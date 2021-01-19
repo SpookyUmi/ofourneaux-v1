@@ -1,0 +1,28 @@
+{
+  "name": "projet-generateur-recettes",
+  "version": "1.0.0",
+  "description": "<h1> O'Fourneaux </h1>",
+  "main": "index.js",
+  "dependencies": {
+    "commitizen": "^4.2.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/O-clock-Lyra-JS/projet-generateur-recettes.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/O-clock-Lyra-JS/projet-generateur-recettes/issues"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "homepage": "https://github.com/O-clock-Lyra-JS/projet-generateur-recettes#readme"
+}
