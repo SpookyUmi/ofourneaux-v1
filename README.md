@@ -1,4 +1,4 @@
-<h1>
+<h1 align="center">
 O'Fourneaux
 </h1>
 
@@ -15,3 +15,9 @@ L’application se veut très inclusive et personnalisable avec un large choix d
 ## Accessibilité
 
 L’application sera développée en responsive design, c’est-à-dire que l’affichage s'adapte en fonction de la taille d’écran et du terminal utilisé. Nous nous concentrerons sur deux types d’affichages : affichage mobile (pour les téléphones portables en mode portrait), et desktop (pour les ordinateurs, format paysage). 
+
+## Fonctionnement
+
+### Arborescence
+
+![arborescence](img/arborescence.png)
