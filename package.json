@@ -4,7 +4,6 @@
   "description": "<h1> O'Fourneaux </h1>",
   "main": "index.js",
   "dependencies": {
-    "commitizen": "^4.2.3"
   },
   "devDependencies": {},
   "scripts": {
@@ -18,11 +17,6 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/O-clock-Lyra-JS/projet-generateur-recettes/issues"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
   },
   "homepage": "https://github.com/O-clock-Lyra-JS/projet-generateur-recettes#readme"
 }
