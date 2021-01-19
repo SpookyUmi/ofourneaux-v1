@@ -1,0 +1,41 @@
+Organisation de nos composants React 
+
+- Home/App  
+  - Header (desktop) / Navbar (mobile)
+  - Generator
+    - Recipes
+      - CardRecipe
+        - Recipe
+          - Ingredients
+          - Instructions
+          - Informations
+  - Profile
+    -  Recipes
+       -  CardRecipe
+          -  Recipe
+            - Ingredients
+            - Instructions
+            - Informations
+    -  ShoppingList
+       -  CardRecipe
+          -  Recipe
+            - Ingredients
+            - Instructions
+            - Informations
+       -  ListByCategory
+    -  Admin
+       -  RecipeForm
+       -  LabelForm
+       -  UserForm 
+  - Search 
+    - Recipes
+      - CardRecipe
+        - Recipe
+          - Ingredients
+          - Instructions
+          - Informations
+  - Inscription
+  - Connexion
+  - About
+  - Contact
+  - Footer
