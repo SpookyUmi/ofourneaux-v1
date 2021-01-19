@@ -20,4 +20,4 @@ L’application sera développée en responsive design, c’est-à-dire que l’
 
 ### Arborescence
 
-![arborescence](img/arborescence.png)
+![arborescence](public/img/arborescence.png)
