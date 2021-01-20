@@ -2,18 +2,18 @@ import React from 'react';
 
 import './styles.scss';
 
-const Informations = () => {
+const Informations = ({recipe}) => {
   return (
     <div className="recipe__infos">
       <div className="recipe__infos__header">
         <h1 className="recipe__infos__header__title">
-          Nom de la recette
+          {recipe.title}
         </h1>
         <p className="recipe__infos__header__tag">
           tag
         </p>
       </div>
-      <span className="recipe__infos__line"></span>
+      <div className="recipe__line"></div>
       <div className="recipe__infos__data">
         {/* INFOS : TIME */}
         <div className="recipe__infos__data__time">
@@ -26,7 +26,7 @@ const Informations = () => {
               {/* clock icon */}
               <img className="recipe__infos__data__icon" src="" />
               <p className="recipe__infos__data__text">
-                XX min
+                {recipe.preparation_time + recipe.baking_time} min
               </p>
             </div>
           </div>
@@ -40,7 +40,7 @@ const Informations = () => {
             <div className="recipe__infos__data__details">
               <img className="recipe__infos__data__icon" src="" />
               <p className="recipe__infos__data__text">
-                XX min
+              {recipe.preparation_time} min
               </p>
             </div>
           </div>
@@ -54,7 +54,7 @@ const Informations = () => {
             <div className="recipe__infos__data__details">
               <img className="recipe__infos__data__icon" src="" />
               <p className="recipe__infos__data__text">
-                XX min
+                {recipe.baking_time} min
               </p>
             </div>
           </div>
@@ -68,7 +68,7 @@ const Informations = () => {
           <div className="recipe__infos__data__details">
             <img className="recipe__infos__data__icon" src="" />
             <p className="recipe__infos__data__text">
-              Lorem
+              {recipe.difficulty}
             </p>
           </div>
         </div>
@@ -79,15 +79,15 @@ const Informations = () => {
           <div className="recipe__infos__data__details">
             <img className="recipe__infos__data__icon" src="" />
             <p className="recipe__infos__data__text">
-              X
+              {recipe.nutri_score}
             </p>
           </div>
         </div>
       </div>
       <div className="recipe__select">
-        <span className="recipe__line"></span>
-        <button type="button">Sélectionner</button>
-        <span className="recipe__line"></span>
+        <div className="recipe__line"></div>
+        <button className="recipe__select__button" type="button">Sélectionner</button>
+        <div className="recipe__line"></div>
       </div>
     </div>
   )

@@ -4,6 +4,10 @@
   display: flex;
   flex-direction: row;
 
+  &__block {
+    padding: 10px;
+  }
+
   &__block-left, &__block-right {
     width: 50%;
   }
