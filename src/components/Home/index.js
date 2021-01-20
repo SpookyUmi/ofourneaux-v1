@@ -12,13 +12,13 @@ import './styles.scss';
 // == Composant
 const Home = () => {
   const [title, setTitle] = useState("O'Fourneaux");
-
+  const [isClicked, setIsClicked] = useState(false);
 
   return (
     <div className="home">
       <Header title={title} />
       <HomePresentation title={title} />
-      <Generator />
+      <Generator setIsClicked={setIsClicked} isClicked={isClicked}/>
 
     </div>
   );

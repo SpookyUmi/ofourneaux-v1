@@ -13,8 +13,8 @@ const Header = ({ title }) => {
       <input type="text" placeholder="Soupe au chat" className="header__elem"/>
       <h1 className="header__elem">{title}</h1>
       <div className="header__buttons">
-        <button className="header__elem">S'inscrire</button>
-        <button className="header__elem">Se connecter</button>
+        <a className="header__elem--button">S'inscrire</a>
+        <a className="header__elem">Se connecter</a>
       </div>
     </header>
   );

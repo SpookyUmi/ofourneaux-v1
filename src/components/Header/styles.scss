@@ -3,10 +3,18 @@
 .header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 1.5rem;
   background-color: vars.$color-secondary;
 
   &__elem {
     padding: 0.5rem;
+
+    &--button {
+      background-color: vars.$color-primary;
+      color: vars.$color-secondary;
+      border-radius: 1.3rem;
+      padding: 0.6rem 0.8rem;
+    }
   }
 }
