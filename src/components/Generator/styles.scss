@@ -1,0 +1,28 @@
+.generator {
+  padding: 3rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &__title {
+    font-size: 2rem;
+  }
+
+  &__section {
+    padding: 2rem;
+    width: 300px;
+    height: 250px;
+    margin: 1rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: aqua;
+    border-radius: 10px;
+
+    &__elem {
+      background-color: red;
+      width: 100px;
+      height: 100px;
+    }
+  }
+}

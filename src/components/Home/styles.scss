@@ -1,21 +1,53 @@
+@use 'src/styles/vars';
+
 .app {
   max-width: 1440px;
   margin: 0 auto;
   text-align: center;
+  font-family: vars.$font-text;
 }
 
-.app img {
-  max-width: 150px;
+.app h1 {
+  font-family: vars.$font-title;
 }
 
 .home__presentation {
   width: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
   padding: 3rem;
+  height: 500px;
+  position: relative;
+  background: #ffdfb1;
+  overflow: hidden;
 
   &__elem {
+    width: 40%;
     padding: 0.5rem;
-    width: 50%;
   }
+
+  &__text {
+    text-align: left;
+  }
+
+  &__text h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  &__text p {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+
+  &__img {
+    text-align: right;
+    width: 350px;
+  }
+
+}
+
+.home__presentation > svg {
+  display: block;
 }
