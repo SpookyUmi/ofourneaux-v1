@@ -11,15 +11,16 @@ const Recipe = () => {
     <>
       {/* header/navbar */}
       TODO: ici le composant header/navbar (codé par Chloé)
+      <div className="recipe">
+        <div className="recipe__block-left">
+          <Informations />
+          <Instructions />
+        </div>
 
-      <div className="recipe__block-left">
-        <Informations />
-        <Instructions />
-      </div>
-
-      <div className="recipe__block-right">
-        <img src=""></img>
-        <Ingredients />
+        <div className="recipe__block-right">
+          <img className="recipe__img" src="" />
+          <Ingredients />
+        </div>
       </div>
     </>
 

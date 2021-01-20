@@ -1,0 +1,11 @@
+@use 'src/styles/vars';
+
+.recipe {
+  &__ingredients {
+
+    &__list {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+}

@@ -1,0 +1,15 @@
+@use 'src/styles/vars';
+
+.recipe {
+  &__infos {
+    &__data {
+      display: flex;
+      flex-direction: row;
+
+      &__time {
+        display: flex;
+        flex-direction: row;
+      }
+    }
+  }
+}
