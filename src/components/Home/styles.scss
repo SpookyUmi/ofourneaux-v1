@@ -5,14 +5,21 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 3rem;
+  padding: 3rem 3rem 0 3rem;
   max-height: 450px;
-  position: relative;
   background: vars.$color-secondary;
 
   &__elem {
     width: 40%;
     padding: 0.5rem;
+
+    &--button {
+      background-color: vars.$color-primary;
+      color: vars.$color-secondary;
+      border-radius: 1.3rem;
+      padding: 0.6rem 0.8rem;
+      font-weight: 700;
+    }
   }
 
   &__text {
@@ -26,7 +33,7 @@
 
   &__text p {
     font-size: 1.1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
   }
 
   &__img {
@@ -34,10 +41,4 @@
     width: 350px;
   }
 
-}
-
-.home__presentation > svg {
-  display: block;
-  position: absolute;
-  bottom: -175px;
 }

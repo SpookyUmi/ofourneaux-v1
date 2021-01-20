@@ -13,13 +13,15 @@ import './styles.scss';
 const Home = () => {
   const [title, setTitle] = useState("O'Fourneaux");
   const [isClicked, setIsClicked] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <div className="home">
-      <Header title={title} />
+      {/* TODO: switch between Header and NavBar according to responsive : set a property in our state ? */}
+      <Header title={title} isLoggedIn={isLoggedIn} />
+      {/* TODO: Change the components thanks to Links */}
       <HomePresentation title={title} />
-      <Generator setIsClicked={setIsClicked} isClicked={isClicked}/>
-
+      <Generator setIsClicked={setIsClicked} isClicked={isClicked} isLoggedIn={isLoggedIn} />
     </div>
   );
 };

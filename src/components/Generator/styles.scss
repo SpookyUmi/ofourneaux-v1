@@ -1,8 +1,6 @@
 @use 'src/styles/vars';
 
 .generator {
-  margin-top: 3rem;
-  padding: 3rem;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -23,8 +21,12 @@
     background-color: vars.$color-secondary;
     border-radius: 4rem;
 
-    &__elem {
+    &__logo {
       width: 50%;
+    }
+
+    &__click {
+      font-weight: 700;
     }
   }
 }
