@@ -1,0 +1,19 @@
+@use 'src/styles/vars';
+
+.app {
+  max-width: 1440px;
+  margin: 0 auto;
+  text-align: center;
+  font-family: vars.$font-text;
+  line-height: 1.6rem;
+}
+
+.app h1 {
+  font-family: vars.$font-title;
+  font-size: 3rem;
+  color: #00382a;
+}
+
+.app h2 {
+  line-height: 2rem;
+}

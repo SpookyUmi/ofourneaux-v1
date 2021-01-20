@@ -8,7 +8,6 @@ import './styles.scss';
 // == Composant
 const Header = ({ title }) => {
 
-
   return (
     <header className="header">
       <input type="text" placeholder="Soupe au chat" className="header__elem"/>

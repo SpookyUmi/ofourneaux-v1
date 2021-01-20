@@ -10,12 +10,12 @@ import HomePresentation from 'src/components/Home/HomePresentation';
 import './styles.scss';
 
 // == Composant
-const App = () => {
+const Home = () => {
   const [title, setTitle] = useState("O'Fourneaux");
 
 
   return (
-    <div className="app">
+    <div className="home">
       <Header title={title} />
       <HomePresentation title={title} />
       <Generator />
@@ -25,4 +25,4 @@ const App = () => {
 };
 
 // == Export
-export default App;
+export default Home;

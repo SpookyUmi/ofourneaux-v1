@@ -1,8 +1,10 @@
+@use 'src/styles/vars';
+
 .header {
   display: flex;
   justify-content: space-between;
   padding: 1.5rem;
-  background-color: #bfe285;
+  background-color: vars.$color-secondary;
 
   &__elem {
     padding: 0.5rem;
