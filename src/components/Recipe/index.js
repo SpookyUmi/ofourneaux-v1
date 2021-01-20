@@ -12,8 +12,6 @@ const Recipe = ({recipes}) => {
 
   return (
     <>
-      {/* header/navbar */}
-      TODO: ici le composant header/navbar (codé par Chloé)
       <div className="recipe">
         <div className="recipe__block recipe__block--left" >
           <Informations recipe={recipes[0]} />
@@ -21,7 +19,7 @@ const Recipe = ({recipes}) => {
         </div>
 
         <div className="recipe__block recipe__block--right" >
-          <img className="recipe__img" src="" />
+          <img className="recipe__img" src={recipes[0].picture} />
           <Ingredients ingredients={recipes[0].ingredients} />
         </div>
       </div>

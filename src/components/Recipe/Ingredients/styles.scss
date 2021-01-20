@@ -3,9 +3,45 @@
 .recipe {
   &__ingredients {
 
+    &__title {
+      font-size: 1.875rem;
+      padding: 0px 25px;
+      margin-bottom: 15px;
+    }
+
     &__list {
       display: flex;
       flex-direction: row;
+      flex-wrap: wrap;
     }
+  }
+
+  &__ingredient {
+    margin: 0px 5px;
+
+    &__img {
+      height: 60px;
+      width: 60px;
+      background-color: #00000027;
+      margin-bottom: 10px;
+    }
+
+    &__title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    &__quantity {
+      font-size: 0.8rem;
+    }
+  }
+
+  &__ingredient:first-child {
+    margin-left: 0px;
+  }
+  
+  &__ingredient:last-child {
+    margin-right: 0px;
   }
 }

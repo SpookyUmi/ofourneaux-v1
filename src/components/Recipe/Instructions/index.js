@@ -15,7 +15,12 @@ const Instructions = ({instructions}) => {
           step++;
           return (
             <div key={step} className="recipe__instructions__step">
-              {step}. {instruction}
+              <div className="recipe__instructions__step__nb">
+                {step}.
+              </div>
+              <div className="recipe__instructions__step__text">
+                {instruction}
+              </div>
             </div>
           )
         })}
