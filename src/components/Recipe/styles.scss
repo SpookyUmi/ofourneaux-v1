@@ -1,18 +1,9 @@
 @use 'src/styles/vars';
 
-// (for tests)
-#root {
-  color: #31231A;
-  background-color: #fdf5e5;
-  height: 100vh;
-}
-
 .recipe {
   display: flex;
   flex-direction: row;
   padding: 50px 250px;
-
-
 
   &__block {
     margin: 30px;

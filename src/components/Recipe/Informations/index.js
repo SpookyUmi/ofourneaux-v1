@@ -1,17 +1,17 @@
 import React from 'react';
 
-import clock from 'src/assets/images/recipe_clock.svg';
-import hands from 'src/assets/images/recipe_hands.svg';
-import cooking from 'src/assets/images/recipe_cooking.svg';
-import difficulty from 'src/assets/images/recipe_difficulty.svg';
-import nutriScore from 'src/assets/images/recipe_nutri-score.svg';
+import time from 'src/assets/icons/temps.svg';
+import baking from 'src/assets/icons/baking.svg';
+import oven from 'src/assets/icons/four.svg';
+import difficulty from 'src/assets/icons/difficulte.svg';
+import nutriScore from 'src/assets/icons/nutriscore.svg';
 
 import './styles.scss';
 
 const Informations = ({recipe}) => {
   return (
     <div className="recipe__infos">
-      {/* HEADER : OK */}
+      {/* HEADER */}
       <div className="recipe__infos__header">
         <h1 className="recipe__infos__header__title">
           {recipe.title}
@@ -43,7 +43,8 @@ const Informations = ({recipe}) => {
             </div>
             <div className="recipe__infos__data__details">
               {/* clock icon */}
-              <img className="recipe__infos__data__icon" src={clock} />
+
+              <img className="recipe__infos__data__icon" src={time} />
               <p className="recipe__infos__data__text">
                 {recipe.preparation_time + recipe.baking_time} min
               </p>
@@ -55,7 +56,7 @@ const Informations = ({recipe}) => {
               Temps préparation
             </div>
             <div className="recipe__infos__data__details">
-              <img className="recipe__infos__data__icon" src={hands} />
+              <img className="recipe__infos__data__icon" src={baking} />
               <p className="recipe__infos__data__text">
               {recipe.preparation_time} min
               </p>
@@ -67,7 +68,7 @@ const Informations = ({recipe}) => {
               Temps cuisson
             </div>
             <div className="recipe__infos__data__details">
-              <img className="recipe__infos__data__icon" src={cooking} />
+              <img className="recipe__infos__data__icon" src={oven} />
               <p className="recipe__infos__data__text">
                 {recipe.baking_time} min
               </p>
