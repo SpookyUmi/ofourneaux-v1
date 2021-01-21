@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 
 // == Import
 import './styles.scss';
-import time from 'src/assets/icons/temps.svg'
 
 // == Composant
 const Header = ({ title, isLoggedIn }) => {
@@ -21,7 +20,6 @@ const Header = ({ title, isLoggedIn }) => {
           <a className="header__container__elem header__container__elem--button">S'inscrire</a>
         {/* TODO: Link to /connexion */}
           <a className="header__container__elem">Se connecter</a>
-          <img src={time} />
         </div>
         }
         {

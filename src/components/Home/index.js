@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 // == Import
 import Header from 'src/components/Header';
 import Generator from 'src/components/Generator';
+import About from 'src/components/About';
 import HomePresentation from 'src/components/Home/HomePresentation';
 
 import './styles.scss';
@@ -22,6 +23,7 @@ const Home = () => {
       {/* TODO: Change the components thanks to Links */}
       <HomePresentation title={title} />
       <Generator setIsClicked={setIsClicked} isClicked={isClicked} isLoggedIn={isLoggedIn} />
+      {/* <About /> */}
     </div>
   );
 };
