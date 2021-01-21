@@ -9,7 +9,8 @@ import './styles.scss';
 const Contact = () => {
   return (
     <div className="container">
-
+      <form>
+      </form>
     </div>
   );
 };
