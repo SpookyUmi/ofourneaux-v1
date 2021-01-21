@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import profilePicture from 'src/assets/images/profile-picture.jpg';
+import list from 'src/assets/icons/list.svg';
+
 import './styles.scss';
 
 const Profile = () => {
@@ -8,7 +11,7 @@ const Profile = () => {
     <div className="profile">
       <h1 className="profile__title">Mon profil</h1>
       <div className="profile__wrapper">
-        <img className="profile__img" src="" />
+        <img className="profile__img" src={profilePicture} />
         <div className="profile__content">
 
           <div className="profile__content__header">
@@ -18,7 +21,7 @@ const Profile = () => {
             </a>
             {/* TODO: lien vers la liste de courses */}
             <a>
-              <img className="profile__content__header__icon" src="" />
+              <img className="profile__content__header__icon" src={list} />
             </a>
           </div>
 
@@ -45,19 +48,19 @@ const Profile = () => {
               <div className="profile__content__constraints__inputs">
                 <div className="profile__content__constraints__input">
                   <input className="profile__content__constraints__checkbox" type="checkbox" id="vegetalien" name="vegetalien"/>
-                  <label className="profile__content__constraints__label" for="vegetalien">Végétalien</label>
+                  <label className="profile__content__constraints__label" htmlFor="vegetalien">Végétalien</label>
                 </div>
                 <div className="profile__content__constraints__input">
                   <input className="profile__content__constraints__checkbox" type="checkbox" id="vegetarien" name="vegetarien"/>
-                  <label className="profile__content__constraints__label" for="vegetarien">Végétarien</label>
+                  <label className="profile__content__constraints__label" htmlFor="vegetarien">Végétarien</label>
                 </div>
                 <div className="profile__content__constraints__input">
                   <input className="profile__content__constraints__checkbox" type="checkbox" id="no-gluten" name="no-gluten"/>
-                  <label className="profile__content__constraints__label" for="no-gluten">Sans gluten</label>
+                  <label className="profile__content__constraints__label" htmlFor="no-gluten">Sans gluten</label>
                 </div>
                 <div className="profile__content__constraints__input">
                   <input className="profile__content__constraints__checkbox" type="checkbox" id="no-lactose" name="no-lactose"/>
-                  <label className="profile__content__constraints__label" for="no-lactose">Sans lactose</label>
+                  <label className="profile__content__constraints__label" htmlFor="no-lactose">Sans lactose</label>
                 </div>
               </div>
             </div>
@@ -74,6 +77,10 @@ const Profile = () => {
       </div>      
     </div>
   );
+};
+
+Profile.propTypes = {
+
 };
 
 export default Profile;

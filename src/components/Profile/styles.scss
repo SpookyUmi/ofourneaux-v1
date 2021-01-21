@@ -17,24 +17,38 @@
   }
 
   &__img {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     position: absolute;
     // to align the elements horizontally when they are in absolute position, we use the transform property, associated with translate which allows to shift the element by half its width
     // plus d'infos : https://www.alsacreations.com/article/lire/539-Centrer#:~:text=Pour%20centrer%20horizontalement%20un%20%C3%A9l%C3%A9ment,%22auto%22%20aux%20marges%20lat%C3%A9rales.&text=De%20cette%20mani%C3%A8re%2C%20il%20%C3%A9quilibrera%20automatiquement%20les%20marges%20lat%C3%A9rales.
     left: 50%;
     transform: translate(-50%, 0);
+    border-radius: 150px;
   }
 
   &__content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 50px;
+    margin-top: 80px;
     color: vars.$color-primary;
     background-color: vars.$color-secondary;
     border-radius: 25px;
-    padding: 65px 25px 25px 25px;
+    padding: 90px 25px 25px 25px;
+
+    &__header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 40%;
+      margin-bottom: 25px;
+
+      &__icon {
+        height: 30px;
+        width: 30px;
+      }
+    }
 
     &__infos {
       display: flex;
@@ -67,6 +81,7 @@
         border: 2px solid vars.$color-primary;
         padding: 0.5rem 1rem;
         font-size: 0.9rem;
+        background-color: #f5f5f5;
       }
 
       &__field::placeholder {
