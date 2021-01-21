@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import './styles.scss';
+
 const Profile = () => {
   return (
     <div className="profile">
@@ -23,43 +25,51 @@ const Profile = () => {
           <div className="profile__content__infos">
             <div className="profile__content__infos__inputs">
               <div className="profile__content__infos__input">
-                <label>Nom</label>
-                <input type="text" placeholder="Doe" />
+                <label className="profile__content__infos__label">Nom</label>
+                <input className="profile__content__infos__field" type="text" placeholder="Doe" />
               </div>
               <div className="profile__content__infos__input">
-                <label>Prénom</label>
-                <input type="text" placeholder="John" />
+                <label className="profile__content__infos__label">Prénom</label>
+                <input className="profile__content__infos__field" type="text" placeholder="John" />
               </div>
               <div className="profile__content__infos__input">
-                <label>Email</label>
-                <input type="text" placeholder="johndoe@yahoo.fr" />
+                <label className="profile__content__infos__label">Email</label>
+                <input className="profile__content__infos__field" type="text" placeholder="johndoe@yahoo.fr" />
+              </div>
+            </div>
+
+            <div className="profile__content__constraints">
+              <h2 className="profile__content__constraints__title">
+                Mes contraintes alimentaires
+              </h2>
+              <div className="profile__content__constraints__inputs">
+                <div className="profile__content__constraints__input">
+                  <input className="profile__content__constraints__checkbox" type="checkbox" id="vegetalien" name="vegetalien"/>
+                  <label className="profile__content__constraints__label" for="vegetalien">Végétalien</label>
+                </div>
+                <div className="profile__content__constraints__input">
+                  <input className="profile__content__constraints__checkbox" type="checkbox" id="vegetarien" name="vegetarien"/>
+                  <label className="profile__content__constraints__label" for="vegetarien">Végétarien</label>
+                </div>
+                <div className="profile__content__constraints__input">
+                  <input className="profile__content__constraints__checkbox" type="checkbox" id="no-gluten" name="no-gluten"/>
+                  <label className="profile__content__constraints__label" for="no-gluten">Sans gluten</label>
+                </div>
+                <div className="profile__content__constraints__input">
+                  <input className="profile__content__constraints__checkbox" type="checkbox" id="no-lactose" name="no-lactose"/>
+                  <label className="profile__content__constraints__label" for="no-lactose">Sans lactose</label>
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="profile__content__constraints">
-            <h2 className="profil__content__constraints__title">
-              Mes contraintes alimentaires
-            </h2>
-            <div className="profil__content__constraints__inputs">
-              <div className="profil__content__constraints__input">
-                <input className="" type="checkbox" />
-                <label>Végétalien</label>
-              </div>
-              <div className="profil__content__constraints__input">
-                <input className="" type="checkbox" />
-                <label>Végétarien</label>
-              </div>
-              <div className="profil__content__constraints__input">
-                <input className="" type="checkbox" />
-                <label>Sans gluten</label>
-              </div>
-              <div className="profil__content__constraints__input">
-                <input className="" type="checkbox" />
-                <label>Sans lactose</label>
-              </div>
-            </div>
+          <div className="profile__content__buttons">
+            <button className="profile__content__button">Modifier</button>
+            {/* TODO: to be displayed only when the user is an administrator */}
+            <button className="profile__content__button">Espace administrateur</button>
           </div>
+
+          <p className="profile__content__text">Pour la suppression de votre compte, veuillez cliquer <a className="profile__content__text--underline" href="">ici</a>.</p>
         </div>
       </div>      
     </div>
