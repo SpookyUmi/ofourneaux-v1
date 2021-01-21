@@ -81,7 +81,7 @@
         border: 2px solid vars.$color-primary;
         padding: 0.5rem 1rem;
         font-size: 0.9rem;
-        background-color: #f5f5f5;
+        background-color: vars.$color-sand;
       }
 
       &__field::placeholder {
