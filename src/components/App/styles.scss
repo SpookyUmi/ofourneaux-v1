@@ -1,13 +1,12 @@
 @use 'src/styles/vars';
 
 .app {
-  //max-width: 1440px;
   margin: 0 auto;
   text-align: center;
   font-family: vars.$font-text;
   line-height: 1.6rem;
   color: vars.$color-primary;
-  background-color: #fbf6ed;
+  background-color: vars.$color-sand;
 }
 
 .app h1 {
@@ -16,5 +15,23 @@
 }
 
 .app h2 {
-  line-height: 2rem;
+  line-height: 3.2rem;
+  font-family: vars.$font-title;
+  font-size: 2.5rem;
+}
+
+.app h3 {
+  font-size: 1.8rem;
+}
+
+.app h4 {
+  font-size: 1.5rem;
+}
+
+.app p {
+  font-size: 1.2rem;
+}
+
+.app a {
+  font-size: 1.1rem;
 }

@@ -3,19 +3,17 @@
 .home__presentation {
   width: 100%;
   background: vars.$color-secondary;
-  padding: 3rem 3rem 0 3rem;
-  max-height: 450px;
 }
 
 .home__container {
   margin: 0 auto;
-  max-width: 1440px;
   display: flex;
+  flex-direction: column-reverse;
   justify-content: center;
   align-items: center;
+  padding: 3rem;
 
   &__elem {
-    width: 40%;
     padding: 0.5rem;
 
     &--button {
@@ -28,7 +26,7 @@
   }
 
   &__text {
-    text-align: left;
+    text-align: center;
   }
 
   &__text h2 {
@@ -37,13 +35,47 @@
   }
 
   &__text p {
-    font-size: 1.1rem;
     margin-bottom: 1.5rem;
   }
 
   &__img {
     text-align: right;
-    width: 350px;
+    width: 300px;
   }
+
+}
+
+
+@media only screen and (min-width: 768px) {
+
+.home__container__img {
+  width: 350px;
+}
+
+}
+
+
+@media only screen and (min-width: 1024px) {
+
+.home__container {
+  max-width: 1440px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  &__elem {
+    width: 40%;
+  }
+
+  &__text {
+    text-align: left;
+  }
+
+  &__img {
+    width: 380px;
+  }
+
+}
 
 }

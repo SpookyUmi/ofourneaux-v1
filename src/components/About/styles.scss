@@ -1,0 +1,27 @@
+@use 'src/styles/vars';
+
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  height: 600px;
+
+  &__section {
+
+
+    &__title {
+      margin: 0.8rem;
+    }
+
+    &--flex {
+      display: flex;
+
+    }
+  }
+}
+
+.section__card {
+
+  &__image {
+    width: 5rem;
+  }
+}

@@ -23,6 +23,7 @@ const Home = () => {
       {/* TODO: Change the components thanks to Links */}
       <HomePresentation title={title} />
       <Generator setIsClicked={setIsClicked} isClicked={isClicked} isLoggedIn={isLoggedIn} />
+      {/* TODO: Link to /a-propos */}
       {/* <About /> */}
     </div>
   );

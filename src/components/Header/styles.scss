@@ -2,10 +2,20 @@
 
 .header {
   background-color: vars.$color-secondary;
-  padding: 1.5rem;
 }
 
+
+
+@media only screen and (min-width: 768px) {
+
+
+
+}
+
+@media only screen and (min-width: 1024px) {
+
 .header__container {
+  padding: 1.5rem;
   margin: 0 auto;
   max-width: 1440px;
   display: flex;
@@ -13,7 +23,7 @@
   align-items: center;
 
   &__elem {
-    padding: 0.5rem;
+    padding: 0.6rem;
     font-weight: 700;
 
     &--button {
@@ -26,7 +36,12 @@
     &--input {
       border-radius: 1.3rem;
       border: 2px solid vars.$color-primary;
+      background-color: vars.$color-sand;
       padding-left: 1rem;
+      text-align: left;
     }
+
   }
+}
+
 }
