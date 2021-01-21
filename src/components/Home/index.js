@@ -24,7 +24,7 @@ const Home = () => {
       <HomePresentation title={title} />
       <Generator setIsClicked={setIsClicked} isClicked={isClicked} isLoggedIn={isLoggedIn} />
       {/* TODO: Link to /a-propos */}
-      {/* <About /> */}
+      <About />
     </div>
   );
 };
