@@ -1,11 +1,16 @@
 @use 'src/styles/vars';
 
 .header {
+  background-color: vars.$color-secondary;
+  padding: 1.5rem;
+}
+
+.header__container {
+  margin: 0 auto;
+  max-width: 1440px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem;
-  background-color: vars.$color-secondary;
 
   &__elem {
     padding: 0.5rem;

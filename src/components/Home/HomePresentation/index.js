@@ -11,16 +11,18 @@ const HomePresentation = ({ title }) => {
 
   return (
     <div className="home__presentation">
-      <section className="home__presentation__elem home__presentation__text">
-        <h2>Gérez votre quotidien avec {title}</h2>
-        <p>Moderne et ludique, O'Fourneaux vous accompagne au quotidien
-        en vous proposant des recettes variées, en fonction de la saison
-        et de vos exigences alimentaires.</p>
-        <a className="home__presentation__elem--button">S'inscrire</a>
-      </section>
-      <section className="home__presentation__elem">
-        <img src={photo} className="home__presentation__img"/>
-      </section>
+      <div className="home__container">
+        <section className="home__container__elem home__container__text">
+          <h2>Gérez votre quotidien avec {title}</h2>
+          <p>Moderne et ludique, O'Fourneaux vous accompagne au quotidien
+            en vous proposant des recettes variées, en fonction de la saison
+            et de vos exigences alimentaires.</p>
+          <a className="home__container__elem--button">S'inscrire</a>
+        </section>
+        <section className="home__container__elem">
+          <img src={photo} className="home__container__img"/>
+        </section>
+      </div>
     </div>
   );
 };
