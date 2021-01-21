@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import profilePicture from 'src/assets/images/profile-picture.jpg';
+import heartFull from 'src/assets/icons/heart-full.svg';
 import list from 'src/assets/icons/list.svg';
 
 import './styles.scss';
@@ -17,7 +18,7 @@ const Profile = () => {
           <div className="profile__content__header">
             {/* TODO: lien vers les recettes préférées */}
             <a>
-              <img className="profile__content__header__icon" src="" />
+              <img className="profile__content__header__icon" src={heartFull} />
             </a>
             {/* TODO: lien vers la liste de courses */}
             <a>
