@@ -1,10 +1,10 @@
 import React from 'react';
 
-import time from 'src/assets/icons/temps.svg';
+import time from 'src/assets/icons/time.svg';
 import baking from 'src/assets/icons/baking.svg';
-import oven from 'src/assets/icons/four.svg';
-import difficulty from 'src/assets/icons/difficulte.svg';
-import nutriScore from 'src/assets/icons/nutriscore.svg';
+import oven from 'src/assets/icons/oven.svg';
+import difficulty from 'src/assets/icons/difficulty.svg';
+import nutriscore from 'src/assets/icons/nutriscore.svg';
 
 import './styles.scss';
 
@@ -94,7 +94,7 @@ const Informations = ({recipe}) => {
               Nutri-score
             </div>
             <div className="recipe__infos__data__details">
-              <img className="recipe__infos__data__icon" src={nutriScore} />
+              <img className="recipe__infos__data__icon" src={nutriscore} />
               <p className="recipe__infos__data__text">
                 {recipe.nutri_score}
               </p>
