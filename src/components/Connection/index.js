@@ -9,16 +9,16 @@ const Connection = () => {
       <div className="connection__content">
         <form className="connection__content__form" action="" method="POST">
           <div className="connection__content__form__input">
-            <label className="connection__content__form__label">
+            <label className="connection__content__form__label" forHtml="email">
               Email
             </label>
-            <input className="connection__content__form__field" placeholder="Email" />
+            <input className="connection__content__form__field" type="text" id="email" name="email" placeholder="Email" />
           </div>
           <div className="connection__content__form__input">
-            <label className="connection__content__form__label">
+            <label className="connection__content__form__label" forHtml="password">
               Mot de passe
             </label>
-            <input className="connection__content__form__field" placeholder="Mot de passe" />
+            <input className="connection__content__form__field" type="password" id="password" name="password" placeholder="Mot de passe"/>
             {/* TODO: link to the forgotten password page */}
             <a href="">
               <div className="connection__content__text connection__content__text--forgotten-password">Mot de passe oublié ?</div>
