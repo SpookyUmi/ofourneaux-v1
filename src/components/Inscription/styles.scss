@@ -4,46 +4,45 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 50px 250px;
+  padding: 3rem 0;
 
   &__title {
-    font-family: vars.$font-title;
-    font-size: 2rem;
-    margin-bottom: 25px;
+    margin-bottom: 1.5rem;
   }
 
   &__content {
+    min-width: 30%;
     display: flex;
     flex-direction: column;
     color: vars.$color-primary;
     background-color: vars.$color-secondary;
-    border-radius: 25px;
-    padding: 25px;
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    margin: 0rem 5rem;
 
     &__text {
-      max-width: 400px;
-      margin-bottom: 25px;
+      margin-bottom: 1.5rem;
     }
 
     &__inputs {
-      margin-bottom: 25px;
+      margin-bottom: 1.5rem;
     }
 
     &__input {
       display: flex;
       flex-direction: column;
-      margin: 10px 0px 5px 0px;
+      margin: 0.6rem 0 0.3rem 0;
     }
 
     &__input:first-child {
-      margin-top: 0px;
+      margin-top: 0rem;
     }
 
     &__label {
       font-size: 0.9rem;
       font-weight: 700;
       color: #000000;
-      margin: 0px 18px 5px 18px;
+      margin: 0 1.1rem 0.3rem 1.1rem;
     }
 
     &__field {
@@ -65,30 +64,43 @@
 
       &__password {
         &__text {
-          margin-bottom: 15px;
+          margin-bottom: 0.9rem;
         }
 
         &__instructions {
-          list-style-type: initial;
-        padding-left: 40px;
-        margin-bottom: 25px;
+        list-style-type: initial;
+        padding-left: 2.5rem;
+        margin-bottom: 1.5rem;
         }
       }
 
       &__button {
+        box-sizing: border-box;
         font-weight: 800;
         font-size: 0.85rem;
         text-transform: uppercase;
-        padding: 12px 20px;
+        padding: 0.75rem 1.25rem;
         margin: auto;
         color: vars.$color-secondary;
+        border: 2px solid vars.$color-primary;
         background-color: vars.$color-primary;
-        border-radius: 20px;
+        border-radius: 3rem;
+        transition: 0.2s;
+      }
+
+      &__button:hover {
+        border: 2px solid vars.$color-primary;
+        background-color: vars.$color-sand;
+        color: vars.$color-primary;
       }
     }
+  }
+}
 
-    
-
-    
+@media only screen and (min-width: 768px) {
+  .inscription {
+    &__content {
+      width: 40%;
+    }
   }
 }

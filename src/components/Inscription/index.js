@@ -13,34 +13,86 @@ const Inscription = () => {
 
         <div className="inscription__content__inputs">
           <div className="inscription__content__input">
-            <label className="inscription__content__label">
+            <label 
+              className="inscription__content__label" 
+              forHtml="last-name"
+            >
               Nom
             </label>
-            <input className="inscription__content__field" type="text" placeholder="Doe" />
+            <input 
+              className="inscription__content__field" 
+              type="text" 
+              id="last-name" 
+              name="last-name" 
+              placeholder="Doe" 
+              required 
+            />
           </div>
           <div className="inscription__content__input">
-            <label className="inscription__content__label">
+            <label 
+              className="inscription__content__label" 
+              forHtml="first-name"
+            >
               Prénom
             </label>
-            <input className="inscription__content__field" type="text" placeholder="John" />
+            <input 
+              className="inscription__content__field" 
+              type="text" 
+              id="first-name" 
+              name="first-name" 
+              placeholder="John" 
+              required 
+            />
           </div>
           <div className="inscription__content__input">
-            <label className="inscription__content__label">
+            <label 
+              className="inscription__content__label" 
+              forHtml="email"
+            >
               Email
             </label>
-            <input className="inscription__content__field" type="text" placeholder="Email" />
+            <input 
+              className="inscription__content__field" 
+              type="text" 
+              id="email" 
+              name="email" 
+              placeholder="Email" 
+              required 
+            />
           </div>
           <div className="inscription__content__input">
-            <label className="inscription__content__label">
+            <label 
+              className="inscription__content__label" 
+              forHtml="password"
+            >
               Mot de passe
             </label>
-            <input className="inscription__content__field" type="text" placeholder="Mot de passe" />
+            <input 
+              className="inscription__content__field" 
+              type="password" 
+              id="password" 
+              name="password" 
+              placeholder="Mot de passe" 
+              minlenght="8" 
+              required 
+            />
           </div>
           <div className="inscription__content__input">
-            <label className="inscription__content__label">
+            <label 
+              className="inscription__content__label" 
+              forHtml="password-confirm"
+            >
               Confirmation mot de passe
             </label>
-            <input className="inscription__content__field" type="text" placeholder="Confirmation du mot de passe" />
+            <input 
+              className="inscription__content__field" 
+              type="password" 
+              id="password-confirm" 
+              name="password-confirm" 
+              placeholder="Confirmation du mot de passe" 
+              minlenght="8" 
+              required 
+            />
           </div>
         </div>
 
