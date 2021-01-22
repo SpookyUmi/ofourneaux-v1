@@ -1,6 +1,7 @@
 // == Import npm
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { Route } from 'react-router-dom';
 
 // == Import
 import Header from 'src/components/Header';
@@ -25,8 +26,14 @@ const Home = () => {
       <HomePresentation title={title} />
       <Generator setIsClicked={setIsClicked} isClicked={isClicked} isLoggedIn={isLoggedIn} />
       {/* TODO: Link to /a-propos, to /contact */}
-      {/* <About /> */}
-      {/* <Contact /> */}
+      <Route exact path="/a-propos">
+        <About />
+      </Route>
+
+      <Route exact path="/contact">
+        <Contact />
+      </Route>
+
     </div>
   );
 };
