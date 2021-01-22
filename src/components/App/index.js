@@ -1,21 +1,16 @@
-// == Import npm
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// == Import
-//import Home from 'src/components/Home';
+import Connection from 'src/components/Connection';
 
 import './styles.scss';
 
-// == Composant
 const App = () => {
-
   return (
     <div className="app">
-      {/* <Home /> */}
+      <Connection />
     </div>
   );
 };
 
-// == Export
 export default App;
