@@ -34,8 +34,8 @@ Organisation de nos composants React
           - Ingredients
           - Instructions
           - Informations
-  - Inscription
-  - Connexion
+  - SignUp
+  - SignIn
   - About
   - Contact
   - Footer
