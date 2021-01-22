@@ -2,10 +2,10 @@
 @use 'vars';
 
 body {
-  font-family: vars.$font-text;
+  background-color: vars.$color-sand;
 }
 
-/* 
+/*
   // or you can import your own font
   @font-face {
     font-family: 'Roboto';

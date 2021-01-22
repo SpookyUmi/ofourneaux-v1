@@ -12,22 +12,23 @@ const Profile = () => {
     <div className="profile">
       <h1 className="profile__title">Mon profil</h1>
       <div className="profile__wrapper">
+      {/* TODO: access to the user's files to change/modify his profile picture (open a modal to allow him to choose?) */}
         <img className="profile__img" src={profilePicture} />
         <div className="profile__content">
 
           <div className="profile__content__header">
-            {/* TODO: lien vers les recettes préférées */}
-            <a>
+            {/* TODO: link to the favorite recipes */}
+            <a href="">
               <img className="profile__content__header__icon" src={heartFull} />
             </a>
-            {/* TODO: lien vers la liste de courses */}
-            <a>
+            {/* TODO: link to the shopping list */}
+            <a href="">
               <img className="profile__content__header__icon" src={list} />
             </a>
           </div>
 
           <div className="profile__content__infos">
-            <div className="profile__content__infos__inputs">
+            <div className="profile__content__block profile__content__infos__inputs">
               <div className="profile__content__infos__input">
                 <label className="profile__content__infos__label">Nom</label>
                 <input className="profile__content__infos__field" type="text" placeholder="Doe" />
@@ -42,10 +43,10 @@ const Profile = () => {
               </div>
             </div>
 
-            <div className="profile__content__constraints">
-              <h2 className="profile__content__constraints__title">
+            <div className="profile__content__block profile__content__constraints">
+              <h3 className="profile__content__constraints__title">
                 Mes contraintes alimentaires
-              </h2>
+              </h3>
               <div className="profile__content__constraints__inputs">
                 <div className="profile__content__constraints__input">
                   <input className="profile__content__constraints__checkbox" type="checkbox" id="vegetalien" name="vegetalien"/>
@@ -73,7 +74,10 @@ const Profile = () => {
             <button className="profile__content__button">Espace administrateur</button>
           </div>
 
-          <p className="profile__content__text">Pour la suppression de votre compte, veuillez cliquer <a className="profile__content__text--underline" href="">ici</a>.</p>
+          <p className="profile__content__text">Pour la suppression de votre compte, veuillez cliquer 
+          {/* TODO: link to the deletion account page */}
+            <a className="profile__content__text--underline" href="">ici</a>
+          .</p>
         </div>
       </div>      
     </div>
@@ -81,7 +85,6 @@ const Profile = () => {
 };
 
 Profile.propTypes = {
-
 };
 
 export default Profile;
