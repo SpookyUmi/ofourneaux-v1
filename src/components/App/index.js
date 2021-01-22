@@ -10,6 +10,6 @@ const App = () => (
   <>
     <Recipe recipes={recipes} />
   </>
-  );
+);
 
 export default App;
