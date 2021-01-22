@@ -96,7 +96,7 @@ const AddRecipeForm = ({ tags, ingredients }) => (
         ))}
       </select>
       <input type="text" placeholder="Unité" />
-      <input type="text" placeholder="Quantité" />
+      <input type="number" min="0" placeholder="Quantité" />
       {/* TODO handle click of this button, it must add the ingredient/unit/qty to
       an array in state, then reset so that the user may add another */}
       <button type="button">Ajouter un ingrédient</button>
