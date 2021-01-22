@@ -9,13 +9,13 @@ const Connection = () => {
       <div className="connection__content">
         <form className="connection__content__form" action="" method="POST">
           <div className="connection__content__form__input">
-            <label className="connection__content__form__label" forHtml="email">
+            <label className="connection__content__form__label" htmlFor="email">
               Email
             </label>
             <input className="connection__content__form__field" type="text" id="email" name="email" placeholder="Email" />
           </div>
           <div className="connection__content__form__input">
-            <label className="connection__content__form__label" forHtml="password">
+            <label className="connection__content__form__label" htmlFor="password">
               Mot de passe
             </label>
             <input className="connection__content__form__field" type="password" id="password" name="password" placeholder="Mot de passe"/>
