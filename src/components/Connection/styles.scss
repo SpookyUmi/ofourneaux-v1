@@ -65,14 +65,23 @@
     }
 
     &__button {
+      box-sizing: border-box;
       font-weight: 800;
       font-size: 0.85rem;
       text-transform: uppercase;
       padding: 0.75rem 1.25rem;
       margin: 0 1.25rem;
       color: vars.$color-sand;
+      border: 2px solid vars.$color-primary;
       background-color: vars.$color-primary;
       border-radius: 1.875rem;
+      transition: 0.2s;
+    }
+
+    &__button:hover {
+      border: 2px solid vars.$color-primary;
+      background-color: vars.$color-sand;
+      color: vars.$color-primary;
     }
 
     &__inscription {
