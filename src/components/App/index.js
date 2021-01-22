@@ -4,14 +4,12 @@ import Recipe from 'src/components/Recipe';
 
 import recipes from 'src/data/recipes';
 
-import './styles.css';
+import './styles.scss';
 
-const App = () => {
-  return (
-    <>
-      <Recipe recipes={recipes} />
-    </>
-  )
-};
+const App = () => (
+  <>
+    <Recipe recipes={recipes} />
+  </>
+  );
 
 export default App;

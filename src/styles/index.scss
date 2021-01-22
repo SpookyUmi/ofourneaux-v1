@@ -2,14 +2,10 @@
 @use 'vars';
 
 body {
-  font-family: 'Nunito', sans-serif;
+  background-color: vars.$color-sand;
 }
 
-h1, h2 {
-  font-family: 'Pacifico', sans-serif;
-}
-
-/* 
+/*
   // or you can import your own font
   @font-face {
     font-family: 'Roboto';
