@@ -1,6 +1,7 @@
 // == Import npm
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FormspreeProvider } from '@formspree/react';
 
 // == Import
 import Home from 'src/components/Home';
@@ -12,7 +13,9 @@ const App = () => {
 
   return (
     <div className="app">
-      <Home />
+      <FormspreeProvider project={process.env.FORMSPREE_PROJECT_ID}>
+        <Home />
+      </FormspreeProvider>
     </div>
   );
 };

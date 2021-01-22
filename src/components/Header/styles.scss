@@ -41,11 +41,10 @@
       padding: 0.6rem;
       font-weight: 700;
 
-      &--button {
-        background-color: vars.$color-primary;
-        color: vars.$color-secondary;
-        border-radius: 1.3rem;
-        padding: 0.6rem 0.8rem;
+      &--signin {
+        text-transform: uppercase;
+        padding-top: 1rem;
+        margin-left: 0.3rem;
       }
 
       &--input {

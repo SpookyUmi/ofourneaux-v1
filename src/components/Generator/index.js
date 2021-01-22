@@ -35,11 +35,11 @@ const Generator = ({ isClicked, setIsClicked, isLoggedIn }) => {
         <form className="generator__form">
           <label>
               Nombre de recettes
-              <input type="number" name="nbRecipes" max="20" />
+              <input type="number" name="nbRecipes" min="0" max="20" />
           </label>
           <label>
               Temps
-              <input type="number" name="time" step="5" />
+              <input type="number" name="time" step="5" min="0" />
           </label>
           <label>Difficulté
             <select name="difficulty">

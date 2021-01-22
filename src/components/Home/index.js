@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import Header from 'src/components/Header';
 import Generator from 'src/components/Generator';
 import About from 'src/components/About';
+import Contact from 'src/components/Contact';
 import HomePresentation from 'src/components/Home/HomePresentation';
 
 import './styles.scss';
@@ -23,8 +24,9 @@ const Home = () => {
       {/* TODO: Change the components thanks to Links */}
       <HomePresentation title={title} />
       <Generator setIsClicked={setIsClicked} isClicked={isClicked} isLoggedIn={isLoggedIn} />
-      {/* TODO: Link to /a-propos */}
-      <About />
+      {/* TODO: Link to /a-propos, to /contact */}
+      {/* <About /> */}
+      {/* <Contact /> */}
     </div>
   );
 };

@@ -13,11 +13,11 @@ const HomePresentation = ({ title }) => {
     <div className="home__presentation">
       <div className="home__container">
         <section className="home__container__elem home__container__text">
-          <h2>Gérez votre quotidien avec {title}</h2>
+          <h2 className="home__presentation__title">Gérez votre quotidien avec {title}</h2>
           <p>Moderne et ludique, O'Fourneaux vous accompagne au quotidien
             en vous proposant des recettes variées, en fonction de la saison
             et de vos exigences alimentaires.</p>
-          <a className="home__container__elem--button">S'inscrire</a>
+          <a className="home__container__elem button__style">S'inscrire</a>
         </section>
         <section className="home__container__elem">
           <img src={photo} className="home__container__img"/>

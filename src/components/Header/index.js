@@ -17,16 +17,16 @@ const Header = ({ title, isLoggedIn }) => {
         { !isLoggedIn &&
           <div className="header__container__buttons desktop">
         {/* TODO: Link to /inscription */}
-          <a className="header__container__elem header__container__elem--button">S'inscrire</a>
+          <a className="header__container__elem button__style">S'inscrire</a>
         {/* TODO: Link to /connexion */}
-          <a className="header__container__elem">Se connecter</a>
+          <a className="header__container__elem header__container__elem--signin">Se connecter</a>
         </div>
         }
         {
           isLoggedIn &&
           <div className="header__container__buttons desktop">
           {/* TODO: Link to /profil */}
-            <a className="header__container__elem header__container__elem--button">Mon profil</a>
+            <a className="header__container__elem button__style">Mon profil</a>
           {/* TODO: onClick, toggle isLoggedIn to false + redirect to /home */}
             <a className="header__container__elem">Se déconnecter</a>
           </div>
