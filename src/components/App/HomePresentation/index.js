@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 // == Import
 import photo from 'src/assets/images/cooking.png';
-import '../styles.scss';
+import './styles.scss';
 
 // == Composant
 const HomePresentation = ({ title }) => {
