@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Informations from 'src/components/Recipe/Informations';
 import Instructions from 'src/components/Recipe/Instructions';
 import Ingredients from 'src/components/Recipe/Ingredients';
+import Image from 'src/components/Recipe/Image';
 
 import './styles.scss';
 
@@ -15,7 +16,7 @@ const Recipe = ({ recipes }) => (
     </div>
 
     <div className="recipe__block recipe__block--right">
-      <img className="recipe__img" src={recipes[0].picture} />
+      <Image image={recipes[0].picture}/>
       <Ingredients ingredients={recipes[0].ingredients} />
     </div>
   </div>
