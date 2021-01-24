@@ -8,6 +8,7 @@ import Header from 'src/components/Header';
 import Generator from 'src/components/Generator';
 import About from 'src/components/About';
 import Contact from 'src/components/Contact';
+import ShoppingList from 'src/components/ShoppingList';
 import HomePresentation from 'src/components/App/HomePresentation';
 
 import './styles.scss';
@@ -17,6 +18,7 @@ const App = () => {
   const [title, setTitle] = useState("O'Fourneaux");
   const [isClicked, setIsClicked] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [quantity, setQuantity] = useState(1);
 
   return (
     <div className="app">
@@ -29,6 +31,7 @@ const App = () => {
         {/* TODO: Link to /a-propos, to /contact */}
         {/* <About /> */}
         {/* <Contact /> */}
+        <ShoppingList quantity={quantity} setQuantity={setQuantity} />
       </FormspreeProvider>
     </div>
   );
