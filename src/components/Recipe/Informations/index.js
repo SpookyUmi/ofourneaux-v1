@@ -8,8 +8,7 @@ import nutriscore from 'src/assets/icons/nutriscore.svg';
 
 import './styles.scss';
 
-const Informations = ({recipe}) => {
-  return (
+const Informations = ({recipe}) => (
     <div className="recipe__infos">
       {/* HEADER */}
       <div className="recipe__infos__header">
@@ -108,7 +107,6 @@ const Informations = ({recipe}) => {
         <div className="recipe__line"></div>
       </div>
     </div>
-  )
-};
+  );
 
 export default Informations;

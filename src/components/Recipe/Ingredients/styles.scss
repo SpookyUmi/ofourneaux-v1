@@ -4,9 +4,9 @@
   &__ingredients {
 
     &__title {
-      font-size: 1.875rem;
-      padding: 0px 25px;
-      margin-bottom: 15px;
+      padding: 0 1.5rem;
+      margin-bottom: 0.9rem;
+      text-align: left;
     }
 
     &__list {
@@ -17,31 +17,23 @@
   }
 
   &__ingredient {
-    margin: 0px 5px;
+    margin-right: 0.625rem;
 
     &__img {
-      height: 60px;
-      width: 60px;
+      height: 3.75rem;
+      width: 3.75rem;
       background-color: #00000027;
-      margin-bottom: 10px;
+      margin-bottom: 0.625rem;
     }
 
     &__title {
       font-size: 0.9rem;
       font-weight: 700;
-      margin-bottom: 5px;
+      margin-bottom: 0.3rem;
     }
 
     &__quantity {
       font-size: 0.8rem;
     }
-  }
-
-  &__ingredient:first-child {
-    margin-left: 0px;
-  }
-  
-  &__ingredient:last-child {
-    margin-right: 0px;
   }
 }

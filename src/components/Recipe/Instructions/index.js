@@ -4,8 +4,7 @@ import './styles.scss';
 
 let step = 0;
 
-const Instructions = ({instructions}) => {
-  return (
+const Instructions = ({instructions}) => (
     <div className="recipe__instructions">
       <h2 className="recipe__instructions__title">
         Instructions
@@ -26,7 +25,6 @@ const Instructions = ({instructions}) => {
         })}
       </div>
     </div>
-  )
-};
+  );
 
 export default Instructions;
