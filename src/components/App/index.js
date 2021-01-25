@@ -1,7 +1,6 @@
 // == Import npm
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { FormspreeProvider } from '@formspree/react';
 import { Route } from 'react-router-dom';
 
 // == Import
@@ -32,7 +31,6 @@ const App = () => {
 
   return (
     <div className="app">
-      <FormspreeProvider project={process.env.FORMSPREE_PROJECT_ID}>
         {/* TODO: switch between Header and NavBar according to responsive : set a property in our state ? */}
         <Header title={title} />
         <NavBar />
@@ -67,7 +65,6 @@ const App = () => {
           <Recipe recipes={recipes} />
         </Route>
         <Footer />
-      </FormspreeProvider>
     </div>
   );
 };
