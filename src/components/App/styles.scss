@@ -50,13 +50,14 @@ input::placeholder, textarea::placeholder {
   color: #00382a91;
 }
 
-button, .button__style, input[type=button] {
+.button__style, button, input[type=button] {
   background-color: vars.$color-primary;
   padding: 0.75rem 1.25rem;
   color: vars.$color-sand;
   text-transform: uppercase;
   border-radius: 3rem;
   font-weight: 700;
+  font-size: 0.9rem;
 }
 
 label {

@@ -7,7 +7,7 @@ import { NavLink, Redirect } from 'react-router-dom';
 import './styles.scss';
 
 // == Composant
-const Header = ({ title, isLoggedIn }) => {
+const Header = ({ title, isLogged }) => {
 
   return (
     <header className="header">
@@ -17,7 +17,7 @@ const Header = ({ title, isLoggedIn }) => {
         <NavLink exact to="/">
           <h1 className="header__container__title">{title}</h1>
         </NavLink>
-        { !isLoggedIn &&
+        { !isLogged &&
           <div className="header__container__buttons desktop">
         {/* TODO: Link to /inscription */}
           <NavLink exact to="/inscription" className="header__container__elem button__style">S'inscrire</NavLink>
@@ -26,7 +26,7 @@ const Header = ({ title, isLoggedIn }) => {
         </div>
         }
         {
-          isLoggedIn &&
+          isLogged &&
           <div className="header__container__buttons desktop">
           {/* TODO: Link to /profil */}
             <NavLink exact to="/profil" className="header__container__elem button__style">Mon profil</NavLink>
