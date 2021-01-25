@@ -1,0 +1,23 @@
+@use 'src/styles/vars';
+
+.recipe {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  &__block {
+    max-width: 31.25rem;
+    width: 80%;
+  }
+}
+
+@media only screen and (min-width: 1118px) {
+  .recipe {
+    &__block {
+      
+      margin: 30px;
+      width: 50%;
+    }
+  }
+}

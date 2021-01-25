@@ -1,0 +1,41 @@
+@use 'src/styles/vars';
+
+.recipe {
+  &__ingredients {
+
+    &__title {
+      padding: 0 1.5rem;
+      margin-bottom: 0.9rem;
+      text-align: left;
+    }
+
+    &__list {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+  }
+
+  &__ingredient {
+    margin-right: 0.625rem;
+    margin-bottom: 0.625rem;
+
+    &__img {
+      height: 3.75rem;
+      width: 3.75rem;
+      background-color: #00000027;
+      margin-bottom: 0.625rem;
+      border-radius: 0.6rem;
+    }
+
+    &__title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    &__quantity {
+      font-size: 0.8rem;
+    }
+  }
+}

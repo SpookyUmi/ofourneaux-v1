@@ -14,8 +14,9 @@ import HomePresentation from 'src/components/App/HomePresentation';
 import Inscription from 'src/components/Inscription';
 import Connection from 'src/components/Connection';
 import Profile from 'src/components/Profile';
+import Recipe from 'src/components/Recipe';
 
-import './styles.scss';
+import recipes from 'src/data/recipes';
 
 const App = () => {
   const [title, setTitle] = useState("O'Fourneaux");
@@ -38,6 +39,7 @@ const App = () => {
         <Inscription />
         <Connection />
         <Profile />
+        <Recipe recipes={recipes} />
       </FormspreeProvider>
     </div>
   );

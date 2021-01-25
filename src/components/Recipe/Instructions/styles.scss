@@ -1,0 +1,30 @@
+@use 'src/styles/vars';
+
+.recipe {
+  &__instructions {
+    &__title {
+      padding: 0 1.5rem;
+      margin-bottom: 0.9rem;
+      text-align: left;
+    }
+
+    &__steps {
+      color: vars.$color-primary;
+      background-color: vars.$color-secondary;
+      border-radius: 1.5rem;
+      padding: 0.9rem 1.5rem;
+    }
+
+    &__step {
+      padding: 0.3rem 0;
+      font-size: 0.9rem;
+      display: flex;
+      flex-direction: row;
+
+      &__nb {
+        font-weight: 700;
+        margin-right: 0.625rem;
+      }
+    }
+  }
+}
