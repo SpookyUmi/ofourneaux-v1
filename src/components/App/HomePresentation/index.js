@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 
 // == Import
 import photo from 'src/assets/images/cooking.png';
-import '../styles.scss';
+import './styles.scss';
 
 // == Composant
 const HomePresentation = ({ title }) => {
