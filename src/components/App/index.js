@@ -33,8 +33,8 @@ const App = () => {
         <HomePresentation title={title} />
         <Generator setIsClicked={setIsClicked} isClicked={isClicked} isLoggedIn={isLoggedIn} />
         {/* TODO: Link to /a-propos, to /contact */}
-        {/* <About /> */}
-        {/* <Contact /> */}
+        <About />
+        <Contact />
         <ShoppingList quantity={quantity} setQuantity={setQuantity} />
         <Inscription />
         <Connection />
