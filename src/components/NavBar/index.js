@@ -74,11 +74,11 @@ const Navbar = ({ isLoggedIn, isAdmin, navBarIsOpen }) => (
         <img className="navbar__link__profile__icon" href={profile} alt="icône profil" />
         Mon profil
       </a>
-      <a className="navbar__link__adminrecipes" href="/admin/ajout-recettes">
+      <a className="navbar__link__adminrecipes" href="/admin/ajout-recette">
         <img className="navbar__link__adminrecipes__icon" href={recipe} alt="icône recettes" />
         Ajouter une recette
       </a>
-      <a className="navbar__link__adminrecipes" href="/admin/modification-recettes">
+      <a className="navbar__link__adminrecipes" href="/admin/modification-recette">
         <img className="navbar__link__adminrecipes__icon" href={recipe} alt="icône recettes" />
         Modifier/Supprimer une recette
       </a>
