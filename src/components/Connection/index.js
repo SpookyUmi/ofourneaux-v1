@@ -5,7 +5,9 @@ import PropTypes from 'prop-types';
 
 import './styles.scss';
 
-const Connection = ({email, password, isLogged, trackEmail, trackPassword, handleLogin}) => (
+const Connection = ({
+  email, password, isLogged, trackEmail, trackPassword, handleLogin,
+}) => (
   <div className="connection">
     <h2 className="connection__title">Connexion</h2>
     {isLogged && (<p className="connection__message"> Vous êtes connecté ! </p>)}
@@ -36,7 +38,8 @@ const Connection = ({email, password, isLogged, trackEmail, trackPassword, handl
           </label>
           <input
             className="connection__content__form__field"
-            type="password" id="password"
+            type="password"
+            id="password"
             name="password"
             placeholder="Mot de passe"
             value={password}
@@ -47,7 +50,7 @@ const Connection = ({email, password, isLogged, trackEmail, trackPassword, handl
             <div className="connection__content__text connection__content__text--forgotten-password">Mot de passe oublié ?</div>
           </a>
         </div>
-          <input className="connection__content__button" type="submit" value="Connexion"/>
+        <input className="connection__content__button" type="submit" value="Connexion" />
       </form>
       <div className="connection__content__inscription">
         <p className="connection__content__inscription__text">
@@ -63,52 +66,48 @@ const Connection = ({email, password, isLogged, trackEmail, trackPassword, handl
   </div>
 );
 
-Connection.proptypes ={
+Connection.propTypes = {
   email: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
   isLogged: PropTypes.bool.isRequired,
   trackEmail: PropTypes.func.isRequired,
   trackPassword: PropTypes.func.isRequired,
   handleLogin: PropTypes.func.isRequired,
-}
-
-const mapStateToProps = (state) => {
-  return {
-    email: state.auth.email,
-    password: state.auth.password,
-    isLogged: state.auth.isLogged,
-  }
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    trackEmail: (event) => {
-      // console.log('Input email :', event.target.value);
-      dispatch({
-        type: 'EDIT_FIELD_EMAIL',
-        payload: {
-          email: event.target.value,
-        }
-      });
-    },
+const mapStateToProps = (state) => ({
+  email: state.auth.email,
+  password: state.auth.password,
+  isLogged: state.auth.isLogged,
+});
 
-    trackPassword: (event) => {
-      // console.log('Input password :', event.target.value);
-      dispatch({
-        type: 'EDIT_FIELD_PASSWORD',
-        payload: {
-          password: event.target.value,
-        }
-      });
-    },
+const mapDispatchToProps = (dispatch) => ({
+  trackEmail: (event) => {
+    // console.log('Input email :', event.target.value);
+    dispatch({
+      type: 'EDIT_FIELD_EMAIL',
+      payload: {
+        email: event.target.value,
+      },
+    });
+  },
 
-    handleLogin: (event) => {
-      event.preventDefault();
-      dispatch({
-        type: 'SEND_LOGIN_REQUEST',
-      });
-    },
-  }
-};
+  trackPassword: (event) => {
+    // console.log('Input password :', event.target.value);
+    dispatch({
+      type: 'EDIT_FIELD_PASSWORD',
+      payload: {
+        password: event.target.value,
+      },
+    });
+  },
+
+  handleLogin: (event) => {
+    event.preventDefault();
+    dispatch({
+      type: 'SEND_LOGIN_REQUEST',
+    });
+  },
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Connection);
