@@ -1,5 +1,6 @@
 // == Import npm
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { NavLink, Redirect } from 'react-router-dom';
 
@@ -7,8 +8,7 @@ import { NavLink, Redirect } from 'react-router-dom';
 import './styles.scss';
 
 // == Composant
-const Header = ({ title, isLoggedIn }) => {
-
+const Header = ({ title, isLogged }) => {
   return (
     <header className="header">
       <div className="header__container">
@@ -17,7 +17,7 @@ const Header = ({ title, isLoggedIn }) => {
         <NavLink exact to="/">
           <h1 className="header__container__title">{title}</h1>
         </NavLink>
-        { !isLoggedIn &&
+        { !isLogged &&
           <div className="header__container__buttons desktop">
         {/* TODO: Link to /inscription */}
           <NavLink exact to="/inscription" className="header__container__elem button__style">S'inscrire</NavLink>
@@ -26,12 +26,12 @@ const Header = ({ title, isLoggedIn }) => {
         </div>
         }
         {
-          isLoggedIn &&
+          isLogged &&
           <div className="header__container__buttons desktop">
           {/* TODO: Link to /profil */}
             <NavLink exact to="/profil" className="header__container__elem button__style">Mon profil</NavLink>
           {/* TODO: onClick, toggle isLoggedIn to false + redirect to /home */}
-            <Redirect to="/" className="header__container__elem">Se déconnecter</Redirect>
+            <NavLink to="/" className="header__container__elem">Se déconnecter</NavLink>
           </div>
         }
       </div>
@@ -39,5 +39,19 @@ const Header = ({ title, isLoggedIn }) => {
   );
 };
 
-// == Export
-export default Header;
+Header.proptypes ={
+  title: PropTypes.string.isRequired,
+  isLogged: PropTypes.bool.isRequired,
+}
+
+const mapStateToProps = (state) => {
+  return {
+    isLogged: state.auth.isLogged,
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {}
+};
+
+export default connect(mapStateToProps, null)(Header);

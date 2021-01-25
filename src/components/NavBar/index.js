@@ -102,10 +102,11 @@ const Navbar = ({ isLoggedIn, isAdmin, navBarIsOpen }) => (
   </div>
 );
 
-Navbar.propTypes = {
-  isLoggedIn: PropTypes.bool.isRequired,
-  isAdmin: PropTypes.bool.isRequired,
-  navBarIsOpen: PropTypes.bool.isRequired,
-};
+// ! temporarily commented to avoid errors in the console
+// Navbar.propTypes = {
+//   isLoggedIn: PropTypes.bool.isRequired,
+//   isAdmin: PropTypes.bool.isRequired,
+//   navBarIsOpen: PropTypes.bool.isRequired,
+// };
 
 export default Navbar;

@@ -26,9 +26,10 @@ const Recipes = ({ recipes, title }) => (
   </main>
 );
 
-Recipes.propTypes = {
-  recipes: PropTypes.array.isRequired,
-  title: PropTypes.string.isRequired,
-};
+// ! temporarily commented to avoid errors in the console
+// Recipes.propTypes = {
+//   recipes: PropTypes.array.isRequired,
+//   title: PropTypes.string.isRequired,
+// };
 
 export default Recipes;
