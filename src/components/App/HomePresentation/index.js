@@ -1,6 +1,7 @@
 // == Import npm
 import React from 'react';
 import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 
 // == Import
 import photo from 'src/assets/images/cooking.png';
@@ -17,7 +18,7 @@ const HomePresentation = ({ title }) => {
           <p>Moderne et ludique, O'Fourneaux vous accompagne au quotidien
             en vous proposant des recettes variées, en fonction de la saison
             et de vos exigences alimentaires.</p>
-          <a className="home__container__elem button__style">S'inscrire</a>
+          <NavLink exact to="/inscription" className="home__container__elem button__style">S'inscrire</NavLink>
         </section>
         <section className="home__container__elem">
           <img src={photo} className="home__container__img"/>

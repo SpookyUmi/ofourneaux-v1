@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormspreeProvider } from '@formspree/react';
+import { Route } from 'react-router-dom';
 
 // == Import
 import Header from 'src/components/Header';
@@ -12,7 +13,6 @@ import HomePresentation from 'src/components/App/HomePresentation';
 
 import './styles.scss';
 
-// == Composant
 const App = () => {
   const [title, setTitle] = useState("O'Fourneaux");
   const [isClicked, setIsClicked] = useState(false);
@@ -34,5 +34,4 @@ const App = () => {
   );
 };
 
-// == Export
 export default App;
