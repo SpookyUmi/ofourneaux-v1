@@ -1,0 +1,28 @@
+@use 'src/styles/vars';
+
+.recipes__footer{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: vars.$color-secondary;
+  color: vars.$color-primary;
+  padding: 1.2rem;
+  font-size: 1.2rem;
+  border-radius: 1.5rem 1.5rem 0 0;
+}
+
+.recipes__footer__home{
+  font-family: vars.$font-title;
+  font-size: 1.5rem;
+}
+
+.desktop {
+  display: none;
+}
+
+@media only screen and (min-width: 1024px) {
+
+  .desktop {
+    display: block;
+  }
+}
