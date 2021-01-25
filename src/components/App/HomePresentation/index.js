@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
 // == Import
-import photo from 'src/assets/images/cooking.png';
+import photo from 'src/assets/images/dish.png';
 import './styles.scss';
 
 // == Composant
