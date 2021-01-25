@@ -10,7 +10,7 @@ import App from 'src/components/App';
 
 const rootReactElement = (
   <BrowserRouter>
-    <FormspreeProvider project={process.env.FORMSPREE_PROJECT_ID}>
+    <FormspreeProvider project="1596756043252104978">
       <App />
     </FormspreeProvider>
   </BrowserRouter>
