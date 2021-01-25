@@ -20,6 +20,7 @@
 }
 
 .app h3 {
+  font-family: vars.$font-title;
   font-size: 1.5rem;
 }
 
@@ -28,6 +29,36 @@
   font-style: italic;
 }
 
-.app p, .app a {
+h1, h2, button {
+  text-align: center;
+}
+
+.app p, .app label {
   font-size: 1.2rem;
+}
+
+.app input, .app select {
+  border-radius: 1.3rem;
+  border: 2px solid vars.$color-primary;
+  background-color: vars.$color-sand;
+  padding: 0.5rem;
+  padding-left: 1rem;
+  text-align: left;
+}
+
+.app input::placeholder, .app textarea::placeholder {
+  color: #00382a91;
+}
+
+.app button, .button__style {
+  background-color: vars.$color-primary;
+  padding: 0.75rem 1.25rem;
+  color: vars.$color-sand;
+  text-transform: uppercase;
+  border-radius: 3rem;
+  font-weight: 700;
+}
+
+.app label {
+  color: #000;
 }
