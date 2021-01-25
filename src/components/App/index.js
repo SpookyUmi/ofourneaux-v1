@@ -28,19 +28,18 @@ import './styles.scss';
 const App = () => {
   const [title, setTitle] = useState("O'Fourneaux");
   const [isClicked, setIsClicked] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [quantity, setQuantity] = useState(1);
 
   return (
     <div className="app">
       <FormspreeProvider project={process.env.FORMSPREE_PROJECT_ID}>
         {/* TODO: switch between Header and NavBar according to responsive : set a property in our state ? */}
-        <Header title={title} isLoggedIn={isLoggedIn} />
-        <NavBar isLoggedIn={isLoggedIn} />
+        <Header title={title} />
+        <NavBar />
         <Route exact path='/'>
           {/* TODO: Change the components thanks to Links */}
           <HomePresentation title={title} />
-          <Generator setIsClicked={setIsClicked} isClicked={isClicked} isLoggedIn={isLoggedIn} />
+          <Generator setIsClicked={setIsClicked} isClicked={isClicked} />
         </Route>
         {/* TODO: Link to /a-propos, to /contact */}
         <Route exact path='/a-propos'>

@@ -1,5 +1,6 @@
 // == Import npm
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { NavLink, Redirect } from 'react-router-dom';
 
@@ -30,7 +31,7 @@ const Header = ({ title, isLogged }) => {
           {/* TODO: Link to /profil */}
             <NavLink exact to="/profil" className="header__container__elem button__style">Mon profil</NavLink>
           {/* TODO: onClick, toggle isLoggedIn to false + redirect to /home */}
-            <Redirect to="/" className="header__container__elem">Se déconnecter</Redirect>
+            <NavLink to="/" className="header__container__elem">Se déconnecter</NavLink>
           </div>
         }
       </div>
@@ -38,5 +39,19 @@ const Header = ({ title, isLogged }) => {
   );
 };
 
-// == Export
-export default Header;
+Header.proptypes ={
+  title: PropTypes.string.isRequired,
+  isLogged: PropTypes.bool.isRequired,
+}
+
+const mapStateToProps = (state) => {
+  return {
+    isLogged: state.auth.isLogged,
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {}
+};
+
+export default connect(mapStateToProps, null)(Header);
