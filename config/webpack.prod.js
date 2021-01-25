@@ -21,6 +21,7 @@ module.exports = merge(common, {
     }),
     // Stats bundle
     new BundleStatsWebpackPlugin(),
+    new Dotenv()
   ],
   module: {
     rules: [
@@ -72,8 +73,4 @@ module.exports = merge(common, {
   node: {
     fs: "empty"
   },
-
-  plugins: [
-    new Dotenv()
-  ]
 });
