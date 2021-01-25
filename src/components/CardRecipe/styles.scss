@@ -1,0 +1,46 @@
+@use 'src/styles/vars';
+
+.card__recipe {
+  background-color: vars.$color-secondary;
+  max-width: 320px;
+  margin: 1rem auto;
+  border-radius: 2rem;
+  overflow: hidden;
+
+  &__img {
+    width: 100%;
+  }
+
+  &__time__icon {
+    width: 1.7rem;
+    margin-right: 0.5rem;
+  }
+
+  &__info, &__buttons {
+    display: flex;
+  }
+
+  &__title {
+    padding: 1rem;
+  }
+
+  &__buttons {
+    margin-top: 1.5rem;
+    justify-content: center;
+  }
+
+  &__select__button {
+    border-right: 1px solid vars.$color-secondary;
+  }
+
+  &__info {
+    padding: 0.3rem 1rem;
+    align-items: center;
+  }
+}
+
+#special__button {
+  border-radius: 0;
+  width: 100%;
+  padding: 1rem 1.5rem;
+}

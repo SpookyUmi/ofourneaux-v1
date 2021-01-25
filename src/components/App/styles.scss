@@ -20,6 +20,7 @@
 }
 
 .app h3 {
+  font-family: vars.$font-title;
   font-size: 1.5rem;
 }
 
@@ -34,6 +35,15 @@ h1, h2, button {
 
 .app p, .app label {
   font-size: 1.2rem;
+}
+
+.app input, .app select {
+  border-radius: 1.3rem;
+  border: 2px solid vars.$color-primary;
+  background-color: vars.$color-sand;
+  padding: 0.5rem;
+  padding-left: 1rem;
+  text-align: left;
 }
 
 .app input::placeholder, .app textarea::placeholder {
