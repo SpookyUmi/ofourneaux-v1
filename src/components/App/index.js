@@ -13,6 +13,7 @@ import ShoppingList from 'src/components/ShoppingList';
 import HomePresentation from 'src/components/App/HomePresentation';
 import Inscription from 'src/components/Inscription';
 import Connection from 'src/components/Connection';
+import Profile from 'src/components/Profile';
 
 import './styles.scss';
 
@@ -36,6 +37,7 @@ const App = () => {
         <ShoppingList quantity={quantity} setQuantity={setQuantity} />
         <Inscription />
         <Connection />
+        <Profile />
       </FormspreeProvider>
     </div>
   );
