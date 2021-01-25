@@ -1,21 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import setToggleClassname from 'src/utils/setToggleClassname';
-
 import home from 'src/assets/icons/home.svg';
-import menu from 'src/assets/icons/menu.svg';
+import menu from 'src/assets/icons/nav.svg';
 import arrow from 'src/assets/icons/up-arrow.svg';
-import profile from 'src/assets/icons/profil.svg';
-import list from 'src/assets/icons/liste.svg';
+import profile from 'src/assets/icons/profile.svg';
+import list from 'src/assets/icons/list.svg';
 import favorites from 'src/assets/icons/heart-full.svg';
 import recipe from 'src/assets/icons/bookmark.svg';
 import tag from 'src/assets/icons/tag.svg';
 import users from 'src/assets/icons/users.svg';
 import contact from 'src/assets/icons/contact.svg';
-import about from 'src/assets/icons/apropos.svg';
+import about from 'src/assets/icons/about.svg';
 
-// import './navbar.scss';
+import './styles.scss';
 
 const Navbar = ({ isLoggedIn, isAdmin, navBarIsOpen }) => (
   <div className="navbar">

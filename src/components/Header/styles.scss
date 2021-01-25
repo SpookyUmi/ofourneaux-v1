@@ -1,0 +1,61 @@
+@use 'src/styles/vars';
+
+.header {
+  background-color: vars.$color-secondary;
+}
+
+.desktop {
+  display: none;
+}
+
+.header__container__title {
+  padding-top: 1rem;
+}
+
+
+@media only screen and (min-width: 768px) {
+
+
+
+}
+
+@media only screen and (min-width: 1024px) {
+
+  .desktop {
+    display: block;
+  }
+
+  .header__container {
+    padding: 1.5rem;
+    margin: 0 auto;
+    max-width: 1440px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__title {
+      padding-top: 0;
+    }
+
+    &__elem {
+      padding: 0.6rem;
+      font-weight: 700;
+
+      &--signin {
+        text-transform: uppercase;
+        padding-top: 1rem;
+        margin-left: 0.3rem;
+      }
+
+      &--input {
+        border-radius: 1.3rem;
+        border: 2px solid vars.$color-primary;
+        background-color: vars.$color-sand;
+        padding-left: 1rem;
+        text-align: left;
+      }
+
+    }
+  }
+
+}

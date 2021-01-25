@@ -3,12 +3,9 @@
 .container {
   max-width: 1440px;
   margin: 1rem auto;
+  text-align: center;
 
   &__section {
-
-    &__text {
-      text-align: center;
-    }
 
     &__title {
       margin: 0.8rem;
