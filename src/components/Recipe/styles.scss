@@ -3,10 +3,21 @@
 .recipe {
   display: flex;
   flex-direction: row;
-  padding: 50px 250px;
+  justify-content: center;
+  flex-wrap: wrap;
 
   &__block {
-    margin: 30px;
-    width: 50%;
+    max-width: 31.25rem;
+    width: 80%;
+  }
+}
+
+@media only screen and (min-width: 1118px) {
+  .recipe {
+    &__block {
+      
+      margin: 30px;
+      width: 50%;
+    }
   }
 }
