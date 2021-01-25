@@ -5,13 +5,10 @@ import Profile from 'src/components/Profile';
 
 import './styles.scss';
 
-const App = () => {
-
-  return (
-    <div className="app">
-      <Profile />
-    </div>
-  );
-};
+const App = () => (
+  <div className="app">
+    <Profile />
+  </div>
+);
 
 export default App;

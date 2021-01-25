@@ -2,7 +2,6 @@
 
 .app {
   margin: 0 auto;
-  // text-align: center;
   font-family: vars.$font-text;
   line-height: 1.6rem;
   color: vars.$color-primary;
@@ -29,6 +28,6 @@
   font-style: italic;
 }
 
-// .app p, .app a {
-//   font-size: 1.2rem;
-// }
+.app p, .app a {
+  font-size: 1.2rem;
+}
