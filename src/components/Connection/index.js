@@ -5,9 +5,10 @@ import PropTypes from 'prop-types';
 
 import './styles.scss';
 
-const Connection = ({email, password, trackEmail, trackPassword, handleLogin}) => (
+const Connection = ({email, password, isLogged, trackEmail, trackPassword, handleLogin}) => (
   <div className="connection">
     <h2 className="connection__title">Connexion</h2>
+    {isLogged && (<p className="connection__message"> Vous êtes connecté ! </p>)}
     <div className="connection__content">
       <form
         className="connection__content__form"
@@ -65,6 +66,7 @@ const Connection = ({email, password, trackEmail, trackPassword, handleLogin}) =
 Connection.proptypes ={
   email: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
+  isLogged: PropTypes.bool.isRequired,
   trackEmail: PropTypes.func.isRequired,
   trackPassword: PropTypes.func.isRequired,
   handleLogin: PropTypes.func.isRequired,
@@ -74,6 +76,7 @@ const mapStateToProps = (state) => {
   return {
     email: state.auth.email,
     password: state.auth.password,
+    isLogged: state.auth.isLogged,
   }
 };
 

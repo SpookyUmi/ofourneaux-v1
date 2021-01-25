@@ -8,7 +8,6 @@ import './styles.scss';
 
 // == Composant
 const Header = ({ title, isLogged }) => {
-
   return (
     <header className="header">
       <div className="header__container">
