@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormspreeProvider } from '@formspree/react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 // == Import
 import Header from 'src/components/Header';
@@ -33,7 +33,6 @@ const App = () => {
 
   return (
     <div className="app">
-    <BrowserRouter>
       <FormspreeProvider project={process.env.FORMSPREE_PROJECT_ID}>
         {/* TODO: switch between Header and NavBar according to responsive : set a property in our state ? */}
         <Header title={title} isLoggedIn={isLoggedIn} />
@@ -70,7 +69,6 @@ const App = () => {
         </Route>
         <Footer />
       </FormspreeProvider>
-    </BrowserRouter>
     </div>
   );
 };

@@ -39,5 +39,3 @@ const Connection = () => (
     </div>
   </div>
 );
-
-export default Connection;

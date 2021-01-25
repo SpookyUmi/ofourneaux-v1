@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { NavLink } from 'react-router-dom';
 
 import './styles.scss';
 import time from 'src/assets/icons/time.svg';
@@ -15,9 +15,9 @@ const CardRecipe = ({ picture, title, preparation_time, baking_time, difficulty 
   <div className="card__recipe">
     <img className="card__recipe__img" src={picture} alt={title} />
     <h3 className="card__recipe__title">
-      <a className="card__recipe__title__link" href="/recette/:slug">
+      <NavLink to="/recette/:slug" className="card__recipe__title__link">
         {title}
-      </a>
+      </NavLink>
     </h3>
     <section className="card__recipe__info">
       <img className="card__recipe__time__icon" src={time} alt="icône de durée" />

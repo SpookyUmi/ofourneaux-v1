@@ -7,24 +7,24 @@
   color: vars.$color-primary;
 }
 
-.app h1 {
+h1 {
   line-height: 1.5;
   font-family: vars.$font-title;
   font-size: 3rem;
 }
 
-.app h2 {
+h2 {
   line-height: 3.5rem;
   font-family: vars.$font-title;
   font-size: 2.5rem;
 }
 
-.app h3 {
+h3 {
   font-family: vars.$font-title;
   font-size: 1.5rem;
 }
 
-.app h4 {
+h4 {
   font-size: 1.4rem;
   font-style: italic;
 }
@@ -33,11 +33,11 @@ h1, h2, button {
   text-align: center;
 }
 
-.app p, .app label {
+p, label {
   font-size: 1.1rem;
 }
 
-.app input, .app select {
+input, select {
   border-radius: 1.3rem;
   border: 2px solid vars.$color-primary;
   background-color: vars.$color-sand;
@@ -46,11 +46,11 @@ h1, h2, button {
   text-align: left;
 }
 
-.app input::placeholder, .app textarea::placeholder {
+input::placeholder, textarea::placeholder {
   color: #00382a91;
 }
 
-.app button, .button__style {
+button, .button__style, input[type=button] {
   background-color: vars.$color-primary;
   padding: 0.75rem 1.25rem;
   color: vars.$color-sand;
@@ -59,6 +59,6 @@ h1, h2, button {
   font-weight: 700;
 }
 
-.app label {
+label {
   color: #000;
 }
