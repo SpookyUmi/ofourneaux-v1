@@ -12,6 +12,7 @@ import Contact from 'src/components/Contact';
 import ShoppingList from 'src/components/ShoppingList';
 import HomePresentation from 'src/components/App/HomePresentation';
 import Inscription from 'src/components/Inscription';
+import Connection from 'src/components/Connection';
 
 import './styles.scss';
 
@@ -34,6 +35,7 @@ const App = () => {
         {/* <Contact /> */}
         <ShoppingList quantity={quantity} setQuantity={setQuantity} />
         <Inscription />
+        <Connection />
       </FormspreeProvider>
     </div>
   );
