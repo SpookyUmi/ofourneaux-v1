@@ -12,6 +12,7 @@ export default [
     date_creation: '2021-01-20T10:20:39.402Z',
     date_update: '2021-01-20T10:20:39.402Z',
     season: 'Printemps',
+    tags: ['Végétarien', 'Sans Porc'],
     ingredients: [
       {
         id: 1,
@@ -90,6 +91,7 @@ export default [
     date_creation: '2021-01-20T10:20:39.402Z',
     date_update: '2021-01-20T10:20:39.402Z',
     season: 'Printemps',
+    tags: ['Végétarien', 'Sans Porc'],
     ingredients: [
       {
         id: 1,

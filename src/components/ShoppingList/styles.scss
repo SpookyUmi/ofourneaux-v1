@@ -1,0 +1,46 @@
+@use 'src/styles/vars';
+
+.shopping__list {
+  background-color: vars.$color-secondary;
+  padding: 0.5rem;
+  width: 80%;
+  margin: 1rem auto;
+  border-radius: 2rem;
+
+  &__header {
+    display: flex;
+    padding: 1rem 0;
+  }
+
+  &__body {
+    padding: 0.5rem;
+
+    &__form {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem;
+    }
+  }
+}
+
+.quantity__setter__block {
+  display: flex;
+}
+
+
+@media only screen and (min-width: 768px) {
+  .recipes {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+}
+
+
+@media only screen and (min-width: 1024px) {
+
+  .shopping__list {
+    max-width: 90%;
+  }
+
+}

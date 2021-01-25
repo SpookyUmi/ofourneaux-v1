@@ -1,0 +1,72 @@
+@use 'src/styles/vars';
+
+.home__presentation {
+  width: 100%;
+  background: vars.$color-secondary;
+
+  &__title {
+    margin-bottom: 1rem;
+  }
+}
+
+.home__container {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 3rem 1rem 3rem;
+
+  &__elem {
+    padding: 0.5rem;
+    text-align: center;
+  }
+
+  &__text p {
+    margin-bottom: 1.5rem;
+  }
+
+  &__img {
+    width: 300px;
+  }
+
+}
+
+
+@media only screen and (min-width: 768px) {
+
+.home__container__img {
+  width: 350px;
+}
+
+}
+
+
+@media only screen and (min-width: 1024px) {
+
+.home__presentation__title {
+  text-align: left;
+}
+
+.home__container {
+  max-width: 1440px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  &__elem {
+    width: 40%;
+  }
+
+  &__text {
+    text-align: left;
+  }
+
+  &__img {
+    width: 400px;
+  }
+
+}
+
+}
