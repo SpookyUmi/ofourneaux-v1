@@ -25,7 +25,7 @@ const signIn = (store) => (next) => (action) => {
         .then((response) => {
           // console.log('Réponse inscription :', response);
           store.dispatch({
-            type: 'LOGIN_SUCCESS',
+            type: 'SUBSCRIPTION_SUCCESS',
           });
         })
         .catch((error) => {

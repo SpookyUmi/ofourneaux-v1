@@ -34,6 +34,16 @@ const reducer = (oldState = initialState, action) => {
         ...oldState,
         confirmPassword: action.payload.confirmPassword,
       };
+    case 'SUBSCRIPTION_SUCCESS':
+      return {
+        ...oldState,
+        lastName: '',
+        firstName: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+        errorMessage: '',
+      };
     case 'SUBSCRIPTION_FAILED':
       return {
         ...oldState,
