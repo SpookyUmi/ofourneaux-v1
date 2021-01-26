@@ -2,6 +2,8 @@ const initialState = {
   email: '',
   password: '',
   isLogged: false,
+  errorMessage: '',
+  token: '',
 };
 
 const reducer = (oldState = initialState, action) => {
@@ -20,11 +22,26 @@ const reducer = (oldState = initialState, action) => {
         password: action.payload.password,
       };
     case 'LOGIN_SUCCESS':
-      // console.log('CONNECTED!!!');
+      console.log('CONNECTED!!!');
       return {
         ...oldState,
+        email: '',
+        password: '',
         isLogged: true,
         errorMessage: '',
+        token: action.payload.token,
+      };
+    case 'LOGIN_FAILED':
+      return {
+        ...oldState,
+        errorMessage: action.payload.errorMessage,
+      };
+    case 'LOGOUT_SUCCESS':
+      console.log('DISCONNECTED!!!');
+      return {
+        ...oldState,
+        isLogged: false,
+        token: '',
       };
     default:
       return {

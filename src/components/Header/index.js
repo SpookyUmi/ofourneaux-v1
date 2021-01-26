@@ -27,7 +27,6 @@ const Header = ({ title, isLogged, handleDisconnect }) => (
         && (
           <div className="header__container__buttons desktop">
             <NavLink exact to="/profil" className="header__container__elem button__style">Mon profil</NavLink>
-            {/* TODO: onClick, toggle isLoggedIn to false + redirect to /home */}
             <NavLink to="/" className="header__container__elem" onClick={handleDisconnect}>Se déconnecter</NavLink>
           </div>
         )
@@ -48,6 +47,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   handleDisconnect: () => {
+    dispatch({
+      type: 'LOGOUT_SUCCESS',
+    });
   },
 });
 

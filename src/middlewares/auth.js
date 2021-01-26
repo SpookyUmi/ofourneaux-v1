@@ -19,13 +19,23 @@ const auth = (store) => (next) => (action) => {
         },
       })
         .then((response) => {
-          console.log('Réponse connexion :', response);
+          // console.log('Réponse connexion :', response);
           store.dispatch({
             type: 'LOGIN_SUCCESS',
+            payload: {
+              token: response.data.token,
+            }
           });
+          action.redirect('/');
         })
         .catch((error) => {
-          console.log('Erreur connexion :', error);
+          // console.log('Erreur inscription :', error);
+          store.dispatch({
+            type: 'LOGIN_FAILED',
+            payload: {
+              errorMessage: 'Identifiants incorrects',
+            },
+          });
         });
       break;
     default:
