@@ -1,5 +1,6 @@
 // == Import npm
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 // == Import
@@ -7,7 +8,7 @@ import giftLogo from 'src/assets/images/surprise.svg';
 import './styles.scss';
 
 // == Composant
-const Generator = ({ isClicked, setIsClicked, isLoggedIn }) => {
+const Generator = ({ isClicked, isLogged, handleClick }) => {
 
   return (
     <div className="generator">
@@ -20,9 +21,7 @@ const Generator = ({ isClicked, setIsClicked, isLoggedIn }) => {
           <>
             <img src={giftLogo}
               className="generator__section__logo"
-              onClick={() => {
-                setIsClicked(true);
-              }}
+              onClick={handleClick}
             />
             <p className="generator__section__click">Click me</p>
           </>
@@ -48,7 +47,7 @@ const Generator = ({ isClicked, setIsClicked, isLoggedIn }) => {
                 <option value="expert">Expérimenté</option>
               </select>
             </label>
-            {isLoggedIn &&
+            {isLogged &&
               <label>Recettes favorites uniquement
                 <input type="checkbox" name="favourites" />
               </label>
@@ -64,5 +63,21 @@ const Generator = ({ isClicked, setIsClicked, isLoggedIn }) => {
   );
 };
 
-// == Export
-export default Generator;
+const mapStateToProps = (state) => {
+  return {
+    isLogged: state.auth.isLogged,
+    isClicked: state.app.isClicked
+  }
+};
+
+const mapDispatchToProps = (dispatch) => ({
+
+  handleClick: (event) => {
+    event.preventDefault();
+    dispatch({
+      type: 'CLICK_ON_ELEMENT',
+    });
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Generator);

@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import home from 'src/assets/icons/home.svg';
@@ -15,7 +16,7 @@ import about from 'src/assets/icons/about.svg';
 
 import './styles.scss';
 
-const Navbar = ({ isLoggedIn, isAdmin, navBarIsOpen }) => (
+const Navbar = ({ isLogged, isAdmin, navBarIsOpen }) => (
   <div className="navbar">
     {/* The following elements are displayed for all users */}
     {/* TODO onClick button => navBarIsOpen */}
@@ -35,7 +36,7 @@ const Navbar = ({ isLoggedIn, isAdmin, navBarIsOpen }) => (
       Accueil
     </a>
     {/* TODO the following elements must only be displayed if the user is NOT logged in */}
-    {isLoggedIn === false
+    {!isLogged
     && (
     <>
       <a className="navbar__link__signin" href="/connexion">
@@ -47,7 +48,7 @@ const Navbar = ({ isLoggedIn, isAdmin, navBarIsOpen }) => (
     </>
     )}
     {/* TODO the following elements must only be displayed if the user is logged in */}
-    {isLoggedIn === true
+    {isLogged
     && (
     <>
       <a className="navbar__link__profile" href="/profil/:slug">
@@ -65,7 +66,7 @@ const Navbar = ({ isLoggedIn, isAdmin, navBarIsOpen }) => (
     </>
     )}
     {/* TODO the following elements must only be displayed if the user is logged in AND ADMIN */}
-    {isLoggedIn === true && isAdmin === true
+    {isLogged && isAdmin
     && (
     <>
       <a className="navbar__link__profile" href="/profil/:slug">
@@ -109,4 +110,14 @@ const Navbar = ({ isLoggedIn, isAdmin, navBarIsOpen }) => (
 //   navBarIsOpen: PropTypes.bool.isRequired,
 // };
 
-export default Navbar;
+const mapStateToProps = (state) => {
+  return {
+    isLogged: state.auth.isLogged,
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {}
+};
+
+export default connect(mapStateToProps, null)(Navbar);

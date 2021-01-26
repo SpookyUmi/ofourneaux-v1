@@ -1,5 +1,6 @@
 // == Import npm
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
@@ -28,5 +29,14 @@ const HomePresentation = ({ title }) => {
   );
 };
 
-// == Export
-export default HomePresentation;
+const mapStateToProps = (state) => {
+  return {
+    title: state.app.title,
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {}
+};
+
+export default connect(mapStateToProps, null)(HomePresentation);

@@ -25,18 +25,17 @@ import recipes from 'src/data/recipes';
 import './styles.scss';
 
 const App = () => {
-  const [title, setTitle] = useState("O'Fourneaux");
   const [isClicked, setIsClicked] = useState(false);
   const [quantity, setQuantity] = useState(1);
 
   return (
     <div className="app">
         {/* TODO: switch between Header and NavBar according to responsive : set a property in our state ? */}
-        <Header title={title} />
+        <Header />
         <NavBar />
         <Route exact path='/'>
           {/* TODO: Change the components thanks to Links */}
-          <HomePresentation title={title} />
+          <HomePresentation />
           <Generator setIsClicked={setIsClicked} isClicked={isClicked} />
         </Route>
         {/* TODO: Link to /a-propos, to /contact */}

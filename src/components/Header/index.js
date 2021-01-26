@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { NavLink, Redirect } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 // == Import
 import './styles.scss';
@@ -46,6 +46,7 @@ Header.proptypes ={
 
 const mapStateToProps = (state) => {
   return {
+    title: state.app.title,
     isLogged: state.auth.isLogged,
   }
 };
