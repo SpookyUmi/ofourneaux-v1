@@ -14,17 +14,20 @@ const auth = (store) => (next) => (action) => {
         method: 'post',
         url: 'https://ofourneaux.herokuapp.com/users/login',
         data: form,
-        headers: {'Content-Type': 'multipart/form-data'}
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
       })
-      .then((response) => {
-        console.log('Réponse connexion :', response);
-        store.dispatch({
-          type: 'LOGIN_SUCCESS',
+        .then((response) => {
+          console.log('Réponse connexion :', response);
+          store.dispatch({
+            type: 'LOGIN_SUCCESS',
+          });
         })
-      })
-      .catch((error) => {
-        console.log('Erreur connexion :', error);
-      });
+        .catch((error) => {
+          console.log('Erreur connexion :', error);
+        });
+      break;
     default:
       next(action);
   }

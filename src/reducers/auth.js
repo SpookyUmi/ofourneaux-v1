@@ -20,15 +20,17 @@ const reducer = (oldState = initialState, action) => {
         password: action.payload.password,
       };
     case 'LOGIN_SUCCESS':
-      console.log('CONNECTED!!!');
+      // console.log('CONNECTED!!!');
       return {
         ...oldState,
         isLogged: true,
         errorMessage: '',
-      }
+      };
     default:
-      return {...oldState};
-  };
+      return {
+        ...oldState,
+      };
+  }
 };
 
 export default reducer;
