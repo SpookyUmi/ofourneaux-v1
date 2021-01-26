@@ -4,6 +4,7 @@ const initialState = {
   isLogged: false,
   errorMessage: '',
   token: '',
+  id: '',
 };
 
 const reducer = (oldState = initialState, action) => {
@@ -30,6 +31,7 @@ const reducer = (oldState = initialState, action) => {
         isLogged: true,
         errorMessage: '',
         token: action.payload.token,
+        id: action.payload.id,
       };
     case 'LOGIN_FAILED':
       return {

@@ -24,7 +24,8 @@ const auth = (store) => (next) => (action) => {
             type: 'LOGIN_SUCCESS',
             payload: {
               token: response.data.token,
-            }
+              id: response.data.id,
+            },
           });
           action.redirect('/');
         })
