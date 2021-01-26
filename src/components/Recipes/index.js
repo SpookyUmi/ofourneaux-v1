@@ -1,11 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 // hard json data for test ( TODO PUT THIS IN PARENT ELEMENT FOR PROPS)
-import recipes from 'src/data/recipes';
+//import recipes from 'src/data/recipes';
 
-import Header from 'src/components/Header';
-import Footer from 'src/components/Footer';
 import CardRecipe from 'src/components/CardRecipe';
 import RecipesHeader from './RecipesHeader';
 
@@ -15,14 +14,12 @@ import RecipesHeader from './RecipesHeader';
 // the Recipes page's specific Header,
 // map trough the data and display a CardRecipe element for each recipe,
 // and finally the main Footer (in desktop mode)
-const Recipes = ({ recipes, title }) => (
+const Recipes = ({ recipes }) => (
   <main className="recipes">
-    <Header />
-    <RecipesHeader title={title} />
+    <RecipesHeader />
     {recipes.map((recipe) => (
-      <CardRecipe recipe={recipe} key={recipe.id} />
+      <CardRecipe {...recipe} key={recipe.id} />
     ))}
-    <Footer />
   </main>
 );
 
@@ -32,4 +29,14 @@ const Recipes = ({ recipes, title }) => (
 //   title: PropTypes.string.isRequired,
 // };
 
-export default Recipes;
+const mapStateToProps = (state) => {
+  return {
+    recipes: state.recipes.recipes,
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Recipes);

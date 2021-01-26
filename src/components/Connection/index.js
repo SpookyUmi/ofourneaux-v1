@@ -50,7 +50,7 @@ const Connection = ({
             <div className="connection__content__text connection__content__text--forgotten-password">Mot de passe oublié ?</div>
           </a>
         </div>
-        <input className="connection__content__button" type="submit" value="Connexion" />
+          <input className="connection__content__button button__style" type="submit" value="Connexion" />
       </form>
       <div className="connection__content__inscription">
         <p className="connection__content__inscription__text">

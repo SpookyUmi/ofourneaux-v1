@@ -2,18 +2,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 
 // == Import
 import './styles.scss';
 
 // == Composant
-const Header = ({ title, isLogged }) => {
+const Header = ({ title, isLogged, trackSearch, handleSearch, recipes }) => {
   return (
     <header className="header">
       <div className="header__container">
         {/* TODO: onSubmit, send a GET request (axios), and redirect to /recettes */}
-        <input type="text" placeholder="Recherche..." className="header__container__elem header__container__elem--input desktop"/>
+        <form type="submit" onSubmit={handleSearch}>
+          <input
+            type="text"
+            placeholder="Recherche..."
+            className="header__container__elem header__container__elem--input desktop"
+            onChange={trackSearch}
+          />
+        </form>
         <NavLink exact to="/">
           <h1 className="header__container__title">{title}</h1>
         </NavLink>
@@ -48,11 +55,27 @@ const mapStateToProps = (state) => {
   return {
     title: state.app.title,
     isLogged: state.auth.isLogged,
+    recipes: state.recipes.recipes,
   }
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {}
-};
+const mapDispatchToProps = (dispatch) => ({
+  trackSearch: (event) => {
+    // console.log('Input email :', event.target.value);
+    dispatch({
+      type: 'EDIT_SEARCH_FIELD',
+      payload: {
+        search: event.target.value,
+      },
+    });
+  },
 
-export default connect(mapStateToProps, null)(Header);
+  handleSearch: (event) => {
+    event.preventDefault();
+    dispatch({
+      type: 'SEND_SEARCH_REQUEST',
+    });
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

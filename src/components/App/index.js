@@ -1,7 +1,8 @@
 // == Import npm
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Route } from 'react-router-dom';
+import { Redirect, Route } from 'react-router-dom';
 
 // == Import
 import Header from 'src/components/Header';
@@ -24,8 +25,7 @@ import recipes from 'src/data/recipes';
 // SCSS
 import './styles.scss';
 
-const App = () => {
-  const [isClicked, setIsClicked] = useState(false);
+const App = ({ isLogged, recipes }) => {
   const [quantity, setQuantity] = useState(1);
 
   return (
@@ -36,7 +36,7 @@ const App = () => {
         <Route exact path='/'>
           {/* TODO: Change the components thanks to Links */}
           <HomePresentation />
-          <Generator setIsClicked={setIsClicked} isClicked={isClicked} />
+          <Generator />
         </Route>
         {/* TODO: Link to /a-propos, to /contact */}
         <Route exact path='/a-propos'>
@@ -53,6 +53,7 @@ const App = () => {
         </Route>
         <Route exact path='/connexion'>
           <Connection />
+          {isLogged && <Redirect to="/"/> }
         </Route>
         <Route exact path='/profil'>
           <Profile />
@@ -68,4 +69,13 @@ const App = () => {
   );
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  isLogged: state.auth.isLogged,
+  recipes: state.recipes.recipes
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
