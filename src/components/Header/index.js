@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 
 import './styles.scss';
 
-const Header = ({ title, isLogged }) => (
+const Header = ({ title, isLogged, handleDisconnect }) => (
   <header className="header">
     <div className="header__container">
       {/* TODO: onSubmit, send a GET request (axios), and redirect to /recettes */}
@@ -13,20 +13,25 @@ const Header = ({ title, isLogged }) => (
       <NavLink exact to="/">
         <h1 className="header__container__title">{title}</h1>
       </NavLink>
-      { !isLogged && (
-        <div className="header__container__buttons desktop">
-          <NavLink exact to="/inscription" className="header__container__elem button__style">S'inscrire</NavLink>
-          <NavLink exact to="/connexion" className="header__container__elem header__container__elem--signin">Se connecter</NavLink>
-        </div>
-      )}
       {
-        isLogged && (
-        <div className="header__container__buttons desktop">
-          <NavLink exact to="/profil" className="header__container__elem button__style">Mon profil</NavLink>
-          {/* TODO: onClick, toggle isLoggedIn to false + redirect to /home */}
-          <NavLink to="/" className="header__container__elem">Se déconnecter</NavLink>
-        </div>
-        )}
+        !isLogged
+        && (
+          <div className="header__container__buttons desktop">
+            <NavLink exact to="/inscription" className="header__container__elem button__style">S'inscrire</NavLink>
+            <NavLink exact to="/connexion" className="header__container__elem header__container__elem--signin">Se connecter</NavLink>
+          </div>
+        )
+      }
+      {
+        isLogged
+        && (
+          <div className="header__container__buttons desktop">
+            <NavLink exact to="/profil" className="header__container__elem button__style">Mon profil</NavLink>
+            {/* TODO: onClick, toggle isLoggedIn to false + redirect to /home */}
+            <NavLink to="/" className="header__container__elem" onClick={handleDisconnect}>Se déconnecter</NavLink>
+          </div>
+        )
+      }
     </div>
   </header>
 );
@@ -34,6 +39,7 @@ const Header = ({ title, isLogged }) => (
 Header.propTypes = {
   title: PropTypes.string.isRequired,
   isLogged: PropTypes.bool.isRequired,
+  handleDisconnect: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -41,7 +47,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-
+  handleDisconnect: () => {
+  },
 });
 
-export default connect(mapStateToProps, null)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
