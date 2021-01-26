@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { NavLink, Redirect } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 
 // == Import
 import './styles.scss';
@@ -51,7 +51,7 @@ Header.proptypes ={
   isLogged: PropTypes.bool.isRequired,
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   return {
     title: state.app.title,
     isLogged: state.auth.isLogged,
@@ -59,7 +59,7 @@ const mapStateToProps = (state) => {
   }
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
   trackSearch: (event) => {
     // console.log('Input email :', event.target.value);
     dispatch({
@@ -74,8 +74,13 @@ const mapDispatchToProps = (dispatch) => ({
     event.preventDefault();
     dispatch({
       type: 'SEND_SEARCH_REQUEST',
+      redirect: ownProps.history.push
     });
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+let container = connect(mapStateToProps, mapDispatchToProps)(Header);
+
+container = withRouter(container);
+
+export default container;

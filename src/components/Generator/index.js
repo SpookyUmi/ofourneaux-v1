@@ -5,10 +5,11 @@ import PropTypes from 'prop-types';
 
 // == Import
 import giftLogo from 'src/assets/images/surprise.svg';
+import arrow from 'src/assets/icons/up-arrow.svg';
 import './styles.scss';
 
 // == Composant
-const Generator = ({ isClicked, isLogged, handleClick }) => {
+const Generator = ({ isClicked, isLogged, handleClickIn, handleClickOut }) => {
 
   return (
     <div className="generator">
@@ -21,7 +22,8 @@ const Generator = ({ isClicked, isLogged, handleClick }) => {
           <>
             <img src={giftLogo}
               className="generator__section__logo"
-              onClick={handleClick}
+              alt="logo de cadeau"
+              onClick={handleClickIn}
             />
             <p className="generator__section__click">Click me</p>
           </>
@@ -32,6 +34,12 @@ const Generator = ({ isClicked, isLogged, handleClick }) => {
         {
           isClicked &&
           <form className="generator__form">
+          <img
+            src={arrow}
+            alt="logo de flèche"
+            className="generator__section__arrow"
+            onClick={handleClickOut}
+          />
             <label>
               Nombre de recettes
               <input type="number" name="nbRecipes" min="0" max="20" />
@@ -72,10 +80,17 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
 
-  handleClick: (event) => {
+  handleClickIn: (event) => {
     event.preventDefault();
     dispatch({
-      type: 'CLICK_ON_ELEMENT',
+      type: 'CLICK_IN',
+    });
+  },
+
+  handleClickOut: (event) => {
+    event.preventDefault();
+    dispatch({
+      type: 'CLICK_OUT',
     });
   }
 });

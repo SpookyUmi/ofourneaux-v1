@@ -5,10 +5,15 @@ const initialState = {
 
 const reducer = (oldState = initialState, action) => {
   switch (action.type) {
-    case 'CLICK_ON_ELEMENT':
+    case 'CLICK_IN':
       return {
         ...oldState,
         isClicked: true,
+      };
+    case 'CLICK_OUT':
+      return {
+        ...oldState,
+        isClicked: false,
       };
     default:
       return { ...oldState };

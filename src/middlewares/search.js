@@ -22,7 +22,8 @@ const search = (store) => (next) => (action) => {
             payload: {
               recipes: response.data,
             }
-          })
+          });
+          action.redirect('/recettes');
         })
         .catch((error) => {
           console.log('Erreur connexion :', error);

@@ -53,7 +53,6 @@ const App = ({ isLogged, recipes }) => {
         </Route>
         <Route exact path='/connexion'>
           <Connection />
-          {isLogged && <Redirect to="/"/> }
         </Route>
         <Route exact path='/profil'>
           <Profile />
