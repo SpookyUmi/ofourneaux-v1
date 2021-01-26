@@ -21,7 +21,7 @@ module.exports = {
     new CleanWebpackPlugin(),
     new CopyWebpackPlugin({
       patterns: [
-        { 
+        {
           from: paths.static,
           to: '',
         }
@@ -29,7 +29,7 @@ module.exports = {
     }),
 
     new HtmlWebpackPlugin({
-      favicon: paths.assets + '/favicon.ico',
+      favicon: paths.assets + '/chef-hat.svg',
       template: paths.assets + '/index.html',
     }),
   ],
