@@ -42,6 +42,21 @@ const reducer = (oldState = initialState, action) => {
         ...oldState,
         shoppingList: action.payload.shoppingList,
       };
+    case 'EDIT_FIELD_PROFILE_LAST_NAME':
+      return {
+        ...oldState,
+        lastName: action.payload.lastName,
+      };
+    case 'EDIT_FIELD_PROFILE_FIRST_NAME':
+      return {
+        ...oldState,
+        firstName: action.payload.firstName,
+      };
+    case 'EDIT_FIELD_PROFILE_EMAIL':
+      return {
+        ...oldState,
+        email: action.payload.email,
+      };
     default:
       return {
         ...oldState,

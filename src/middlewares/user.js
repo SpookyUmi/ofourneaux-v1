@@ -40,6 +40,21 @@ const user = (store) => (next) => (action) => {
           // console.log('Erreur requête :', error);
         });
       break;
+    case 'SEND_EDIT_PROFILE_REQUEST':
+      axios({
+        method: 'patch',
+        url: `https://ofourneaux.herokuapp.com/users/${state.user.id}`,
+      })
+        .then((response) => {
+          // console.log('Réponse requête :', response);
+          store.dispatch({
+            type: 'EDIT_PROFILE_SUCCESS',
+          });
+        })
+        .catch((error) => {
+          // console.log('Erreur requête :', error);
+        });
+      break;
     default:
       next(action);
   }

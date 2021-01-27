@@ -16,6 +16,10 @@ const Profile = ({
   status,
   getFavoritesRecipes,
   getShoppingList,
+  trackLastName,
+  trackFirstName,
+  trackEmail,
+  handleEditProfile,
 }) => (
   <div className="profile">
     <h1 className="profile__title">Mon profil</h1>
@@ -40,15 +44,33 @@ const Profile = ({
           <div className="profile__content__block profile__content__infos__inputs">
             <div className="profile__content__infos__input">
               <label className="profile__content__infos__label">Nom</label>
-              <input className="profile__content__infos__field" type="text" placeholder="Doe" value={lastName} />
+              <input
+                className="profile__content__infos__field"
+                type="text"
+                placeholder="Doe"
+                value={lastName}
+                onChange={trackLastName}
+              />
             </div>
             <div className="profile__content__infos__input">
               <label className="profile__content__infos__label">Prénom</label>
-              <input className="profile__content__infos__field" type="text" placeholder="John" value={firstName} />
+              <input
+                className="profile__content__infos__field"
+                type="text"
+                placeholder="John"
+                value={firstName}
+                onChange={trackFirstName}
+              />
             </div>
             <div className="profile__content__infos__input">
               <label className="profile__content__infos__label">Email</label>
-              <input className="profile__content__infos__field" type="text" placeholder="johndoe@yahoo.fr" value={email} />
+              <input
+                className="profile__content__infos__field"
+                type="text"
+                placeholder="johndoe@yahoo.fr"
+                value={email}
+                onChange={trackEmail}
+              />
             </div>
           </div>
 
@@ -78,7 +100,13 @@ const Profile = ({
         </div>
 
         <div className="profile__content__buttons">
-          <button type="button" className="profile__content__button">Modifier</button>
+          <button
+            type="button"
+            className="profile__content__button"
+            onClick={handleEditProfile}
+          >
+            Modifier
+          </button>
           {
             status === 'admin'
             && (
@@ -105,6 +133,10 @@ Profile.propTypes = {
   status: PropTypes.string.isRequired,
   getFavoritesRecipes: PropTypes.func.isRequired,
   getShoppingList: PropTypes.func.isRequired,
+  trackLastName: PropTypes.func.isRequired,
+  trackFirstName: PropTypes.func.isRequired,
+  trackEmail: PropTypes.func.isRequired,
+  handleEditProfile: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -123,6 +155,39 @@ const mapDispatchToProps = (dispatch) => ({
   getShoppingList: () => {
     dispatch({
       type: 'SEND_SHOPPING_LIST_REQUEST',
+    });
+  },
+
+  trackLastName: (event) => {
+    dispatch({
+      type: 'EDIT_FIELD_PROFILE_LAST_NAME',
+      payload: {
+        lastName: event.target.value,
+      },
+    });
+  },
+
+  trackFirstName: (event) => {
+    dispatch({
+      type: 'EDIT_FIELD_PROFILE_FIRST_NAME',
+      payload: {
+        firstName: event.target.value,
+      },
+    });
+  },
+
+  trackEmail: (event) => {
+    dispatch({
+      type: 'EDIT_FIELD_PROFILE_EMAIL',
+      payload: {
+        email: event.target.value,
+      },
+    });
+  },
+
+  handleEditProfile: () => {
+    dispatch({
+      type: 'SEND_EDIT_PROFILE_REQUEST',
     });
   },
 });
