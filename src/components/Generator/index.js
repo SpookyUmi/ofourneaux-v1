@@ -12,7 +12,16 @@ import './styles.scss';
 
 // == Composant
 //! In this container, we will use "gen" in our actions, functions and Redux payload as a shortcut for "generator".
-const Generator = ({ isClicked, isLogged, handleClickIn, handleClickOut, trackGenNumber, trackGenTime, trackGenDifficulty, handleGenerator }) => {
+const Generator = ({
+  isClicked,
+  isLogged,
+  handleClickIn,
+  handleClickOut,
+  trackGenNumber,
+  trackGenTime,
+  trackGenDifficulty,
+  trackGenFavorites,
+  handleGenerator }) => {
 
   return (
     <div className="background__image">
@@ -70,7 +79,7 @@ const Generator = ({ isClicked, isLogged, handleClickIn, handleClickOut, trackGe
                   </select>
                 {isLogged &&
                   <label>Recettes favorites uniquement
-                    <input type="checkbox" name="favourites" />
+                    <input type="checkbox" name="favorites" onChange={trackGenFavorites} />
                   </label>
                 }
                 {/* TODO: onSubmit, send GET/POST? request with form info AND season + last recipes used. Then redirect to /recettes */}
@@ -136,6 +145,16 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         diffGen: event.target.value
       }
     })
+  },
+
+  trackGenFavorites: (event) => {
+    console.log('favoris ?', event.target.checked);
+      dispatch({
+        type: 'EDIT_GEN_FAVORITES',
+        payload: {
+          favGen: event.target.checked
+        }
+      })
   },
 
   handleGenerator: (event) => {
