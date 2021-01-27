@@ -1,6 +1,7 @@
 // == Import npm
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 // == Import
@@ -10,7 +11,8 @@ import pancakes from 'src/assets/images/pancakes.png';
 import './styles.scss';
 
 // == Composant
-const Generator = ({ isClicked, isLogged, handleClickIn, handleClickOut }) => {
+//! In this container, we will use "gen" in our actions, functions and Redux payload as a shortcut for "generator".
+const Generator = ({ isClicked, isLogged, handleClickIn, handleClickOut, trackGenNumber, trackGenTime, trackGenDifficulty, handleGenerator }) => {
 
   return (
     <div className="background__image">
@@ -49,15 +51,19 @@ const Generator = ({ isClicked, isLogged, handleClickIn, handleClickOut }) => {
                 <label>
                   Nombre de recettes
                 </label>
-                <input type="number" name="nbRecipes" id="nbRecipes" min="0" max="20" />
+                <input type="number" name="nbRecipes" id="nbRecipes" min="0" max="20"
+                  onChange={trackGenNumber}
+                />
                 <label htmlFor="time">
                   Temps
                 </label>
-                <input type="number" name="time" id="time" step="5" min="0" />
+                <input type="number" name="time" id="time" step="5" min="0"
+                  onChange={trackGenTime}
+                />
                 <label htmlFor="difficulty">
                   Difficulté
                 </label>
-                <select name="difficulty" id="difficulty">
+                <select name="difficulty" id="difficulty" onChange={trackGenDifficulty}>
                     <option value="easy">Facile</option>
                     <option value="average">Moyen</option>
                     <option value="expert">Expérimenté</option>
@@ -68,7 +74,7 @@ const Generator = ({ isClicked, isLogged, handleClickIn, handleClickOut }) => {
                   </label>
                 }
                 {/* TODO: onSubmit, send GET/POST? request with form info AND season + last recipes used. Then redirect to /recettes */}
-                <button type="submit">Try me !</button>
+                <button type="submit" onClick={handleGenerator}>Try me !</button>
               </form>
             }
 
@@ -79,14 +85,14 @@ const Generator = ({ isClicked, isLogged, handleClickIn, handleClickOut }) => {
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   return {
     isLogged: state.auth.isLogged,
     isClicked: state.app.isClicked
   }
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
 
   handleClickIn: (event) => {
     event.preventDefault();
@@ -100,7 +106,49 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch({
       type: 'CLICK_OUT',
     });
-  }
+  },
+
+  trackGenNumber: (event) => {
+    event.preventDefault();
+    dispatch({
+      type: 'EDIT_GEN_NUMBER',
+      payload: {
+        numberGen: event.target.value
+      }
+    })
+  },
+
+  trackGenTime: (event) => {
+    event.preventDefault();
+    dispatch({
+      type: 'EDIT_GEN_TIME',
+      payload: {
+        timeGen: event.target.value
+      }
+    })
+  },
+
+  trackGenDifficulty: (event) => {
+    event.preventDefault();
+    dispatch({
+      type: 'EDIT_GEN_DIFFICULTY',
+      payload: {
+        diffGen: event.target.value
+      }
+    })
+  },
+
+  handleGenerator: (event) => {
+    event.preventDefault();
+    dispatch({
+      type: 'SEND_GEN_REQUEST',
+      redirect: ownProps.history.push
+    })
+  },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Generator);
+let container = connect(mapStateToProps, mapDispatchToProps)(Generator);
+
+container = withRouter(container);
+
+export default container;
