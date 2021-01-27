@@ -14,6 +14,8 @@ const Profile = ({
   firstName,
   email,
   status,
+  getFavoritesRecipes,
+  getShoppingList,
 }) => (
   <div className="profile">
     <h1 className="profile__title">Mon profil</h1>
@@ -25,11 +27,11 @@ const Profile = ({
 
         <div className="profile__content__header">
           {/* TODO: function to query favorite recipes */}
-          <NavLink exact to="/recettes-favorites">
+          <NavLink exact to="/recettes-favorites" onClick={getFavoritesRecipes}>
             <img className="profile__content__header__icon" src={heartFull} alt="Icône d'un coeur" />
           </NavLink>
           {/* TODO: function to query shopping list */}
-          <NavLink exact to="/liste-de-courses">
+          <NavLink exact to="/liste-de-courses" onClick={getShoppingList}>
             <img className="profile__content__header__icon" src={list} alt="Icône d'une liste" />
           </NavLink>
         </div>
@@ -77,7 +79,6 @@ const Profile = ({
 
         <div className="profile__content__buttons">
           <button type="button" className="profile__content__button">Modifier</button>
-          {/* TODO: to be displayed only when the user is an administrator */}
           {
             status === 'admin'
             && (
@@ -102,6 +103,8 @@ Profile.propTypes = {
   firstName: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
   status: PropTypes.string.isRequired,
+  getFavoritesRecipes: PropTypes.func.isRequired,
+  getShoppingList: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -112,7 +115,16 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-
+  getFavoritesRecipes: () => {
+    dispatch({
+      type: 'SEND_FAVORITES_RECIPES_REQUEST',
+    });
+  },
+  getShoppingList: () => {
+    dispatch({
+      type: 'SEND_SHOPPING_LIST_REQUEST',
+    });
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);
