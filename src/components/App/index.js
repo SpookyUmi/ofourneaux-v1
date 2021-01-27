@@ -61,7 +61,8 @@ const App = () => {
         <Route exact path='/recettes'>
           <Recipes recipes={recipes} />
         </Route>
-        <Route exact path='/recettes/:slug'>
+        {/* <Route exact path='/recettes/:slug'> */}
+        <Route exact path="/recette">
           <Recipe recipes={recipes} />
         </Route>
         <Footer />

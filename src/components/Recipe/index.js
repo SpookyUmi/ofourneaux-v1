@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Informations from 'src/components/Recipe/Informations';
@@ -16,13 +17,22 @@ const Recipe = ({ recipes }) => (
     </div>
 
     <div className="recipe__block recipe__block--right">
-      <Image image={recipes[0].picture}/>
+      <Image image={recipes[0].picture} />
       <Ingredients ingredients={recipes[0].ingredients} />
     </div>
   </div>
 );
+
 Recipe.propTypes = {
 
 };
 
-export default Recipe;
+const mapStateToProps = () => ({
+
+});
+
+const mapDispatchToProps = () => ({
+  
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Recipe);
