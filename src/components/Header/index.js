@@ -29,7 +29,7 @@ const Header = ({ title, isLogged, trackSearch, handleSearch, recipes }) => {
         {/* TODO: Link to /inscription */}
           <NavLink exact to="/inscription" className="header__container__elem button__style">S'inscrire</NavLink>
         {/* TODO: Link to /connexion */}
-          <NavLink exact to="/connexion" className="header__container__elem header__container__elem--signin">Se connecter</NavLink>
+          <NavLink exact to="/connexion" className="header__container__elem header__container__elem--signin link__style">Se connecter</NavLink>
         </div>
         }
         {
@@ -38,7 +38,7 @@ const Header = ({ title, isLogged, trackSearch, handleSearch, recipes }) => {
           {/* TODO: Link to /profil */}
             <NavLink exact to="/profil" className="header__container__elem button__style">Mon profil</NavLink>
           {/* TODO: onClick, toggle isLoggedIn to false + redirect to /home */}
-            <NavLink to="/" className="header__container__elem">Se déconnecter</NavLink>
+            <NavLink to="/" className="header__container__elem link__style">Se déconnecter</NavLink>
           </div>
         }
       </div>

@@ -6,71 +6,75 @@ import PropTypes from 'prop-types';
 // == Import
 import giftLogo from 'src/assets/images/surprise.svg';
 import arrow from 'src/assets/icons/up-arrow.svg';
+import pancakes from 'src/assets/images/pancakes.png';
 import './styles.scss';
 
 // == Composant
 const Generator = ({ isClicked, isLogged, handleClickIn, handleClickOut }) => {
 
   return (
-    <div className="generator">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#bfe285" fillOpacity="1" d="M0,96L80,122.7C160,149,320,203,480,192C640,181,800,107,960,90.7C1120,75,1280,117,1360,138.7L1440,160L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z"></path>
-      </svg>
-      <h2 className="generator__title">Le Générateur</h2>
-      <div className="generator__flexblock">
-      <p className="generator__text">Un outil intelligent, qui tient compte de la saison, des 7 dernières recettes que vous avez sélectionnées et de vos exigences alimentaires. Affinez vous-même ses critères de sélection grâce à son formulaire intégré :</p>
-        <section className="generator__section">
-          {/* When property isClicked is false, the generator displays a logo */}
-          {!isClicked &&
-            <>
-              <img src={giftLogo}
-                className="generator__section__logo"
-                alt="logo de cadeau"
-                onClick={handleClickIn}
+    <div className="background__image">
+      <div className="generator">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#bfe285" fillOpacity="1" d="M0,96L80,122.7C160,149,320,203,480,192C640,181,800,107,960,90.7C1120,75,1280,117,1360,138.7L1440,160L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z"></path>
+        </svg>
+        <div className="generator__flexblock">
+          <section className="generator__description">
+            <h2 className="generator__title">Le Générateur</h2>
+            <p className="generator__text">Un outil intelligent, qui tient compte de la saison, de vos exigences alimentaires et des 7 dernières recettes que vous avez sélectionnées. Affinez vous-même les critères de sélection du générateur grâce à son formulaire intégré.</p>
+          </section>
+          <section className="generator__section">
+            {/* When property isClicked is false, the generator displays a logo */}
+            {!isClicked &&
+              <>
+                <img src={pancakes}
+                  className="generator__section__logo"
+                  alt="logo de cadeau"
+                  onClick={handleClickIn}
+                />
+                <p className="generator__section__click">Click me</p>
+              </>
+            }
+            {/* When property isClicked is true (when somebody clicked on the logo),
+            it displays a form.
+          */}
+            {
+              isClicked &&
+              <form className="generator__form">
+              <img
+                src={arrow}
+                alt="logo de flèche"
+                className="generator__section__arrow"
+                onClick={handleClickOut}
               />
-              <p className="generator__section__click">Click me</p>
-            </>
-          }
-          {/* When property isClicked is true (when somebody clicked on the logo),
-          it displays a form.
-        */}
-          {
-            isClicked &&
-            <form className="generator__form">
-            <img
-              src={arrow}
-              alt="logo de flèche"
-              className="generator__section__arrow"
-              onClick={handleClickOut}
-            />
-              <label>
-                Nombre de recettes
-              </label>
-              <input type="number" name="nbRecipes" id="nbRecipes" min="0" max="20" />
-              <label htmlFor="time">
-                Temps
-              </label>
-              <input type="number" name="time" id="time" step="5" min="0" />
-              <label htmlFor="difficulty">
-                Difficulté
-              </label>
-              <select name="difficulty" id="difficulty">
-                  <option value="easy">Facile</option>
-                  <option value="average">Moyen</option>
-                  <option value="expert">Expérimenté</option>
-                </select>
-              {isLogged &&
-                <label>Recettes favorites uniquement
-                  <input type="checkbox" name="favourites" />
+                <label>
+                  Nombre de recettes
                 </label>
-              }
-              {/* TODO: onSubmit, send GET/POST? request with form info AND season + last recipes used. Then redirect to /recettes */}
-              <button type="submit">Try me !</button>
-            </form>
-          }
+                <input type="number" name="nbRecipes" id="nbRecipes" min="0" max="20" />
+                <label htmlFor="time">
+                  Temps
+                </label>
+                <input type="number" name="time" id="time" step="5" min="0" />
+                <label htmlFor="difficulty">
+                  Difficulté
+                </label>
+                <select name="difficulty" id="difficulty">
+                    <option value="easy">Facile</option>
+                    <option value="average">Moyen</option>
+                    <option value="expert">Expérimenté</option>
+                  </select>
+                {isLogged &&
+                  <label>Recettes favorites uniquement
+                    <input type="checkbox" name="favourites" />
+                  </label>
+                }
+                {/* TODO: onSubmit, send GET/POST? request with form info AND season + last recipes used. Then redirect to /recettes */}
+                <button type="submit">Try me !</button>
+              </form>
+            }
 
-        </section>
+          </section>
+        </div>
       </div>
-
     </div>
   );
 };

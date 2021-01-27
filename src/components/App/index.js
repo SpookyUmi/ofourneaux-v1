@@ -19,11 +19,9 @@ import Recipes from 'src/components/Recipes';
 import NavBar from 'src/components/NavBar';
 import Footer from 'src/components/Footer';
 
-// Data
-import recipes from 'src/data/recipes';
-
 // SCSS
 import './styles.scss';
+import '../../styles/index.scss'
 
 const App = ({ isLogged, recipes }) => {
   const [quantity, setQuantity] = useState(1);
@@ -63,7 +61,7 @@ const App = ({ isLogged, recipes }) => {
         <Route exact path='/recettes/:slug'>
           <Recipe recipes={recipes} />
         </Route>
-        <Footer />
+        <Footer className="footer"/>
     </div>
   );
 };
