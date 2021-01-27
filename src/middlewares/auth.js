@@ -56,6 +56,7 @@ const auth = (store) => (next) => (action) => {
               firstName: response.data.data.first_name,
               lastName: response.data.data.last_name,
               email: response.data.data.mail_address,
+              status: response.data.data.status,
               recipesHistory: response.data.data.recipes_history,
             },
           });

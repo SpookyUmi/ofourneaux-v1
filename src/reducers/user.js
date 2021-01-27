@@ -4,6 +4,7 @@ const initialState = {
   email: '',
   token: '',
   id: '',
+  status: '',
   recipesHistory: [],
 };
 
