@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import profilePicture from 'src/assets/images/profile-picture.jpg';
@@ -8,7 +9,12 @@ import list from 'src/assets/icons/list.svg';
 
 import './styles.scss';
 
-const Profile = ({ lastName, firstName, email, status }) => (
+const Profile = ({
+  lastName,
+  firstName,
+  email,
+  status,
+}) => (
   <div className="profile">
     <h1 className="profile__title">Mon profil</h1>
     <div className="profile__wrapper">
@@ -18,14 +24,14 @@ const Profile = ({ lastName, firstName, email, status }) => (
       <div className="profile__content">
 
         <div className="profile__content__header">
-          {/* TODO: link to the favorite recipes */}
-          <a href="">
+          {/* TODO: function to query favorite recipes */}
+          <NavLink exact to="/recettes-favorites">
             <img className="profile__content__header__icon" src={heartFull} alt="Icône d'un coeur" />
-          </a>
-          {/* TODO: link to the shopping list */}
-          <a href="">
+          </NavLink>
+          {/* TODO: function to query shopping list */}
+          <NavLink exact to="/liste-de-courses">
             <img className="profile__content__header__icon" src={list} alt="Icône d'une liste" />
-          </a>
+          </NavLink>
         </div>
 
         <div className="profile__content__infos">
