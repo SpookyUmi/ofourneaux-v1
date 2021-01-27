@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux';
 
-//reducers import
+// reducers import
 import authReducer from './auth';
 import recipesReducer from './recipes';
+import userReducer from './user';
 
-// reducers
+// combine reducers
 export default combineReducers({
   auth: authReducer,
   recipes: recipesReducer,
+  user: userReducer,
 });

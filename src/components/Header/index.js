@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import './styles.scss';
 
-const Header = ({ title, isLogged, handleDisconnect }) => (
+const Header = ({ title, isLogged, getProfile, handleDisconnect }) => (
   <header className="header">
     <div className="header__container">
       {/* TODO: onSubmit, send a GET request (axios), and redirect to /recettes */}
@@ -26,7 +26,7 @@ const Header = ({ title, isLogged, handleDisconnect }) => (
         isLogged
         && (
           <div className="header__container__buttons desktop">
-            <NavLink exact to="/profil" className="header__container__elem button__style">Mon profil</NavLink>
+            <NavLink exact to="/profil" className="header__container__elem button__style" onClick={getProfile}>Mon profil</NavLink>
             <NavLink to="/" className="header__container__elem" onClick={handleDisconnect}>Se déconnecter</NavLink>
           </div>
         )
@@ -38,6 +38,7 @@ const Header = ({ title, isLogged, handleDisconnect }) => (
 Header.propTypes = {
   title: PropTypes.string.isRequired,
   isLogged: PropTypes.bool.isRequired,
+  getProfile: PropTypes.func.isRequired,
   handleDisconnect: PropTypes.func.isRequired,
 };
 
@@ -46,6 +47,12 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  getProfile: () => {
+    dispatch({
+      type: 'SEND_PROFILE_REQUEST',
+    });
+  },
+
   handleDisconnect: () => {
     dispatch({
       type: 'LOGOUT_SUCCESS',

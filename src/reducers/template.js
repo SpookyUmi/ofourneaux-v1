@@ -1,4 +1,4 @@
-const initalState = {
+const initialState = {
 };
 
 const reducer = (oldState = initialState, action) => {
