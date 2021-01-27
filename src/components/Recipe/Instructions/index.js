@@ -38,8 +38,4 @@ const mapStateToProps = (state) => ({
   instructions: state.recipe.instructions,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Instructions);
+export default connect(mapStateToProps, null)(Instructions);

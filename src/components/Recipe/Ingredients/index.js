@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import './styles.scss';
 
@@ -23,4 +25,15 @@ const Ingredients = ({ingredients}) => (
   </div>
 );
 
-export default Ingredients;
+Ingredients.propTypes = {
+  ingredients: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string,
+    category: PropTypes.string,
+  })).isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  ingredients: state.recipe.ingredients,
+});
+
+export default connect(mapStateToProps, null)(Ingredients);
