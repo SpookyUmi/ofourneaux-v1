@@ -6,34 +6,38 @@ import PropTypes from 'prop-types';
 import '../styles.scss';
 
 import QuantitySetter from '../QuantitySetter';
+import categories from 'src/data/categories';
 
 // == Composant
-const GeneratedList = ({ quantity, setQuantity }) => {
+const GeneratedList = ({ setQuantity }) => {
   return (
-    <div className="shopping__list">
-      <section className="shopping__list__header">
-        <img src="" alt="catégorie"/>
-        <h3>Catégorie aliment</h3>
-        <img src="" alt="flèche"/>
-      </section>
-      <section className="shopping__list__body">
-        <form className="shopping__list__body__form">
-          <label>
-            <input type="checkbox" name="ingredient"/>
-            Ingredient
-          </label>
-          <QuantitySetter quantity={quantity} setQuantity={setQuantity}/>
-        </form>
-        <form className="shopping__list__body__form">
-          <label>
-            <input type="checkbox" name="ingredient"/>
-            Ingredient
-          </label>
-          <QuantitySetter quantity={quantity} setQuantity={setQuantity}/>
-        </form>
-      </section>
-    </div>
+    <>
+    {categories.map((category) => (
+      <div className="shopping__list" key={category.id}>
+        <section className="shopping__list__header">
+          <img src="" alt={category.name}/>
+          <h3>{category.label}</h3>
+          <img src="" alt="flèche"/>
+        </section>
+        <section className="shopping__list__body">
+        {category.items.map((ingredient) => (
+          <form className="shopping__list__body__form" key={ingredient.id}>
+            <label>
+              <input type="checkbox" name="ingredient" />
+              {ingredient.name}
+            </label>
+            <div className="shopping__list__body__form__quantity">
+              <QuantitySetter quantity={ingredient.quantity} setQuantity={setQuantity} />
+              <p>{ingredient.unit}</p>
+            </div>
+          </form>
+        ))}
+        </section>
+      </div>
+    ))}
+    </>
   );
+
 };
 
 // == Export

@@ -11,6 +11,7 @@ const search = (store) => (next) => (action) => {
   generator.append('number', state.recipes.number);
   generator.append('time', state.recipes.time);
   generator.append('difficulty', state.recipes.difficulty);
+  generator.append('favorites', state.recipes.favorites);
 
   switch (action.type) {
     case 'SEND_SEARCH_REQUEST':
@@ -35,7 +36,7 @@ const search = (store) => (next) => (action) => {
         });
     case 'SEND_GEN_REQUEST':
       axios({
-        method: 'get',
+        method: 'post',
         url: 'https://ofourneaux.herokuapp.com/recipes',
         data: generator,
         headers: { 'Content-Type': 'multipart/form-data' }
