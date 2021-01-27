@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import profilePicture from 'src/assets/images/profile-picture.jpg';
@@ -7,7 +8,7 @@ import list from 'src/assets/icons/list.svg';
 
 import './styles.scss';
 
-const Profile = () => (
+const Profile = ({ lastName, firstName, email, status }) => (
   <div className="profile">
     <h1 className="profile__title">Mon profil</h1>
     <div className="profile__wrapper">
@@ -31,15 +32,15 @@ const Profile = () => (
           <div className="profile__content__block profile__content__infos__inputs">
             <div className="profile__content__infos__input">
               <label className="profile__content__infos__label">Nom</label>
-              <input className="profile__content__infos__field" type="text" placeholder="Doe" />
+              <input className="profile__content__infos__field" type="text" placeholder="Doe" value={lastName} />
             </div>
             <div className="profile__content__infos__input">
               <label className="profile__content__infos__label">Prénom</label>
-              <input className="profile__content__infos__field" type="text" placeholder="John" />
+              <input className="profile__content__infos__field" type="text" placeholder="John" value={firstName} />
             </div>
             <div className="profile__content__infos__input">
               <label className="profile__content__infos__label">Email</label>
-              <input className="profile__content__infos__field" type="text" placeholder="johndoe@yahoo.fr" />
+              <input className="profile__content__infos__field" type="text" placeholder="johndoe@yahoo.fr" value={email} />
             </div>
           </div>
 
@@ -49,19 +50,19 @@ const Profile = () => (
             </h3>
             <div className="profile__content__constraints__inputs">
               <div className="profile__content__constraints__input">
-                <input className="profile__content__constraints__checkbox" type="checkbox" id="vegetalien" name="vegetalien"/>
+                <input className="profile__content__constraints__checkbox" type="checkbox" id="vegetalien" name="vegetalien" />
                 <label className="profile__content__constraints__label" htmlFor="vegetalien">Végétalien</label>
               </div>
               <div className="profile__content__constraints__input">
-                <input className="profile__content__constraints__checkbox" type="checkbox" id="vegetarien" name="vegetarien"/>
+                <input className="profile__content__constraints__checkbox" type="checkbox" id="vegetarien" name="vegetarien" />
                 <label className="profile__content__constraints__label" htmlFor="vegetarien">Végétarien</label>
               </div>
               <div className="profile__content__constraints__input">
-                <input className="profile__content__constraints__checkbox" type="checkbox" id="no-gluten" name="no-gluten"/>
+                <input className="profile__content__constraints__checkbox" type="checkbox" id="no-gluten" name="no-gluten" />
                 <label className="profile__content__constraints__label" htmlFor="no-gluten">Sans gluten</label>
               </div>
               <div className="profile__content__constraints__input">
-                <input className="profile__content__constraints__checkbox" type="checkbox" id="no-lactose" name="no-lactose"/>
+                <input className="profile__content__constraints__checkbox" type="checkbox" id="no-lactose" name="no-lactose" />
                 <label className="profile__content__constraints__label" htmlFor="no-lactose">Sans lactose</label>
               </div>
             </div>
@@ -71,10 +72,17 @@ const Profile = () => (
         <div className="profile__content__buttons">
           <button type="button" className="profile__content__button">Modifier</button>
           {/* TODO: to be displayed only when the user is an administrator */}
-          <button type="button" className="profile__content__button">Espace administrateur</button>
+          {
+            status === 'admin'
+            && (
+            <button type="button" className="profile__content__button">
+              Espace administrateur
+            </button>
+            )
+          }
         </div>
 
-        <p className="profile__content__text">Pour la suppression de votre compte, veuillez cliquer 
+        <p className="profile__content__text">Pour la suppression de votre compte, veuillez cliquer
           {/* TODO: link to the deletion account page */}
           <a className="profile__content__text--underline" href="">ici</a>.
         </p>
@@ -84,6 +92,21 @@ const Profile = () => (
 );
 
 Profile.propTypes = {
+  lastName: PropTypes.string.isRequired,
+  firstName: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  status: PropTypes.string.isRequired,
 };
 
-export default Profile;
+const mapStateToProps = (state) => ({
+  lastName: state.user.lastName,
+  firstName: state.user.firstName,
+  email: state.user.email,
+  status: state.user.status,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);
