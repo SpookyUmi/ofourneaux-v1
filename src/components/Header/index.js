@@ -5,7 +5,12 @@ import PropTypes from 'prop-types';
 
 import './styles.scss';
 
-const Header = ({ title, isLogged, getProfile, handleDisconnect }) => (
+const Header = ({
+  title,
+  isLogged,
+  getProfile,
+  handleDisconnect,
+}) => (
   <header className="header">
     <div className="header__container">
       {/* TODO: onSubmit, send a GET request (axios), and redirect to /recettes */}

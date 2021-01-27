@@ -53,8 +53,8 @@ const auth = (store) => (next) => (action) => {
           store.dispatch({
             type: 'PROFILE_SUCCESS',
             payload: {
-              firstName: response.data.data.first_name,
               lastName: response.data.data.last_name,
+              firstName: response.data.data.first_name,
               email: response.data.data.mail_address,
               status: response.data.data.status,
               recipesHistory: response.data.data.recipes_history,
@@ -62,6 +62,7 @@ const auth = (store) => (next) => (action) => {
           });
         })
         .catch((error) => {
+          // TODO: what to do when the profile access request fails?
           console.log('Erreur de la requête :', error);
         });
       break;
