@@ -20,7 +20,7 @@ const auth = (store) => (next) => (action) => {
         },
       })
         .then((response) => {
-          // console.log('Réponse connexion :', response);
+        // console.log('Réponse connexion :', response);
           store.dispatch({
             type: 'LOGIN_SUCCESS',
             payload: {
