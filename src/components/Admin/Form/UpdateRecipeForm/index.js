@@ -603,7 +603,7 @@ const mapDispatchToProps = (dispatch) => ({
     });
   },
 
-  searchByEmail: (event) => {
+  deleteRecipe: (event) => {
     event.preventDefault();
     dispatch({
       type: 'DELETE_RECIPE',
