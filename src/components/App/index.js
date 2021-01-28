@@ -29,7 +29,7 @@ const App = ({ isLogged, recipes }) => {
     <div className="app">
         {/* TODO: switch between Header and NavBar according to responsive : set a property in our state ? */}
         <Header />
-        <NavBar />
+        <NavBar className="navbar" />
         <Route exact path='/'>
           {/* TODO: Change the components thanks to Links */}
           <HomePresentation />

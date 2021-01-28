@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import PropTypes from 'prop-types';
 
 import home from 'src/assets/icons/home.svg';
@@ -16,23 +18,44 @@ import about from 'src/assets/icons/about.svg';
 
 import './styles.scss';
 
-const Navbar = ({ isLogged, isAdmin, navBarIsOpen }) => (
+const Navbar = ({ isLogged, isAdmin }) => {
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
   <div className="navbar">
     {/* The following elements are displayed for all users */}
     {/* TODO onClick button => navBarIsOpen */}
-    <button className="navbar__toggle" type="button">
       {/* Here I want to display a "menu icon" if my navbar is closed
         and a "back arrow icon" when the navbar is opened,
        I will use the function setToggleClassname defined in src/utils */}
-        {!navBarIsOpen && <img className="navbar__toggle__home__icon" href={menu} alt="icône menu" />}
-        {navBarIsOpen && <img className="navbar__toggle__home__icon" href={arrow} alt="icône flèche gauche" />}
-    </button>
-    <input
+        {!isOpen &&
+          <img className="navbar__toggle__home__icon" src={menu} alt="icône menu"
+            onClick={() => { setIsOpen(true) }}
+          />
+        }
+        {isOpen &&
+          <img className="navbar__toggle__home__icon" src={arrow} alt="icône flèche gauche"
+        onClick={() => { setIsOpen(false) }}
+          />
+        }
+    {/* <input
       className="navbar__search"
       placeholder="Cake aux olives"
-    />
-    <a className="navbar__link__home" href="/accueil">
-      <img className="navbar__link__home__icon" href={home} alt="icône accueil" />
+    /> */}
+    <form type="submit" className="header__container__searchform">
+      <div className="header__container__searchform__icon">
+        <FontAwesomeIcon icon={faSearch} />
+      </div>
+      <input
+        type="text"
+        placeholder="Recherche..."
+        className="header__container__elem--input"
+        id="searchInput"
+      />
+    </form>
+    <a className="navbar__link__home" href="/">
+      <img className="navbar__link__home__icon" src={home} alt="icône accueil" />
       Accueil
     </a>
     {/* TODO the following elements must only be displayed if the user is NOT logged in */}
@@ -93,15 +116,15 @@ const Navbar = ({ isLogged, isAdmin, navBarIsOpen }) => (
     )}
     {/* The following elements are displayed for all users */}
     <a className="navbar__link__contact" href="/contact">
-      <img className="navbar__link__contact__icon" href={contact} alt="icône contact" />
+      <img className="navbar__link__contact__icon" src={contact} alt="icône contact" />
       Contact
     </a>
     <a className="navbar__link__about" href="/a-propos">
-      <img className="navbar__link__about__icon" href={about} alt="icône à propos" />
+      <img className="navbar__link__about__icon" src={about} alt="icône à propos" />
       A propos
     </a>
   </div>
-);
+  )};
 
 // ! temporarily commented to avoid errors in the console
 // Navbar.propTypes = {
