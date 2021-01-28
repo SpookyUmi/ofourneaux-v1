@@ -1,6 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 
 import Informations from 'src/components/Recipe/Informations';
 import Instructions from 'src/components/Recipe/Instructions';
@@ -9,30 +7,18 @@ import Image from 'src/components/Recipe/Image';
 
 import './styles.scss';
 
-const Recipe = ({ recipes }) => (
+const Recipe = () => (
   <div className="recipe">
     <div className="recipe__block recipe__block--left">
-      <Informations recipe={recipes[0]} />
-      <Instructions instructions={recipes[0].instructions} />
+      <Informations />
+      <Instructions />
     </div>
 
     <div className="recipe__block recipe__block--right">
-      <Image image={recipes[0].picture} />
-      <Ingredients ingredients={recipes[0].ingredients} />
+      <Image />
+      <Ingredients />
     </div>
   </div>
 );
 
-Recipe.propTypes = {
-
-};
-
-const mapStateToProps = () => ({
-
-});
-
-const mapDispatchToProps = () => ({
-
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Recipe);
+export default Recipe;

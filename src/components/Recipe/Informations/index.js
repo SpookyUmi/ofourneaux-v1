@@ -14,10 +14,10 @@ const Informations = ({
   title,
   description,
   // tags,
-  preparationTime,
-  bakingTime,
+  preparation_time,
+  baking_time,
   // difficulty,
-  nutriScore,
+  nutri_score,
 }) => (
   <div className="recipe__infos">
     {/* HEADER */}
@@ -48,7 +48,7 @@ const Informations = ({
           <div className="recipe__infos__data__details">
             <img className="recipe__infos__data__icon" src={time} alt="Icône d'horloge" />
             <p className="recipe__infos__data__text">
-              {preparationTime + bakingTime} min
+              {preparation_time + baking_time} min
             </p>
           </div>
         </div>
@@ -59,7 +59,7 @@ const Informations = ({
           <div className="recipe__infos__data__details">
             <img className="recipe__infos__data__icon" src={baking} alt="Icône d'un fouet et d'un rouleau à patisserie" />
             <p className="recipe__infos__data__text">
-              {preparationTime} min
+              {preparation_time} min
             </p>
           </div>
         </div>
@@ -70,7 +70,7 @@ const Informations = ({
           <div className="recipe__infos__data__details">
             <img className="recipe__infos__data__icon" src={oven} alt="Icône d'un four" />
             <p className="recipe__infos__data__text">
-              {bakingTime} min
+              {baking_time} min
             </p>
           </div>
         </div>
@@ -95,7 +95,7 @@ const Informations = ({
           <div className="recipe__infos__data__details">
             <img className="recipe__infos__data__icon" src={nutriscore} alt="Icône d'un baromètre" />
             <p className="recipe__infos__data__text">
-              {nutriScore}
+              {nutri_score}
             </p>
           </div>
         </div>
@@ -115,20 +115,20 @@ Informations.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   // tags: PropTypes.array.isRequired,
-  preparationTime: PropTypes.number.isRequired,
-  bakingTime: PropTypes.number.isRequired,
+  preparation_time: PropTypes.number.isRequired,
+  baking_time: PropTypes.number.isRequired,
   // difficulty: PropTypes.string.isRequired,
-  nutriScore: PropTypes.string.isRequired,
+  nutri_score: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   title: state.recipe.title,
   description: state.recipe.description,
   // tags: state.recipe.tags,
-  preparationTime: state.recipe.preparationTime,
-  bakingTime: state.recipe.bakingTime,
+  preparation_time: state.recipe.preparationTime,
+  baking_time: state.recipe.bakingTime,
   // difficulty: state.recipe.difficulty,
-  nutriScore: state.recipe.nutriScore,
+  nutri_score: state.recipe.nutriScore,
 });
 
 const mapDispatchToProps = (dispatch) => ({
