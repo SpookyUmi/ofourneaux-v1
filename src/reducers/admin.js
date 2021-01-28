@@ -1,8 +1,10 @@
-import user from '../middlewares/adminActionsOnUser';
-
 const initialState = {
   user: {},
   userSearchField: '',
+  recipe: {},
+  tags: [],
+  ingredients: [],
+  titleField: '',
 };
 
 const reducer = (oldState = initialState, action) => {
@@ -18,17 +20,27 @@ const reducer = (oldState = initialState, action) => {
     case 'USER_FOUND':
       return {
         ...oldState,
-        user,
+        user: action.payload.user,
       };
     case 'USER_UPDATE':
       return {
         ...oldState,
-        user,
+        user: action.payload.user,
       };
-    case 'USER_DELETED':
+    case 'USER_DELETE':
       return {
         ...oldState,
         user: {},
+      };
+    case 'RECIPE_UPDATE':
+      return {
+        ...oldState,
+        recipe: action.payload.recipe,
+      };
+    case 'RECIPE_DELETE':
+      return {
+        ...oldState,
+        recipe: {},
       };
     default:
       return { ...oldState };

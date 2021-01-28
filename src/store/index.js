@@ -7,11 +7,12 @@ import rootReducer from 'src/reducers';
 // middlewares
 import authMiddleware from 'src/middlewares/auth';
 import adminActionsOnUserMiddleware from 'src/middlewares/adminActionsOnUser';
+import adminActionsOnRecipeMiddleware from 'src/middlewares/adminActionsOnRecipe';
 
 const store = createStore(
   rootReducer,
   composeWithDevTools(
-    applyMiddleware(authMiddleware, adminActionsOnUserMiddleware),
+    applyMiddleware(authMiddleware, adminActionsOnUserMiddleware, adminActionsOnRecipeMiddleware),
   ),
 );
 

@@ -18,6 +18,16 @@ const AddRecipeForm = ({ tags, ingredients }) => (
         Image
         <input className="add__recipe__form__image__input" type="file" placeholder="Choisir votre fichier" />
       </label>
+
+      <label className="add__recipe__form__type__label">
+        Catégorie
+        <input className="add__recipe__form__type__input" type="text" placeholder="Entrée, Plat ou Dessert" />
+      </label>
+
+      <label className="add__recipe__form__description__label">
+        Description
+        <input className="add__recipe__form__description__input" type="text" placeholder="Veuillez décrire brièvement la recette." />
+      </label>
     </div>
 
     <div className="add__recipe__form__div__2">

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import FormData from 'form-data';
 
-const user = (store) => (next) => (action) => {
+const adminActionsOnUser = (store) => (next) => (action) => {
   const state = store.getState();
 
   const makeAdminForm = new FormData();
@@ -79,7 +79,7 @@ const user = (store) => (next) => (action) => {
         .then((response) => {
           console.log('Réponse connexion :', response);
           store.dispatch({
-            type: 'USER_DELETED',
+            type: 'USER_DELETE',
           });
         })
         .catch((error) => {
@@ -91,4 +91,4 @@ const user = (store) => (next) => (action) => {
   }
 };
 
-export default user;
+export default adminActionsOnUser;
