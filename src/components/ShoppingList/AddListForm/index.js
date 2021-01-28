@@ -16,20 +16,17 @@ const AddListForm = ({ isClicked, setIsClicked, setUserItems, userItems }) => {
     <div className="shopping__list">
         {/* <button type="button" onClick>Ajouter un item</button> */}
       <section className="shopping__list__body">
-        <form className="shopping__list__body__form">
-          <label>
-            <input type="text" name="item" placeholder="Liquide vaisselle..."
+        <form className="shopping__list__body__form__addForm">
+            <input type="text" name="item" placeholder="Lessive..."
               onChange={(event) => { setName(event.target.value) }}
             />
-          </label>
-          <label>
-            <input type="number" name="quantity" placeholder="quantité" className="shopping__list"
+            <input type="number" name="quantity" placeholder="Quantité" className="shopping__list"
               onChange={(event) => { setQuantity(event.target.value) }}
             />
-          </label>
-          <select name="unit" placeholder="unité"
+          <select name="unit" placeholder="Unité" defaultValue=""
             onChange={(event) => { setUnit(event.target.value) }}
           >
+            <option disabled={true} value="">Unité</option>
             <option value="no unit"></option>
             <option value="grams">g</option>
             <option value="cL">cL</option>

@@ -4,7 +4,7 @@
   background-color: vars.$color-secondary;
 }
 
-.desktop {
+.desktop, form {
   display: none;
 }
 
@@ -25,7 +25,7 @@
 
 @media only screen and (min-width: 1024px) {
 
-  .desktop {
+  .desktop, form {
     display: block;
   }
 
@@ -41,6 +41,21 @@
       padding-top: 0;
     }
 
+    &__searchform {
+      display: flex;
+      align-items: center;
+
+      &__icon {
+        padding: 0.5rem 0 0.5rem 0.5rem;
+        background-color: vars.$color-sand;
+        border-top: 2px solid vars.$color-primary;
+        border-bottom: 2px solid vars.$color-primary;
+        border-left: 2px solid vars.$color-primary;
+        border-top-left-radius: 1.3rem;
+        border-bottom-left-radius: 1.3rem;
+      }
+    }
+
     &__elem {
       padding: 0.6rem;
       font-weight: 700;
@@ -52,11 +67,15 @@
       }
 
       &--input {
-        border-radius: 1.3rem;
+        border-radius: 0;
+        border-top-right-radius: 1.3rem;
+        border-bottom-right-radius: 1.3rem;
         border: 2px solid vars.$color-primary;
+        border-left: none;
         background-color: vars.$color-sand;
-        padding-left: 1rem;
+        padding-left: 0.7rem;
         text-align: left;
+        font-weight: 700;
       }
 
     }

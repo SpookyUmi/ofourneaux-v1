@@ -16,7 +16,7 @@ import categories from 'src/data/categories';
 const ShoppingList = () => {
 
   const [userCategories, setUserCategories] = useState([ {id: 56, name: 'Condiments'} ]);
-  const [userCategory, setUserCategory] = useState();
+  const [userCategory, setUserCategory] = useState("");
   const [isClicked, setIsClicked] = useState(false);
 
   return (
@@ -40,10 +40,10 @@ const ShoppingList = () => {
             {...category}
           />
         ))}
-        <h2>Listes personnalisée</h2>
+        <h2>Liste personnalisée</h2>
         {userCategories.map((category) => (
           <CustomList
-            key={category.id}
+            key={category.name}
             {...category}
             userCategories={userCategories}
             setUserCategories={setUserCategories}
@@ -53,19 +53,27 @@ const ShoppingList = () => {
         ))}
         <form onSubmit={(event) => {
           event.preventDefault();
-          setUserCategories([...userCategories, userCategory]);
-          setUserCategory('');
+          setUserCategories([...userCategories,
+            {
+              name: userCategory
+            }
+          ]);
+          setUserCategory("");
         }}>
-          <input type="text" id="category" name="category"
+          <input type="text" id="category" name="category" value={userCategory}
             onChange={(event) => {
               event.preventDefault();
-              setUserCategory({name: event.target.value});
+              setUserCategory(event.target.value);
             }}
           />
           <button type="button"
             onClick={() => {
-              setUserCategories([...userCategories, userCategory]);
-              setUserCategory('');
+              setUserCategories([...userCategories,
+                {
+                  name: userCategory
+                }
+              ]);
+              setUserCategory("");
             }}
           >
             Ajouter une catégorie

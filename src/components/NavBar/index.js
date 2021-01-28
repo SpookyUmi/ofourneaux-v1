@@ -22,10 +22,10 @@ const Navbar = ({ isLogged, isAdmin, navBarIsOpen }) => (
     {/* TODO onClick button => navBarIsOpen */}
     <button className="navbar__toggle" type="button">
       {/* Here I want to display a "menu icon" if my navbar is closed
-       and a "back arrow icon" when the navbar is opened,
+        and a "back arrow icon" when the navbar is opened,
        I will use the function setToggleClassname defined in src/utils */}
-       {!navBarIsOpen && <img className="navbar__toggle__home__icon" href={menu} alt="icône menu" />}
-       {navBarIsOpen && <img className="navbar__toggle__home__icon" href={arrow} alt="icône flèche gauche" />}
+        {!navBarIsOpen && <img className="navbar__toggle__home__icon" href={menu} alt="icône menu" />}
+        {navBarIsOpen && <img className="navbar__toggle__home__icon" href={arrow} alt="icône flèche gauche" />}
     </button>
     <input
       className="navbar__search"
