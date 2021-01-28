@@ -1,5 +1,5 @@
 // == Import npm
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 // == Import
@@ -10,8 +10,15 @@ import CardRecipe from 'src/components/CardRecipe';
 import GeneratedList from './GeneratedList';
 import CustomList from './CustomList';
 
+import categories from 'src/data/categories';
+
 // == Composant
-const ShoppingList = ({ quantity, setQuantity }) => {
+const ShoppingList = () => {
+
+  const [userCategories, setUserCategories] = useState([ {id: 56, name: 'Condiments'} ]);
+  const [userCategory, setUserCategory] = useState("");
+  const [isClicked, setIsClicked] = useState(false);
+
   return (
     <div className="container">
       <h2>Recettes sélectionnées</h2>
@@ -27,16 +34,51 @@ const ShoppingList = ({ quantity, setQuantity }) => {
       </section>
       <h2>Liste de courses</h2>
       <section className="lists">
-        {/* TODO: map on `categories` to display all the required lists of ingredients
         {categories.map((category) => (
           <GeneratedList
             key={category.id}
             {...category}
           />
-        ))} */}
-        <GeneratedList quantity={quantity} setQuantity={setQuantity}/>
+        ))}
         <h2>Liste personnalisée</h2>
-        <CustomList quantity={quantity} setQuantity={setQuantity}/>
+        {userCategories.map((category) => (
+          <CustomList
+            key={category.name}
+            {...category}
+            userCategories={userCategories}
+            setUserCategories={setUserCategories}
+            isClicked={isClicked}
+            setIsClicked={setIsClicked}
+          />
+        ))}
+        <form onSubmit={(event) => {
+          event.preventDefault();
+          setUserCategories([...userCategories,
+            {
+              name: userCategory
+            }
+          ]);
+          setUserCategory("");
+        }}>
+          <input type="text" id="category" name="category" value={userCategory}
+            onChange={(event) => {
+              event.preventDefault();
+              setUserCategory(event.target.value);
+            }}
+          />
+          <button type="button"
+            onClick={() => {
+              setUserCategories([...userCategories,
+                {
+                  name: userCategory
+                }
+              ]);
+              setUserCategory("");
+            }}
+          >
+            Ajouter une catégorie
+          </button>
+        </form>
       </section>
     </div>
   );

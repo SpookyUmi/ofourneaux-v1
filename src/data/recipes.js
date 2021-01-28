@@ -313,7 +313,7 @@ export default [
     ],
   },
   {
-    id: 8965,
+    id: 6780,
     title: 'Pizza Margherita',
     picture: 'https://images.pexels.com/photos/263041/pexels-photo-263041.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
     description: 'Dans la pure tradition italienne',

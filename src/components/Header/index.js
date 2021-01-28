@@ -3,6 +3,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { NavLink, withRouter } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 // == Import
 import './styles.scss';
@@ -13,11 +15,15 @@ const Header = ({ title, isLogged, trackSearch, handleSearch, recipes }) => {
     <header className="header">
       <div className="header__container">
         {/* TODO: onSubmit, send a GET request (axios), and redirect to /recettes */}
-        <form type="submit" onSubmit={handleSearch}>
+        <form type="submit" onSubmit={handleSearch} className="header__container__searchform">
+          <div className="header__container__searchform__icon">
+            <FontAwesomeIcon icon={faSearch} />
+          </div>
           <input
             type="text"
             placeholder="Recherche..."
-            className="header__container__elem header__container__elem--input desktop"
+            className="header__container__elem--input"
+            id="searchInput"
             onChange={trackSearch}
           />
         </form>

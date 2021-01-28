@@ -22,11 +22,11 @@ const search = (store) => (next) => (action) => {
         headers: { 'Content-Type': 'multipart/form-data' }
       })
         .then((response) => {
-          console.log('Réponse recettes :', response.data);
+          console.log('Réponse recettes :', response.data.data);
           store.dispatch({
             type: 'RECIPES_RESULTS',
             payload: {
-              recipes: response.data,
+              recipes: response.data.data,
             }
           });
           action.redirect('/recettes');
@@ -36,18 +36,17 @@ const search = (store) => (next) => (action) => {
         });
     case 'SEND_GEN_REQUEST':
       axios({
-        method: 'post',
+        method: 'get',
         url: 'https://ofourneaux.herokuapp.com/recipes',
         data: generator,
         headers: { 'Content-Type': 'multipart/form-data' }
       })
         .then((response) => {
-          if (response.status !== 200) return;
-          console.log('Réponse recettes :', response.data);
+          console.log('Réponse recettes :', response.data.data);
           store.dispatch({
             type: 'RECIPES_RESULTS',
             payload: {
-              recipes: response.data,
+              recipes: response.data.data,
             }
           });
           action.redirect('/recettes');

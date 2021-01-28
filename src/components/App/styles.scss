@@ -37,7 +37,7 @@ p, label {
   font-size: 1.1rem;
 }
 
-input, select {
+input, select, input[type=number] {
   border-radius: 1.3rem;
   border: 2px solid vars.$color-primary;
   background-color: vars.$color-sand;
