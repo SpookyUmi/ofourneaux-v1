@@ -49,12 +49,13 @@ const auth = (store) => (next) => (action) => {
         },
       })
         .then((response) => {
-          console.log('Profil utilisateur :', response);
+          // console.log('Réponse requête :', response);
           store.dispatch({
             type: 'PROFILE_SUCCESS',
             payload: {
-              lastName: response.data.data.last_name,
+              id: response.data.data.id,
               firstName: response.data.data.first_name,
+              lastName: response.data.data.last_name,
               email: response.data.data.mail_address,
               status: response.data.data.status,
               recipesHistory: response.data.data.recipes_history,

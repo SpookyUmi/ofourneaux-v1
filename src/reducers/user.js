@@ -1,16 +1,16 @@
 const initialState = {
+  id: '',
+  token: '',
   firstName: '',
   lastName: '',
   email: '',
-  token: '',
-  id: '',
   status: '',
   recipesHistory: [],
 };
 
 const reducer = (oldState = initialState, action) => {
   // console.log('State :', oldState);
-  // console.log('Action :', action);
+  console.log('Action :', action);
 
   switch (action.type) {
     // after the user login, we place the token and the id in the reducer "user".
@@ -22,17 +22,18 @@ const reducer = (oldState = initialState, action) => {
         token: action.payload.token,
         id: action.payload.id,
       };
-    default:
-      return {
-        ...oldState,
-      };
     case 'PROFILE_SUCCESS':
       return {
         ...oldState,
+        id: action.payload.id,
         firstName: action.payload.firstName,
         lastName: action.payload.lastName,
         email: action.payload.email,
         recipesHistory: action.payload.recipesHistory,
+      };
+    default:
+      return {
+        ...oldState,
       };
   }
 };
