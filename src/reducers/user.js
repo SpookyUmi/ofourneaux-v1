@@ -27,6 +27,7 @@ const reducer = (oldState = initialState, action) => {
     case 'PROFILE_SUCCESS':
       return {
         ...oldState,
+        id: action.payload.id,
         firstName: action.payload.firstName,
         lastName: action.payload.lastName,
         email: action.payload.email,

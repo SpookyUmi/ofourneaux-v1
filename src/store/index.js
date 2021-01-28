@@ -7,6 +7,7 @@ import rootReducer from 'src/reducers';
 import authMiddleware from 'src/middlewares/auth';
 import userMiddleware from 'src/middlewares/user';
 import profileMiddleware from 'src/middlewares/profile';
+import signInMiddleware from 'src/middlewares/signIn';
 
 const store = createStore(
   rootReducer,
@@ -15,6 +16,7 @@ const store = createStore(
       authMiddleware,
       userMiddleware,
       profileMiddleware,
+      signInMiddleware,
     ),
   ),
 );

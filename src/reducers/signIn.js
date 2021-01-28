@@ -1,17 +1,24 @@
 const initialState = {
+  lastName: '',
+  firstName: '',
   email: '',
   password: '',
-  isLogged: false,
+  confirmPassword: '',
   errorMessage: '',
-  token: '',
-  id: '',
 };
 
 const reducer = (oldState = initialState, action) => {
-  // console.log('State :', oldState);
-  // console.log('Action :', action);
-
   switch (action.type) {
+    case 'EDIT_FIELD_LAST_NAME':
+      return {
+        ...oldState,
+        lastName: action.payload.lastName,
+      };
+    case 'EDIT_FIELD_FIRST_NAME':
+      return {
+        ...oldState,
+        firstName: action.payload.firstName,
+      };
     case 'EDIT_FIELD_EMAIL':
       return {
         ...oldState,
@@ -22,27 +29,25 @@ const reducer = (oldState = initialState, action) => {
         ...oldState,
         password: action.payload.password,
       };
-    case 'LOGIN_SUCCESS':
-      // console.log('CONNECTED!!!');
+    case 'EDIT_FIELD_CONFIRM_PASSWORD':
       return {
         ...oldState,
+        confirmPassword: action.payload.confirmPassword,
+      };
+    case 'SUBSCRIPTION_SUCCESS':
+      return {
+        ...oldState,
+        lastName: '',
+        firstName: '',
         email: '',
         password: '',
-        isLogged: true,
+        confirmPassword: '',
         errorMessage: '',
-        token: action.payload.token,
-        id: action.payload.id,
       };
-    case 'LOGIN_FAILED':
+    case 'SUBSCRIPTION_FAILED':
       return {
         ...oldState,
         errorMessage: action.payload.errorMessage,
-      };
-      // TODO: logout case
-    case 'LOGOUT_SUCCESS':
-      // console.log('DISCONNECTED!!!');
-      return {
-        ...oldState,
       };
     default:
       return {
