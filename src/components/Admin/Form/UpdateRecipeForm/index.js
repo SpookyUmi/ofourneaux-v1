@@ -575,6 +575,8 @@ const mapDispatchToProps = (dispatch) => ({
   updateRecipe: (
     title,
     picture,
+    type,
+    description,
     seasons,
     recipeTags,
     difficulty,
@@ -591,6 +593,8 @@ const mapDispatchToProps = (dispatch) => ({
       payload: {
         title,
         picture,
+        type,
+        description,
         seasons,
         recipeTags,
         difficulty,
