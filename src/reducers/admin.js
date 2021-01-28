@@ -4,7 +4,7 @@ const initialState = {
   recipe: {},
   tags: [],
   ingredients: [],
-  titleField: '',
+  newRecipe: {},
 };
 
 const reducer = (oldState = initialState, action) => {
@@ -31,6 +31,11 @@ const reducer = (oldState = initialState, action) => {
       return {
         ...oldState,
         user: {},
+      };
+    case 'RECIPE_ADD':
+      return {
+        ...oldState,
+        newRecipe: action.payload.recipe,
       };
     case 'RECIPE_UPDATE':
       return {

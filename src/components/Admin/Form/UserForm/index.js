@@ -59,11 +59,11 @@ const mapDispatchToProps = (dispatch) => ({
     });
   },
 
-  searchByEmail: () => {
-    dispatch({
-      type: 'GET_USER_BY_EMAIL',
-    });
-  },
+  // searchByEmail: () => {
+  //   dispatch({
+  //     type: 'GET_USER_BY_EMAIL',
+  //   });
+  // },
 
   searchById: () => {
     dispatch({
