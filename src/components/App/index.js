@@ -1,5 +1,5 @@
 // == Import npm
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Redirect, Route } from 'react-router-dom';
@@ -24,7 +24,6 @@ import './styles.scss';
 import '../../styles/index.scss'
 
 const App = ({ isLogged, recipes }) => {
-  const [quantity, setQuantity] = useState(1);
 
   return (
     <div className="app">
@@ -44,7 +43,7 @@ const App = ({ isLogged, recipes }) => {
           <Contact />
         </Route>
         <Route exact path='/profil/liste-de-courses'>
-          <ShoppingList quantity={quantity} setQuantity={setQuantity} />
+          <ShoppingList />
         </Route>
         <Route exact path='/inscription'>
           <Inscription />

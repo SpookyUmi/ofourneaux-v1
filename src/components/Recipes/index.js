@@ -17,7 +17,7 @@ import RecipesHeader from './RecipesHeader';
 const Recipes = ({ recipes }) => (
   <main className="recipes">
     <RecipesHeader />
-    {recipes.map((recipe) => (
+    {recipes?.map((recipe) => (
       <CardRecipe {...recipe} key={recipe.id} />
     ))}
   </main>

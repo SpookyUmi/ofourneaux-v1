@@ -16,9 +16,11 @@ const HomePresentation = ({ title }) => {
       <div className="home__container">
         <section className="home__container__elem home__container__text">
           <h2 className="home__presentation__title">Gérez votre quotidien avec {title}</h2>
-          <p>Moderne et ludique, O'Fourneaux vous accompagne au quotidien
-            en vous proposant des recettes variées, en fonction de la saison
-            et de vos exigences alimentaires.</p>
+          <p>
+            Moderne et ludique, O'Fourneaux vous accompagne au quotidien
+            en vous proposant des recettes variées et adaptées à chacun, grâce à une démarche éco-responsable et inclusive.
+            Cuisinez des recettes en fonction de la saison et de vos préférences !
+          </p>
           <NavLink exact to="/inscription" className="home__container__elem button__style">S'inscrire</NavLink>
         </section>
         <section className="home__container__elem">
