@@ -3,6 +3,7 @@ import FormData from 'form-data';
 
 const auth = (store) => (next) => (action) => {
   const state = store.getState();
+  console.log(state);
 
   const form = new FormData();
   form.append('mail_address', state.auth.email);
@@ -19,12 +20,12 @@ const auth = (store) => (next) => (action) => {
         },
       })
         .then((response) => {
-          console.log('Réponse connexion :', response);
+        // console.log('Réponse connexion :', response);
           store.dispatch({
             type: 'LOGIN_SUCCESS',
             payload: {
-              token: response.data.token,
-              id: response.data.id,
+              token: response.data.data.token,
+              id: response.data.data.userId,
             },
           });
           action.redirect('/');
@@ -37,6 +38,33 @@ const auth = (store) => (next) => (action) => {
               errorMessage: 'Identifiants incorrects',
             },
           });
+        });
+      break;
+    case 'SEND_PROFILE_REQUEST':
+      axios({
+        method: 'get',
+        url: `https://ofourneaux.herokuapp.com/users/${state.user.id}`,
+        headers: {
+          authorization: state.user.token,
+        },
+      })
+        .then((response) => {
+          // console.log('Réponse requête :', response);
+          store.dispatch({
+            type: 'PROFILE_SUCCESS',
+            payload: {
+              id: response.data.data.id,
+              firstName: response.data.data.first_name,
+              lastName: response.data.data.last_name,
+              email: response.data.data.mail_address,
+              status: response.data.data.status,
+              recipesHistory: response.data.data.recipes_history,
+            },
+          });
+        })
+        .catch((error) => {
+          // TODO: what to do when the profile access request fails?
+          console.log('Erreur de la requête :', error);
         });
       break;
     default:

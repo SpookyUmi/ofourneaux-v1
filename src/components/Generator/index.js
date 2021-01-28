@@ -33,28 +33,30 @@ const Generator = ({ isClicked, setIsClicked, isLoggedIn }) => {
         {
           isClicked &&
           <form className="generator__form">
-            <label>
+            <label htmlFor="nbRecipes">
               Nombre de recettes
-              <input type="number" name="nbRecipes" min="0" max="20" />
             </label>
-            <label>
+            <input type="number" name="nbRecipes" id="nbRecipes" min="0" max="20" />
+            <label htmlFor="time">
               Temps
-              <input type="number" name="time" step="5" min="0" />
             </label>
-            <label>Difficulté
-            <select name="difficulty">
+            <input type="number" name="time" id="time" step="5" min="0" />
+            <label htmlFor="difficulty">
+              Difficulté
+            </label>
+            <select name="difficulty" id="difficulty">
                 <option value="easy">Facile</option>
                 <option value="average">Moyen</option>
                 <option value="expert">Expérimenté</option>
-              </select>
-            </label>
+            </select>
             {isLoggedIn &&
-              <label>Recettes favorites uniquement
+              <label>
+                Recettes favorites uniquement
                 <input type="checkbox" name="favourites" />
               </label>
             }
             {/* TODO: onSubmit, send GET/POST? request with form info AND season + last recipes used. Then redirect to /recettes */}
-            <a type="submit">Try me !</a>
+            <button type="submit">Try me !</button>
           </form>
         }
 
