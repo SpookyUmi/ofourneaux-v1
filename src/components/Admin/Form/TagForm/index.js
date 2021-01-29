@@ -48,6 +48,7 @@ TagForm.propTypes = {
   tagField: PropTypes.string.isRequired,
   updateTagField: PropTypes.func.isRequired,
   addNewTag: PropTypes.func.isRequired,
+  deleteTag: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
