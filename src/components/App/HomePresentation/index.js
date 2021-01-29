@@ -9,7 +9,7 @@ import photo from 'src/assets/images/dish.png';
 import './styles.scss';
 
 // == Composant
-const HomePresentation = ({ title }) => {
+const HomePresentation = ({ title, isLogged }) => {
 
   return (
     <div className="home__presentation">
@@ -21,7 +21,10 @@ const HomePresentation = ({ title }) => {
             en vous proposant des recettes variées et adaptées à chacun, grâce à une démarche éco-responsable et inclusive.
             Cuisinez des recettes en fonction de la saison et de vos préférences !
           </p>
-          <NavLink exact to="/inscription" className="home__container__elem button__style">S'inscrire</NavLink>
+          {!isLogged &&
+            <NavLink exact to="/inscription" className="home__container__elem button__style">S'inscrire</NavLink>
+
+          }
         </section>
         <section className="home__container__elem">
           <img src={photo} className="home__container__img"/>
@@ -34,6 +37,7 @@ const HomePresentation = ({ title }) => {
 const mapStateToProps = (state) => {
   return {
     title: state.app.title,
+    isLogged: state.auth.isLogged
   }
 };
 

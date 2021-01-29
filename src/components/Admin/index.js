@@ -4,9 +4,6 @@ import PropTypes from 'prop-types';
 import nameAccordingToCurrentRoute from 'src/utils/nameAccordingToCurrentRoute';
 // https://stackoverflow.com/questions/52392765/how-to-change-state-based-on-route-change-in-react-router
 
-import Header from 'src/components/Header';
-import Footer from 'src/components/Footer';
-import NavBar from 'src/components/Navbar';
 import Form from './Form';
 
 // import './admin.scss';
@@ -17,7 +14,6 @@ const Admin = ({ currentRoute }) => (
     {/* TODO media queries =>
     Header, Footer, desktop__subheader, desktop__tabs only appear in desktop,
     Navbar, mobile__subheader only appear in mobile */}
-    <Header />
     <div className="admin__desktop__subheader">
       <h2 className="admin__desktop__subheader__title">Espace administrateur</h2>
       <a className="admin__desktop__subheader__button" href="/profil/:slug">Retour à mon profil</a>
@@ -28,13 +24,11 @@ const Admin = ({ currentRoute }) => (
       <a className="admin__desktop__tabs__labels" href="/admin/gesttion-labels">Gérer les labels</a>
       <a className="admin__desktop__tabs__users" href="/admin/gestion-utilisateurs">Gérer les utilisateurs</a>
     </div>
-    <NavBar />
     <div className="admin__mobile__subheader">
       <h2 className="admin__mobile__subheader__title">O'Fourneaux</h2>
       <h3 className="admin__mobile__subheader__tab">{nameAccordingToCurrentRoute(currentRoute)}</h3>
     </div>
     <Form />
-    <Footer />
   </div>
 );
 
