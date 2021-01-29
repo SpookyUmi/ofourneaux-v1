@@ -48,7 +48,7 @@ const auth = (store) => (next) => (action) => {
         },
       })
         .then((response) => {
-          // console.log('Réponse profil :', response);
+          console.log('Réponse requête :', response);
           store.dispatch({
             type: 'PROFILE_SUCCESS',
             payload: {

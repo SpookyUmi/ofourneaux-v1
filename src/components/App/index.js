@@ -1,10 +1,10 @@
-// == Import npm
+// YARN
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Redirect, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
-// == Import
+// Components
 import Header from 'src/components/Header';
 import Generator from 'src/components/Generator';
 import About from 'src/components/About';
@@ -18,13 +18,13 @@ import Recipe from 'src/components/Recipe';
 import Recipes from 'src/components/Recipes';
 import NavBar from 'src/components/NavBar';
 import Footer from 'src/components/Footer';
+import Admin from 'src/components/Admin';
 
 // SCSS
 import './styles.scss';
 import '../../styles/index.scss'
 
-const App = ({ isLogged, recipes }) => {
-
+const App = ({ recipes }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -59,22 +59,24 @@ const App = ({ isLogged, recipes }) => {
         <Route exact path='/recettes'>
           <Recipes recipes={recipes} />
         </Route>
-        {/* <Route exact path='/recettes/:slug'> */}
-        <Route exact path="/recette">
+        <Route exact path='/recettes/:slug'>
+          {/* use a "hasData" boolean to display the page only if you retrive a lot of data */}
           <Recipe recipes={recipes} />
+        </Route>
+        <Route exact path="/admin/ajout-recettes">
+          <Admin />
         </Route>
         <Footer className="footer"/>
     </div>
   );
 };
 
+App.propTypes = {
+  recipes: PropTypes.array.isRequired,
+};
+
 const mapStateToProps = (state) => ({
-  isLogged: state.auth.isLogged,
   recipes: state.recipes.recipes
 });
 
-const mapDispatchToProps = (dispatch) => {
-  return {};
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, null)(App);

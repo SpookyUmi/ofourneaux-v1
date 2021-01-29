@@ -11,8 +11,9 @@ import adminActionsOnRecipeMiddleware from 'src/middlewares/adminActionsOnRecipe
 import adminActionsOnTagMiddleware from 'src/middlewares/adminActionsOnTag';
 import userMiddleware from 'src/middlewares/user';
 import profileMiddleware from 'src/middlewares/profile';
-import signInMiddleware from 'src/middlewares/signIn';
+import signUpMiddleware from 'src/middlewares/signUp';
 import searchMiddleware from 'src/middlewares/search';
+import recipeMiddleware from 'src/middlewares/recipe';
 
 const store = createStore(
   rootReducer,
@@ -24,8 +25,9 @@ const store = createStore(
       adminActionsOnTagMiddleware,
       userMiddleware,
       profileMiddleware,
-      signInMiddleware,
-      searchMiddleware
+      signUpMiddleware,
+      searchMiddleware,
+      recipeMiddleware,
     ),
   ),
 );

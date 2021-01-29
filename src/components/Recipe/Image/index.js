@@ -53,17 +53,12 @@ Image.propTypes = {
   handleEditOrDeleteRecipe: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  id: state.recipe.id,
-  picture: state.recipe.picture,
-});
-
 const mapDispatchToProps = (dispatch) => ({
   handleEditRecipe: () => {
     dispatch({
-      type: 'SEND_EDIT/DELETE_RECIPE_REQUEST',
+      type: 'SEND_RECIPE_REQUEST',
     });
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Image);
+export default connect(null, mapDispatchToProps)(Image);

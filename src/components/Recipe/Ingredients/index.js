@@ -33,8 +33,4 @@ Ingredients.propTypes = {
   })).isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  ingredients: state.recipe.ingredients,
-});
-
-export default connect(mapStateToProps, null)(Ingredients);
+export default connect(null, null)(Ingredients);

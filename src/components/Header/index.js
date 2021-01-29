@@ -57,7 +57,7 @@ const Header = ({
         && (
           <div className="header__container__buttons desktop">
             <NavLink exact to="/profil" className="header__container__elem button__style" onClick={getProfile}>Mon profil</NavLink>
-            <NavLink to="/" className="header__container__elem link__style" onClick={handleDisconnect}>Se déconnecter</NavLink>
+            <NavLink to="/" className="header__container__elem header__container__elem--signout link__style" onClick={handleDisconnect}>Se déconnecter</NavLink>
 
           </div>
         )

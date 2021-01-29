@@ -5,10 +5,10 @@ import authReducer from './auth';
 import recipesReducer from './recipes';
 import adminReducer from './admin';
 import appReducer from './app';
-import signInReducer from './signIn';
+import signUpReducer from './signUp';
 import userReducer from './user';
 import profileReducer from './profile';
-
+import recipeReducer from './recipe';
 
 // combine reducers
 export default combineReducers({
@@ -16,7 +16,8 @@ export default combineReducers({
   recipes: recipesReducer,
   admin: adminReducer,
   app: appReducer,
-  signIn: signInReducer,
+  signUp: signUpReducer,
   user: userReducer,
   profile: profileReducer,
+  recipe: recipeReducer,
 });

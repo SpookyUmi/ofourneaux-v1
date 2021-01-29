@@ -63,7 +63,7 @@ const Profile = ({
                 value={lastName}
                 onChange={trackLastName}
               />
-            </div>
+            </div>z
             <div className="profile__content__infos__input">
               {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
               <label className="profile__content__infos__label">Prénom</label>
@@ -128,9 +128,11 @@ const Profile = ({
           {
             status === 'admin'
             && (
-            <button type="button" className="profile__content__button">
-              Espace administrateur
-            </button>
+            <NavLink exact to="/admin/ajout-recettes">
+              <button type="button" className="profile__content__button">
+                Espace administrateur
+              </button>
+            </NavLink>
             )
           }
         </div>

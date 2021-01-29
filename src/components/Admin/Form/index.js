@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Route } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import AddRecipeForm from './AddRecipeForm';
 import UpdateRecipeForm from './UpdateRecipeForm';
@@ -8,18 +10,22 @@ import UserForm from './UserForm';
 
 // import './admin.scss';
 
-// TODO get currentRoute value from React-router to know which route we're on.
-const Form = ({ currentRoute }) => (
-  <div className="form">
-    {currentRoute === '/admin/ajout-recettes' && <AddRecipeForm />}
-    {currentRoute === '/admin/modification-recettes' && <UpdateRecipeForm />}
-    {currentRoute === '/admin/gestion-label' && <TagForm />}
-    {currentRoute === '/admin/gestion-utilisateurs' && <UserForm />}
-  </div>
-);
+const Form = () => (
+    <div className="form">
+      <Route exact path="/admin/ajout-recettes">
+        <AddRecipeForm />
+      </Route>
+      <Route exact path="/admin/modification-recettes">
+        <UpdateRecipeForm />
+      </Route>
+      <Route exact path="/admin/gestion-labels">
+        <TagForm />
+      </Route>
+      <Route exact path="/admin/gestion-utilisateurs">
+        <UserForm />
+      </Route>
+    </div>
 
-Form.propTypes = {
-  currentRoute: PropTypes.string.isRequired,
-};
+);
 
 export default Form;

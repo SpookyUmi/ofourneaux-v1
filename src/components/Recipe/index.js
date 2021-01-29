@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Informations from 'src/components/Recipe/Informations';
@@ -8,27 +9,31 @@ import Image from 'src/components/Recipe/Image';
 
 import './styles.scss';
 
-const Recipe = ({ recipe }) => (
-  <div className="recipe">
-    <div className="recipe__block recipe__block--left">
-      <Informations
-        title={recipe.title}
-        description={recipe.description}
-        tags={recipe.tags}
-        preparationTime={recipe.preparation_time}
-        bakingTime={recipe.baking_time}
-        difficulty={recipe.difficulty}
-        nutriScore={recipe.nutri_score}
-      />
-      <Instructions instructions={recipe.instructions} />
-    </div>
+const Recipe = ({ recipe }) => {
+  console.log(recipe);
 
-    <div className="recipe__block recipe__block--right">
-      <Image id={recipe.id} picture={recipe.picture_url} />
-      <Ingredients ingredients={recipe.ingredients} />
+  return (
+    <div className="recipe">
+      <div className="recipe__block recipe__block--left">
+        <Informations
+          title={recipe.title}
+          description={recipe.description}
+          tags={recipe.tags}
+          preparationTime={recipe.preparation_time}
+          bakingTime={recipe.baking_time}
+          difficulty={recipe.difficulty}
+          nutriScore={recipe.nutri_score}
+        />
+        <Instructions steps={recipe.steps} />
+      </div>
+
+      <div className="recipe__block recipe__block--right">
+        <Image id={recipe.id} picture={recipe.picture_url} />
+        <Ingredients ingredients={recipe.ingredients} />
+      </div>
     </div>
-  </div>
-);
+  )
+};
 
 // to see if we keep the propTypes here
 // it may not be the best way to manage the data of the component
@@ -59,4 +64,10 @@ Recipe.propTypes = {
   }).isRequired,
 };
 
-export default Recipe;
+const mapStateToProps = (state) => {
+  return {
+    recipe: state.recipe,
+  }
+};
+
+export default connect(mapStateToProps, null)(Recipe);

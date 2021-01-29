@@ -1,14 +1,14 @@
 import axios from 'axios';
 import FormData from 'form-data';
 
-const signIn = (store) => (next) => (action) => {
+const signUp = (store) => (next) => (action) => {
   const state = store.getState();
 
   const form = new FormData();
-  form.append('last_name', state.signIn.lastName);
-  form.append('first_name', state.signIn.firstName);
-  form.append('mail_address', state.signIn.email);
-  form.append('password', state.signIn.password);
+  form.append('last_name', state.signUp.lastName);
+  form.append('first_name', state.signUp.firstName);
+  form.append('mail_address', state.signUp.email);
+  form.append('password', state.signUp.password);
 
   switch (action.type) {
     case 'SEND_SUBSCRIPTION_REQUEST':
@@ -44,4 +44,4 @@ const signIn = (store) => (next) => (action) => {
   }
 };
 
-export default signIn;
+export default signUp;

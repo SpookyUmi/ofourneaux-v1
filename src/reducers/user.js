@@ -45,6 +45,7 @@ const reducer = (oldState = initialState, action) => {
         firstName: action.payload.firstName,
         lastName: action.payload.lastName,
         email: action.payload.email,
+        status: action.payload.status,
         recipesHistory: action.payload.recipesHistory,
       };
 
@@ -85,7 +86,7 @@ const reducer = (oldState = initialState, action) => {
         ...oldState,
         shoppingList: action.payload.shoppingList,
       };
-    
+
     case 'EDIT_FIELD_PROFILE_LAST_NAME':
       return {
         ...oldState,

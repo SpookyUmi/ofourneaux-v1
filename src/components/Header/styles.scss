@@ -15,7 +15,7 @@
     margin-left: 1rem;
   }
 
-  &__container__elem--signin {
+  &__container__elem--signin, &__container__elem--signout {
     font-size: 0.9rem;
   }
 }
@@ -71,7 +71,7 @@
       padding: 0.6rem;
       font-weight: 700;
 
-      &--signin {
+      &--signin, &--signout {
         text-transform: uppercase;
         padding-top: 1rem;
         margin-left: 0.3rem;
