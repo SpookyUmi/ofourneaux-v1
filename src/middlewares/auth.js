@@ -3,7 +3,6 @@ import FormData from 'form-data';
 
 const auth = (store) => (next) => (action) => {
   const state = store.getState();
-  console.log(state);
 
   const form = new FormData();
   form.append('mail_address', state.auth.email);
@@ -20,7 +19,7 @@ const auth = (store) => (next) => (action) => {
         },
       })
         .then((response) => {
-        // console.log('Réponse connexion :', response);
+        // console.log('Réponse inscription :', response);
           store.dispatch({
             type: 'LOGIN_SUCCESS',
             payload: {
@@ -49,7 +48,7 @@ const auth = (store) => (next) => (action) => {
         },
       })
         .then((response) => {
-          // console.log('Réponse requête :', response);
+          // console.log('Réponse profil :', response);
           store.dispatch({
             type: 'PROFILE_SUCCESS',
             payload: {
@@ -64,7 +63,7 @@ const auth = (store) => (next) => (action) => {
         })
         .catch((error) => {
           // TODO: what to do when the profile access request fails?
-          console.log('Erreur de la requête :', error);
+          console.log('Erreur profil :', error);
         });
       break;
     default:

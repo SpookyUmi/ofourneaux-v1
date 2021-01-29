@@ -30,7 +30,7 @@ const signIn = (store) => (next) => (action) => {
         })
         .catch((error) => {
           // console.log('Erreur inscription :', error);
-          // console.log('Type d\'erreur :', error.response.data.error);
+          console.log('Type d\'erreur :', error.response);
           store.dispatch({
             type: 'SUBSCRIPTION_FAILED',
             payload: {

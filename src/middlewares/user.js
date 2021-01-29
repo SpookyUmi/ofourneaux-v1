@@ -4,31 +4,43 @@ const user = (store) => (next) => (action) => {
   const state = store.getState();
 
   switch (action.type) {
+    // ! request for when the user whishes to access the page of his favourite recipes : 404
     case 'SEND_FAVORITES_RECIPES_REQUEST':
       axios({
         method: 'get',
         url: `https://ofourneaux.herokuapp.com/favorites/${state.user.id}`,
+        header: {
+          // ! the token is necessary ?
+          authorization: state.user.token,
+        },
       })
         .then((response) => {
-          // console.log('Réponse requête :', response);
+          console.log('Réponse requête :', response);
           store.dispatch({
             type: 'FAVORITES_RECIPES_SUCCESS',
             payload: {
-              favoriteRecipes: response.data.data.favorite_recipes,
+              favoritesRecipes: response.data.data.favorites_recipes,
             },
           });
         })
         .catch((error) => {
-          // console.log('Erreur requête :', error);
+          console.log('Erreur requête :', error.response);
+          // ! do we send anything in particular if the request fails ?
         });
       break;
+
+    // ! request for when the user whishes to access the page of his shopping list : 404
     case 'SEND_SHOPPING_LIST_REQUEST':
       axios({
         method: 'get',
         url: `https://ofourneaux.herokuapp.com/shopping_list/${state.user.id}`,
+        header: {
+          // ! the token is necessary ?
+          authorization: state.user.token,
+        },
       })
         .then((response) => {
-          // console.log('Réponse requête :', response);
+          console.log('Réponse requête :', response);
           store.dispatch({
             type: 'SHOPPING_LIST_SUCCESS',
             payload: {
@@ -37,24 +49,11 @@ const user = (store) => (next) => (action) => {
           });
         })
         .catch((error) => {
-          // console.log('Erreur requête :', error);
+          console.log('Erreur requête :', error.response);
+          // ! do we send anything in particular if the request fails ?
         });
       break;
-    case 'SEND_EDIT_PROFILE_REQUEST':
-      axios({
-        method: 'patch',
-        url: `https://ofourneaux.herokuapp.com/users/${state.user.id}`,
-      })
-        .then((response) => {
-          // console.log('Réponse requête :', response);
-          store.dispatch({
-            type: 'EDIT_PROFILE_SUCCESS',
-          });
-        })
-        .catch((error) => {
-          // console.log('Erreur requête :', error);
-        });
-      break;
+
     default:
       next(action);
   }

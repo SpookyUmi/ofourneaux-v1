@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import Modal from './Modal';
-
 import profilePicture from 'src/assets/images/profile-picture.jpg';
 import heartFull from 'src/assets/icons/heart-full.svg';
 import list from 'src/assets/icons/list.svg';
+
+import Modal from './Modal';
 
 import './styles.scss';
 
@@ -26,7 +26,6 @@ const Profile = ({
   openModalConfirmDelete,
 }) => (
   <div className="profile">
-    {showModal && <Modal />}
     <h1 className="profile__title">Mon profil</h1>
     <div className="profile__wrapper">
       {/* TODO: access to the user's files to change/modify his profile picture
@@ -138,12 +137,18 @@ const Profile = ({
 
         <p className="profile__content__text">
           Pour la suppression de votre compte, veuillez cliquer
-          <NavLink className="profile__content__text--underline" onClick={openModalConfirmDelete}>
+          <span
+            className="profile__content__text--underline"
+            onClick={openModalConfirmDelete}
+          >
             ici
-          </NavLink>.
+          </span>.
         </p>
       </div>
     </div>
+    {/* when the user tries to delete his account
+    a modal asking him to confirm his choix is opened */}
+    {showModal && <Modal />}
   </div>
 );
 
@@ -158,7 +163,7 @@ Profile.propTypes = {
   trackFirstName: PropTypes.func.isRequired,
   trackEmail: PropTypes.func.isRequired,
   handleEditProfile: PropTypes.func.isRequired,
-  showModal: PropTypes.func.isRequired,
+  showModal: PropTypes.bool.isRequired,
   openModalConfirmDelete: PropTypes.func.isRequired,
 };
 
@@ -176,6 +181,7 @@ const mapDispatchToProps = (dispatch) => ({
       type: 'SEND_FAVORITES_RECIPES_REQUEST',
     });
   },
+
   getShoppingList: () => {
     dispatch({
       type: 'SEND_SHOPPING_LIST_REQUEST',

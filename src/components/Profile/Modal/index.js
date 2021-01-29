@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import './styles.scss';
@@ -22,10 +23,11 @@ Modal.propTypes = {
   handleCancelDelete: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
   handleConfirmDelete: () => {
     dispatch({
       type: 'SEND_DELETE_PROFILE_REQUEST',
+      redirect: ownProps.history.push,
     });
   },
 
@@ -36,4 +38,8 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default connect(null, mapDispatchToProps)(Modal);
+let container = connect(null, mapDispatchToProps)(Modal);
+
+container = withRouter(container);
+
+export default container;
