@@ -56,6 +56,9 @@
   },
   "dependencies": {
     "@formspree/react": "^2.2.3",
+    "@fortawesome/fontawesome-svg-core": "^1.2.34",
+    "@fortawesome/free-solid-svg-icons": "^5.15.2",
+    "@fortawesome/react-fontawesome": "^0.1.14",
     "axios": "^0.21.1",
     "commitizen": "^4.2.3",
     "dotenv-webpack": "^6.0.0",

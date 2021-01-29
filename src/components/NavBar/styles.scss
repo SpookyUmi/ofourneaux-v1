@@ -1,8 +1,86 @@
 @use 'src/styles/vars';
 
 .navbar {
-  background-color: vars.$color-secondary;
-  display: none;
+  background-color: #bee285b9;
+  backdrop-filter: blur( 6px );
+  -webkit-backdrop-filter: blur( 6px );
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  height: 100%;
+  position: fixed;
+  z-index: 99;
+  width: 230px;
+  box-shadow: 0 8px 32px 0 #00382a52;
+  border-bottom-right-radius: 1.3rem;
+  border-top-right-radius: 1.3rem;
+  padding: 1rem;
+
+  &__links__top, &__links__bottom {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+  }
+
+  &__searchform {
+    margin: 1rem 0;
+  }
+
+  &__link__icon, &__toggle__home__icon {
+    width: 2.5rem;
+    cursor: pointer;
+    margin-right: 0.5rem;
+  }
+
+  &__searchform {
+    display: flex;
+    align-items: center;
+
+    &__icon {
+      padding: 0.5rem 0 0.5rem 0.5rem;
+      background-color: vars.$color-sand;
+      border-top: 2px solid vars.$color-primary;
+      border-bottom: 2px solid vars.$color-primary;
+      border-left: 2px solid vars.$color-primary;
+      border-top-left-radius: 1.3rem;
+      border-bottom-left-radius: 1.3rem;
+    }
+
+    &__input {
+      width: 150px;
+      border-radius: 0;
+      border-top-right-radius: 1.3rem;
+      border-bottom-right-radius: 1.3rem;
+      border-left: none;
+      padding-left: 0.7rem;
+    }
+  }
+
+  &__link {
+    &__home, &__signin, &__signup, &__profile, &__list, &__favorites, &__adminrecipes, &__adminusers, &__adminlabels, &__contact, &__about {
+      margin: 0.5rem 0;
+    }
+
+    &__signup {
+      text-align: center;
+    }
+  }
+}
+
+.link__style {
+  display: flex;
+  align-items: flex-end;
+}
+
+@supports not (backdrop-filter: none) {
+  .navbar {
+    background-color: #bee285e3;
+  }
+}
+
+.navbar--extended {
+  width: 20%;
 }
 
 @media only screen and (min-width: 768px) {

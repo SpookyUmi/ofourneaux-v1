@@ -10,6 +10,7 @@
   &__header {
     display: flex;
     padding: 1rem 0;
+    justify-content: center;
   }
 
   &__body {
@@ -18,14 +19,31 @@
     &__form {
       display: flex;
       justify-content: space-between;
+      //flex-wrap: wrap;
+      align-items: center;
       padding: 0.5rem;
+
+      &__addForm {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        align-self: center;
+      }
+
+      &__addForm input[type=text], &__addForm input[type=number], &__addForm select {
+      width: 200px;
+      margin: 0.5rem;
     }
+    }
+
+
   }
 }
 
 .quantity__setter__block {
   display: flex;
 }
+
 
 
 @media only screen and (min-width: 768px) {
