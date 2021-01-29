@@ -9,7 +9,7 @@ import 'src/components/Admin/admin.scss';
 import bin from 'src/assets/icons/delete.svg';
 
 // TODO add props (controlled field, handlesubmit and props)
-const AddRecipeForm = ({ tags, ingredients, addRecipe, userToken }) => {
+const AddRecipeForm = ({ tags, ingredients, userToken }) => {
 
   // I'm going to create a local state here to avoid having too many dispatches between my component
   // and the store. The dispatch will only happen at the submit of the form.
@@ -372,7 +372,6 @@ AddRecipeForm.propTypes = {
     name: PropTypes.string,
     category: PropTypes.string,
   })).isRequired,
-  addRecipe: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -381,6 +380,5 @@ const mapStateToProps = (state) => ({
   ingredients: state.admin.ingredients,
   userToken: state.user.token
 });
-
 
 export default connect(mapStateToProps, null)(AddRecipeForm);
