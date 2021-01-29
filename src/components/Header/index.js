@@ -1,5 +1,5 @@
 // == Import npm
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { NavLink, withRouter } from 'react-router-dom';
@@ -71,6 +71,10 @@ Header.propTypes = {
   isLogged: PropTypes.bool.isRequired,
   getProfile: PropTypes.func.isRequired,
   handleDisconnect: PropTypes.func.isRequired,
+  trackSearc: PropTypes.func.isRequired,
+  handleSearch: PropTypes.func.isRequired,
+  setIsOpen: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
 }
 
 
