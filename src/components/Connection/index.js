@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import './styles.scss';
 
 const Connection = ({
-  email, password, isLogged, trackEmail, trackPassword, handleLogin,
+  email, password, isLogged, errorMessage, trackEmail, trackPassword, handleLogin,
 }) => (
   <div className="connection">
     <h2 className="connection__title">Connexion</h2>
@@ -18,6 +18,7 @@ const Connection = ({
         method="POST"
         onSubmit={handleLogin}
       >
+        {errorMessage}
         <div className="connection__content__form__input">
           <label className="connection__content__form__label" htmlFor="email">
             Email
@@ -70,18 +71,20 @@ Connection.propTypes = {
   email: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
   isLogged: PropTypes.bool.isRequired,
+  errorMessage: PropTypes.string.isRequired,
   trackEmail: PropTypes.func.isRequired,
   trackPassword: PropTypes.func.isRequired,
   handleLogin: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, ownProps) => ({
   email: state.auth.email,
   password: state.auth.password,
   isLogged: state.auth.isLogged,
+  errorMessage: state.auth.errorMessage,
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
   trackEmail: (event) => {
     // console.log('Input email :', event.target.value);
     dispatch({
@@ -106,8 +109,13 @@ const mapDispatchToProps = (dispatch) => ({
     event.preventDefault();
     dispatch({
       type: 'SEND_LOGIN_REQUEST',
+      redirect: ownProps.history.push,
     });
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Connection);
+let container = connect(mapStateToProps, mapDispatchToProps)(Connection);
+
+container = withRouter(container);
+
+export default container;

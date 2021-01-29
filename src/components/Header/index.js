@@ -1,21 +1,29 @@
 // == Import npm
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { NavLink, withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import menu from 'src/assets/icons/nav.svg';
 
-// == Import
 import './styles.scss';
 
-// == Composant
-const Header = ({ title, isLogged, trackSearch, handleSearch, setIsOpen, isOpen }) => {
-  return (
-    <header className="header">
-      <div className="header__container">
-        {!isOpen &&
+const Header = ({
+  title,
+  isLogged,
+  getProfile,
+  handleDisconnect,
+  trackSearch, 
+  handleSearch, 
+  setIsOpen, 
+  isOpen
+}) => (
+  <header className="header">
+    <div className="header__container">
+      {/* TODO: onSubmit, send a GET request (axios), and redirect to /recettes */}
+      {!isOpen &&
           <img className="header__container__menu__icon" src={menu} alt="icône menu"
             onClick={() => { setIsOpen(true) }}
           />
@@ -33,35 +41,39 @@ const Header = ({ title, isLogged, trackSearch, handleSearch, setIsOpen, isOpen 
             onChange={trackSearch}
           />
         </form>
-        <NavLink exact to="/">
-          <h1 className="header__container__title">{title}</h1>
-        </NavLink>
-        { !isLogged &&
+      <NavLink exact to="/">
+        <h1 className="header__container__title">{title}</h1>
+      </NavLink>
+      {
+        !isLogged
+        && (
           <div className="header__container__buttons desktop">
-        {/* TODO: Link to /inscription */}
-          <NavLink exact to="/inscription" className="header__container__elem button__style">S'inscrire</NavLink>
-        {/* TODO: Link to /connexion */}
-          <NavLink exact to="/connexion" className="header__container__elem header__container__elem--signin link__style">Se connecter</NavLink>
-        </div>
-        }
-        {
-          isLogged &&
-          <div className="header__container__buttons desktop">
-          {/* TODO: Link to /profil */}
-            <NavLink exact to="/profil" className="header__container__elem button__style">Mon profil</NavLink>
-          {/* TODO: onClick, toggle isLoggedIn to false + redirect to /home */}
-            <NavLink to="/" className="header__container__elem link__style">Se déconnecter</NavLink>
+            <NavLink exact to="/inscription" className="header__container__elem button__style">S'inscrire</NavLink>
+            <NavLink exact to="/connexion" className="header__container__elem header__container__elem--signin link__style">Se connecter</NavLink>
           </div>
-        }
-      </div>
-    </header>
-  );
-};
+        )
+      }
+      {
+        isLogged
+        && (
+          <div className="header__container__buttons desktop">
+            <NavLink exact to="/profil" className="header__container__elem button__style" onClick={getProfile}>Mon profil</NavLink>
+            <NavLink to="/" className="header__container__elem link__style" onClick={handleDisconnect}>Se déconnecter</NavLink>
 
-Header.proptypes ={
+          </div>
+        )
+      }
+    </div>
+  </header>
+);
+
+Header.propTypes = {
   title: PropTypes.string.isRequired,
   isLogged: PropTypes.bool.isRequired,
+  getProfile: PropTypes.func.isRequired,
+  handleDisconnect: PropTypes.func.isRequired,
 }
+
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -88,7 +100,19 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
       type: 'SEND_SEARCH_REQUEST',
       redirect: ownProps.history.push
     });
-  }
+  },
+  
+  getProfile: () => {
+    dispatch({
+      type: 'SEND_PROFILE_REQUEST',
+    });
+  },
+
+  handleDisconnect: () => {
+    dispatch({
+      type: 'LOGOUT_SUCCESS',
+    });
+  },
 });
 
 let container = connect(mapStateToProps, mapDispatchToProps)(Header);
