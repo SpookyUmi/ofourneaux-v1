@@ -1,11 +1,13 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import 'src/components/Admin/admin.scss';
 
-// TODO add props (controlled field, handle onclick and props)
-const User = ({ user }) => (
+const User = ({
+  user, makeAdmin, makeNonAdmin, deleteUser,
+}) => (
   <div className="user">
     <img className="user__image" href={user.image} alt="utilisateur" />
     <div className="user__description">
@@ -15,10 +17,29 @@ const User = ({ user }) => (
     </div>
     <div className="user__buttons">
       {user.status === 'utilisateur'
-      && <button className="user__buttons__status" type="button">Donner le statut administrateur</button>}
+      && (
+      <button
+        className="user__buttons__status"
+        type="button"
+        onClick={makeAdmin}
+      >Donner le statut administrateur
+      </button>
+      )}
       {user.status === 'administrateur'
-      && <button className="user__buttons__status" type="button">Retirer le statut administrateur</button>}
-      <button className="usser__buttons__delete" type="button">Supprimer l'utilisateur</button>
+      && (
+      <button
+        className="user__buttons__status"
+        type="button"
+        onClick={makeNonAdmin}
+      >Retirer le statut administrateur
+      </button>
+      )}
+      <button
+        className="usser__buttons__delete"
+        type="button"
+        onClick={deleteUser}
+      >Supprimer l'utilisateur
+      </button>
     </div>
     <div className="user__status">{user.status}</div>
   </div>
@@ -33,6 +54,33 @@ User.propTypes = {
     email: PropTypes.string,
     status: PropTypes.string,
   }).isRequired,
+  makeAdmin: PropTypes.func.isRequired,
+  makeNonAdmin: PropTypes.func.isRequired,
+  deleteUser: PropTypes.func.isRequired,
 };
 
-export default User;
+const mapStateToProps = (state) => ({
+  user: state.admin.user,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  makeAdmin: () => {
+    dispatch({
+      type: 'MAKE_ADMIN',
+    });
+  },
+
+  makeNonAdmin: () => {
+    dispatch({
+      type: 'MAKE_NON_ADMIN',
+    });
+  },
+
+  deleteUser: () => {
+    dispatch({
+      type: 'DELETE_USER',
+    });
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(User);
