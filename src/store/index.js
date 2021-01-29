@@ -8,11 +8,17 @@ import rootReducer from 'src/reducers';
 import authMiddleware from 'src/middlewares/auth';
 import adminActionsOnUserMiddleware from 'src/middlewares/adminActionsOnUser';
 import adminActionsOnRecipeMiddleware from 'src/middlewares/adminActionsOnRecipe';
+import adminActionsOnTagMiddleware from 'src/middlewares/adminActionsOnTag';
 
 const store = createStore(
   rootReducer,
   composeWithDevTools(
-    applyMiddleware(authMiddleware, adminActionsOnUserMiddleware, adminActionsOnRecipeMiddleware),
+    applyMiddleware(
+      authMiddleware,
+      adminActionsOnUserMiddleware,
+      adminActionsOnRecipeMiddleware,
+      adminActionsOnTagMiddleware,
+    ),
   ),
 );
 

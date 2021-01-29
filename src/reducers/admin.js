@@ -5,6 +5,7 @@ const initialState = {
   tags: [],
   ingredients: [],
   newRecipe: {},
+  tagField: '',
 };
 
 const reducer = (oldState = initialState, action) => {
@@ -46,6 +47,21 @@ const reducer = (oldState = initialState, action) => {
       return {
         ...oldState,
         recipe: {},
+      };
+    case 'UPDATE_TAG_FIELD':
+      return {
+        ...oldState,
+        tagField: action.payload.tagField,
+      };
+    case 'TAG_ADD':
+      return {
+        ...oldState,
+        tags: action.payload.tags,
+      };
+    case 'TAG_DELETE':
+      return {
+        ...oldState,
+        tags: action.payload.tags,
       };
     default:
       return { ...oldState };
