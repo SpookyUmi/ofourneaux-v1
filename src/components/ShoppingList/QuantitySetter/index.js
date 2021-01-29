@@ -1,6 +1,8 @@
 // == Import npm
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
 
 // == Import
 import '../styles.scss';
@@ -9,16 +11,14 @@ import '../styles.scss';
 const QuantitySetter = ({ quantity, setQuantity }) => {
   return (
     <div className="quantity__setter__block">
-      <img
-        src=""
+      <FontAwesomeIcon icon={faMinus}
         alt="bouton réduire"
         onClick={() => {
           setQuantity(quantity - 1);
         }}
       />
         <p>{quantity}</p>
-      <img
-        src=""
+      <FontAwesomeIcon icon={faPlus}
         alt="bouton augmenter"
         onClick={() => {
           setQuantity(quantity + 1);

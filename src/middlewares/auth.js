@@ -14,17 +14,58 @@ const auth = (store) => (next) => (action) => {
         method: 'post',
         url: 'https://ofourneaux.herokuapp.com/users/login',
         data: form,
-        headers: {'Content-Type': 'multipart/form-data'}
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
       })
-      .then((response) => {
-        console.log('Réponse connexion :', response);
-        store.dispatch({
-          type: 'LOGIN_SUCCESS',
+        .then((response) => {
+        // console.log('Réponse inscription :', response);
+          store.dispatch({
+            type: 'LOGIN_SUCCESS',
+            payload: {
+              token: response.data.data.token,
+              id: response.data.data.userId,
+            },
+          });
+          action.redirect('/');
         })
+        .catch((error) => {
+          // console.log('Erreur inscription :', error);
+          store.dispatch({
+            type: 'LOGIN_FAILED',
+            payload: {
+              errorMessage: 'Identifiants incorrects',
+            },
+          });
+        });
+      break;
+    case 'SEND_PROFILE_REQUEST':
+      axios({
+        method: 'get',
+        url: `https://ofourneaux.herokuapp.com/users/${state.user.id}`,
+        headers: {
+          authorization: state.user.token,
+        },
       })
-      .catch((error) => {
-        console.log('Erreur connexion :', error);
-      });
+        .then((response) => {
+          // console.log('Réponse profil :', response);
+          store.dispatch({
+            type: 'PROFILE_SUCCESS',
+            payload: {
+              id: response.data.data.id,
+              firstName: response.data.data.first_name,
+              lastName: response.data.data.last_name,
+              email: response.data.data.mail_address,
+              status: response.data.data.status,
+              recipesHistory: response.data.data.recipes_history,
+            },
+          });
+        })
+        .catch((error) => {
+          // TODO: what to do when the profile access request fails?
+          console.log('Erreur profil :', error);
+        });
+      break;
     default:
       next(action);
   }

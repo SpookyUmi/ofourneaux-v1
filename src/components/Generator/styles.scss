@@ -1,40 +1,95 @@
 @use 'src/styles/vars';
 
+.background__image {
+  background-image: url('../../assets/images/background.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+@supports not (backdrop-filter: none) {
+  .background__image {
+    background-image: url('../../assets/images/background-blur.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+}
+
 .generator {
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding-bottom: 15rem;
+  padding-bottom: 12rem;
+  background-color: rgba( 251, 246, 237, 0.75 );
+  backdrop-filter: blur( 6px );
+  -webkit-backdrop-filter: blur( 6px );
+
+
+  &__flexblock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__description {
+    text-align: center;
+  }
+
 
   &__title {
     font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  &__text {
+    max-width: 450px;
+    margin: 0.5rem;
   }
 
   &__section {
     padding: 2rem;
-    width: 300px;
-    height: 250px;
-    margin: 1rem auto;
+    width: 330px;
+    height: 330px;
+    margin: 0.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: vars.$color-secondary;
     border-radius: 4rem;
+    box-shadow: 0 8px 32px 0 rgba(117, 117, 117, 0.37);
 
     &__logo {
-      width: 50%;
+      width: 60%;
+      cursor: pointer;
+    }
+
+    &__arrow {
+      width: 15%;
+      cursor: pointer;
     }
 
     &__click {
       font-weight: 700;
     }
   }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 @media only screen and (min-width: 768px) {
 
+  .generator {
 
+    &__section {
+      width: 400px;
+      height: 350px;
+    }
+  }
 
 }
 
@@ -42,10 +97,23 @@
 
   .generator {
 
-  &__section {
-    width: 400px;
-    height: 350px;
+  &__flexblock {
+    flex-direction: row-reverse;
+    justify-content: center;
   }
+
+  &__description {
+    text-align: left;
+    padding: 0.5rem;
+  }
+
+  &__title {
+    text-align: left;
+    margin-left: 0.5rem;
+  }
+
 }
+
+
 
 }

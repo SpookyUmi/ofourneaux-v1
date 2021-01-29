@@ -1,7 +1,8 @@
 // == Import npm
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Route } from 'react-router-dom';
+import { Redirect, Route } from 'react-router-dom';
 
 // == Import
 import Header from 'src/components/Header';
@@ -18,26 +19,23 @@ import Recipes from 'src/components/Recipes';
 import NavBar from 'src/components/NavBar';
 import Footer from 'src/components/Footer';
 
-// Data
-import recipes from 'src/data/recipes';
-
 // SCSS
 import './styles.scss';
+import '../../styles/index.scss'
 
-const App = () => {
-  const [title, setTitle] = useState("O'Fourneaux");
-  const [isClicked, setIsClicked] = useState(false);
-  const [quantity, setQuantity] = useState(1);
+const App = ({ isLogged, recipes }) => {
+
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="app">
         {/* TODO: switch between Header and NavBar according to responsive : set a property in our state ? */}
-        <Header title={title} />
-        <NavBar />
+        <Header setIsOpen={setIsOpen} isOpen={isOpen} />
+      <NavBar setIsOpen={setIsOpen} isOpen={isOpen} />
         <Route exact path='/'>
           {/* TODO: Change the components thanks to Links */}
-          <HomePresentation title={title} />
-          <Generator setIsClicked={setIsClicked} isClicked={isClicked} />
+          <HomePresentation />
+          <Generator />
         </Route>
         {/* TODO: Link to /a-propos, to /contact */}
         <Route exact path='/a-propos'>
@@ -47,7 +45,7 @@ const App = () => {
           <Contact />
         </Route>
         <Route exact path='/profil/liste-de-courses'>
-          <ShoppingList quantity={quantity} setQuantity={setQuantity} />
+          <ShoppingList />
         </Route>
         <Route exact path='/inscription'>
           <Inscription />
@@ -64,9 +62,18 @@ const App = () => {
         <Route exact path='/recettes/:slug'>
           <Recipe recipes={recipes} />
         </Route>
-        <Footer />
+        <Footer className="footer"/>
     </div>
   );
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  isLogged: state.auth.isLogged,
+  recipes: state.recipes.recipes
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

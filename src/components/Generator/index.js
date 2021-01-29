@@ -1,68 +1,173 @@
 // == Import npm
 import React from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 // == Import
 import giftLogo from 'src/assets/images/surprise.svg';
+import arrow from 'src/assets/icons/up-arrow.svg';
+import pancakes from 'src/assets/images/pancakes.png';
 import './styles.scss';
 
 // == Composant
-const Generator = ({ isClicked, setIsClicked, isLoggedIn }) => {
+//! In this container, we will use "gen" in our actions, functions and Redux payload as a shortcut for "generator".
+const Generator = ({
+  isClicked,
+  isLogged,
+  handleClickIn,
+  handleClickOut,
+  trackGenNumber,
+  trackGenTime,
+  trackGenDifficulty,
+  trackGenFavorites,
+  handleGenerator }) => {
 
   return (
-    <div className="generator">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#bfe285" fillOpacity="1" d="M0,96L80,122.7C160,149,320,203,480,192C640,181,800,107,960,90.7C1120,75,1280,117,1360,138.7L1440,160L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z"></path>
-      </svg>
-      <h2 className="generator__title">Le Générateur</h2>
-      <section className="generator__section">
-        {/* When property isClicked is false, the generator displays a logo */}
-        {!isClicked &&
-          <>
-            <img src={giftLogo}
-              className="generator__section__logo"
-              onClick={() => {
-                setIsClicked(true);
-              }}
-            />
-            <p className="generator__section__click">Click me</p>
-          </>
-        }
-        {/* When property isClicked is true (when somebody clicked on the logo),
-        it displays a form.
-      */}
-        {
-          isClicked &&
-          <form className="generator__form">
-            <label>
-              Nombre de recettes
-              <input type="number" name="nbRecipes" min="0" max="20" />
-            </label>
-            <label>
-              Temps
-              <input type="number" name="time" step="5" min="0" />
-            </label>
-            <label>Difficulté
-            <select name="difficulty">
-                <option value="easy">Facile</option>
-                <option value="average">Moyen</option>
-                <option value="expert">Expérimenté</option>
-              </select>
-            </label>
-            {isLoggedIn &&
-              <label>Recettes favorites uniquement
-                <input type="checkbox" name="favourites" />
-              </label>
+    <div className="background__image">
+      <div className="generator">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#bfe285" fillOpacity="1" d="M0,96L80,122.7C160,149,320,203,480,192C640,181,800,107,960,90.7C1120,75,1280,117,1360,138.7L1440,160L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z"></path>
+        </svg>
+        <div className="generator__flexblock">
+          <section className="generator__description">
+            <h2 className="generator__title">Le Générateur</h2>
+            <p className="generator__text">Un outil intelligent, qui tient compte de la saison, de vos exigences alimentaires et des 7 dernières recettes que vous avez sélectionnées. Affinez vous-même les critères de sélection du générateur grâce à son formulaire intégré.</p>
+          </section>
+          <section className="generator__section">
+            {/* When property isClicked is false, the generator displays a logo */}
+            {!isClicked &&
+              <>
+                <img src={pancakes}
+                  className="generator__section__logo"
+                  alt="logo de cadeau"
+                  onClick={handleClickIn}
+                />
+                <p className="generator__section__click">Click me</p>
+              </>
             }
-            {/* TODO: onSubmit, send GET/POST? request with form info AND season + last recipes used. Then redirect to /recettes */}
-            <a type="submit">Try me !</a>
-          </form>
-        }
+            {/* When property isClicked is true (when somebody clicked on the logo),
+            it displays a form.
+          */}
+            {
+              isClicked &&
+              <form className="generator__form">
+              <img
+                src={arrow}
+                alt="logo de flèche"
+                className="generator__section__arrow"
+                onClick={handleClickOut}
+              />
+                <label>
+                  Nombre de recettes
+                </label>
+                <input type="number" name="nbRecipes" id="nbRecipes" min="0" max="20"
+                  onChange={trackGenNumber}
+                />
+                <label htmlFor="time">
+                  Temps
+                </label>
+                <input type="number" name="time" id="time" step="5" min="0"
+                  onChange={trackGenTime}
+                />
+                <label htmlFor="difficulty">
+                  Difficulté
+                </label>
+                <select name="difficulty" id="difficulty" onChange={trackGenDifficulty}>
+                    <option value="easy">Facile</option>
+                    <option value="average">Moyen</option>
+                    <option value="expert">Expérimenté</option>
+                  </select>
+                {isLogged &&
+                  <label>Recettes favorites uniquement
+                    <input type="checkbox" name="favorites" onChange={trackGenFavorites} />
+                  </label>
+                }
+                {/* TODO: onSubmit, send GET/POST? request with form info AND season + last recipes used. Then redirect to /recettes */}
+                <button type="submit" onClick={handleGenerator}>Try me !</button>
+              </form>
+            }
 
-      </section>
-
+          </section>
+        </div>
+      </div>
     </div>
   );
 };
 
-// == Export
-export default Generator;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    isLogged: state.auth.isLogged,
+    isClicked: state.app.isClicked
+  }
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+
+  handleClickIn: (event) => {
+    event.preventDefault();
+    dispatch({
+      type: 'CLICK_IN',
+    });
+  },
+
+  handleClickOut: (event) => {
+    event.preventDefault();
+    dispatch({
+      type: 'CLICK_OUT',
+    });
+  },
+
+  trackGenNumber: (event) => {
+    event.preventDefault();
+    dispatch({
+      type: 'EDIT_GEN_NUMBER',
+      payload: {
+        numberGen: event.target.value
+      }
+    })
+  },
+
+  trackGenTime: (event) => {
+    event.preventDefault();
+    dispatch({
+      type: 'EDIT_GEN_TIME',
+      payload: {
+        timeGen: event.target.value
+      }
+    })
+  },
+
+  trackGenDifficulty: (event) => {
+    event.preventDefault();
+    dispatch({
+      type: 'EDIT_GEN_DIFFICULTY',
+      payload: {
+        diffGen: event.target.value
+      }
+    })
+  },
+
+  trackGenFavorites: (event) => {
+    console.log('favoris ?', event.target.checked);
+      dispatch({
+        type: 'EDIT_GEN_FAVORITES',
+        payload: {
+          favGen: event.target.checked
+        }
+      })
+  },
+
+  handleGenerator: (event) => {
+    event.preventDefault();
+    dispatch({
+      type: 'SEND_GEN_REQUEST',
+      redirect: ownProps.history.push
+    })
+  },
+});
+
+let container = connect(mapStateToProps, mapDispatchToProps)(Generator);
+
+container = withRouter(container);
+
+export default container;
