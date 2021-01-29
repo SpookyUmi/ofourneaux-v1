@@ -1,5 +1,5 @@
 // == Import npm
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Redirect, Route } from 'react-router-dom';
@@ -25,11 +25,13 @@ import '../../styles/index.scss'
 
 const App = ({ isLogged, recipes }) => {
 
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div className="app">
         {/* TODO: switch between Header and NavBar according to responsive : set a property in our state ? */}
-        <Header />
-        <NavBar />
+        <Header setIsOpen={setIsOpen} isOpen={isOpen} />
+      <NavBar setIsOpen={setIsOpen} isOpen={isOpen} />
         <Route exact path='/'>
           {/* TODO: Change the components thanks to Links */}
           <HomePresentation />

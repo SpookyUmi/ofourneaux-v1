@@ -1,19 +1,25 @@
 // == Import npm
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { NavLink, withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import menu from 'src/assets/icons/nav.svg';
 
 // == Import
 import './styles.scss';
 
 // == Composant
-const Header = ({ title, isLogged, trackSearch, handleSearch, recipes }) => {
+const Header = ({ title, isLogged, trackSearch, handleSearch, setIsOpen, isOpen }) => {
   return (
     <header className="header">
       <div className="header__container">
+        {!isOpen &&
+          <img className="header__container__menu__icon" src={menu} alt="icône menu"
+            onClick={() => { setIsOpen(true) }}
+          />
+        }
         {/* TODO: onSubmit, send a GET request (axios), and redirect to /recettes */}
         <form type="submit" onSubmit={handleSearch} className="header__container__searchform">
           <div className="header__container__searchform__icon">

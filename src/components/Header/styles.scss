@@ -2,20 +2,27 @@
 
 .header {
   background-color: vars.$color-secondary;
+  position: relative;
+
+  &__container__title {
+    padding-top: 1rem;
+  }
+
+  &__container__menu__icon {
+    width: 2.3rem;
+    position: absolute;
+    margin-top: 1.8rem;
+    margin-left: 1rem;
+  }
+
+  &__container__elem--signin {
+    font-size: 0.9rem;
+  }
 }
 
 .desktop, form {
   display: none;
 }
-
-.header__container__title {
-  padding-top: 1rem;
-}
-
-.header__container__elem--signin {
-  font-size: 0.9rem;
-}
-
 
 @media only screen and (min-width: 768px) {
 
@@ -39,6 +46,10 @@
 
     &__title {
       padding-top: 0;
+    }
+
+    &__menu__icon {
+      display: none;
     }
 
     &__searchform {
