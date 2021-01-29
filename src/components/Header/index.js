@@ -1,7 +1,6 @@
 // == Import npm
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { NavLink, withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -15,9 +14,9 @@ const Header = ({
   isLogged,
   getProfile,
   handleDisconnect,
-  trackSearch, 
-  handleSearch, 
-  setIsOpen, 
+  trackSearch,
+  handleSearch,
+  setIsOpen,
   isOpen
 }) => (
   <header className="header">
@@ -101,7 +100,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
       redirect: ownProps.history.push
     });
   },
-  
+
   getProfile: () => {
     dispatch({
       type: 'SEND_PROFILE_REQUEST',
