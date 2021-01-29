@@ -68,11 +68,6 @@
   }
 }
 
-.link__style {
-  display: flex;
-  align-items: flex-end;
-}
-
 @supports not (backdrop-filter: none) {
   .navbar {
     background-color: #bee285e3;
