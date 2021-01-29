@@ -14,6 +14,11 @@
     margin-top: 1.8rem;
     margin-left: 1rem;
     cursor: pointer;
+    transition: 0.3s;
+  }
+
+  &__container__menu__icon:hover {
+    opacity: 0.8;
   }
 
   &__container__elem--signin, &__container__elem--signout {

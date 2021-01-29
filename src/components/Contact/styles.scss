@@ -36,3 +36,19 @@
   }
 
 }
+
+.message__sent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__icon {
+    width: 10rem;
+    margin-top: 2rem;
+  }
+}
+
+.message__sent h3 {
+  margin: 0.5rem;
+}

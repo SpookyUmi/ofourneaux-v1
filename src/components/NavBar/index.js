@@ -21,37 +21,37 @@ import './styles.scss';
 const Navbar = ({ isLogged, isAdmin, isOpen, setIsOpen, trackSearch, handleSearch }) => {
 
   return (
-      <>
+      <div className={`navbar ${isOpen ? "show__navbar" : ""}`}>
         {isOpen &&
-        <div className="navbar">
-          <div className="navbar__links__top">
-          <img className="navbar__toggle__home__icon link__style" src={arrow} alt="icône flèche gauche"
+        <>
+        <div className="navbar__links__top">
+          <img className="navbar__toggle__home__icon link__style transition" src={arrow} alt="icône flèche gauche"
             onClick={() => { setIsOpen(false) }}
               />
-          <form onSubmit={handleSearch} className="navbar__searchform">
-            <div className="navbar__searchform__icon">
+          <form onSubmit={handleSearch} className="navbar__searchform transition">
+            <div className="navbar__searchform__icon transition">
               <FontAwesomeIcon icon={faSearch} />
             </div>
             <input
               type="text"
               placeholder="Recherche..."
-              className="navbar__searchform__input"
+              className="navbar__searchform__input transition"
               id="searchInputNavbar"
               onChange={trackSearch}
             />
           </form>
             <NavLink to="/" className="navbar__link__home link__style">
-              <img className="navbar__link__icon" src={home} alt="icône accueil" />
+            <img className="navbar__link__icon transition" src={home} alt="icône accueil" />
               Accueil
             </NavLink>
             {/* TODO the following elements must only be displayed if the user is NOT logged in */}
             {!isLogged
             && (
             <>
-              <NavLink to="/connexion" className="navbar__link__signin link__style">
+              <NavLink to="/connexion" className="navbar__link__signin link__style transition">
                 Se connecter
               </NavLink>
-              <NavLink to="/insciption" className="navbar__link__signup button__style">
+              <NavLink to="/insciption" className="navbar__link__signup button__style transition">
                 S'inscrire
               </NavLink>
             </>
@@ -60,16 +60,16 @@ const Navbar = ({ isLogged, isAdmin, isOpen, setIsOpen, trackSearch, handleSearc
             {isLogged
             && (
             <>
-              <NavLink to="/profil/:slug" className="navbar__link__profile link__style">
-                <img className="navbar__link__icon" src={profile} alt="icône profil" />
+              <NavLink to="/profil/:slug" className="navbar__link__profile link__style transition">
+                <img className="navbar__link__icon transition" src={profile} alt="icône profil" />
                 Mon profil
               </NavLink>
-              <NavLink to="/profil/liste-de-courses" className="navbar__link__list link__style">
-                <img className="navbar__link__icon" src={list} alt="icône liste de courses" />
+              <NavLink to="/profil/liste-de-courses" className="navbar__link__list link__style transition">
+                <img className="navbar__link__icon transition" src={list} alt="icône liste de courses" />
                 Liste de courses
               </NavLink>
-              <NavLink to="/profil/recettes-favorites" className="navbar__link__favorites link__style">
-                <img className="navbar__link__icon" src={favorites} alt="icône favoris" />
+              <NavLink to="/profil/recettes-favorites" className="navbar__link__favorites link__style transition">
+                <img className="navbar__link__icon transition" src={favorites} alt="icône favoris" />
                 Recettes favoritesNavLink
               </NavLink>
             </>
@@ -78,43 +78,42 @@ const Navbar = ({ isLogged, isAdmin, isOpen, setIsOpen, trackSearch, handleSearc
             {isLogged && isAdmin
             && (
             <>
-              <NavLink to="/profil" className="navbar__link__profile link__style">
-                <img className="navbar__link__icon" src={profile} alt="icône profil" />
+              <NavLink to="/profil" className="navbar__link__profile link__style transition">
+                <img className="navbar__link__icon transition" src={profile} alt="icône profil" />
                 Mon profil
               </NavLink>
-              <NavLink to="/admin/ajout-recette" className="navbar__link__adminrecipes link__style">
-                <img className="navbar__link__icon" src={recipe} alt="icône recettes" />
+              <NavLink to="/admin/ajout-recette" className="navbar__link__adminrecipes link__style transition">
+                <img className="navbar__link__icon transition" src={recipe} alt="icône recettes" />
                 Ajouter une recette
               </NavLink>
-              <NavLink to="/admin/modification-recette" className="navbar__link__adminrecipes link__style">
-                <img className="navbar__link__icon" src={recipe} alt="icône recettes" />
+              <NavLink to="/admin/modification-recette" className="navbar__link__adminrecipes link__style transition">
+                <img className="navbar__link__icon transition" src={recipe} alt="icône recettes" />
                 Modifier/Supprimer une recette
               </NavLink>
-              <NavLink to="/admin/gestion-labels" className="navbar__link__adminlabels link__style">
-                <img className="navbar__link__icon" src={tag} alt="icône labels" />
+              <NavLink to="/admin/gestion-labels" className="navbar__link__adminlabels link__style transition">
+                <img className="navbar__link__icon transition" src={tag} alt="icône labels" />
                 Gérer les labels
               </NavLink>
-              <NavLink to="/admin/gestion-utilisateurs" className="navbar__link__adminusers link__style">
-                <img className="navbar__link__icon" src={users} alt="icône utilisateurs" />
+              <NavLink to="/admin/gestion-utilisateurs" className="navbar__link__adminusers link__style transition">
+                <img className="navbar__link__icon transition" src={users} alt="icône utilisateurs" />
                 Gérer les utilisateurs
               </NavLink>
             </>
             )}
         </div>
-          {/* The following elements are displayed for all users */}
         <div className="navbar__links__bottom">
-          <NavLink to="/contact" className="navbar__link__contact link__style">
-            <img className="navbar__link__icon" src={contact} alt="icône contact" />
+          <NavLink to="/contact" className="navbar__link__contact link__style transition">
+            <img className="navbar__link__icon transition" src={contact} alt="icône contact" />
             Contact
           </NavLink>
-          <NavLink to="/a-propos" className="navbar__link__about link__style">
-            <img className="navbar__link__icon" src={about} alt="icône à propos" />
+          <NavLink to="/a-propos" className="navbar__link__about link__style transition">
+            <img className="navbar__link__icon transition" src={about} alt="icône à propos" />
             A propos
           </NavLink>
         </div>
-        </div>
+        </>
         }
-      </>
+      </div>
   )};
 
 // ! temporarily commented to avoid errors in the console
