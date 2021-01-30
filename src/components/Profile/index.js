@@ -63,7 +63,7 @@ const Profile = ({
                 value={lastName}
                 onChange={trackLastName}
               />
-            </div>z
+            </div>
             <div className="profile__content__infos__input">
               {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
               <label className="profile__content__infos__label">Prénom</label>
