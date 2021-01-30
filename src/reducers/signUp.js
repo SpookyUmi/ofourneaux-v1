@@ -10,27 +10,27 @@ const initialState = {
 const reducer = (oldState = initialState, action) => {
   switch (action.type) {
     // controlled fields
-    case 'EDIT_FIELD_LAST_NAME':
+    case 'EDIT_FIELD_SIGN_UP_LAST_NAME':
       return {
         ...oldState,
         lastName: action.payload.lastName,
       };
-    case 'EDIT_FIELD_FIRST_NAME':
+    case 'EDIT_FIELD_SIGN_UP_FIRST_NAME':
       return {
         ...oldState,
         firstName: action.payload.firstName,
       };
-    case 'EDIT_FIELD_EMAIL':
+    case 'EDIT_FIELD_SIGN_UP_EMAIL':
       return {
         ...oldState,
         email: action.payload.email,
       };
-    case 'EDIT_FIELD_PASSWORD':
+    case 'EDIT_FIELD_SIGN_UP_PASSWORD':
       return {
         ...oldState,
         password: action.payload.password,
       };
-    case 'EDIT_FIELD_CONFIRM_PASSWORD':
+    case 'EDIT_FIELD_SIGN_UP_CONFIRM_PASSWORD':
       return {
         ...oldState,
         confirmPassword: action.payload.confirmPassword,
@@ -58,10 +58,9 @@ const reducer = (oldState = initialState, action) => {
         confirmPassword: '',
         // and an error message is displayed to indicate
         // to the user which fields are problematic
-        // eslint-disable-next-line max-len
-        // ! TODO: for the moment, the message that appears is directly extracted from API, therefore in english. to see how it can be reused to customise the error message on the front side
         errorMessage: action.payload.errorMessage,
       };
+
     default:
       return {
         ...oldState,

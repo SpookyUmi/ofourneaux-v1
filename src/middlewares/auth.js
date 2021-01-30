@@ -23,7 +23,7 @@ const auth = (store) => (next) => (action) => {
         },
       })
         .then((response) => {
-        // console.log('Réponse requête connexion :', response);
+        // console.log('Answer request connection :', response);
           store.dispatch({
             type: 'LOGIN_SUCCESS',
             payload: {
@@ -36,7 +36,7 @@ const auth = (store) => (next) => (action) => {
           action.redirect('/');
         })
         .catch((error) => {
-          // console.log('Erreur requête inscription :', error);
+          // console.log('Error request connection :', error);
           store.dispatch({
             type: 'LOGIN_FAILED',
             payload: {

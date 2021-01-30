@@ -25,7 +25,11 @@ const Connection = ({
         method="POST"
         onSubmit={handleLogin}
       >
-        {errorMessage}
+
+        <div className="connection__error-message error-message">
+          {errorMessage}
+        </div>
+
         <div className="connection__content__form__input">
           {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <label className="connection__content__form__label" htmlFor="email">

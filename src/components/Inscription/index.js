@@ -1,9 +1,13 @@
+// YARN
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+// SCSS
 import './styles.scss';
 
+// component
 const Inscription = ({
   lastName,
   firstName,
@@ -16,7 +20,7 @@ const Inscription = ({
   trackEmail,
   trackPassword,
   trackConfirmPassword,
-  handleSubscription
+  handleSubscription,
 }) => (
   <div className="inscription">
     <h1 className="inscription__title">
@@ -31,11 +35,16 @@ const Inscription = ({
         className="inscription__content__form"
         onSubmit={handleSubscription}
       >
-        {errorMessage}
+
+        <div className="connection__error-message error-message">
+          {errorMessage}
+        </div>
+
         <div className="inscription__content__inputs">
           <div className="inscription__content__input">
-            <label 
-              className="inscription__content__label" 
+            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+            <label
+              className="inscription__content__label"
               htmlFor="last-name"
             >
               Nom
@@ -52,8 +61,9 @@ const Inscription = ({
             />
           </div>
           <div className="inscription__content__input">
-            <label 
-              className="inscription__content__label" 
+            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+            <label
+              className="inscription__content__label"
               htmlFor="first-name"
             >
               Prénom
@@ -70,8 +80,9 @@ const Inscription = ({
             />
           </div>
           <div className="inscription__content__input">
-            <label 
-              className="inscription__content__label" 
+            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+            <label
+              className="inscription__content__label"
               htmlFor="email"
             >
               Email
@@ -88,8 +99,9 @@ const Inscription = ({
             />
           </div>
           <div className="inscription__content__input">
-            <label 
-              className="inscription__content__label" 
+            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+            <label
+              className="inscription__content__label"
               htmlFor="password"
             >
               Mot de passe
@@ -107,8 +119,9 @@ const Inscription = ({
             />
           </div>
           <div className="inscription__content__input">
-            <label 
-              className="inscription__content__label" 
+            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+            <label
+              className="inscription__content__label"
               htmlFor="password-confirm"
             >
               Confirmation mot de passe
@@ -146,6 +159,7 @@ const Inscription = ({
   </div>
 );
 
+// PropTypes
 Inscription.propTypes = {
   lastName: PropTypes.string.isRequired,
   firstName: PropTypes.string.isRequired,
@@ -161,67 +175,72 @@ Inscription.propTypes = {
   handleSubscription: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  lastName: state.signIn.lastName,
-  firstName: state.signIn.firstName,
-  email: state.signIn.email,
-  password: state.signIn.password,
-  confirmPassword: state.signIn.confirmPassword,
-  errorMessage: state.signIn.errorMessage,
+// eslint-disable-next-line no-unused-vars
+const mapStateToProps = (state, ownProps) => ({
+  lastName: state.signUp.lastName,
+  firstName: state.signUp.firstName,
+  email: state.signUp.email,
+  password: state.signUp.password,
+  confirmPassword: state.signUp.confirmPassword,
+  errorMessage: state.signUp.errorMessage,
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  // controlled fields
   trackLastName: (event) => {
     dispatch({
-      type: 'EDIT_FIELD_LAST_NAME',
+      type: 'EDIT_FIELD_SIGN_UP_LAST_NAME',
       payload: {
         lastName: event.target.value,
       },
     });
   },
-
   trackFirstName: (event) => {
     dispatch({
-      type: 'EDIT_FIELD_FIRST_NAME',
+      type: 'EDIT_FIELD_SIGN_UP_FIRST_NAME',
       payload: {
         firstName: event.target.value,
       },
     });
   },
-
   trackEmail: (event) => {
     dispatch({
-      type: 'EDIT_FIELD_EMAIL',
+      type: 'EDIT_FIELD_SIGN_UP_EMAIL',
       payload: {
         email: event.target.value,
       },
     });
   },
-
   trackPassword: (event) => {
     dispatch({
-      type: 'EDIT_FIELD_PASSWORD',
+      type: 'EDIT_FIELD_SIGN_UP_PASSWORD',
       payload: {
         password: event.target.value,
       },
     });
   },
-
   trackConfirmPassword: (event) => {
     dispatch({
-      type: 'EDIT_FIELD_CONFIRM_PASSWORD',
+      type: 'EDIT_FIELD_SIGN_UP_CONFIRM_PASSWORD',
       payload: {
         confirmPassword: event.target.value,
       },
     });
   },
 
+  // sends registration request to the middleware "signUp.js"
   handleSubscription: (event) => {
     event.preventDefault();
     dispatch({
       type: 'SEND_SUBSCRIPTION_REQUEST',
+      redirect: ownProps.history.push,
     });
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Inscription);
+// eslint-disable-next-line import/no-mutable-exports
+let container = connect(mapStateToProps, mapDispatchToProps)(Inscription);
+
+container = withRouter(container);
+
+export default container;
