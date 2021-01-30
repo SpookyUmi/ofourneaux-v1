@@ -57,7 +57,7 @@ const auth = (store) => (next) => (action) => {
         },
       })
         .then((response) => {
-          console.log('Réponse requête :', response);
+          // console.log('Answer request profil :', response);
           store.dispatch({
             type: 'PROFILE_SUCCESS',
             payload: {
@@ -72,7 +72,7 @@ const auth = (store) => (next) => (action) => {
         })
         .catch((error) => {
           // TODO: what to do when the profile access request fails?
-          console.log('Erreur profil :', error);
+          // console.log('Error request profile :', error);
         });
       break;
     default:

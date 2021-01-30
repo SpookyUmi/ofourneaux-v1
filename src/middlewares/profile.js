@@ -65,7 +65,7 @@ const profile = (store) => (next) => (action) => {
         })
         // eslint-disable-next-line no-unused-vars
         .catch((error) => {
-          // console.log('Error request update :', error.response);
+          console.log('Error request update :', error.response);
           // ! do we send anything in particular if the request fails ?
           // ! in what cases can it fail ?
         });
