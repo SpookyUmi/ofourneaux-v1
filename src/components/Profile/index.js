@@ -1,21 +1,27 @@
+// YARN
 import React from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+// icons
 import profilePicture from 'src/assets/images/profile-picture.jpg';
 import heartFull from 'src/assets/icons/heart-full.svg';
 import list from 'src/assets/icons/list.svg';
 
+// components import
 import Modal from './Modal';
 
+// SCSS
 import './styles.scss';
 
+// component
 const Profile = ({
   lastName,
   firstName,
   email,
   status,
+  message,
   getFavoritesRecipes,
   getShoppingList,
   trackLastName,
@@ -33,18 +39,20 @@ const Profile = ({
       <img className="profile__img" src={profilePicture} alt="Icône de profil de l'utilisateur" />
       <div className="profile__content">
         <div className="profile__content__header">
-          {/* TODO: function to query favorite recipes */}
+          {/* TODO: check if the favorite recipes query works */}
           <NavLink
             exact
             to="/recettes-favorites"
+            className="profile__content__header__link"
             onClick={getFavoritesRecipes}
           >
             <img className="profile__content__header__icon" src={heartFull} alt="Icône d'un coeur" />
           </NavLink>
-          {/* TODO: function to query shopping list */}
+          {/* TODO: check if the shopping list query works */}
           <NavLink
             exact
             to="/liste-de-courses"
+            className="profile__content__header__link"
             onClick={getShoppingList}
           >
             <img className="profile__content__header__icon" src={list} alt="Icône d'une liste" />
@@ -63,7 +71,7 @@ const Profile = ({
                 value={lastName}
                 onChange={trackLastName}
               />
-            </div>z
+            </div>
             <div className="profile__content__infos__input">
               {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
               <label className="profile__content__infos__label">Prénom</label>
@@ -117,6 +125,10 @@ const Profile = ({
           </div>
         </div>
 
+        <div className="profile__content__message">
+          {message}
+        </div>
+
         <div className="profile__content__buttons">
           <button
             type="button"
@@ -154,11 +166,13 @@ const Profile = ({
   </div>
 );
 
+// PropTypes
 Profile.propTypes = {
   lastName: PropTypes.string.isRequired,
   firstName: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
   status: PropTypes.string.isRequired,
+  message: PropTypes.string.isRequired,
   getFavoritesRecipes: PropTypes.func.isRequired,
   getShoppingList: PropTypes.func.isRequired,
   trackLastName: PropTypes.func.isRequired,
@@ -174,22 +188,26 @@ const mapStateToProps = (state) => ({
   firstName: state.user.firstName,
   email: state.user.email,
   status: state.user.status,
+  message: state.profile.message,
   showModal: state.profile.showModal,
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  // sends the request to retrieve favorite recipes to the middleware "profile.js"
   getFavoritesRecipes: () => {
     dispatch({
       type: 'SEND_FAVORITES_RECIPES_REQUEST',
     });
   },
 
+  // sends the request to retrieve shopping list to the middleware "profile.js"
   getShoppingList: () => {
     dispatch({
       type: 'SEND_SHOPPING_LIST_REQUEST',
     });
   },
 
+  // controlled fields
   trackLastName: (event) => {
     dispatch({
       type: 'EDIT_FIELD_PROFILE_LAST_NAME',
@@ -198,7 +216,6 @@ const mapDispatchToProps = (dispatch) => ({
       },
     });
   },
-
   trackFirstName: (event) => {
     dispatch({
       type: 'EDIT_FIELD_PROFILE_FIRST_NAME',
@@ -207,7 +224,6 @@ const mapDispatchToProps = (dispatch) => ({
       },
     });
   },
-
   trackEmail: (event) => {
     dispatch({
       type: 'EDIT_FIELD_PROFILE_EMAIL',
@@ -217,12 +233,15 @@ const mapDispatchToProps = (dispatch) => ({
     });
   },
 
+  // sends request to modify the profile to the middleware "profile.js"
   handleEditProfile: () => {
     dispatch({
       type: 'SEND_EDIT_PROFILE_REQUEST',
     });
   },
 
+  // we dispatch the action of opening the modal
+  // to confirm or cancel the deletion of the account
   openModalConfirmDelete: () => {
     dispatch({
       type: 'OPEN_MODAL',
