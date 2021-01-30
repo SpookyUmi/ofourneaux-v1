@@ -7,6 +7,7 @@ import axios from 'axios';
 
 import 'src/components/Admin/admin.scss';
 import bin from 'src/assets/icons/delete.svg';
+import './addrecipeform.scss';
 
 // TODO add props (controlled field, handlesubmit and props)
 const AddRecipeForm = ({ tags, ingredients, userToken }) => {

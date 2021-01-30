@@ -19,12 +19,19 @@ const auth = (store) => (next) => (action) => {
         },
       })
         .then((response) => {
-        // console.log('Réponse inscription :', response);
+        console.log('Réponse inscription :', response);
           store.dispatch({
             type: 'LOGIN_SUCCESS',
             payload: {
               token: response.data.data.token,
               id: response.data.data.userId,
+              firstName: response.data.data.firstName,
+              lastName: response.data.data.lastName,
+              email: response.data.data.email,
+              status: response.data.data.status,
+              recipesHistory: response.data.data.recipesHistory,
+              favoriteRecipes: response.data.data.favoriteRecipes,
+              shoppingList: response.data.data.shoppingList,
             },
           });
           action.redirect('/');

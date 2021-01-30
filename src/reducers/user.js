@@ -24,6 +24,13 @@ const reducer = (oldState = initialState, action) => {
         ...oldState,
         token: action.payload.token,
         id: action.payload.id,
+        firstName: action.payload.firstName,
+        lastName: action.payload.lastName,
+        email: action.payload.email,
+        status: action.payload.status,
+        recipesHistory: action.payload.recipesHistory,
+        favoriteRecipes: action.payload.favoriteRecipes,
+        shoppingList: action.payload.shoppingList,
       };
     case 'LOGOUT_SUCCESS':
       return {

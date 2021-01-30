@@ -5,7 +5,7 @@ import nameAccordingToCurrentRoute from 'src/utils/nameAccordingToCurrentRoute';
 
 import Form from './Form';
 
-// import './admin.scss';
+import './admin.scss';
 
 const Admin = () => (
   <div className="admin">
@@ -22,7 +22,7 @@ const Admin = () => (
       <NavLink className="admin__desktop__tab" exact to="/admin/gestion-utilisateurs">Gérer les utilisateurs</NavLink>
       <NavLink className="admin__desktop__tab back__to__profile" exact to="/profil/:slug">Retour à mon profil</NavLink>
     </div>
-    <h3 className="admin__mobile__subheader">{nameAccordingToCurrentRoute(window.location.pathname)}</h3>
+    <h3 className="admin__subheader">{nameAccordingToCurrentRoute(window.location.pathname)}</h3>
     <Form />
   </div>
 );

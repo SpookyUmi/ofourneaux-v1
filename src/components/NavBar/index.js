@@ -18,33 +18,40 @@ import about from 'src/assets/icons/about.svg';
 
 import './styles.scss';
 
-const Navbar = ({ isLogged, isAdmin, isOpen, setIsOpen, trackSearch, handleSearch }) => {
-
-  return (
-      <>
-        {isOpen &&
+const Navbar = ({
+  isLogged, status, isOpen, setIsOpen, trackSearch, handleSearch,
+}) => (
+  <>
+    {/* This will change the icon depending on the navbar being open or folded */}
+    {isOpen
+        && (
         <div className="navbar">
           <div className="navbar__links__top">
-          <img className="navbar__toggle__home__icon link__style" src={arrow} alt="icône flèche gauche"
-            onClick={() => { setIsOpen(false) }}
-              />
-          <form onSubmit={handleSearch} className="navbar__searchform">
-            <div className="navbar__searchform__icon">
-              <FontAwesomeIcon icon={faSearch} />
-            </div>
-            <input
-              type="text"
-              placeholder="Recherche..."
-              className="navbar__searchform__input"
-              id="searchInputNavbar"
-              onChange={trackSearch}
+            <img
+              className="navbar__toggle__home__icon link__style"
+              src={arrow}
+              alt="icône flèche gauche"
+              onClick={() => {
+                setIsOpen(false);
+              }}
             />
-          </form>
+            <form onSubmit={handleSearch} className="navbar__searchform">
+              <div className="navbar__searchform__icon">
+                <FontAwesomeIcon icon={faSearch} />
+              </div>
+              <input
+                type="text"
+                placeholder="Recherche..."
+                className="navbar__searchform__input"
+                id="searchInputNavbar"
+                onChange={trackSearch}
+              />
+            </form>
             <NavLink to="/" className="navbar__link__home link__style">
               <img className="navbar__link__icon" src={home} alt="icône accueil" />
               Accueil
             </NavLink>
-            {/* TODO the following elements must only be displayed if the user is NOT logged in */}
+            {/* The following elements will only be displayed if the user is NOT logged in */}
             {!isLogged
             && (
             <>
@@ -56,7 +63,7 @@ const Navbar = ({ isLogged, isAdmin, isOpen, setIsOpen, trackSearch, handleSearc
               </NavLink>
             </>
             )}
-            {/* TODO the following elements must only be displayed if the user is logged in */}
+            {/* The following elements will only be displayed if the user is logged in */}
             {isLogged
             && (
             <>
@@ -70,12 +77,12 @@ const Navbar = ({ isLogged, isAdmin, isOpen, setIsOpen, trackSearch, handleSearc
               </NavLink>
               <NavLink to="/profil/recettes-favorites" className="navbar__link__favorites link__style">
                 <img className="navbar__link__icon" src={favorites} alt="icône favoris" />
-                Recettes favoritesNavLink
+                Recettes favorites
               </NavLink>
             </>
             )}
-            {/* TODO the following elements must only be displayed if the user is logged in AND ADMIN */}
-            {isLogged && isAdmin
+            {/* The following elements will only be displayed if the user is logged in and admin */}
+            {isLogged && status === 'admin'
             && (
             <>
               <NavLink to="/profil" className="navbar__link__profile link__style">
@@ -100,35 +107,34 @@ const Navbar = ({ isLogged, isAdmin, isOpen, setIsOpen, trackSearch, handleSearc
               </NavLink>
             </>
             )}
-        </div>
+          </div>
           {/* The following elements are displayed for all users */}
-        <div className="navbar__links__bottom">
-          <NavLink to="/contact" className="navbar__link__contact link__style">
-            <img className="navbar__link__icon" src={contact} alt="icône contact" />
-            Contact
-          </NavLink>
-          <NavLink to="/a-propos" className="navbar__link__about link__style">
-            <img className="navbar__link__icon" src={about} alt="icône à propos" />
-            A propos
-          </NavLink>
+          <div className="navbar__links__bottom">
+            <NavLink to="/contact" className="navbar__link__contact link__style">
+              <img className="navbar__link__icon" src={contact} alt="icône contact" />
+              Contact
+            </NavLink>
+            <NavLink to="/a-propos" className="navbar__link__about link__style">
+              <img className="navbar__link__icon" src={about} alt="icône à propos" />
+              A propos
+            </NavLink>
+          </div>
         </div>
-        </div>
-        }
-      </>
-  )};
+        )}
+  </>
+);
 
 // ! temporarily commented to avoid errors in the console
 // Navbar.propTypes = {
 //   isLoggedIn: PropTypes.bool.isRequired,
-//   isAdmin: PropTypes.bool.isRequired,
-//   navBarIsOpen: PropTypes.bool.isRequired,
+//   status: PropTypes.string.isRequired,
+//   isOpen: PropTypes.bool.isRequired,
 // };
 
-const mapStateToProps = (state) => {
-  return {
-    isLogged: state.auth.isLogged,
-  }
-};
+const mapStateToProps = (state) => ({
+  isLogged: state.auth.isLogged,
+  status: state.user.status,
+});
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   trackSearch: (event) => {
@@ -145,9 +151,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     event.preventDefault();
     dispatch({
       type: 'SEND_SEARCH_REQUEST',
-      redirect: ownProps.history.push
+      redirect: ownProps.history.push,
     });
-  }
+  },
 });
 
 let container = connect(mapStateToProps, mapDispatchToProps)(Navbar);
