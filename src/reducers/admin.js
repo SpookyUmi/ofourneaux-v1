@@ -6,7 +6,6 @@ const initialState = {
   ingredients: [],
   newRecipe: {},
   tagField: '',
-  currentRoute: '',
 };
 
 const reducer = (oldState = initialState, action) => {
@@ -14,11 +13,6 @@ const reducer = (oldState = initialState, action) => {
   // console.log('Action :', action);
 
   switch (action.type) {
-    case 'CHANGE_CURRENT_ROUTE':
-      return {
-        ...oldState,
-        currentRoute: action.currentRoute.pathname,
-      };
     case 'UPDATE_USER_SEARCH_FIELD':
       return {
         ...oldState,

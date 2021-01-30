@@ -5,6 +5,8 @@ function nameAccordingToCurrentRoute(currentRoute) {
     return ('Ajouter une recette');
   } if (currentRoute === '/admin/modification-recettes/:id') {
     return ('Modifier une recette');
+  } if (currentRoute === '/admin/modification-recettes') {
+    return ('Modifier une recette');
   } if (currentRoute === '/admin/gestion-labels') {
     return ('Gérer les labels');
   } if (currentRoute === '/admin/gestion-utilisateurs') {

@@ -11,20 +11,20 @@ import UserForm from './UserForm';
 // import './admin.scss';
 
 const Form = () => (
-    <div className="form">
-      <Route exact path="/admin/ajout-recettes">
-        <AddRecipeForm />
-      </Route>
-      <Route exact path="/admin/modification-recettes">
-        <UpdateRecipeForm />
-      </Route>
-      <Route exact path="/admin/gestion-labels">
-        <TagForm />
-      </Route>
-      <Route exact path="/admin/gestion-utilisateurs">
-        <UserForm />
-      </Route>
-    </div>
+  <div className="form">
+    <Route exact path="/admin/ajout-recettes">
+      <AddRecipeForm />
+    </Route>
+    <Route exact path="/admin/modification-recettes">
+      <UpdateRecipeForm />
+    </Route>
+    <Route exact path="/admin/gestion-labels">
+      <TagForm />
+    </Route>
+    <Route exact path="/admin/gestion-utilisateurs">
+      <UserForm />
+    </Route>
+  </div>
 
 );
 
