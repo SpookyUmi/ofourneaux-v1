@@ -1,0 +1,32 @@
+@use 'src/styles/vars';
+
+// MOBILE
+@media only screen and (max-width: 768px) {
+  
+}
+
+//DESKTOP
+@media only screen and (min-width: 768px) {
+  .add__recipe__form{
+    padding: 2rem;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+  
+  }
+  .label{
+    font-weight: bold;
+    font-size:1.1rem,
+  }
+  
+  p,label{
+    padding: 2rem 0.5rem;
+  }
+  input, select{
+    margin: 1rem;
+  }
+
+  .add__recipe__form__image__input{
+    border: 0px;
+  }
+}
