@@ -41,6 +41,8 @@ const reducer = (oldState = initialState, action) => {
     case 'LOGIN_FAILED':
       return {
         ...oldState,
+        // when the connection fails, the password field is emptied
+        password: '',
         // the error message is displayed
         errorMessage: action.payload.errorMessage,
       };

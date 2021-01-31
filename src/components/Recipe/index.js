@@ -1,14 +1,18 @@
+// YARN
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+// icons
 import Informations from 'src/components/Recipe/Informations';
 import Instructions from 'src/components/Recipe/Instructions';
 import Ingredients from 'src/components/Recipe/Ingredients';
 import Image from 'src/components/Recipe/Image';
 
+// SCSS
 import './styles.scss';
 
+// component
 const Recipe = ({ recipe }) => {
   console.log(recipe);
 
@@ -32,11 +36,10 @@ const Recipe = ({ recipe }) => {
         <Ingredients ingredients={recipe.ingredients} />
       </div>
     </div>
-  )
+  );
 };
 
-// to see if we keep the propTypes here
-// it may not be the best way to manage the data of the component
+// PropTypes
 Recipe.propTypes = {
   recipe: PropTypes.shape({
     id: PropTypes.number,
@@ -60,14 +63,12 @@ Recipe.propTypes = {
       category: PropTypes.string,
       icon: PropTypes.string,
     })),
-    instructions: PropTypes.arrayOf(PropTypes.string),
+    steps: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
 };
 
-const mapStateToProps = (state) => {
-  return {
-    recipe: state.recipe,
-  }
-};
+const mapStateToProps = (state) => ({
+  recipe: state.recipe,
+});
 
 export default connect(mapStateToProps, null)(Recipe);

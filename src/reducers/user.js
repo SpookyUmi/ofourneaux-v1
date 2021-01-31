@@ -12,8 +12,8 @@ const initialState = {
 };
 
 const reducer = (oldState = initialState, action) => {
-  // console.log('State :', oldState);
-  // console.log('Action :', action);
+  // console.log('State user :', oldState);
+  // console.log('Action user :', action);
 
   switch (action.type) {
     // after the user login, we place the token and the id in the reducer "user".
@@ -24,7 +24,16 @@ const reducer = (oldState = initialState, action) => {
         ...oldState,
         token: action.payload.token,
         id: action.payload.id,
+        firstName: action.payload.firstName,
+        lastName: action.payload.lastName,
+        email: action.payload.email,
+        status: action.payload.status,
+        recipesHistory: action.payload.recipesHistory,
+        favoritesRecipes: action.payload.favoritesRecipes,
+        eatingPreferences: action.payload.eatingPreferences,
       };
+
+    // when the user logs out, the state is cleared
     case 'LOGOUT_SUCCESS':
       return {
         ...oldState,
@@ -38,16 +47,6 @@ const reducer = (oldState = initialState, action) => {
         favoriteRecipes: [],
         shoppingList: [],
       };
-    case 'PROFILE_SUCCESS':
-      return {
-        ...oldState,
-        id: action.payload.id,
-        firstName: action.payload.firstName,
-        lastName: action.payload.lastName,
-        email: action.payload.email,
-        status: action.payload.status,
-        recipesHistory: action.payload.recipesHistory,
-      };
 
     // after edition to the account, the state is modified
     case 'EDIT_PROFILE_SUCCESS':
@@ -56,6 +55,12 @@ const reducer = (oldState = initialState, action) => {
         firstName: action.payload.firstName,
         lastName: action.payload.lastName,
         email: action.payload.email,
+      };
+
+    case 'UPDATE_FAVORITES_SUCCESS':
+      return {
+        ...oldState,
+        favoritesRecipes: action.payload.favoritesRecipes,
       };
 
     // after deletion to the account, the state is emptied
