@@ -7,7 +7,6 @@ const recipe = (store) => (next) => (action) => {
   const state = store.getState();
 
   const form = new FormData();
-  form.append('favorites_recipes', state.user.favoritesRecipes);
   // console.log(form);
 
   switch (action.type) {
@@ -76,6 +75,8 @@ const recipe = (store) => (next) => (action) => {
         });
       }
 
+      form.append('favorites_recipes', updatedRecipesFavorites);
+
       // axios({
       //   method: 'patch',
       //   url: `https://ofourneaux.herokuapp.com/favorites/${state.user.id}`,
@@ -86,7 +87,7 @@ const recipe = (store) => (next) => (action) => {
       //   .then((response) => {
       //     console.log('Answer request add recipe in favorites :', response);
       //     store.dispatch({
-      //       type: 'UPDATE_FAVORTES_REQUEST',
+      //       type: 'UPDATE_FAVORITES_REQUEST',
       //       payload: {
       //         favoritesRecipes: updatedRecipesFavorites,
       //       },

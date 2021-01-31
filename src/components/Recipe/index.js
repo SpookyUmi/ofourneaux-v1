@@ -20,6 +20,7 @@ const Recipe = ({ recipe }) => {
     <div className="recipe">
       <div className="recipe__block recipe__block--left">
         <Informations
+          id={recipe.id}
           title={recipe.title}
           description={recipe.description}
           tags={recipe.tags}
