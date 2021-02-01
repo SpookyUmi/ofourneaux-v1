@@ -17,28 +17,28 @@ const auth = (store) => (next) => (action) => {
     try {
       const response = await axios({
         method: 'GET',
-        url: `${URL}/new`,
+        url: `${URL}/recipes/new`,
         headers: {
           authorization: userToken,
         },
       });
 
-      console.log('Answer request tags :', response);
+      // console.log('Answer request data :', response.data.data[0].type);
 
       store.dispatch({
         type: 'REQUIRED_DATA_SUCCESS',
         payload: {
-          types: response.data.data.type,
-          seasons: response.data.data.season,
-          tags: response.data.data.tag,
-          difficulties: response.data.data.difficulty,
-          categories: response.data.data.category,
-          ingredients: response.data.data.ingredient,
+          types: response.data.data[0].type,
+          seasons: response.data.data[1].season,
+          tags: response.data.data[2].tag,
+          difficulties: response.data.data[3].difficulty,
+          categories: response.data.data[4].category,
+          ingredients: response.data.data[5].ingredient,
         },
       });
     }
     catch (error) {
-      console.log('Error request tags :', error.response);
+      console.log('Error request data :', error.response);
     }
   }
 
@@ -76,7 +76,7 @@ const auth = (store) => (next) => (action) => {
           // TODO: uncomment next line
           // shoppingList: response.data.data.shopping_list,
           // ! test table, to be deleted
-          eatingPreferences: [2],
+          eatingPreferences: [2, 5],
           // TODO: uncomment next line
           // eatingPreferences: response.data.data.eatingPreferences,
         },
