@@ -16,7 +16,7 @@ import RecipesHeader from './RecipesHeader';
 // and finally the main Footer (in desktop mode)
 const Recipes = ({ recipes }) => (
   <main className="recipes">
-    <RecipesHeader />
+    {/* <RecipesHeader /> */}
     {recipes?.map((recipe) => (
       <CardRecipe {...recipe} key={recipe.id} />
     ))}

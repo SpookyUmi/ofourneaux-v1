@@ -7,6 +7,7 @@ import { buildRecipeURL } from 'src/utils/buildRecipeURL';
 
 import time from 'src/assets/icons/time.svg';
 import fire from 'src/assets/icons/difficulty.svg';
+import difficultyNameById from 'src/utils/difficultyNameById';
 
 import './styles.scss';
 
@@ -18,7 +19,7 @@ const CardRecipe = ({
   title,
   preparation_time,
   baking_time,
-  difficulty,
+  difficulty_id,
   getRecipeById,
   id,
 }) => (
@@ -35,7 +36,7 @@ const CardRecipe = ({
     </section>
     <section className="card__recipe__info">
       <img className="card__recipe__time__icon" src={fire} alt="icône de difficulté" />
-      <p className="card__recipe__time">{difficulty}</p>
+      <p className="card__recipe__time">{difficultyNameById(difficulty_id)}</p>
     </section>
     {/* TODO onClick buttons */}
     <section className="card__recipe__buttons">

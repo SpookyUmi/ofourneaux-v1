@@ -9,7 +9,9 @@ import plane from 'src/assets/images/paper-plane.svg';
 
 // == Composant
 const Contact = () => {
+
   const [state, handleSubmit] = useForm("contactForm");
+
   if (state.succeeded) {
     return <div className="contact message__sent">
       <h3>Merci pour votre message !</h3>

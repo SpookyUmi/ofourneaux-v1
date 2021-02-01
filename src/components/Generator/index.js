@@ -5,7 +5,6 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 // == Import
-import giftLogo from 'src/assets/images/surprise.svg';
 import arrow from 'src/assets/icons/up-arrow.svg';
 import pancakes from 'src/assets/images/pancakes.png';
 import './styles.scss';
@@ -36,20 +35,18 @@ const Generator = ({
           <section className="generator__section">
             {/* When property isClicked is false, the generator displays a logo */}
             {!isClicked &&
-              <>
+              <div className="generator--animation">
                 <img src={pancakes}
                   className="generator__section__logo"
                   alt="logo de cadeau"
                   onClick={handleClickIn}
                 />
                 <p className="generator__section__click">Click me</p>
-              </>
+              </div>
             }
             {/* When property isClicked is true (when somebody clicked on the logo),
-            it displays a form.
-          */}
-            {
-              isClicked &&
+            it displays a form.*/}
+            {isClicked &&
               <form className="generator__form">
               <img
                 src={arrow}

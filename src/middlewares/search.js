@@ -11,7 +11,9 @@ const search = (store) => (next) => (action) => {
   generator.append('number', state.recipes.number);
   generator.append('time', state.recipes.time);
   generator.append('difficulty', state.recipes.difficulty);
-  generator.append('favorites', state.recipes.favorites);
+  generator.append('favorites', state.user.favoritesRecipes);
+  generator.append('eatingPreferences', state.user.eatingPreferences);
+  generator.append('recipesHistory', state.user.recipesHistory);
 
   switch (action.type) {
     case 'SEND_SEARCH_REQUEST':

@@ -1,6 +1,5 @@
 const initialState = {
   recipes: [],
-  favorites: [],
   search: '',
   number: 0,
   time: 0,
