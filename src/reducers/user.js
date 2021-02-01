@@ -9,6 +9,7 @@ const initialState = {
   favoritesRecipes: [],
   shoppingList: [],
   eatingPreferences: [],
+  pictureUrl: '',
 };
 
 const reducer = (oldState = initialState, action) => {
@@ -32,6 +33,7 @@ const reducer = (oldState = initialState, action) => {
         favoritesRecipes: action.payload.favoritesRecipes,
         shoppingList: action.payload.shoppingList,
         eatingPreferences: action.payload.eatingPreferences,
+        pictureUrl: action.payload.pictureUrl,
       };
 
     // when the user logs out, the state is cleared

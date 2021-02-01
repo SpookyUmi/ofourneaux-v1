@@ -17,13 +17,13 @@ const auth = (store) => (next) => (action) => {
     try {
       const response = await axios({
         method: 'GET',
-        url: `${URL}/recipes/new`,
+        url: `${URL}/recipes/data`,
         headers: {
           authorization: userToken,
         },
       });
 
-      // console.log('Answer request data :', response.data.data[0].type);
+      console.log('Answer request data :', response.data.data);
 
       store.dispatch({
         type: 'REQUIRED_DATA_SUCCESS',
@@ -79,6 +79,7 @@ const auth = (store) => (next) => (action) => {
           eatingPreferences: [2, 5],
           // TODO: uncomment next line
           // eatingPreferences: response.data.data.eatingPreferences,
+          pictureUrl: response.data.data.picture_url,
         },
       });
 

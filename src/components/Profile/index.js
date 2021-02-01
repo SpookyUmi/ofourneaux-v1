@@ -37,8 +37,6 @@ const Profile = ({
   toggleEatingPreference,
   tags,
   eatingPreferences,
-  checked,
-  checkedEatingPreference,
 }) => (
   <div className="profile">
     <h1 className="profile__title">Mon profil</h1>
@@ -121,11 +119,11 @@ const Profile = ({
             <div className="profile__content__constraints__inputs">
               {
                 tags.map((tag) => {
+                  let checked = false;
+
                   eatingPreferences.forEach((eatingPreference) => {
                     if (eatingPreference === tag.id) {
                       checked = true;
-                    } else {
-                      checked = false;
                     }
                   });
 
@@ -139,9 +137,8 @@ const Profile = ({
                         className="profile__content__constraints__checkbox"
                         type="checkbox"
                         name={tag.name}
-                        onClick={toggleEatingPreference}
+                        onChange={toggleEatingPreference}
                         checked={checked}
-                        onChange={checkedEatingPreference}
                       />
                       {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                       <label
@@ -218,8 +215,6 @@ Profile.propTypes = {
   toggleEatingPreference: PropTypes.func.isRequired,
   eatingPreferences: PropTypes.array.isRequired,
   tags: PropTypes.array.isRequired,
-  checked: PropTypes.bool.isRequired,
-  checkedEatingPreference: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -304,17 +299,6 @@ const mapDispatchToProps = (dispatch) => ({
         id: idEatingPreference,
       },
     });
-  },
-
-  checkedEatingPreference: (event) => {
-    if (event.target.checked) {
-      dispatch({
-        type: '',
-        payload: {
-          checked: !event.target.checked,
-        },
-      });
-    }
   },
 });
 
