@@ -17,8 +17,12 @@ import Modal from './Modal';
 import './styles.scss';
 
 const imageUrl = async (e) => {
-  const url = await uploadImage(e.target.files[0]);
-  console.log('URl =>', url);
+  const image = new File(
+    [e.target.files[0]],
+    `${new Date().toISOString()}_${e.target.files[0].name}`,
+    { type: e.target.files[0].type },
+  );
+  const url = await uploadImage(image);
 };
 
 const Profile = ({
@@ -164,6 +168,15 @@ const Profile = ({
                   placeholder="johndoe@yahoo.fr"
                   value={email}
                   onChange={trackEmail}
+                />
+              </div>
+              <div className="profile__content__infos__input">
+                {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                <label className="profile__content__infos__label">Photo de Profil</label>
+                <input
+                  className="profile__content__infos__field"
+                  type="file"
+                  onChange={imageUrl}
                 />
               </div>
             </div>
