@@ -5,7 +5,6 @@ const initialState = {
   number: 0,
   time: 0,
   difficulty: '',
-  favorites: false
 };
 
 const reducer = (oldState = initialState, action) => {

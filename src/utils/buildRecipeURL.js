@@ -7,7 +7,7 @@ export const slugifyTitle = (title) => {
 
   return (slugify(modifiedTitle, {
     lower: true,
-  }))
+  }));
 };
 
 // we export the slugified URL so that the CardRecipe component can retrieve it
