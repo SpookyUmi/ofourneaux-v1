@@ -1,16 +1,19 @@
 @use 'reset';
 @use 'vars';
 
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 html, body, #root, .app {
   background-color: vars.$color-sand;
-  height: 100%;
 }
 
 .app {
   display: flex;
   flex-direction: column;
-}
-
-.desktop {
-  //flex-shrink: 0;
 }

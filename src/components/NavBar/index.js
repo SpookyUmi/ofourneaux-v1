@@ -32,33 +32,29 @@ const Navbar = ({
   handleDisconnect,
   getFavoritesRecipes,
 }) => (
-  <>
-    {isOpen
-      && (
-      <div className="navbar">
+  <div className={`navbar ${isOpen ? "show__navbar" : ""}`}>
+        {isOpen &&
+        <>
         <div className="navbar__links__top">
-          <img
-            className="navbar__toggle__home__icon link__style"
-            src={arrow}
-            alt="icône flèche gauche"
-            onClick={() => {
-              setIsOpen(false);
-            }}
-          />
-          <form onSubmit={handleSearch} className="navbar__searchform">
-            <div className="navbar__searchform__icon">
+          <img className="navbar__toggle__home__icon link__style transition" src={arrow} alt="icône flèche gauche"
+            onClick={() => { setIsOpen(false) }}
+              />
+          <form onSubmit={handleSearch} className="navbar__searchform transition">
+            <div className="navbar__searchform__icon transition">
+
               <FontAwesomeIcon icon={faSearch} />
             </div>
             <input
               type="text"
               placeholder="Recherche..."
-              className="navbar__searchform__input"
+              className="navbar__searchform__input transition"
               id="searchInputNavbar"
               onChange={trackSearch}
+              onSubmit={() => { setIsOpen(false) }}
             />
           </form>
-          <NavLink to="/" className="navbar__link__home link__style">
-            <img className="navbar__link__icon" src={home} alt="icône accueil" />
+          <NavLink to="/" className="navbar__link__home link__style transition" onClick={() => { setIsOpen(false) }}>
+            <img className="navbar__link__icon transition" src={home} alt="icône accueil" />
             Accueil
           </NavLink>
 
@@ -67,10 +63,10 @@ const Navbar = ({
             !isLogged
             && (
               <>
-                <NavLink to="/connexion" className="navbar__link__signin link__style">
+                <NavLink to="/connexion" className="navbar__link__signin link__style transition" onClick={() => { setIsOpen(false) }}>
                   Se connecter
                 </NavLink>
-                <NavLink to="/insciption" className="navbar__link__signup button__style">
+                <NavLink to="/insciption" className="navbar__link__signup button__style transition" onClick={() => { setIsOpen(false) }}>
                   S'inscrire
                 </NavLink>
               </>
@@ -82,23 +78,24 @@ const Navbar = ({
           isLogged && status === 'user'
             && (
               <>
-                <NavLink to="/profil" className="navbar__link__profile link__style">
-                  <img className="navbar__link__icon" src={profile} alt="icône profil" />
+                <NavLink to="/profil" className="navbar__link__profile link__style transition" onClick={() => { setIsOpen(false) }}>
+                  <img className="navbar__link__icon transition" src={profile} alt="icône profil" />
                   Mon profil
                 </NavLink>
-                <NavLink to="/profil/liste-de-courses" className="navbar__link__list link__style">
-                  <img className="navbar__link__icon" src={list} alt="icône liste de courses" />
+                <NavLink to="/profil/liste-de-courses" className="navbar__link__list link__style transition" onClick={() => { setIsOpen(false) }}>
+                  <img className="navbar__link__icon transition" src={list} alt="icône liste de courses" />
                   Liste de courses
                 </NavLink>
                 <NavLink
                   to="/profil/recettes-favorites"
-                  className="navbar__link__favorites link__style"
+                  className="navbar__link__favorites link__style transition"
                   onClick={getFavoritesRecipes}
+                  onClick={() => { setIsOpen(false) }}
                 >
-                  <img className="navbar__link__icon" src={favorites} alt="icône favoris" />
+                  <img className="navbar__link__icon transition" src={favorites} alt="icône favoris" />
                   Recettes favorites
                 </NavLink>
-                <NavLink to="/" className="navbar__link__logout link__style" onClick={handleDisconnect}>
+                <NavLink to="/" className="navbar__link__logout link__style transition" onClick={handleDisconnect} onClick={() => { setIsOpen(false) }}>
                   Se déconnecter
                 </NavLink>
               </>
@@ -108,24 +105,24 @@ const Navbar = ({
           {isLogged && status === 'admin'
           && (
           <>
-            <NavLink to="/profil" className="navbar__link__profile link__style">
-              <img className="navbar__link__icon" src={profile} alt="icône profil" />
+            <NavLink to="/profil" className="navbar__link__profile link__style transition" onClick={() => { setIsOpen(false) }}>
+              <img className="navbar__link__icon transition" src={profile} alt="icône profil" />
               Mon profil
             </NavLink>
-            <NavLink to="/admin/ajout-recette" className="navbar__link__adminrecipes link__style">
-              <img className="navbar__link__icon" src={recipe} alt="icône recettes" />
+            <NavLink to="/admin/ajout-recette" className="navbar__link__adminrecipes link__style transition" onClick={() => { setIsOpen(false) }}>
+              <img className="navbar__link__icon transition" src={recipe} alt="icône recettes" />
               Ajouter une recette
             </NavLink>
-            <NavLink to="/admin/modification-recette" className="navbar__link__adminrecipes link__style">
-              <img className="navbar__link__icon" src={recipe} alt="icône recettes" />
+            <NavLink to="/admin/modification-recette" className="navbar__link__adminrecipes link__style transition" onClick={() => { setIsOpen(false) }}>
+              <img className="navbar__link__icon transition" src={recipe} alt="icône recettes" />
               Modifier/Supprimer une recette
             </NavLink>
-            <NavLink to="/admin/gestion-labels" className="navbar__link__adminlabels link__style">
-              <img className="navbar__link__icon" src={tag} alt="icône labels" />
+            <NavLink to="/admin/gestion-labels" className="navbar__link__adminlabels link__style transition" onClick={() => { setIsOpen(false) }}>
+              <img className="navbar__link__icon transition" src={tag} alt="icône labels" />
               Gérer les labels
             </NavLink>
-            <NavLink to="/admin/gestion-utilisateurs" className="navbar__link__adminusers link__style">
-              <img className="navbar__link__icon" src={users} alt="icône utilisateurs" />
+            <NavLink to="/admin/gestion-utilisateurs" className="navbar__link__adminusers link__style transition" onClick={() => { setIsOpen(false) }}>
+              <img className="navbar__link__icon transition" src={users} alt="icône utilisateurs" />
               Gérer les utilisateurs
             </NavLink>
           </>
@@ -133,20 +130,22 @@ const Navbar = ({
         </div>
 
         {/* The following elements are displayed for all users */}
+
         <div className="navbar__links__bottom">
-          <NavLink to="/contact" className="navbar__link__contact link__style">
-            <img className="navbar__link__icon" src={contact} alt="icône contact" />
+          <NavLink to="/contact" className="navbar__link__contact link__style transition" onClick={() => { setIsOpen(false) }}>
+            <img className="navbar__link__icon transition" src={contact} alt="icône contact" />
             Contact
           </NavLink>
-          <NavLink to="/a-propos" className="navbar__link__about link__style">
-            <img className="navbar__link__icon" src={about} alt="icône à propos" />
+          <NavLink to="/a-propos" className="navbar__link__about link__style transition" onClick={() => { setIsOpen(false) }}>
+            <img className="navbar__link__icon transition" src={about} alt="icône à propos" />
             A propos
           </NavLink>
         </div>
+        </>
+        }
       </div>
-      )}
-  </>
-);
+  )};
+
 
 Navbar.propTypes = {
   isLogged: PropTypes.bool.isRequired,

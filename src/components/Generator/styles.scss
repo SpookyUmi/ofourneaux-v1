@@ -4,6 +4,7 @@
   background-image: url('../../assets/images/background.jpg');
   background-size: cover;
   background-position: center;
+  margin-bottom: -1.2rem;
 }
 
 @supports not (backdrop-filter: none) {
@@ -22,7 +23,6 @@
   background-color: rgba( 251, 246, 237, 0.75 );
   backdrop-filter: blur( 6px );
   -webkit-backdrop-filter: blur( 6px );
-  position: relative;
 
 
   &__flexblock {
@@ -58,10 +58,29 @@
     background-color: vars.$color-secondary;
     border-radius: 4rem;
     box-shadow: 0 8px 32px 0 rgba(117, 117, 117, 0.37);
+    position: relative;
 
     &__logo {
-      width: 60%;
+      width: 200px;
       cursor: pointer;
+      animation: scale 2s infinite;
+    }
+
+    @keyframes scale {
+      from {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+      to {
+        transform: scale(1);
+      }
+    }
+
+    &__logo:hover {
+      transform: scale(1.1);
+      animation: transform 1s;
     }
 
     &__arrow {
@@ -74,11 +93,54 @@
     }
   }
 
+  &--animation {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: opacity 0.6s;
+  }
+
   &__form {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    transition: 0.5s;
+    animation: opacity 0.6s;
+
+    &__section {
+      display: flex;
+    }
+
+    &__section input {
+      display: flex;
+      width: 85px;
+    }
+
+    &__section label {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  &__form label {
+    margin: 0.3rem 0.5rem;
+  }
+
+  &__form button {
+    margin-top: 0.6rem;
+  }
+
+}
+
+@keyframes opacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
