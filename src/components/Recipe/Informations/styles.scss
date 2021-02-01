@@ -8,6 +8,7 @@
       &__title {
         margin-bottom: 1.25rem;
         text-align: left;
+        line-height: 3.5rem;
       }
 
       &__intro {
@@ -97,17 +98,7 @@
     margin: 0.3rem 0rem; 
 
     &__button {
-      font-weight: 800;
-      font-size: 0.85rem;
       margin: 0rem 1.25rem;
-      border: 2px solid vars.$color-primary;
-      transition: 0.2s;
-    }
-
-    &__button:hover {
-      border: 2px solid vars.$color-primary;
-      background-color: vars.$color-sand;
-      color: vars.$color-primary;
     }
   }
 }

@@ -12,8 +12,8 @@ const initialState = {
 };
 
 const reducer = (oldState = initialState, action) => {
-  // console.log('State :', oldState);
-  // console.log('Action :', action);
+  // console.log('State user :', oldState);
+  // console.log('Action user :', action);
 
   switch (action.type) {
     // after the user login, we place the token and the id in the reducer "user".
@@ -24,8 +24,17 @@ const reducer = (oldState = initialState, action) => {
         ...oldState,
         token: action.payload.token,
         id: action.payload.id,
-        // status: action.payload.status,
+        firstName: action.payload.firstName,
+        lastName: action.payload.lastName,
+        email: action.payload.email,
+        status: action.payload.status,
+        recipesHistory: action.payload.recipesHistory,
+        favoritesRecipes: action.payload.favoritesRecipes,
+        shoppingList: action.payload.shoppingList,
+        eatingPreferences: action.payload.eatingPreferences,
       };
+
+    // when the user logs out, the state is cleared
     case 'LOGOUT_SUCCESS':
       return {
         ...oldState,
@@ -39,17 +48,27 @@ const reducer = (oldState = initialState, action) => {
         favoriteRecipes: [],
         shoppingList: [],
       };
-    case 'PROFILE_SUCCESS':
-      return {
-        ...oldState,
-        id: action.payload.id,
-        firstName: action.payload.firstName,
-        lastName: action.payload.lastName,
-        email: action.payload.email,
-        status: action.payload.status,
-        recipesHistory: action.payload.recipesHistory,
-      };
 
+    case 'UPDATE_EATING_PREFERENCES':
+      // eslint-disable-next-line no-case-declarations, max-len
+      const updatedEatingPreferences = oldState.eatingPreferences.map((eatingPreference) => eatingPreference);
+      console.log('New copy of the eating preferences array :', updatedEatingPreferences);
+
+      // eslint-disable-next-line no-case-declarations
+      const index = updatedEatingPreferences.indexOf(action.payload.id);
+      console.log(index);
+
+      if (index > -1) {
+        updatedEatingPreferences.splice(index, 1);
+        console.log('Eating preference removed !');
+        console.log(updatedEatingPreferences);
+        return {
+          ...oldState,
+          eatingPreferences: updatedEatingPreferences,
+        };
+      }
+
+      break;
     // after edition to the account, the state is modified
     case 'EDIT_PROFILE_SUCCESS':
       return {
@@ -57,6 +76,19 @@ const reducer = (oldState = initialState, action) => {
         firstName: action.payload.firstName,
         lastName: action.payload.lastName,
         email: action.payload.email,
+      };
+
+    // when the update of favourite recipes and shopping
+    // list is successful, the state is updated
+    case 'UPDATE_FAVORITES_SUCCESS':
+      return {
+        ...oldState,
+        favoritesRecipes: action.payload.favoritesRecipes,
+      };
+    case 'UPDATE_SHOPPING_LIST_SUCCESS':
+      return {
+        ...oldState,
+        shoppingList: action.payload.shoppingList,
       };
 
     // after deletion to the account, the state is emptied
