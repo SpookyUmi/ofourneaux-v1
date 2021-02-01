@@ -17,8 +17,12 @@ import Modal from './Modal';
 import './styles.scss';
 
 const imageUrl = async (e) => {
-  const url = await uploadImage(e.target.files[0]);
-  console.log('URl =>', url);
+  const image = new File(
+    [e.target.files[0]],
+    `${new Date().toISOString()}_${e.target.files[0].name}`,
+    { type: e.target.files[0].type },
+  );
+  const url = await uploadImage(image);
 };
 
 const Profile = ({
@@ -56,52 +60,6 @@ const Profile = ({
   //   });
   // };
 
-<<<<<<< HEAD
-        <div className="profile__content__infos">
-          <div className="profile__content__block profile__content__infos__inputs">
-            <div className="profile__content__infos__input">
-              {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-              <label className="profile__content__infos__label">Nom</label>
-              <input
-                className="profile__content__infos__field"
-                type="text"
-                placeholder="Doe"
-                value={lastName}
-                onChange={trackLastName}
-              />
-            </div>
-            <div className="profile__content__infos__input">
-              {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-              <label className="profile__content__infos__label">Prénom</label>
-              <input
-                className="profile__content__infos__field"
-                type="text"
-                placeholder="John"
-                value={firstName}
-                onChange={trackFirstName}
-              />
-            </div>
-            <div className="profile__content__infos__input">
-              {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-              <label className="profile__content__infos__label">Email</label>
-              <input
-                className="profile__content__infos__field"
-                type="text"
-                placeholder="johndoe@yahoo.fr"
-                value={email}
-                onChange={trackEmail}
-              />
-            </div>
-            <div className="profile__content__infos__input">
-              {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-              <label className="profile__content__infos__label">Photo de profil</label>
-              <input
-                className="profile__content__infos__field"
-                type="file"
-                onChange={imageUrl}
-              />
-            </div>
-=======
   // checkIfPreferenceIsInEatingPreferences();
 
   return (
@@ -131,7 +89,6 @@ const Profile = ({
             >
               <img className="profile__content__header__icon" src={list} alt="Icône d'une liste" />
             </NavLink>
->>>>>>> 6ed954ae5e383d5333f362cd3d2ad9f7e22e953d
           </div>
 
           <div className="profile__content__infos">
@@ -167,6 +124,15 @@ const Profile = ({
                   placeholder="johndoe@yahoo.fr"
                   value={email}
                   onChange={trackEmail}
+                />
+              </div>
+              <div className="profile__content__infos__input">
+                {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                <label className="profile__content__infos__label">Photo de Profil</label>
+                <input
+                  className="profile__content__infos__field"
+                  type="file"
+                  onChange={imageUrl}
                 />
               </div>
             </div>
