@@ -36,16 +36,6 @@ const reducer = (oldState = initialState, action) => {
         ...oldState,
         tagField: action.payload.tagField,
       };
-    case 'TAG_ADD':
-      return {
-        ...oldState,
-        tags: action.payload.tags,
-      };
-    case 'TAG_DELETE':
-      return {
-        ...oldState,
-        tags: action.payload.tags,
-      };
     default:
       return { ...oldState };
   }

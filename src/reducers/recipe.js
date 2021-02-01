@@ -1,7 +1,6 @@
 const initialState = {
   id: null,
   title: '',
-  picture: '',
   description: '',
   type: '',
   difficulty: '',
@@ -10,7 +9,6 @@ const initialState = {
   nutri_score: '',
   date_creation: '',
   date_update: '',
-  season: '',
   tags: [],
   steps: [],
   ingredients: [],

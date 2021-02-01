@@ -7,32 +7,42 @@ import axios from 'axios';
 
 import 'src/components/Admin/admin.scss';
 import bin from 'src/assets/icons/delete.svg';
+import seasonsArray from 'src/data/seasons';
 import './updateRecipeForm.scss';
 
-const RecipeForm = ({
-  tags, ingredients, userToken, recipe,
+const UpdateRecipeForm = ({
+  tags, ingredients, userToken,
+  recipeId,
+  recipeTitle,
+  recipePictureUrl,
+  recipeDescription,
+  recipeType,
+  recipeDifficulty,
+  recipePreparationTime,
+  recipeBakingTime,
+  recipeNutriScore,
+  recipeTags,
+  recipeSteps,
+  recipeIngredients,
+  recipeSeasons,
 }) => {
   // I'm going to create a local state here to avoid having too many dispatches between my component
   // and the store.
-  const [title, setTitle] = useState(recipe.title);
-  const [picture, setPicture] = useState(recipe.picture);
-  const [type, setType] = useState(recipe.type);
-  const [description, setDescription] = useState(recipe.description);
+  const [title, setTitle] = useState(recipeTitle);
+  const [picture, setPicture] = useState(recipePictureUrl);
+  const [type, setType] = useState(recipeType);
+  const [description, setDescription] = useState(recipeDescription);
   const [seasons, setSeasons] = useState([]);
-  const [spring, setSpring] = useState('');
-  const [summer, setSummer] = useState('');
-  const [autumn, setAutumn] = useState('');
-  const [winter, setWinter] = useState('');
-  const [recipeTags, setRecipeTags] = useState([]);
+  const [localRecipeTags, setLocalRecipeTags] = useState([]);
   const [difficulty, setDifficulty] = useState('');
   const [nutriScore, setNutriScore] = useState('');
-  const [preparationTime, setPreparationTime] = useState(recipe.preparation_time);
-  const [bakingTime, setBakingTime] = useState(recipe.baking_time);
-  const [recipeIngredients, setRecipeIngredients] = useState(recipe.ingredients);
+  const [preparationTime, setPreparationTime] = useState(recipePreparationTime);
+  const [bakingTime, setBakingTime] = useState(recipeBakingTime);
+  const [localRecipeIngredients, setLocalRecipeIngredients] = useState(recipeIngredients);
   const [newIngredient, setNewIngredient] = useState('');
   const [newUnit, setNewUnit] = useState('');
   const [newQuantity, setNewQuantity] = useState('');
-  const [steps, setSteps] = useState(recipe.instructions);
+  const [steps, setSteps] = useState(recipeSteps);
   const [newStep, setNewStep] = useState('');
 
   return (
@@ -96,90 +106,30 @@ const RecipeForm = ({
         {/* If we have time in the future we could add checked property to the checkbox if
         the season is in recipe.seasons (if else?) */}
         <p className="recipe__form__div__2__p label">Saison</p>
-        <label className="label">
-          <input
-            className="choice__text margin"
-            type="checkbox"
-            name="Printemps"
-            onChange={(event) => {
+        {seasonsArray.map((season) => (
+          <label className="label" key={season.name}>
+            <input
+              className="choice__text margin"
+              type="checkbox"
+              name={season.name}
+              onChange={
+            (event) => {
               if (event.target.checked) {
-                setSpring(1);
+                setSeasons([
+                  ...seasons,
+                  season.id,
+                ]);
               }
-              else {
-                setSpring('');
+              else if (seasons.indexOf(season.id)) {
+                const index = seasons.indexOf(season.id);
+                seasons.splice(index, 1);
               }
-              setSeasons([{
-                spring,
-                summer,
-                autumn,
-                winter,
-              }]);
-            }}
-          />Printemps
-        </label>
-        <label className="label">
-          <input
-            className="choice__text margin"
-            type="checkbox"
-            name="Été"
-            onChange={(event) => {
-              if (event.target.checked) {
-                setSummer(2);
-              }
-              else {
-                setSummer('');
-              }
-              setSeasons([{
-                spring,
-                summer,
-                autumn,
-                winter,
-              }]);
-            }}
-          />Été
-        </label>
-        <label className="label">
-          <input
-            className="choice__text margin"
-            type="checkbox"
-            name="Automne"
-            onChange={(event) => {
-              if (event.target.checked) {
-                setAutumn(3);
-              }
-              else {
-                setAutumn('');
-              }
-              setSeasons([{
-                spring,
-                summer,
-                autumn,
-                winter,
-              }]);
-            }}
-          />Automne
-        </label>
-        <label className="label">
-          <input
-            className="choice__text margin"
-            type="checkbox"
-            name="Hiver"
-            onChange={(event) => {
-              if (event.target.checked) {
-                setWinter(4);
-              }
-              else {
-                setWinter('');
-              }
-              setSeasons([{
-                spring,
-                summer,
-                autumn,
-                winter,
-              }]);
-            }}
-          />Hiver
-        </label>
+              else setSeasons([...seasons]);
+            }
+          }
+            /> {season.name}
+          </label>
+        ))}
 
         {/* ---- TAGS ---- */}
         {/* If we have time in the future we could add checked property to the checkbox if
@@ -193,16 +143,16 @@ const RecipeForm = ({
               name={tag}
               onChange={(event) => {
                 if (event.target.checked) {
-                  setRecipeTags([
-                    ...recipeTags,
+                  setLocalRecipeTags([
+                    ...localRecipeTags,
                     tag,
                   ]);
                 }
-                else if (recipeTags.indexOf(tag)) {
-                  const index = recipeTags.indexOf(tag);
-                  recipeTags.splice(index, 1);
+                else if (localRecipeTags.indexOf(tag)) {
+                  const index = localRecipeTags.indexOf(tag);
+                  localRecipeTags.splice(index, 1);
                 }
-                else setRecipeTags([...recipeTags]);
+                else setLocalRecipeTags([...localRecipeTags]);
               }}
             />
             {tag}
@@ -288,7 +238,7 @@ const RecipeForm = ({
       <div className="recipe__form__div__4">
         {/* ---- INGREDIENTS ---- */}
         <p className="recipe__form__div__4__p label">Ingrédients</p>
-        {recipeIngredients.length !== 0 && recipeIngredients.map((ingredient) => (
+        {localRecipeIngredients.length !== 0 && localRecipeIngredients.map((ingredient) => (
           <div key={ingredient.id}>
             <span className="recipe__form__div__4__quantity">{ingredient.quantity}</span>
             <span className="recipe__form__div__4__unit">{ingredient.unit}</span>
@@ -298,8 +248,8 @@ const RecipeForm = ({
               src={bin}
               alt="bin"
               onClick={() => {
-                const index = recipeIngredients.indexOf(ingredient);
-                recipeIngredients.splice(index, 1);
+                const index = localRecipeIngredients.indexOf(ingredient);
+                localRecipeIngredients.splice(index, 1);
               }}
             />
           </div>
@@ -343,7 +293,7 @@ const RecipeForm = ({
           type="button"
           onClick={(event) => {
             event.preventDefault();
-            setRecipeIngredients([{
+            setLocalRecipeIngredients([{
               newIngredient,
               newQuantity,
               newUnit,
@@ -354,7 +304,7 @@ const RecipeForm = ({
         {/* ---- STEPS ---- */}
         <p className="recipe__form__div__4__p label">Étapes de préparation</p>
         <ol>
-          {steps?.map((step) => (
+          {recipeSteps?.map((step) => (
             <li key={step.string}>{step.string}
               <img
                 className="recipe__form__div__4__delete__icon"
@@ -399,23 +349,23 @@ const RecipeForm = ({
           value="Modifier la recette"
           onClick={(event) => {
             event.preventDefault();
-            const addRecipeForm = new FormData();
+            const addUpdateRecipeForm = new FormData();
             axios({
               method: 'patch',
               url: 'https://ofourneaux.herokuapp.com/recipes/:recipeId',
               data: {
-                title: addRecipeForm.append('title', title),
-                picture: addRecipeForm.append('picture', picture),
-                type: addRecipeForm.append('type', type),
-                description: addRecipeForm.append('description', description),
-                seasons: addRecipeForm.append('seasons', seasons),
-                tags: addRecipeForm.append('tags', recipeTags),
-                difficulty: addRecipeForm.append('difficulty', difficulty),
-                nutri_score: addRecipeForm.append('nutri_score', nutriScore),
-                preparation_time: addRecipeForm.append('preparation_time', preparationTime),
-                baking_time: addRecipeForm.append('baking_time', bakingTime),
-                ingredients: addRecipeForm.append('ingredients', recipeIngredients),
-                steps: addRecipeForm.append('steps', steps),
+                title: addUpdateRecipeForm.append('title', title),
+                picture: addUpdateRecipeForm.append('picture', picture),
+                type: addUpdateRecipeForm.append('type', type),
+                description: addUpdateRecipeForm.append('description', description),
+                seasons: addUpdateRecipeForm.append('seasons', seasons),
+                tags: addUpdateRecipeForm.append('tags', localRecipeTags),
+                difficulty: addUpdateRecipeForm.append('difficulty', difficulty),
+                nutri_score: addUpdateRecipeForm.append('nutri_score', nutriScore),
+                preparation_time: addUpdateRecipeForm.append('preparation_time', preparationTime),
+                baking_time: addUpdateRecipeForm.append('baking_time', bakingTime),
+                ingredients: addUpdateRecipeForm.append('ingredients', localRecipeIngredients),
+                steps: addUpdateRecipeForm.append('steps', steps),
               },
               headers: { authorization: userToken, 'Content-Type': 'multipart/form-data' },
             })
@@ -453,44 +403,52 @@ const RecipeForm = ({
   );
 };
 
-RecipeForm.propTypes = {
+UpdateRecipeForm.propTypes = {
   tags: PropTypes.arrayOf(PropTypes.string).isRequired,
   ingredients: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string,
     category: PropTypes.string,
   })).isRequired,
   userToken: PropTypes.string.isRequired,
-  recipe: PropTypes.shape({
+  recipeId: PropTypes.number.isRequired,
+  recipeTitle: PropTypes.string.isRequired,
+  recipePictureUrl: PropTypes.string.isRequired,
+  recipeDescription: PropTypes.string.isRequired,
+  recipeType: PropTypes.string.isRequired,
+  recipeDifficulty: PropTypes.string.isRequired,
+  recipePreparationTime: PropTypes.number.isRequired,
+  recipeBakingTime: PropTypes.number.isRequired,
+  recipeNutriScore: PropTypes.string.isRequired,
+  recipeSeasons: PropTypes.arrayOf(PropTypes.string).isRequired,
+  recipeTags: PropTypes.arrayOf(PropTypes.string).isRequired,
+  recipeIngredients: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
-    title: PropTypes.string,
-    picture: PropTypes.string,
-    description: PropTypes.string,
-    type: PropTypes.string,
-    difficulty: PropTypes.string,
-    preparation_time: PropTypes.number,
-    baking_time: PropTypes.number,
-    nutri_score: PropTypes.string,
-    date_creation: PropTypes.string,
-    date_update: PropTypes.string,
-    seasons: PropTypes.arrayOf(PropTypes.string),
-    tags: PropTypes.arrayOf(PropTypes.string),
-    ingredients: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number,
-      quantity: PropTypes.number,
-      unit: PropTypes.string,
-      name: PropTypes.string,
-      category: PropTypes.string,
-      icon: PropTypes.string,
-    })),
-    instructions: PropTypes.arrayOf(PropTypes.string),
-  }).isRequired,
+    quantity: PropTypes.number,
+    unit: PropTypes.string,
+    name: PropTypes.string,
+    category: PropTypes.string,
+    icon: PropTypes.string,
+  })).isRequired,
+  recipeSteps: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  tags: state.admin.tags,
-  ingredients: state.admin.ingredients,
+  tags: state.app.tags,
+  ingredients: state.app.ingredients,
   userToken: state.user.token,
-  recipe: state.recipe,
+  recipeId: state.recipe.id,
+  recipeTitle: state.recipe.title,
+  recipePictureUrl: state.recipe.picture_url,
+  recipeDescription: state.recipe.description,
+  recipeType: state.recipe.type,
+  recipeDifficulty: state.recipe.difficulty,
+  recipePreparationTime: state.recipe.preparation_time,
+  recipeBakingTime: state.recipe.baking_time,
+  recipeNutriScore: state.recipe.nutri_score,
+  recipeTags: state.recipe.tags,
+  recipeSteps: state.recipe.steps,
+  recipeIngredients: state.recipe.ingredients,
+  recipeSeasons: state.recipe.seasons,
 });
 
-export default connect(mapStateToProps, null)(RecipeForm);
+export default connect(mapStateToProps, null)(UpdateRecipeForm);

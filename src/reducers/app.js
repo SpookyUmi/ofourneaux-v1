@@ -1,6 +1,7 @@
 const initialState = {
   title: "O'Fourneaux",
-  isClicked: false
+  isClicked: false,
+  tags: [],
 };
 
 const reducer = (oldState = initialState, action) => {
@@ -15,9 +16,19 @@ const reducer = (oldState = initialState, action) => {
         ...oldState,
         isClicked: false,
       };
+    case 'TAG_ADD':
+      return {
+        ...oldState,
+        tags: action.payload.tags,
+      };
+    case 'TAG_DELETE':
+      return {
+        ...oldState,
+        tags: action.payload.tags,
+      };
     default:
       return { ...oldState };
-  };
+  }
 };
 
 export default reducer;

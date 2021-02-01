@@ -7,6 +7,8 @@ import axios from 'axios';
 
 import 'src/components/Admin/admin.scss';
 import bin from 'src/assets/icons/delete.svg';
+import difficultyIdByName from 'src/utils/difficultyIdByName';
+import seasonsArray from 'src/data/seasons';
 import './addRecipeForm.scss';
 
 const AddRecipeForm = ({
@@ -19,11 +21,7 @@ const AddRecipeForm = ({
   const [type, setType] = useState('');
   const [description, setDescription] = useState('');
   const [seasons, setSeasons] = useState([]);
-  const [spring, setSpring] = useState('');
-  const [summer, setSummer] = useState('');
-  const [autumn, setAutumn] = useState('');
-  const [winter, setWinter] = useState('');
-  const [recipeTags, setRecipeTags] = useState([]);
+  const [localRecipeTags, setLocalRecipeTags] = useState([]);
   const [difficulty, setDifficulty] = useState('');
   const [nutriScore, setNutriScore] = useState('');
   const [preparationTime, setPreparationTime] = useState(0);
@@ -96,91 +94,30 @@ const AddRecipeForm = ({
         {/* If we have time in the future we could add checked property to the checkbox if
         the season is in recipe.seasons (if else?) */}
         <p className="recipe__form__div__2__p label">Saison</p>
-        <label className="label">
-          <input
-            className="choice__text margin"
-            type="checkbox"
-            name="Printemps"
-            onChange={(event) => {
+        {seasonsArray.map((season) => (
+          <label className="label" key={season.name}>
+            <input
+              className="choice__text margin"
+              type="checkbox"
+              name={season.name}
+              onChange={
+            (event) => {
               if (event.target.checked) {
-                setSpring(1);
+                setSeasons([
+                  ...seasons,
+                  season.id,
+                ]);
               }
-              else {
-                setSpring('');
+              else if (seasons.indexOf(season.id)) {
+                const index = seasons.indexOf(season.id);
+                seasons.splice(index, 1);
               }
-              setSeasons([{
-                spring,
-                summer,
-                autumn,
-                winter,
-              }]);
-            }}
-          />Printemps
-        </label>
-        <label className="label">
-          <input
-            className="choice__text margin"
-            type="checkbox"
-            name="Été"
-            onChange={(event) => {
-              if (event.target.checked) {
-                setSummer(2);
-              }
-              else {
-                setSummer('');
-              }
-              setSeasons([{
-                spring,
-                summer,
-                autumn,
-                winter,
-              }]);
-            }}
-          />Été
-        </label>
-        <label className="label">
-          <input
-            className="choice__text margin"
-            type="checkbox"
-            name="Automne"
-            onChange={(event) => {
-              if (event.target.checked) {
-                setAutumn(3);
-              }
-              else {
-                setAutumn('');
-              }
-              setSeasons([{
-                spring,
-                summer,
-                autumn,
-                winter,
-              }]);
-            }}
-          />Automne
-        </label>
-        <label className="label">
-          <input
-            className="choice__text margin"
-            type="checkbox"
-            name="Hiver"
-            onChange={(event) => {
-              if (event.target.checked) {
-                setWinter(4);
-              }
-              else {
-                setWinter('');
-              }
-              setSeasons([{
-                spring,
-                summer,
-                autumn,
-                winter,
-              }]);
-            }}
-          />Hiver
-        </label>
-
+              else setSeasons([...seasons]);
+            }
+          }
+            /> {season.name}
+          </label>
+        ))}
         {/* ---- TAGS ---- */}
         {/* If we have time in the future we could add checked property to the checkbox if
         the tag is in recipe.tags (if else?) */}
@@ -193,16 +130,16 @@ const AddRecipeForm = ({
               name={tag}
               onChange={(event) => {
                 if (event.target.checked) {
-                  setRecipeTags([
-                    ...recipeTags,
+                  setLocalRecipeTags([
+                    ...localRecipeTags,
                     tag,
                   ]);
                 }
-                else if (recipeTags.indexOf(tag)) {
-                  const index = recipeTags.indexOf(tag);
-                  recipeTags.splice(index, 1);
+                else if (localRecipeTags.indexOf(tag)) {
+                  const index = localRecipeTags.indexOf(tag);
+                  localRecipeTags.splice(index, 1);
                 }
-                else setRecipeTags([...recipeTags]);
+                else setLocalRecipeTags([...localRecipeTags]);
               }}
             />
             {tag}
@@ -220,13 +157,13 @@ const AddRecipeForm = ({
             name="difficulties"
             onChange={(event) => {
               setDifficulty(
-                event.target.value,
+                difficultyIdByName(event.target.value),
               );
             }}
           >
-            <option value="Facile">Facile</option>
-            <option value="Moyenne">Moyenne</option>
-            <option value="Difficile">Difficile</option>
+            <option value="1">Facile</option>
+            <option value="2">Moyenne</option>
+            <option value="3">Difficile</option>
           </select>
         </label>
 
@@ -433,8 +370,12 @@ const AddRecipeForm = ({
 };
 
 AddRecipeForm.propTypes = {
-  tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+  tags: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+  })).isRequired,
   ingredients: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
     name: PropTypes.string,
     category: PropTypes.string,
   })).isRequired,
@@ -442,8 +383,8 @@ AddRecipeForm.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  tags: state.admin.tags,
-  ingredients: state.admin.ingredients,
+  tags: state.app.tags,
+  ingredients: state.app.ingredients,
   userToken: state.user.token,
 });
 
