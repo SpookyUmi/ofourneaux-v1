@@ -1,16 +1,23 @@
+// YARN
 import React from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+// SCSS
 import './styles.scss';
 
+// component
 const Connection = ({
-  email, password, isLogged, errorMessage, trackEmail, trackPassword, handleLogin,
+  email,
+  password,
+  errorMessage,
+  trackEmail,
+  trackPassword,
+  handleLogin,
 }) => (
   <div className="connection">
     <h2 className="connection__title">Connexion</h2>
-    {isLogged && (<p className="connection__message"> Vous êtes connecté ! </p>)}
     <div className="connection__content">
       <form
         className="connection__content__form"
@@ -18,8 +25,13 @@ const Connection = ({
         method="POST"
         onSubmit={handleLogin}
       >
-        {errorMessage}
+
+        <div className="connection__error-message error-message">
+          {errorMessage}
+        </div>
+
         <div className="connection__content__form__input">
+          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <label className="connection__content__form__label" htmlFor="email">
             Email
           </label>
@@ -34,6 +46,7 @@ const Connection = ({
           />
         </div>
         <div className="connection__content__form__input">
+          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */} 
           <label className="connection__content__form__label" htmlFor="password">
             Mot de passe
           </label>
@@ -51,7 +64,7 @@ const Connection = ({
             <div className="connection__content__text connection__content__text--forgotten-password">Mot de passe oublié ?</div>
           </a>
         </div>
-          <input className="connection__content__button button__style" type="submit" value="Connexion" />
+        <input className="connection__content__button button__style" type="submit" value="Connexion" />
       </form>
       <div className="connection__content__inscription">
         <p className="connection__content__inscription__text">
@@ -67,44 +80,43 @@ const Connection = ({
   </div>
 );
 
+// PropTypes
 Connection.propTypes = {
   email: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
-  isLogged: PropTypes.bool.isRequired,
   errorMessage: PropTypes.string.isRequired,
   trackEmail: PropTypes.func.isRequired,
   trackPassword: PropTypes.func.isRequired,
   handleLogin: PropTypes.func.isRequired,
 };
 
+// eslint-disable-next-line no-unused-vars
 const mapStateToProps = (state, ownProps) => ({
   email: state.auth.email,
   password: state.auth.password,
-  isLogged: state.auth.isLogged,
   errorMessage: state.auth.errorMessage,
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
+  // controlled fields by the reducer "auth.js"
   trackEmail: (event) => {
-    // console.log('Input email :', event.target.value);
     dispatch({
-      type: 'EDIT_FIELD_EMAIL',
+      type: 'EDIT_FIELD_AUTH_EMAIL',
       payload: {
         email: event.target.value,
       },
     });
   },
-
   trackPassword: (event) => {
-    // console.log('Input password :', event.target.value);
     dispatch({
-      type: 'EDIT_FIELD_PASSWORD',
+      type: 'EDIT_FIELD_AUTH_PASSWORD',
       payload: {
         password: event.target.value,
       },
     });
   },
 
+  // sends connection request to the middleware "auth.js"
   handleLogin: (event) => {
     event.preventDefault();
     dispatch({
@@ -114,6 +126,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
 });
 
+// eslint-disable-next-line import/no-mutable-exports
 let container = connect(mapStateToProps, mapDispatchToProps)(Connection);
 
 container = withRouter(container);
