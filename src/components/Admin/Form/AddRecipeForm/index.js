@@ -7,22 +7,20 @@ import axios from 'axios';
 
 import 'src/components/Admin/admin.scss';
 import bin from 'src/assets/icons/delete.svg';
-import difficultyIdByName from 'src/utils/difficultyIdByName';
-import seasonsArray from 'src/data/seasons';
 import './addRecipeForm.scss';
 
 const AddRecipeForm = ({
-  tags, ingredients, userToken,
+  types, seasons, tags, difficulties, ingredients, userToken,
 }) => {
   // I'm going to create a local state here to avoid having too many dispatches between my component
   // and the store.
   const [title, setTitle] = useState('');
   const [picture, setPicture] = useState('');
-  const [type, setType] = useState('');
+  const [recipeType, setRecipeType] = useState(null);
   const [description, setDescription] = useState('');
-  const [seasons, setSeasons] = useState([]);
+  const [recipeSeasons, setRecipeSeasons] = useState([]);
   const [localRecipeTags, setLocalRecipeTags] = useState([]);
-  const [difficulty, setDifficulty] = useState('');
+  const [recipeDifficulty, setRecipeDifficulty] = useState(null);
   const [nutriScore, setNutriScore] = useState('');
   const [preparationTime, setPreparationTime] = useState(0);
   const [bakingTime, setBakingTime] = useState(0);
@@ -63,18 +61,24 @@ const AddRecipeForm = ({
           />
         </label>
 
-        <label className="recipe__form__type__label label">
-          Catégorie
-          <input
-            className="recipe__form__type__input margin"
-            type="text"
-            placeholder="Entrée, Plat ou Dessert"
-            value={type}
-            onChange={(event) => {
-              setType(event.target.value);
-            }}
-          />
-        </label>
+        {/* ---- TYPES ---- */}
+        <p className="recipe__form__div__1__p label">Catégories</p>
+        {types.map((type) => (
+          <label className="label" key={type.name}>
+            <input
+              className="choice__text margin"
+              type="radio"
+              name={type.name}
+              onChange={
+            (event) => {
+              if (event.target.checked) {
+                setRecipeType(type.id);
+              }
+            }
+          }
+            /> {type.name}
+          </label>
+        ))}
 
         <label className="recipe__form__description__label label">
           Description
@@ -94,7 +98,7 @@ const AddRecipeForm = ({
         {/* If we have time in the future we could add checked property to the checkbox if
         the season is in recipe.seasons (if else?) */}
         <p className="recipe__form__div__2__p label">Saison</p>
-        {seasonsArray.map((season) => (
+        {seasons.map((season) => (
           <label className="label" key={season.name}>
             <input
               className="choice__text margin"
@@ -103,16 +107,16 @@ const AddRecipeForm = ({
               onChange={
             (event) => {
               if (event.target.checked) {
-                setSeasons([
-                  ...seasons,
+                setRecipeSeasons([
+                  ...recipeSeasons,
                   season.id,
                 ]);
               }
-              else if (seasons.indexOf(season.id)) {
-                const index = seasons.indexOf(season.id);
-                seasons.splice(index, 1);
+              else if (recipeSeasons.indexOf(season.id)) {
+                const index = recipeSeasons.indexOf(season.id);
+                recipeSeasons.splice(index, 1);
               }
-              else setSeasons([...seasons]);
+              else setRecipeSeasons([...recipeSeasons]);
             }
           }
             /> {season.name}
@@ -156,14 +160,12 @@ const AddRecipeForm = ({
             className="margin"
             name="difficulties"
             onChange={(event) => {
-              setDifficulty(
-                difficultyIdByName(event.target.value),
-              );
+              setRecipeDifficulty(event.target.value);
             }}
           >
-            <option value="1">Facile</option>
-            <option value="2">Moyenne</option>
-            <option value="3">Difficile</option>
+            {difficulties.map((difficulty) => {
+              <option value={difficulty.id}>{difficulty.level}</option>;
+            })}
           </select>
         </label>
 
@@ -344,8 +346,8 @@ const AddRecipeForm = ({
                 picture: addRecipeForm.append('picture', picture),
                 type: addRecipeForm.append('type', type),
                 description: addRecipeForm.append('description', description),
-                seasons: addRecipeForm.append('seasons', seasons),
-                tags: addRecipeForm.append('tags', recipeTags),
+                seasons: addRecipeForm.append('seasons', recipeSeasons),
+                tags: addRecipeForm.append('tags', localRecipeTags),
                 difficulty: addRecipeForm.append('difficulty', difficulty),
                 nutri_score: addRecipeForm.append('nutri_score', nutriScore),
                 preparation_time: addRecipeForm.append('preparation_time', preparationTime),
@@ -379,12 +381,27 @@ AddRecipeForm.propTypes = {
     name: PropTypes.string,
     category: PropTypes.string,
   })).isRequired,
+  types: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+  })).isRequired,
+  seasons: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+  })).isRequired,
+  difficulties: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    level: PropTypes.string,
+  })).isRequired,
   userToken: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   tags: state.app.tags,
   ingredients: state.app.ingredients,
+  types: state.app.types,
+  seasons: state.app.seasons,
+  difficulties: state.app.difficulties,
   userToken: state.user.token,
 });
 
