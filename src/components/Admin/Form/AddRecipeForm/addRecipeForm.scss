@@ -7,7 +7,7 @@
 
 //DESKTOP
 @media only screen and (min-width: 768px) {
-  .add__recipe__form{
+  .recipe__form{
     padding: 2rem;
     display:flex;
     flex-direction: column;
@@ -16,17 +16,25 @@
   }
   .label{
     font-weight: bold;
-    font-size:1.1rem,
-  }
-  
-  p,label{
+    font-size: 1.1rem;
     padding: 2rem 0.5rem;
   }
-  input, select{
+
+  .margin{
     margin: 1rem;
   }
 
-  .add__recipe__form__image__input{
+  .recipe__form__image__input{
     border: 0px;
+  }
+
+  .recipe__form__div__4__delete__icon{
+    width: 2.5rem;
+  }
+
+  .submit__button{
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
   }
 }

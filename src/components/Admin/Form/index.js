@@ -8,10 +8,10 @@ import UserForm from './UserForm';
 
 const Form = () => (
   <div className="form">
-    <Route exact path="/admin/ajout-recettes">
+    <Route exact path="/admin/ajout-recette">
       <AddRecipeForm />
     </Route>
-    <Route exact path="/admin/modification-recettes">
+    <Route path="/admin/modification-recette">
       <UpdateRecipeForm />
     </Route>
     <Route exact path="/admin/gestion-labels">

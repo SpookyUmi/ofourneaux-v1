@@ -65,7 +65,7 @@ const App = ({ recipes }) => {
       </Route>
       <Route
         exact
-        path={['/admin/ajout-recettes', '/admin/modification-recettes', '/admin/gestion-labels', '/admin/gestion-utilisateurs']}
+        path={['/admin/ajout-recette', '/admin/modification-recette/:id', '/admin/gestion-labels', '/admin/gestion-utilisateurs']}
       >
         <Admin />
       </Route>

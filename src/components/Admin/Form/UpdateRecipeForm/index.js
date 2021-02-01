@@ -1,375 +1,260 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import FormData from 'form-data';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import axios from 'axios';
 
-// import pencil from 'src/assets/icons/modifier.svg';
-import bin from 'src/assets/icons/delete.svg';
 import 'src/components/Admin/admin.scss';
+import bin from 'src/assets/icons/delete.svg';
+import './updateRecipeForm.scss';
 
-const UpdateRecipeForm = ({
-  tags, ingredients, recipe, updateRecipe, deleteRecipe,
-}) => (
+const RecipeForm = ({
+  tags, ingredients, userToken, recipe,
+}) => {
   // I'm going to create a local state here to avoid having too many dispatches between my component
-  // and the store. The dispatch will only happen at the submit of the form.
-  function localState() {
-    const [title, setTitle] = useState(recipe.title);
-    const [picture, setPicture] = useState(recipe.picture);
-    const [type, setType] = useState(recipe.type);
-    const [description, setDescription] = useState(recipe.description);
-    const [seasons, setSeasons] = useState(recipe.seasons);
-    const [recipeTags, setRecipeTags] = useState(recipe.tags);
-    const [difficulty, setDifficulty] = useState(recipe.difficulty);
-    const [nutriScore, setNutriScore] = useState(recipe.nutri_score);
-    const [preparationTime, setPreparationTime] = useState(recipe.preparation_time);
-    const [bakingTime, setBakingTime] = useState(recipe.baking_time);
-    const [recipeIngredients, setRecipeIngredients] = useState(recipe.ingredients);
-    const [newIngredient, setNewIngredient] = useState({});
-    const [instructions, setInstructions] = useState(recipe.instructions);
-    const [newInstruction, setNewInstruction] = useState('');
+  // and the store.
+  const [title, setTitle] = useState(recipe.title);
+  const [picture, setPicture] = useState(recipe.picture);
+  const [type, setType] = useState(recipe.type);
+  const [description, setDescription] = useState(recipe.description);
+  const [seasons, setSeasons] = useState([]);
+  const [spring, setSpring] = useState('');
+  const [summer, setSummer] = useState('');
+  const [autumn, setAutumn] = useState('');
+  const [winter, setWinter] = useState('');
+  const [recipeTags, setRecipeTags] = useState([]);
+  const [difficulty, setDifficulty] = useState('');
+  const [nutriScore, setNutriScore] = useState('');
+  const [preparationTime, setPreparationTime] = useState(recipe.preparation_time);
+  const [bakingTime, setBakingTime] = useState(recipe.baking_time);
+  const [recipeIngredients, setRecipeIngredients] = useState(recipe.ingredients);
+  const [newIngredient, setNewIngredient] = useState('');
+  const [newUnit, setNewUnit] = useState('');
+  const [newQuantity, setNewQuantity] = useState('');
+  const [steps, setSteps] = useState(recipe.instructions);
+  const [newStep, setNewStep] = useState('');
 
-    return (
-      <form className="update__recipe__form">
-        {/* I am creating divs 1-2-3-4 to help style the form for desktop mode */}
-        <div className="update__recipe__form__div__1">
-          <label className="update__recipe__form__title__label">
-            Titre
-            <input
-              className="update__recipe__form__title__input"
-              type="text"
-              placeholder="Titre"
-              value={title}
-              onChange={(event) => {
-                setTitle(event.target.value);
-              }}
-            />
-          </label>
-
-          <label className="update__recipe__form__image__label">
-            Image
-            <input
-              className="update__recipe__form__image__input"
-              type="file"
-              placeholder="Choisir votre fichier"
-              value={picture}
-              onChange={(event) => {
-                setPicture(event.target.value);
-              }}
-            />
-          </label>
-
-          <label className="update__recipe__form__type__label">
-            Catégorie
-            <input
-              className="update__recipe__form__type__input"
-              type="text"
-              placeholder="Entrée, Plat ou Dessert"
-              value={type}
-              onChange={(event) => {
-                setType(event.target.value);
-              }}
-            />
-          </label>
-
-          <label className="update__recipe__form__description__label">
-            Description
-            <input
-              className="update__recipe__form__description__input"
-              type="text"
-              placeholder="Veuillez décrire brièvement la recette."
-              value={description}
-              onChange={(event) => {
-                setDescription(event.target.value);
-              }}
-            />
-          </label>
-        </div>
-
-        <div className="update__recipe__form__div__2">
-          <p className="update__recipe__form__div__2__p">Saison</p>
-          <div className="update__recipe__form__div__2__checkbox">
-            {/* Here if the array seasons contains the number 1 a checked input is displayed */}
-            {seasons.indexOf(1) > -1
-            && (
-            <input
-              type="checkbox"
-              name="Printemps"
-              checked
-              // When the user unchecks the input a new array is rendered without the number 1
-              onChange={setSeasons((seasons.filter((item) => item !== 1)))}
-            />
-            )}
-            {/* Here if the array seasons does not contain the number 1
-            an unchecked input is displayed */}
-            {seasons.indexOf(1) === -1
-            && (
-            <input
-              type="checkbox"
-              name="Printemps"
-            // When the user checks the input a new array is rendered with the number 1 added
-              onChange={setSeasons(seasons.push(1))}
-            />
-            )}
-            <label htmlFor="Printemps">Printemps</label>
-          </div>
-          <div className="update__recipe__form__div__2__checkbox">
-            {/* Here if the array seasons contains the number 2 a checked input is displayed */}
-            {seasons.indexOf(2) > -1
-            && (
-            <input
-              type="checkbox"
-              name="Été"
-              checked
-              // When the user unchecks the input a new array is rendered without the number 2
-              onChange={setSeasons((seasons.filter((item) => item !== 2)))}
-            />
-            )}
-            {/* Here if the array seasons does not contain the number 2
-            an unchecked input is displayed */}
-            {seasons.indexOf(2) === -1
-            && (
-            <input
-              type="checkbox"
-              name="Été"
-            // When the user checks the input a new array is rendered with the number 2 added
-              onChange={setSeasons(seasons.push(2))}
-            />
-            )}
-            <label htmlFor="Été">Été</label>
-          </div>
-          <div className="update__recipe__form__div__2__checkbox">
-            {/* Here if the array seasons contains the number 3 a checked input is displayed */}
-            {seasons.indexOf(3) > -1
-            && (
-            <input
-              type="checkbox"
-              name="Automne"
-              checked
-              // When the user unchecks the input a new array is rendered without the number 3
-              onChange={setSeasons((seasons.filter((item) => item !== 3)))}
-            />
-            )}
-            {/* Here if the array seasons does not contain the number 3
-            an unchecked input is displayed */}
-            {seasons.indexOf(3) === -1
-            && (
-            <input
-              type="checkbox"
-              name="Automne"
-            // When the user checks the input a new array is rendered with the number 3 added
-              onChange={setSeasons(seasons.push(3))}
-            />
-            )}
-            <label htmlFor="Automne">Automne</label>
-          </div>
-          <div className="update__recipe__form__div__2__checkbox">
-            {/* Here if the array seasons contains the number 4 a checked input is displayed */}
-            {seasons.indexOf(4) > -1
-            && (
-            <input
-              type="checkbox"
-              name="Hiver"
-              checked
-              // When the user unchecks the input a new array is rendered without the number 4
-              onChange={setSeasons((seasons.filter((item) => item !== 4)))}
-            />
-            )}
-            {/* Here if the array seasons does not contain the number 4
-            an unchecked input is displayed */}
-            {seasons.indexOf(4) === -1
-            && (
-            <input
-              type="checkbox"
-              name="Hiver"
-            // When the user checks the input a new array is rendered with the number 4 added
-              onChange={setSeasons(seasons.push(4))}
-            />
-            )}
-            <label htmlFor="Hiver">Hiver</label>
-          </div>
-
-          <p className="update__recipe__form__div__2__p">Labels</p>
-          {/* Here I am mapping through the array of all existing tags
-           and for each displaying a checkbox that will be checked or not according to
-           the fact that this tag is present or not in the array of tags associated with
-           the current recipe */}
-          {tags.map((tag) => (
-            <div className="update__recipe__form__div__2__checkbox" key={tag}>
-              {recipeTags.filter((word) => word === tag)
-              && (
-              <input
-                type="checkbox"
-                name={tag}
-              // When the user unchecks the input a new array is rendered
-              // without the corresponding tag
-                onChange={setRecipeTags((recipeTags.filter((item) => item !== tag)))}
-                checked
-              />
-              )}
-              {recipeTags.filter((word) => word !== tag)
-              && (
-              <input
-                type="checkbox"
-                name={tag}
-              // When the user checks the input a new array is rendered
-              // with the corresponding tag added
-                onChange={setRecipeTags((recipeTags.push(tag)))}
-              />
-              )}
-              <label htmlFor={tag}>{tag}</label>
-            </div>
-          ))}
-        </div>
-
-        <div className="update__recipe__form__div__3">
-          <p className="update__recipe__form__div__3__p">Difficulté</p>
-          <select name="difficulties">
-            {difficulty === 'Facile'
-            && (
-            <option
-              value="Facile"
-              selected
-              onChange={setDifficulty('')}
-            >Facile
-            </option>
-            )}
-            {difficulty !== 'Facile'
-            && (
-            <option
-              value="Facile"
-              onChange={setDifficulty('Facile')}
-            >Facile
-            </option>
-            )}
-
-            {difficulty === 'Moyenne'
-            && (
-            <option
-              value="Moyenne"
-              selected
-              onChange={setDifficulty('')}
-            >Moyenne
-            </option>
-            )}
-            {difficulty !== 'Moyenne'
-            && (
-            <option
-              value="Moyenne"
-              onChange={setDifficulty('Moyenne')}
-            >Moyenne
-            </option>
-            )}
-
-            {difficulty === 'Difficile'
-            && (
-            <option
-              value="Difficile"
-              selected
-              onChange={setDifficulty('')}
-            >Difficile
-            </option>
-            )}
-            {difficulty !== 'Difficile'
-            && (
-            <option
-              value="Difficile"
-              onChange={setDifficulty('Difficile')}
-            >Difficile
-            </option>
-            )}
-          </select>
-
-          <p className="update__recipe__form__div__3__p">Nutri Score</p>
-          <select name="scores">
-            {nutriScore === 'A'
-            && (
-            <option
-              value="A"
-              selected
-              onChange={setNutriScore('')}
-            >A
-            </option>
-            )}
-            {nutriScore !== 'A'
-            && (
-            <option
-              value="A"
-              onChange={setNutriScore('A')}
-            >A
-            </option>
-            )}
-            {nutriScore === 'B'
-            && (
-            <option
-              value="B"
-              selected
-              onChange={setNutriScore('')}
-            >B
-            </option>
-            )}
-            {nutriScore !== 'B'
-            && (
-            <option
-              value="B"
-              onChange={setNutriScore('B')}
-            >B
-            </option>
-            )}
-            {nutriScore === 'C'
-            && (
-            <option
-              value="C"
-              selected
-              onChange={setNutriScore('')}
-            >C
-            </option>
-            )}
-            {nutriScore !== 'C'
-            && (
-            <option
-              value="C"
-              onChange={setNutriScore('C')}
-            >C
-            </option>
-            )}
-            {nutriScore === 'D'
-            && (
-            <option
-              value="D"
-              selected
-              onChange={setNutriScore('')}
-            >D
-            </option>
-            )}
-            {nutriScore !== 'D'
-            && (
-            <option
-              value="D"
-              onChange={setNutriScore('D')}
-            >D
-            </option>
-            )}
-            {nutriScore === 'E'
-            && (
-            <option
-              value="E"
-              selected
-              onChange={setNutriScore('')}
-            >E
-            </option>
-            )}
-            {nutriScore !== 'E'
-            && (
-            <option
-              value="E"
-              onChange={setNutriScore('E')}
-            >E
-            </option>
-            )}
-          </select>
-
-          <p className="update__recipe__form__div__3__p">Temps de préparation</p>
+  return (
+    <form className="recipe__form">
+      {/* I am creating divs 1-2-3-4 to help style the form for desktop mode */}
+      <div className="recipe__form__div__1">
+        <label className="recipe__form__title__label label">
+          Titre
           <input
+            className="recipe__form__title__input margin"
+            type="text"
+            placeholder="Titre"
+            value={title}
+            onChange={(event) => {
+              setTitle(event.target.value);
+            }}
+          />
+        </label>
+
+        <label className="recipe__form__image__label label">
+          Image
+          <input
+            className="recipe__form__image__input margin"
+            type="file"
+            placeholder="Choisir votre fichier"
+            value={picture}
+            onChange={(event) => {
+              setPicture(event.target.value);
+            }}
+          />
+        </label>
+
+        <label className="recipe__form__type__label label">
+          Catégorie
+          <input
+            className="recipe__form__type__input margin"
+            type="text"
+            placeholder="Entrée, Plat ou Dessert"
+            value={type}
+            onChange={(event) => {
+              setType(event.target.value);
+            }}
+          />
+        </label>
+
+        <label className="recipe__form__description__label label">
+          Description
+          <input
+            className="recipe__form__description__input margin"
+            type="text"
+            placeholder="Veuillez décrire brièvement la recette."
+            value={description}
+            onChange={(event) => {
+              setDescription(event.target.value);
+            }}
+          />
+        </label>
+      </div>
+      <div className="recipe__form__div__2">
+        {/* ---- SEASONS ---- */}
+        {/* If we have time in the future we could add checked property to the checkbox if
+        the season is in recipe.seasons (if else?) */}
+        <p className="recipe__form__div__2__p label">Saison</p>
+        <label className="label">
+          <input
+            className="choice__text margin"
+            type="checkbox"
+            name="Printemps"
+            onChange={(event) => {
+              if (event.target.checked) {
+                setSpring(1);
+              }
+              else {
+                setSpring('');
+              }
+              setSeasons([{
+                spring,
+                summer,
+                autumn,
+                winter,
+              }]);
+            }}
+          />Printemps
+        </label>
+        <label className="label">
+          <input
+            className="choice__text margin"
+            type="checkbox"
+            name="Été"
+            onChange={(event) => {
+              if (event.target.checked) {
+                setSummer(2);
+              }
+              else {
+                setSummer('');
+              }
+              setSeasons([{
+                spring,
+                summer,
+                autumn,
+                winter,
+              }]);
+            }}
+          />Été
+        </label>
+        <label className="label">
+          <input
+            className="choice__text margin"
+            type="checkbox"
+            name="Automne"
+            onChange={(event) => {
+              if (event.target.checked) {
+                setAutumn(3);
+              }
+              else {
+                setAutumn('');
+              }
+              setSeasons([{
+                spring,
+                summer,
+                autumn,
+                winter,
+              }]);
+            }}
+          />Automne
+        </label>
+        <label className="label">
+          <input
+            className="choice__text margin"
+            type="checkbox"
+            name="Hiver"
+            onChange={(event) => {
+              if (event.target.checked) {
+                setWinter(4);
+              }
+              else {
+                setWinter('');
+              }
+              setSeasons([{
+                spring,
+                summer,
+                autumn,
+                winter,
+              }]);
+            }}
+          />Hiver
+        </label>
+
+        {/* ---- TAGS ---- */}
+        {/* If we have time in the future we could add checked property to the checkbox if
+        the tag is in recipe.tags (if else?) */}
+        <p className="recipe__form__div__2__p label">Labels</p>
+        {tags?.map((tag) => (
+          <label className="label" htmlFor={tag} key={tag}>
+            <input
+              className="margin"
+              type="checkbox"
+              name={tag}
+              onChange={(event) => {
+                if (event.target.checked) {
+                  setRecipeTags([
+                    ...recipeTags,
+                    tag,
+                  ]);
+                }
+                else if (recipeTags.indexOf(tag)) {
+                  const index = recipeTags.indexOf(tag);
+                  recipeTags.splice(index, 1);
+                }
+                else setRecipeTags([...recipeTags]);
+              }}
+            />
+            {tag}
+          </label>
+        ))}
+      </div>
+
+      <div className="recipe__form__div__3">
+        {/* ---- DIFFICULTY --- */}
+        {/* If we have time in the future we could add checked property to the checkbox if
+        the difficulty is in recipe.difficulty (if else?) */}
+        <label className="recipe__form__div__3__p label">Difficulté
+          <select
+            className="margin"
+            name="difficulties"
+            onChange={(event) => {
+              setDifficulty(
+                event.target.value,
+              );
+            }}
+          >
+            <option value="Facile">Facile</option>
+            <option value="Moyenne">Moyenne</option>
+            <option value="Difficile">Difficile</option>
+          </select>
+        </label>
+
+        {/* ---- NUTRISCORE ---- */}
+        {/* If we have time in the future we could add checked property to the checkbox if
+        the nutriscore is in recipe.nutriscore (if else?) */}
+        <label className="recipe__form__div__3__p label">Nutri Score
+          <select
+            className="margin"
+            name="scores"
+            onChange={(event) => {
+              setNutriScore(
+                event.target.value,
+              );
+            }}
+          >
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+            <option value="E">E</option>
+          </select>
+        </label>
+
+        {/* ---- BAKING TIME ---- */}
+        <label className="recipe__form__div__3__p label">Temps de préparation
+          <input
+            className="margin"
             value={preparationTime}
             onChange={(event) => {
               setPreparationTime(event.target.value);
@@ -379,10 +264,13 @@ const UpdateRecipeForm = ({
             min="0"
             max="240"
           />
-          <span className="update__recipe__form__div__3__span">Minutes</span>
+          <span className="recipe__form__div__3__span choice__text">Minutes</span>
+        </label>
 
-          <p className="update__recipe__form__div__3__p">Temps de cuisson</p>
+        {/* ---- COOKING TIME ---- */}
+        <label className="recipe__form__div__3__p label">Temps de cuisson
           <input
+            className="margin"
             value={bakingTime}
             onChange={(event) => {
               setBakingTime(event.target.value);
@@ -392,149 +280,186 @@ const UpdateRecipeForm = ({
             min="0"
             max="240"
           />
-          <span className="update__recipe__form__div__3__span">Minutes</span>
+          <span className="recipe__form__div__3__span choice_text">Minutes</span>
+        </label>
 
-        </div>
+      </div>
 
-        <div className="update__recipe__form__div__4">
-          <p className="update__recipe__form__div__4__p">Ingrédients</p>
-          {recipeIngredients.map((ingredient) => (
-            <div key={ingredient.id}>
-              <span className="update__recipe__form__div__4__quantity">{ingredient.quantity}</span>
-              <span className="update__recipe__form__div__4__unit">{ingredient.unit}</span>
-              <span className="update__recipe__form__div__4__name">{ingredient.name}</span>
-              {/* <button className="update__recipe__form__div__4__edit__button" type="button">
-            <img className="update__recipe__form__div__4__edit__icon" href={pencil} alt="pencil" />
-          </button> */}
-              <button
-                className="update__recipe__form__div__4__delete__button"
-                type="button"
-                onClick={
-                  setRecipeIngredients(
-                    recipeIngredients.filter((element) => element.id !== ingredient.id),
-                  )
-                }
-              >
-                <img className="update__recipe__form__div__4__delete__icon" href={bin} alt="bin" />
-              </button>
-            </div>
+      <div className="recipe__form__div__4">
+        {/* ---- INGREDIENTS ---- */}
+        <p className="recipe__form__div__4__p label">Ingrédients</p>
+        {recipeIngredients.length !== 0 && recipeIngredients.map((ingredient) => (
+          <div key={ingredient.id}>
+            <span className="recipe__form__div__4__quantity">{ingredient.quantity}</span>
+            <span className="recipe__form__div__4__unit">{ingredient.unit}</span>
+            <span className="recipe__form__div__4__name">{ingredient.name}</span>
+            <img
+              className="recipe__form__div__4__delete__icon"
+              src={bin}
+              alt="bin"
+              onClick={() => {
+                const index = recipeIngredients.indexOf(ingredient);
+                recipeIngredients.splice(index, 1);
+              }}
+            />
+          </div>
+        ))}
+        <select
+          className="margin"
+          name="ingredients"
+          onChange={(event) => {
+            setNewIngredient(
+              event.target.value,
+            );
+          }}
+        >
+          {ingredients?.map((ingredient) => (
+            <option value={ingredient.name} key={ingredient.id}>
+              {ingredient.name}
+            </option>
           ))}
-
-          <select name="ingredients">
-            {ingredients.map((ingredient) => (
-              <option
-                value={ingredient.name}
-                onChange={setNewIngredient(newIngredient.push(ingredient))}
-              >{ingredient.name}
-              </option>
-            ))}
-          </select>
-          <input
-            type="text"
-            placeholder="Unité"
-            onChange={(event) => {
-              setNewIngredient(
-                newIngredient.unit = event.target.value,
-              );
-            }}
-          />
-          <input
-            type="text"
-            placeholder="Quantité"
-            onChange={(event) => {
-              setNewIngredient(
-                newIngredient.quantity = event.target.value,
-              );
-            }}
-          />
-          {/* I am pushing the ingredient, its unit and its quantity into newIngredient,
-          then at button click I push the newIngredient object into RecipeIngredients array
-          before reseting the newIgredient to an empty object */}
-          <button
-            type="button"
-            onClick={setRecipeIngredients(
-              recipeIngredients.push(newIngredient),
-            ).then(() => {
-              setNewIngredient({});
-            })}
-          >Ajouter un ingrédient
-          </button>
-
-          <p className="update__recipe__form__div__4__p">Étapes de préparation</p>
-          <ol>
-            {instructions.map((instruction) => (
-              <li key={instruction}>{instruction}
-                <button
-                  className="update__recipe__form__div__4__delete__button"
-                  type="button"
-                  onClick={setInstructions(instructions.filter((item) => item !== instruction))}
-                >
-                  <img className="update__recipe__form__div__4__delete__icon" href={bin} alt="bin" />
-                </button>
-              </li>
-            ))}
-          </ol>
-          <input
-            className="update__recipe__form__div__4__input"
-            type="text"
-            placeholder="Veuillez saisir une étape"
-            onChange={(event) => {
-              setNewInstruction(event.target.value);
-            }}
-          />
-          {/* I am pushing the instruction that the user typed into newInstruction,
-          then at button click I push the newInstruction string into Instructions array
-          before reseting the newInstruction to empty string */}
-          <button
-            type="button"
-            onClick={setInstructions(
-              instructions.push(newInstruction),
-            ).then(() => {
-              setNewInstruction('');
-            })}
-          >Ajouter une étape
-          </button>
-
-        </div>
-
+        </select>
         <input
-          className="update__recipe__form__submit update"
-          type="submit"
-          value="Modifier cette recette"
-          onClick={updateRecipe(
-            title,
-            picture,
-            type,
-            description,
-            seasons,
-            recipeTags,
-            difficulty,
-            nutriScore,
-            preparationTime,
-            bakingTime,
-            recipeIngredients,
-            instructions,
-          )}
+          className="margin"
+          type="text"
+          placeholder="Unité"
+          onChange={(event) => {
+            setNewUnit(
+              event.target.value,
+            );
+          }}
         />
         <input
-          className="update__recipe__form__submit delete"
+          className="margin"
+          type="text"
+          placeholder="Quantité"
+          onChange={(event) => {
+            setNewQuantity(
+              event.target.value,
+            );
+          }}
+        />
+        <button
+          type="button"
+          onClick={(event) => {
+            event.preventDefault();
+            setRecipeIngredients([{
+              newIngredient,
+              newQuantity,
+              newUnit,
+            }]);
+          }}
+        >Ajouter un ingrédient
+        </button>
+        {/* ---- STEPS ---- */}
+        <p className="recipe__form__div__4__p label">Étapes de préparation</p>
+        <ol>
+          {steps?.map((step) => (
+            <li key={step.string}>{step.string}
+              <img
+                className="recipe__form__div__4__delete__icon"
+                src={bin}
+                alt="bin"
+                onClick={() => {
+                  const index = steps.indexOf(step);
+                  steps.splice(index, 1);
+                }}
+              />
+            </li>
+          ))}
+        </ol>
+        <input
+          className="recipe__form__div__4__input margin"
+          type="text"
+          placeholder="Veuillez saisir une étape"
+          onChange={(event) => {
+            setNewStep(event.target.value);
+          }}
+        />
+        <button
+          type="button"
+          onClick={(event) => {
+            event.preventDefault();
+            setSteps([
+              ...steps,
+              {
+                string: newStep,
+              },
+            ]);
+          }}
+        >Ajouter une étape
+        </button>
+      </div>
+
+      <div className="submit__button">
+
+        <input
+          className="recipe__form__submit button__style"
           type="submit"
-          value="Supprimer cette recette"
-          onClick={deleteRecipe}
+          value="Modifier la recette"
+          onClick={(event) => {
+            event.preventDefault();
+            const addRecipeForm = new FormData();
+            axios({
+              method: 'patch',
+              url: 'https://ofourneaux.herokuapp.com/recipes/:recipeId',
+              data: {
+                title: addRecipeForm.append('title', title),
+                picture: addRecipeForm.append('picture', picture),
+                type: addRecipeForm.append('type', type),
+                description: addRecipeForm.append('description', description),
+                seasons: addRecipeForm.append('seasons', seasons),
+                tags: addRecipeForm.append('tags', recipeTags),
+                difficulty: addRecipeForm.append('difficulty', difficulty),
+                nutri_score: addRecipeForm.append('nutri_score', nutriScore),
+                preparation_time: addRecipeForm.append('preparation_time', preparationTime),
+                baking_time: addRecipeForm.append('baking_time', bakingTime),
+                ingredients: addRecipeForm.append('ingredients', recipeIngredients),
+                steps: addRecipeForm.append('steps', steps),
+              },
+              headers: { authorization: userToken, 'Content-Type': 'multipart/form-data' },
+            })
+              .then((response) => {
+                console.log('Réponse création recette :', response.data);
+              })
+              .catch((error) => {
+                console.log('Erreur connexion :', error);
+              });
+          }}
         />
 
-      </form>
-    );
-  }
+        <input
+          className="recipe__form__submit button__style"
+          type="submit"
+          value="Supprimer la recette"
+          onClick={(event) => {
+            event.preventDefault();
+            axios({
+              method: 'delete',
+              url: 'https://ofourneaux.herokuapp.com/recipes/:recipeId',
+              headers: { authorization: userToken, 'Content-Type': 'multipart/form-data' },
+            })
+              .then((response) => {
+                console.log('Réponse création recette :', response.data);
+              })
+              .catch((error) => {
+                console.log('Erreur connexion :', error);
+              });
+          }}
+        />
+      </div>
 
-);
+    </form>
+  );
+};
 
-UpdateRecipeForm.propTypes = {
+RecipeForm.propTypes = {
   tags: PropTypes.arrayOf(PropTypes.string).isRequired,
   ingredients: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string,
     category: PropTypes.string,
   })).isRequired,
+  userToken: PropTypes.string.isRequired,
   recipe: PropTypes.shape({
     id: PropTypes.number,
     title: PropTypes.string,
@@ -547,7 +472,7 @@ UpdateRecipeForm.propTypes = {
     nutri_score: PropTypes.string,
     date_creation: PropTypes.string,
     date_update: PropTypes.string,
-    seasons: PropTypes.arrayOf(PropTypes.number),
+    seasons: PropTypes.arrayOf(PropTypes.string),
     tags: PropTypes.arrayOf(PropTypes.string),
     ingredients: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.number,
@@ -559,60 +484,13 @@ UpdateRecipeForm.propTypes = {
     })),
     instructions: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
-  updateRecipe: PropTypes.func.isRequired,
-  deleteRecipe: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  recipe: state.admin.recipe,
   tags: state.admin.tags,
   ingredients: state.admin.ingredients,
+  userToken: state.user.token,
+  recipe: state.recipe,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  // Here I am passing down all the info stocked in the local state
-  // to make the API update request
-  updateRecipe: (
-    title,
-    picture,
-    type,
-    description,
-    seasons,
-    recipeTags,
-    difficulty,
-    nutriScore,
-    preparationTime,
-    bakingTime,
-    recipeIngredients,
-    instructions,
-    event,
-  ) => {
-    event.preventDefault();
-    dispatch({
-      type: 'UPDATE_RECIPE',
-      payload: {
-        title,
-        picture,
-        type,
-        description,
-        seasons,
-        recipeTags,
-        difficulty,
-        nutriScore,
-        preparationTime,
-        bakingTime,
-        recipeIngredients,
-        instructions,
-      },
-    });
-  },
-
-  deleteRecipe: (event) => {
-    event.preventDefault();
-    dispatch({
-      type: 'DELETE_RECIPE',
-    });
-  },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(UpdateRecipeForm);
+export default connect(mapStateToProps, null)(RecipeForm);

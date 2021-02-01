@@ -1,11 +1,9 @@
 const initialState = {
   user: {},
   userSearchField: '',
-  recipe: {},
   tags: [],
-  ingredients: [],
-  newRecipe: {},
   tagField: '',
+  ingredients: [],
 };
 
 const reducer = (oldState = initialState, action) => {
@@ -32,21 +30,6 @@ const reducer = (oldState = initialState, action) => {
       return {
         ...oldState,
         user: {},
-      };
-    case 'RECIPE_ADD':
-      return {
-        ...oldState,
-        newRecipe: action.payload.recipe,
-      };
-    case 'RECIPE_UPDATE':
-      return {
-        ...oldState,
-        recipe: action.payload.recipe,
-      };
-    case 'RECIPE_DELETE':
-      return {
-        ...oldState,
-        recipe: {},
       };
     case 'UPDATE_TAG_FIELD':
       return {
