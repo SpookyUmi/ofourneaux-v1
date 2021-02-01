@@ -24,6 +24,16 @@ const reducer = (oldState = initialState, action) => {
         isClicked: false,
       };
 
+    case 'TAG_ADD':
+      return {
+        ...oldState,
+        tags: action.payload.tags,
+      };
+    case 'TAG_DELETE':
+      return {
+        ...oldState,
+        tags: action.payload.tags,
+      };
     case 'REQUIRED_DATA_SUCCESS':
       return {
         ...oldState,
@@ -34,7 +44,6 @@ const reducer = (oldState = initialState, action) => {
         categories: action.payload.categories,
         ingredients: action.payload.ingredients,
       };
-
     default:
       return { ...oldState };
   }

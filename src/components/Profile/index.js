@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import profilePicture from 'src/assets/images/profile-picture.jpg';
 import heartFull from 'src/assets/icons/heart-full.svg';
 import list from 'src/assets/icons/list.svg';
+import uploadImage from 'src/middlewares/firebase';
 
 // components import
 import Modal from './Modal';
@@ -15,7 +16,15 @@ import Modal from './Modal';
 // SCSS
 import './styles.scss';
 
-// component
+const imageUrl = async (e) => {
+  const image = new File(
+    [e.target.files[0]],
+    `${new Date().toISOString()}_${e.target.files[0].name}`,
+    { type: e.target.files[0].type },
+  );
+  const url = await uploadImage(image);
+};
+
 const Profile = ({
   lastName,
   firstName,
@@ -51,6 +60,50 @@ const Profile = ({
   //   });
   // };
 
+        // <div className="profile__content__infos">
+        //   <div className="profile__content__block profile__content__infos__inputs">
+        //     <div className="profile__content__infos__input">
+        //       {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+        //       <label className="profile__content__infos__label">Nom</label>
+        //       <input
+        //         className="profile__content__infos__field"
+        //         type="text"
+        //         placeholder="Doe"
+        //         value={lastName}
+        //         onChange={trackLastName}
+        //       />
+        //     </div>
+        //     <div className="profile__content__infos__input">
+        //       {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+        //       <label className="profile__content__infos__label">Prénom</label>
+        //       <input
+        //         className="profile__content__infos__field"
+        //         type="text"
+        //         placeholder="John"
+        //         value={firstName}
+        //         onChange={trackFirstName}
+        //       />
+        //     </div>
+        //     <div className="profile__content__infos__input">
+        //       {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+        //       <label className="profile__content__infos__label">Email</label>
+        //       <input
+        //         className="profile__content__infos__field"
+        //         type="text"
+        //         placeholder="johndoe@yahoo.fr"
+        //         value={email}
+        //         onChange={trackEmail}
+        //       />
+        //     </div>
+        //     <div className="profile__content__infos__input">
+        //       {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+        //       <label className="profile__content__infos__label">Photo de profil</label>
+        //       <input
+        //         className="profile__content__infos__field"
+        //         type="file"
+        //         onChange={imageUrl}
+        //       />
+        //     </div>
   // checkIfPreferenceIsInEatingPreferences();
 
   return (
@@ -117,6 +170,15 @@ const Profile = ({
                   onChange={trackEmail}
                 />
               </div>
+              <div className="profile__content__infos__input">
+                {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                <label className="profile__content__infos__label">Photo de Profil</label>
+                <input
+                  className="profile__content__infos__field"
+                  type="file"
+                  onChange={imageUrl}
+                />
+              </div>
             </div>
 
             <div className="profile__content__block profile__content__constraints">
@@ -168,7 +230,7 @@ const Profile = ({
             {
             status === 'admin'
             && (
-            <NavLink exact to="/admin/ajout-recettes">
+            <NavLink exact to="/admin/ajout-recette">
               <button type="button" className="profile__content__button">
                 Espace administrateur
               </button>

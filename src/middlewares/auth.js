@@ -99,6 +99,7 @@ const auth = (store) => (next) => (action) => {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
+
       });
 
       // console.log('Answer request login :', response);
