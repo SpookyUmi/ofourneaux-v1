@@ -143,8 +143,8 @@ const Navbar = ({
         </div>
         </>
         }
-      </div>
-  )};
+    </div>
+  );
 
 
 Navbar.propTypes = {
