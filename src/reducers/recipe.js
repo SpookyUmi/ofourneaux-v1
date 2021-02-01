@@ -1,7 +1,7 @@
 const initialState = {
   id: null,
   title: '',
-  picture: '',
+  picture_url: '',
   description: '',
   type: '',
   difficulty: '',
@@ -10,11 +10,9 @@ const initialState = {
   nutri_score: '',
   date_creation: '',
   date_update: '',
-  season: '',
   tags: [],
   steps: [],
   ingredients: [],
-  picture_url: '',
   seasons: [],
 };
 
@@ -24,7 +22,7 @@ const reducer = (oldState = initialState, action) => {
       return {
         ...oldState,
         ...action.payload.recipe,
-      }
+      };
     default:
       return {
         ...oldState,

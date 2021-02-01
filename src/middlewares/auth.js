@@ -13,6 +13,53 @@ const auth = (store) => (next) => (action) => {
 
   const URL = 'https://ofourneaux.herokuapp.com';
 
+  async function getIngredients() {
+    try {
+      const response = await axios({
+        method: 'GET',
+        url: `${URL}/ingredients`,
+      });
+
+      // console.log('Answer request ingredients :', response);
+
+      store.dispatch({
+        type: 'INGREDIENTS_SUCCESS',
+        payload: {
+          ingredients: response.data.data.ingredients,
+        },
+      });
+    }
+    catch (error) {
+      // console.log('Error request ingredients :', error.response);
+    }
+  }
+
+  async function getTags(userToken) {
+    try {
+      const response = await axios({
+        method: 'GET',
+        url: `${URL}/tags`,
+        headers: {
+          authorization: userToken,
+        },
+      });
+
+      // console.log('Answer request tags :', response);
+
+      store.dispatch({
+        type: 'TAGS_SUCCESS',
+        payload: {
+          tags: response.data.data.tags,
+        },
+      });
+
+      getIngredients();
+    }
+    catch (error) {
+      // console.log('Error request tags :', error.response);
+    }
+  }
+
   // asynchronous function to retrieve the user from the result
   // of the function to retrieve the id and the token
   async function getUser(userId, userToken) {
@@ -47,13 +94,16 @@ const auth = (store) => (next) => (action) => {
           // TODO: uncomment next line
           // shoppingList: response.data.data.shopping_list,
           // ! test table, to be deleted
-          eatingPreferences: [3, 1],
+          eatingPreferences: [],
           // TODO: uncomment next line
           // eatingPreferences: response.data.data.eatingPreferences,
         },
       });
+
       // after logging in, the action is redirect to the home page
       action.redirect('/');
+
+      getTags(userToken);
     }
     catch (error) {
       // console.log('Error request user :', error.response);
@@ -71,11 +121,14 @@ const auth = (store) => (next) => (action) => {
           'Content-Type': 'multipart/form-data',
         },
       });
-      console.log('Answer request login :', response);
+
+      // console.log('Answer request login :', response);
+
       getUser(response.data.data.userId, response.data.data.token);
     }
     catch (error) {
-      console.log('Error request login :', error.response);
+      // console.log('Error request login :', error.response);
+
       store.dispatch({
         type: 'LOGIN_FAILED',
         payload: {

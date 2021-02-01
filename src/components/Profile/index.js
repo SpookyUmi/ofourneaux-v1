@@ -31,25 +31,27 @@ const Profile = ({
   showModal,
   openModalConfirmDelete,
   toggleEatingPreference,
+  tags,
   eatingPreferences,
   checked,
+// eslint-disable-next-line arrow-body-style
 }) => {
-  const checkIfPreferenceIsInEatingPreferences = () => {
-    eatingPreferences.forEach(eatingPreference => {
-      if (
-        eatingPreference === 1
-        || eatingPreference === 2
-        || eatingPreference === 3
-        || eatingPreference === 4
-      ) {
-        checked = true;
-      } else {
-        checked = false;
-      }
-    });
-  };
+  // const checkIfPreferenceIsInEatingPreferences = () => {
+  //   eatingPreferences.forEach(eatingPreference => {
+  //     if (
+  //       eatingPreference === 1
+  //       || eatingPreference === 2
+  //       || eatingPreference === 3
+  //       || eatingPreference === 4
+  //     ) {
+  //       checked = true;
+  //     } else {
+  //       checked = false;
+  //     }
+  //   });
+  // };
 
-  checkIfPreferenceIsInEatingPreferences();
+  // checkIfPreferenceIsInEatingPreferences();
 
   return (
     <div className="profile">
@@ -122,54 +124,31 @@ const Profile = ({
                 Mes contraintes alimentaires
               </h3>
               <div className="profile__content__constraints__inputs">
-                <div className="profile__content__constraints__input">
-                  <input
-                    id="1"
-                    className="profile__content__constraints__checkbox"
-                    type="checkbox"
-                    name="vegetalien"
-                    onClick={toggleEatingPreference}
-                    checked={checked}
-                  />
-                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-                  <label id="1" className="profile__content__constraints__label" htmlFor="1">Végétalien</label>
-                </div>
-                <div className="profile__content__constraints__input">
-                  <input
-                    id="2"
-                    className="profile__content__constraints__checkbox"
-                    type="checkbox"
-                    name="vegetarien"
-                    onClick={toggleEatingPreference}
-                    checked={checked}
-                  />
-                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-                  <label id="2" className="profile__content__constraints__label" htmlFor="2">Végétarien</label>
-                </div>
-                <div className="profile__content__constraints__input">
-                  <input
-                    id="3"
-                    className="profile__content__constraints__checkbox"
-                    type="checkbox"
-                    name="no-gluten"
-                    onClick={toggleEatingPreference}
-                    checked={checked}
-                  />
-                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-                  <label id="3" className="profile__content__constraints__label" htmlFor="3">Sans gluten</label>
-                </div>
-                <div className="profile__content__constraints__input">
-                  <input
-                    id="4"
-                    className="profile__content__constraints__checkbox"
-                    type="checkbox"
-                    name="no-lactose"
-                    onClick={toggleEatingPreference}
-                    checked={checked}
-                  />
-                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-                  <label id="4" className="profile__content__constraints__label" htmlFor="4">Sans lactose</label>
-                </div>
+                {
+                  tags.map((tag) => (
+                    <div
+                      key={tag.id}
+                      className="profile__content__constraints__input"
+                    >
+                      <input
+                        id="1"
+                        className="profile__content__constraints__checkbox"
+                        type="checkbox"
+                        name={tag.name}
+                        onClick={toggleEatingPreference}
+                        checked={checked}
+                      />
+                      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                      <label
+                        id="1"
+                        className="profile__content__constraints__label"
+                        htmlFor="1"
+                      >
+                        {tag.name}
+                      </label>
+                    </div>
+                  ))
+                }
               </div>
             </div>
           </div>
@@ -213,7 +192,7 @@ const Profile = ({
     a modal asking him to confirm his choix is opened */}
       {showModal && <Modal />}
     </div>
-)
+  );
 };
 
 // PropTypes
@@ -233,6 +212,7 @@ Profile.propTypes = {
   openModalConfirmDelete: PropTypes.func.isRequired,
   toggleEatingPreference: PropTypes.func.isRequired,
   eatingPreferences: PropTypes.array.isRequired,
+  tags: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -243,6 +223,7 @@ const mapStateToProps = (state) => ({
   message: state.profile.message,
   showModal: state.profile.showModal,
   eatingPreferences: state.user.eatingPreferences,
+  tags: state.app.tags,
 });
 
 const mapDispatchToProps = (dispatch) => ({

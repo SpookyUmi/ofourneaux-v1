@@ -28,7 +28,7 @@ const recipe = (store) => (next) => (action) => {
           });
         })
         .catch((error) => {
-          console.log('Error request recipe :', error.response);
+          // console.log('Error request recipe :', error.response);
         });
       break;
 

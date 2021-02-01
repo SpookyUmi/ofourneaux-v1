@@ -12,7 +12,7 @@ const initialState = {
 };
 
 const reducer = (oldState = initialState, action) => {
-  console.log('State user :', oldState);
+  // console.log('State user :', oldState);
   // console.log('Action user :', action);
 
   switch (action.type) {
