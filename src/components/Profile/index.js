@@ -10,6 +10,11 @@ import list from 'src/assets/icons/list.svg';
 import Modal from './Modal';
 
 import './styles.scss';
+import uploadImage from '../../middlewares/firebase';
+
+const imageUrl = (e) => {
+  uploadImage(e.target.files[0]);
+};
 
 const Profile = ({
   lastName,
@@ -63,7 +68,7 @@ const Profile = ({
                 value={lastName}
                 onChange={trackLastName}
               />
-            </div>z
+            </div>
             <div className="profile__content__infos__input">
               {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
               <label className="profile__content__infos__label">Prénom</label>
@@ -84,6 +89,15 @@ const Profile = ({
                 placeholder="johndoe@yahoo.fr"
                 value={email}
                 onChange={trackEmail}
+              />
+            </div>
+            <div className="profile__content__infos__input">
+              {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+              <label className="profile__content__infos__label">Photo de profil</label>
+              <input
+                className="profile__content__infos__field"
+                type="file"
+                onChange={imageUrl}
               />
             </div>
           </div>
