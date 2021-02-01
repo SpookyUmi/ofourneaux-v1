@@ -13,7 +13,6 @@ const auth = (store) => (next) => (action) => {
 
   const URL = 'https://ofourneaux.herokuapp.com';
 
-
   async function getRequiredData(userToken) {
     try {
       const response = await axios({

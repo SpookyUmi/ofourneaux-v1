@@ -25,24 +25,32 @@ const Header = ({
   <header className="header">
     <div className="header__container">
       {/* TODO: onSubmit, send a GET request (axios), and redirect to /recettes */}
-      {!isOpen &&
-          <img className="header__container__menu__icon" src={menu} alt="icône menu"
-            onClick={() => { setIsOpen(true) }}
+      {
+        !isOpen
+        && (
+          <img
+            className="header__container__menu__icon"
+            src={menu}
+            alt="icône menu"
+            onClick={() => {
+              setIsOpen(true);
+            }}
           />
-        }
-        {/* TODO: onSubmit, send a GET request (axios), and redirect to /recettes */}
-        <form type="submit" onSubmit={handleSearch} className="header__container__searchform">
-          <div className="header__container__searchform__icon">
-            <FontAwesomeIcon icon={faSearch} />
-          </div>
-          <input
-            type="text"
-            placeholder="Recherche..."
-            className="header__container__elem--input"
-            id="searchInput"
-            onChange={trackSearch}
-          />
-        </form>
+        )
+      }
+      {/* TODO: onSubmit, send a GET request (axios), and redirect to /recettes */}
+      <form type="submit" onSubmit={handleSearch} className="header__container__searchform">
+        <div className="header__container__searchform__icon">
+          <FontAwesomeIcon icon={faSearch} />
+        </div>
+        <input
+          type="text"
+          placeholder="Recherche..."
+          className="header__container__elem--input"
+          id="searchInput"
+          onChange={trackSearch}
+        />
+      </form>
       <NavLink exact to="/">
         <h1 className="header__container__title">{title}</h1>
       </NavLink>
