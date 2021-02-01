@@ -9,6 +9,7 @@ const profile = (store) => (next) => (action) => {
   form.append('last_name', state.user.lastName);
   form.append('first_name', state.user.firstName);
   form.append('mail_address', state.user.email);
+  form.append('eating_preferences', state.user.eatingPreferences)
 
   switch (action.type) {
     // request for deletion of the profile by the user : OK

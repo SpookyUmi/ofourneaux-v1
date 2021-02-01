@@ -2,6 +2,7 @@ const initialState = {
   // by default, the modal is closed
   showModal: false,
   message: '',
+  checked: false,
 };
 
 const reducer = (oldState = initialState, action) => {

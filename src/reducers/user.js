@@ -12,7 +12,7 @@ const initialState = {
 };
 
 const reducer = (oldState = initialState, action) => {
-  // console.log('State user :', oldState);
+  console.log('State user :', oldState);
   // console.log('Action user :', action);
 
   switch (action.type) {
@@ -49,6 +49,26 @@ const reducer = (oldState = initialState, action) => {
         shoppingList: [],
       };
 
+    case 'UPDATE_EATING_PREFERENCES':
+      // eslint-disable-next-line no-case-declarations, max-len
+      const updatedEatingPreferences = oldState.eatingPreferences.map((eatingPreference) => eatingPreference);
+      console.log('New copy of the eating preferences array :', updatedEatingPreferences);
+
+      // eslint-disable-next-line no-case-declarations
+      const index = updatedEatingPreferences.indexOf(action.payload.id);
+      console.log(index);
+
+      if (index > -1) {
+        updatedEatingPreferences.splice(index, 1);
+        console.log('Eating preference removed !');
+        console.log(updatedEatingPreferences);
+        return {
+          ...oldState,
+          eatingPreferences: updatedEatingPreferences,
+        };
+      }
+
+      break;
     // after edition to the account, the state is modified
     case 'EDIT_PROFILE_SUCCESS':
       return {

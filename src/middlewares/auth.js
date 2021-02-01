@@ -38,15 +38,18 @@ const auth = (store) => (next) => (action) => {
           email: response.data.data.mail_address,
           status: response.data.data.status,
           recipesHistory: response.data.data.recipes_history,
-          // test table, to be deleted
+          // ! test table, to be deleted
           favoritesRecipes: [1, 3, 5],
-          // TODO: uncomment line 43
+          // TODO: uncomment next line
           // favoritesRecipes: response.data.data.favorites_recipes,
-          // test table, to be deleted
+          // ! test table, to be deleted
           shoppingList: [2, 4, 6],
-          // TODO: uncomment line 48
+          // TODO: uncomment next line
           // shoppingList: response.data.data.shopping_list,
-          eatingPreferences: response.data.data.eatingPreferences,
+          // ! test table, to be deleted
+          eatingPreferences: [3, 1],
+          // TODO: uncomment next line
+          // eatingPreferences: response.data.data.eatingPreferences,
         },
       });
       // after logging in, the action is redirect to the home page
