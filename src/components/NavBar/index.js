@@ -38,9 +38,10 @@ const Navbar = ({ isLogged, isAdmin, isOpen, setIsOpen, trackSearch, handleSearc
               className="navbar__searchform__input transition"
               id="searchInputNavbar"
               onChange={trackSearch}
+              onSubmit={() => { setIsOpen(false) }}
             />
           </form>
-            <NavLink to="/" className="navbar__link__home link__style">
+            <NavLink to="/" className="navbar__link__home link__style" onClick={() => { setIsOpen(false) }}>
             <img className="navbar__link__icon transition" src={home} alt="icône accueil" />
               Accueil
             </NavLink>
@@ -48,10 +49,10 @@ const Navbar = ({ isLogged, isAdmin, isOpen, setIsOpen, trackSearch, handleSearc
             {!isLogged
             && (
             <>
-              <NavLink to="/connexion" className="navbar__link__signin link__style transition">
+              <NavLink to="/connexion" className="navbar__link__signin link__style transition" onClick={() => { setIsOpen(false) }}>
                 Se connecter
               </NavLink>
-              <NavLink to="/insciption" className="navbar__link__signup button__style transition">
+              <NavLink to="/insciption" className="navbar__link__signup button__style transition" onClick={() => { setIsOpen(false) }}>
                 S'inscrire
               </NavLink>
             </>
@@ -60,15 +61,15 @@ const Navbar = ({ isLogged, isAdmin, isOpen, setIsOpen, trackSearch, handleSearc
             {isLogged
             && (
             <>
-              <NavLink to="/profil/:slug" className="navbar__link__profile link__style transition">
+              <NavLink to="/profil/:slug" className="navbar__link__profile link__style transition" onClick={() => { setIsOpen(false) }}>
                 <img className="navbar__link__icon transition" src={profile} alt="icône profil" />
                 Mon profil
               </NavLink>
-              <NavLink to="/profil/liste-de-courses" className="navbar__link__list link__style transition">
+              <NavLink to="/profil/liste-de-courses" className="navbar__link__list link__style transition" onClick={() => { setIsOpen(false) }}>
                 <img className="navbar__link__icon transition" src={list} alt="icône liste de courses" />
                 Liste de courses
               </NavLink>
-              <NavLink to="/profil/recettes-favorites" className="navbar__link__favorites link__style transition">
+              <NavLink to="/profil/recettes-favorites" className="navbar__link__favorites link__style transition" onClick={() => { setIsOpen(false) }}>
                 <img className="navbar__link__icon transition" src={favorites} alt="icône favoris" />
                 Recettes favoritesNavLink
               </NavLink>
@@ -78,23 +79,23 @@ const Navbar = ({ isLogged, isAdmin, isOpen, setIsOpen, trackSearch, handleSearc
             {isLogged && isAdmin
             && (
             <>
-              <NavLink to="/profil" className="navbar__link__profile link__style transition">
+              <NavLink to="/profil" className="navbar__link__profile link__style transition" onClick={() => { setIsOpen(false) }}>
                 <img className="navbar__link__icon transition" src={profile} alt="icône profil" />
                 Mon profil
               </NavLink>
-              <NavLink to="/admin/ajout-recette" className="navbar__link__adminrecipes link__style transition">
+              <NavLink to="/admin/ajout-recette" className="navbar__link__adminrecipes link__style transition" onClick={() => { setIsOpen(false) }}>
                 <img className="navbar__link__icon transition" src={recipe} alt="icône recettes" />
                 Ajouter une recette
               </NavLink>
-              <NavLink to="/admin/modification-recette" className="navbar__link__adminrecipes link__style transition">
+              <NavLink to="/admin/modification-recette" className="navbar__link__adminrecipes link__style transition" onClick={() => { setIsOpen(false) }}>
                 <img className="navbar__link__icon transition" src={recipe} alt="icône recettes" />
                 Modifier/Supprimer une recette
               </NavLink>
-              <NavLink to="/admin/gestion-labels" className="navbar__link__adminlabels link__style transition">
+              <NavLink to="/admin/gestion-labels" className="navbar__link__adminlabels link__style transition" onClick={() => { setIsOpen(false) }}>
                 <img className="navbar__link__icon transition" src={tag} alt="icône labels" />
                 Gérer les labels
               </NavLink>
-              <NavLink to="/admin/gestion-utilisateurs" className="navbar__link__adminusers link__style transition">
+              <NavLink to="/admin/gestion-utilisateurs" className="navbar__link__adminusers link__style transition" onClick={() => { setIsOpen(false) }}>
                 <img className="navbar__link__icon transition" src={users} alt="icône utilisateurs" />
                 Gérer les utilisateurs
               </NavLink>
@@ -102,11 +103,11 @@ const Navbar = ({ isLogged, isAdmin, isOpen, setIsOpen, trackSearch, handleSearc
             )}
         </div>
         <div className="navbar__links__bottom">
-          <NavLink to="/contact" className="navbar__link__contact link__style transition">
+          <NavLink to="/contact" className="navbar__link__contact link__style transition" onClick={() => { setIsOpen(false) }}>
             <img className="navbar__link__icon transition" src={contact} alt="icône contact" />
             Contact
           </NavLink>
-          <NavLink to="/a-propos" className="navbar__link__about link__style transition">
+          <NavLink to="/a-propos" className="navbar__link__about link__style transition" onClick={() => { setIsOpen(false) }}>
             <img className="navbar__link__icon transition" src={about} alt="icône à propos" />
             A propos
           </NavLink>
