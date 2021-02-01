@@ -1,2 +1,79 @@
 @use 'src/styles/vars';
 
+// MOBILE
+@media only screen and (max-width: 768px) {
+  .admin{
+    background-color: vars.$color-sand;
+    font-family: vars.$font-text;
+    color: vars.$color-primary;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+  }
+  
+  .admin__desktop__subheader{
+    display: none;
+  }
+  
+  .admin__desktop__tabs{
+    display: none;
+  }
+  
+  .admin__desktop__tab{
+    display: none;
+  }
+  
+  .back__to__profile{
+    display: none;
+  }
+  
+  .admin__subheader{
+    text-align:center;
+    padding: 3rem;
+    font-size: 2rem;
+  }
+}
+
+//DESKTOP
+@media only screen and (min-width: 768px) {
+  .admin{
+    background-color: vars.$color-sand;
+    font-family: vars.$font-text;
+    color: vars.$color-primary;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+  }
+  
+  .admin__desktop__subheader{
+    padding-bottom: 2rem;
+  }
+  
+  .admin__desktop__tabs{
+    padding: 2rem;
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .admin__desktop__tab{
+    border: 2px solid vars.$color-primary;
+    padding: .5rem .75rem;
+    text-transform: uppercase;
+    border-radius: 3rem;
+    font-weight: 700;
+    font-size: .9rem;
+    -webkit-transition: .2s;
+    transition: .2s;
+  }
+  
+  .back__to__profile{
+    background-color: vars.$color-primary;
+    color: vars.$color-sand;
+  }
+  
+  .admin__subheader{
+    text-align:center;
+    padding: 3rem;
+    font-size: 2rem;
+  }
+}

@@ -220,7 +220,7 @@ const Profile = ({
             {
             status === 'admin'
             && (
-            <NavLink exact to="/admin/ajout-recettes">
+            <NavLink exact to="/admin/ajout-recette">
               <button type="button" className="profile__content__button">
                 Espace administrateur
               </button>
