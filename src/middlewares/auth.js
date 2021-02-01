@@ -17,7 +17,7 @@ const auth = (store) => (next) => (action) => {
     try {
       const response = await axios({
         method: 'GET',
-        url: `${URL}/recipes/new`,
+        url: `${URL}/recipes/data`,
         headers: {
           authorization: userToken,
         },
