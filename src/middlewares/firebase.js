@@ -16,7 +16,13 @@ firebase.initializeApp(firebaseConfig);
 const storage = firebase.storage();
 
 function uploadImage(image) {
-  const uploadTask = storage.ref(`images/${image.name}`).put(image);
+  const imageFile = new File(
+    [image],
+    `${new Date().toISOString()}_${image.name}`,
+    { type: image.type },
+  );
+
+  const uploadTask = storage.ref(`images/${imageFile.name}`).put(imageFile);
 
   return new Promise((resolve, reject) => {
     uploadTask.on(
@@ -29,10 +35,9 @@ function uploadImage(image) {
       () => {
         storage
           .ref('images')
-          .child(image.name)
+          .child(imageFile.name)
           .getDownloadURL()
           .then((url) => {
-            console.log(url);
             resolve(url);
           });
       },
