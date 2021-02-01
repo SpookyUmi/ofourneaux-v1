@@ -5,7 +5,6 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 // == Import
-import giftLogo from 'src/assets/images/surprise.svg';
 import arrow from 'src/assets/icons/up-arrow.svg';
 import pancakes from 'src/assets/images/pancakes.png';
 import './styles.scss';
@@ -20,8 +19,9 @@ const Generator = ({
   trackGenNumber,
   trackGenTime,
   trackGenDifficulty,
-  trackGenFavorites,
-  handleGenerator }) => {
+  handleGenerator,
+  handleGeneratorLogged
+  }) => {
 
   return (
     <div className="background__image">
@@ -36,54 +36,57 @@ const Generator = ({
           <section className="generator__section">
             {/* When property isClicked is false, the generator displays a logo */}
             {!isClicked &&
-              <>
+              <div className="generator--animation">
                 <img src={pancakes}
                   className="generator__section__logo"
                   alt="logo de cadeau"
                   onClick={handleClickIn}
                 />
-                <p className="generator__section__click">Click me</p>
-              </>
+                {/* <p className="generator__section__click">Click me</p> */}
+              </div>
             }
             {/* When property isClicked is true (when somebody clicked on the logo),
-            it displays a form.
-          */}
-            {
-              isClicked &&
+            it displays a form.*/}
+            {isClicked &&
               <form className="generator__form">
               <img
                 src={arrow}
                 alt="logo de flèche"
-                className="generator__section__arrow"
+                className="generator__section__arrow link__style"
                 onClick={handleClickOut}
               />
-                <label>
-                  Nombre de recettes
-                </label>
-                <input type="number" name="nbRecipes" id="nbRecipes" min="0" max="20"
-                  onChange={trackGenNumber}
-                />
-                <label htmlFor="time">
-                  Temps
-                </label>
-                <input type="number" name="time" id="time" step="5" min="0"
-                  onChange={trackGenTime}
-                />
+                <div className="generator__form__section">
+                  <label htmlFor="nbRecipes">
+                    Recettes
+                  <input type="number" name="nbRecipes" id="nbRecipes" min="0" max="20" placeholder="5"
+                    onChange={trackGenNumber}
+                  />
+                  </label>
+                  <label htmlFor="time">
+                    Temps (min)
+                  <input type="number" name="time" id="time" step="5" min="0" placeholder="35 min"
+                    onChange={trackGenTime}
+                  />
+                  </label>
+                </div>
                 <label htmlFor="difficulty">
                   Difficulté
                 </label>
-                <select name="difficulty" id="difficulty" onChange={trackGenDifficulty}>
+                <select name="difficulty" id="difficulty" onChange={trackGenDifficulty} defaultValue="" placeholder>
+                    <option value="">Indifférent</option>
                     <option value="easy">Facile</option>
-                    <option value="average">Moyen</option>
+                    <option value="average">Intermédiaire</option>
                     <option value="expert">Expérimenté</option>
                   </select>
-                {isLogged &&
+                {/* {isLogged &&
                   <label>Recettes favorites uniquement
                     <input type="checkbox" name="favorites" onChange={trackGenFavorites} />
                   </label>
-                }
+                } */}
                 {/* TODO: onSubmit, send GET/POST? request with form info AND season + last recipes used. Then redirect to /recettes */}
-                <button type="submit" onClick={handleGenerator}>Try me !</button>
+                <button type="submit" onClick={
+                  isLogged ? handleGeneratorLogged : handleGenerator
+                }>Try me !</button>
               </form>
             }
 
@@ -139,22 +142,20 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 
   trackGenDifficulty: (event) => {
     event.preventDefault();
+    let difficultyId;
+    if (event.target.value === 'Facile') {
+      return difficultyId = 1;
+    } else if (event.target.value === 'Moyen') {
+      return difficultyId = 2;
+    } else if (event.target.value === 'Difficile') {
+      return difficultyId = 3;
+    }
     dispatch({
       type: 'EDIT_GEN_DIFFICULTY',
       payload: {
-        diffGen: event.target.value
+        diffGen: difficultyId
       }
     })
-  },
-
-  trackGenFavorites: (event) => {
-    console.log('favoris ?', event.target.checked);
-      dispatch({
-        type: 'EDIT_GEN_FAVORITES',
-        payload: {
-          favGen: event.target.checked
-        }
-      })
   },
 
   handleGenerator: (event) => {
@@ -162,7 +163,15 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     dispatch({
       type: 'SEND_GEN_REQUEST',
       redirect: ownProps.history.push
-    })
+    });
+  },
+
+  handleGeneratorLogged: (event) => {
+    event.preventDefault();
+    dispatch({
+      type: 'SEND_GEN_LOGGED_REQUEST',
+      redirect: ownProps.history.push
+    });
   },
 });
 

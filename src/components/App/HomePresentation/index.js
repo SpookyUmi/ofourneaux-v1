@@ -15,7 +15,7 @@ const HomePresentation = ({ title, isLogged }) => {
     <div className="home__presentation">
       <div className="home__container">
         <section className="home__container__elem home__container__text">
-          <h2 className="home__presentation__title">Gérez votre quotidien avec {title}</h2>
+          <h2 className="home__presentation__title">Gérez vos repas avec {title}</h2>
           <p>
             Moderne et ludique, O'Fourneaux vous accompagne au quotidien
             en vous proposant des recettes variées et adaptées à chacun, grâce à une démarche éco-responsable et inclusive.

@@ -17,7 +17,7 @@ export default [
         unit: 'gr',
         name: 'beurre',
       },
-    ]
+    ],
   },
   {
     label: 'Epicerie',
@@ -30,7 +30,7 @@ export default [
         unit: 'gr',
         name: 'farine',
       },
-    ]
+    ],
   },
   {
     label: 'Liquides',
@@ -43,6 +43,6 @@ export default [
         unit: 'càs',
         name: 'rhum',
       },
-    ]
+    ],
   },
-]
+];
