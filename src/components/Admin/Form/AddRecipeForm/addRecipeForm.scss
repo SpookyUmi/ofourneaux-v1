@@ -1,0 +1,40 @@
+@use 'src/styles/vars';
+
+// MOBILE
+@media only screen and (max-width: 768px) {
+  
+}
+
+//DESKTOP
+@media only screen and (min-width: 768px) {
+  .recipe__form{
+    padding: 2rem;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+  
+  }
+  .label{
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 2rem 0.5rem;
+  }
+
+  .margin{
+    margin: 1rem;
+  }
+
+  .recipe__form__image__input{
+    border: 0px;
+  }
+
+  .recipe__form__div__4__delete__icon{
+    width: 2.5rem;
+  }
+
+  .submit__button{
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+  }
+}
