@@ -17,12 +17,7 @@ import Modal from './Modal';
 import './styles.scss';
 
 const imageUrl = async (e) => {
-  const image = new File(
-    [e.target.files[0]],
-    `${new Date().toISOString()}_${e.target.files[0].name}`,
-    { type: e.target.files[0].type },
-  );
-  const url = await uploadImage(image);
+  const url = await uploadImage(e.target.files[0]);
 };
 
 const Profile = ({
