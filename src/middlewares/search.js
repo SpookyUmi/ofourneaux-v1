@@ -3,10 +3,10 @@ import FormData from 'form-data';
 
 const search = (store) => (next) => (action) => {
   const state = store.getState();
+  const search = state.recipes.search.replace(/ /g, "&");
 
-  const search = new FormData();
-  search.append('search', state.recipes.search);
-
+  const number = state.recipes.number;
+  const user = state.user.id
   const generator = new FormData();
   generator.append('number', state.recipes.number);
   generator.append('time', state.recipes.time);
@@ -19,9 +19,7 @@ const search = (store) => (next) => (action) => {
     case 'SEND_SEARCH_REQUEST':
       axios({
         method: 'get',
-        url: 'https://ofourneaux.herokuapp.com/recipes',
-        data: search,
-        headers: { 'Content-Type': 'multipart/form-data' }
+        url: `https://ofourneaux.herokuapp.com/recipes/keyword?${search}`,
       })
         .then((response) => {
           console.log('Réponse recettes :', response.data.data);
@@ -36,12 +34,31 @@ const search = (store) => (next) => (action) => {
         .catch((error) => {
           console.log('Erreur connexion :', error);
         });
+        break;
     case 'SEND_GEN_REQUEST':
       axios({
         method: 'get',
-        url: 'https://ofourneaux.herokuapp.com/recipes',
-        data: generator,
-        headers: { 'Content-Type': 'multipart/form-data' }
+        url: `https://ofourneaux.herokuapp.com/recipes/quantity/${number}`,
+      })
+        .then((response) => {
+          console.log('Réponse recettes :', response.data.data);
+          store.dispatch({
+            type: 'RECIPES_RESULTS',
+            payload: {
+              recipes: response.data.data,
+            }
+          });
+          action.redirect('/recettes');
+        })
+        .catch((error) => {
+          console.log('Erreur connexion :', error);
+        });
+        break;
+    case 'SEND_GEN_LOGGED_REQUEST':
+      axios({
+        method: 'get',
+        url: `https://ofourneaux.herokuapp.com/recipes/quantity/${number}/user/${user}`,
+        headers: { authorization: state.user.token }
       })
         .then((response) => {
           console.log('Réponse recettes :', response.data.data);

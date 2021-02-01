@@ -19,8 +19,9 @@ const Generator = ({
   trackGenNumber,
   trackGenTime,
   trackGenDifficulty,
-  trackGenFavorites,
-  handleGenerator }) => {
+  handleGenerator,
+  handleGeneratorLogged
+  }) => {
 
   return (
     <div className="background__image">
@@ -71,16 +72,18 @@ const Generator = ({
                 </label>
                 <select name="difficulty" id="difficulty" onChange={trackGenDifficulty}>
                     <option value="easy">Facile</option>
-                    <option value="average">Moyen</option>
+                    <option value="average">Intermédiaire</option>
                     <option value="expert">Expérimenté</option>
                   </select>
-                {isLogged &&
+                {/* {isLogged &&
                   <label>Recettes favorites uniquement
                     <input type="checkbox" name="favorites" onChange={trackGenFavorites} />
                   </label>
-                }
+                } */}
                 {/* TODO: onSubmit, send GET/POST? request with form info AND season + last recipes used. Then redirect to /recettes */}
-                <button type="submit" onClick={handleGenerator}>Try me !</button>
+                <button type="submit" onClick={
+                  isLogged ? handleGeneratorLogged : handleGenerator
+                }>Try me !</button>
               </form>
             }
 
@@ -136,22 +139,20 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 
   trackGenDifficulty: (event) => {
     event.preventDefault();
+    let difficultyId;
+    if (event.target.value === 'Facile') {
+      return difficultyId = 1;
+    } else if (event.target.value === 'Moyen') {
+      return difficultyId = 2;
+    } else if (event.target.value === 'Difficile') {
+      return difficultyId = 3;
+    }
     dispatch({
       type: 'EDIT_GEN_DIFFICULTY',
       payload: {
-        diffGen: event.target.value
+        diffGen: difficultyId
       }
     })
-  },
-
-  trackGenFavorites: (event) => {
-    console.log('favoris ?', event.target.checked);
-      dispatch({
-        type: 'EDIT_GEN_FAVORITES',
-        payload: {
-          favGen: event.target.checked
-        }
-      })
   },
 
   handleGenerator: (event) => {
@@ -159,7 +160,15 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     dispatch({
       type: 'SEND_GEN_REQUEST',
       redirect: ownProps.history.push
-    })
+    });
+  },
+
+  handleGeneratorLogged: (event) => {
+    event.preventDefault();
+    dispatch({
+      type: 'SEND_GEN_LOGGED_REQUEST',
+      redirect: ownProps.history.push
+    });
   },
 });
 

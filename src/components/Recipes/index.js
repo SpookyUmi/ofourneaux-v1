@@ -23,11 +23,9 @@ const Recipes = ({ recipes }) => (
   </main>
 );
 
-// ! temporarily commented to avoid errors in the console
-// Recipes.propTypes = {
-//   recipes: PropTypes.array.isRequired,
-//   title: PropTypes.string.isRequired,
-// };
+Recipes.propTypes = {
+  recipes: PropTypes.array.isRequired,
+};
 
 const mapStateToProps = (state) => {
   return {

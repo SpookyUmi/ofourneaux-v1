@@ -2,9 +2,9 @@ function difficultyNameById(id) {
   if (id === 1) {
     return 'Facile';
   } else if (id === 2) {
-    return 'Intermédiaire';
+    return 'Moyen';
   } else if (id === 3) {
-    return 'Expérimenté';
+    return 'Difficile';
   };
 }
 export default difficultyNameById;

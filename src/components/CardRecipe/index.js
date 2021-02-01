@@ -7,7 +7,7 @@ import { buildRecipeURL } from 'src/utils/buildRecipeURL';
 
 import time from 'src/assets/icons/time.svg';
 import fire from 'src/assets/icons/difficulty.svg';
-import difficultyNameById from 'src/utils/difficultyNameById';
+import difficultyNameById from 'src/utils/difficultyNameById'
 
 import './styles.scss';
 
@@ -15,7 +15,7 @@ import './styles.scss';
 // and a button to add the recipe to the user's selection (if logged in)
 // or to redirect to sign in (if not logged in)
 const CardRecipe = ({
-  picture,
+  picture_url,
   title,
   preparation_time,
   baking_time,
@@ -24,7 +24,7 @@ const CardRecipe = ({
   id,
 }) => (
   <div className="card__recipe">
-    <img className="card__recipe__img" src={picture} alt={title} />
+    <img className="card__recipe__img" src={picture_url} alt={title} />
     <h3 className="card__recipe__title">
       <NavLink to={buildRecipeURL(title)} id={id} className="card__recipe__title__link" onClick={getRecipeById}>
         {title}
@@ -47,12 +47,12 @@ const CardRecipe = ({
 );
 
 CardRecipe.propTypes = {
-  id: PropTypes.number,
+  id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  picture: PropTypes.string.isRequired,
+  picture_url: PropTypes.string.isRequired,
   preparation_time: PropTypes.number.isRequired,
   baking_time: PropTypes.number.isRequired,
-  id: PropTypes.number.isRequired,
+  difficulty_id: PropTypes.number.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
