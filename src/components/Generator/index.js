@@ -42,7 +42,7 @@ const Generator = ({
                   alt="logo de cadeau"
                   onClick={handleClickIn}
                 />
-                <p className="generator__section__click">Click me</p>
+                {/* <p className="generator__section__click">Click me</p> */}
               </div>
             }
             {/* When property isClicked is true (when somebody clicked on the logo),
@@ -52,25 +52,28 @@ const Generator = ({
               <img
                 src={arrow}
                 alt="logo de flèche"
-                className="generator__section__arrow"
+                className="generator__section__arrow link__style"
                 onClick={handleClickOut}
               />
-                <label>
-                  Nombre de recettes
-                </label>
-                <input type="number" name="nbRecipes" id="nbRecipes" min="0" max="20"
-                  onChange={trackGenNumber}
-                />
-                <label htmlFor="time">
-                  Temps
-                </label>
-                <input type="number" name="time" id="time" step="5" min="0"
-                  onChange={trackGenTime}
-                />
+                <div className="generator__form__section">
+                  <label htmlFor="nbRecipes">
+                    Recettes
+                  <input type="number" name="nbRecipes" id="nbRecipes" min="0" max="20" placeholder="5"
+                    onChange={trackGenNumber}
+                  />
+                  </label>
+                  <label htmlFor="time">
+                    Temps (min)
+                  <input type="number" name="time" id="time" step="5" min="0" placeholder="35 min"
+                    onChange={trackGenTime}
+                  />
+                  </label>
+                </div>
                 <label htmlFor="difficulty">
                   Difficulté
                 </label>
-                <select name="difficulty" id="difficulty" onChange={trackGenDifficulty}>
+                <select name="difficulty" id="difficulty" onChange={trackGenDifficulty} defaultValue="" placeholder>
+                    <option value="">Indifférent</option>
                     <option value="easy">Facile</option>
                     <option value="average">Intermédiaire</option>
                     <option value="expert">Expérimenté</option>

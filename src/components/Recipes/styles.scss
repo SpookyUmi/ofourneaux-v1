@@ -1,0 +1,9 @@
+@use 'src/styles/vars';
+
+.recipes {
+  min-height: 100vh;
+
+  &__cards {
+    margin: 1.5rem 1rem;
+  }
+}

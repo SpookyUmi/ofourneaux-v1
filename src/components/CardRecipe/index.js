@@ -25,24 +25,28 @@ const CardRecipe = ({
 }) => (
   <div className="card__recipe">
     <img className="card__recipe__img" src={picture_url} alt={title} />
-    <h3 className="card__recipe__title">
-      <NavLink to={buildRecipeURL(title)} id={id} className="card__recipe__title__link" onClick={getRecipeById}>
-        {title}
-      </NavLink>
-    </h3>
-    <section className="card__recipe__info">
-      <img className="card__recipe__time__icon" src={time} alt="icône de durée" />
-      <p className="card__recipe__time">{preparation_time + baking_time} min</p>
-    </section>
-    <section className="card__recipe__info">
-      <img className="card__recipe__time__icon" src={fire} alt="icône de difficulté" />
-      <p className="card__recipe__time">{difficultyNameById(difficulty_id)}</p>
-    </section>
-    {/* TODO onClick buttons */}
-    <section className="card__recipe__buttons">
-      <button id="special__button" className="card__recipe__select__button" type="button">Sélectionner</button>
-      <button id="special__button" className="card__recipe__favorite__button" type="button">Favoris</button>
-    </section>
+    <div className="card__recipe__container">
+      <h3 className="card__recipe__title">
+        <NavLink to={buildRecipeURL(title)} id={id} className="card__recipe__title__link" onClick={getRecipeById}>
+          {title}
+        </NavLink>
+      </h3>
+      <div className="card__recipe__infos">
+        <section className="card__recipe__info">
+          <img className="card__recipe__time__icon" src={time} alt="icône de durée" />
+          <p className="card__recipe__time">{preparation_time + baking_time} min</p>
+        </section>
+        <section className="card__recipe__info">
+          <img className="card__recipe__time__icon" src={fire} alt="icône de difficulté" />
+          <p className="card__recipe__time">{difficultyNameById(difficulty_id)}</p>
+        </section>
+      </div>
+      {/* TODO onClick buttons */}
+      <section className="card__recipe__buttons">
+        <button id="special__button" className="card__recipe__select__button" type="button">Sélectionner</button>
+        <button id="special__button" className="card__recipe__favorite__button" type="button">Favoris</button>
+      </section>
+    </div>
   </div>
 );
 

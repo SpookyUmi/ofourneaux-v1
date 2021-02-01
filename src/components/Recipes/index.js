@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 //import recipes from 'src/data/recipes';
 
 import CardRecipe from 'src/components/CardRecipe';
-import RecipesHeader from './RecipesHeader';
+import './styles.scss';
 
 // import './recipes.scss';
 
@@ -15,12 +15,13 @@ import RecipesHeader from './RecipesHeader';
 // map trough the data and display a CardRecipe element for each recipe,
 // and finally the main Footer (in desktop mode)
 const Recipes = ({ recipes }) => (
-  <main className="recipes">
+  <div className="recipes">
     {/* <RecipesHeader /> */}
+    {/* <h2>Résultats de la recherche</h2> */}
     {recipes?.map((recipe) => (
-      <CardRecipe {...recipe} key={recipe.id} />
+      <CardRecipe {...recipe} key={recipe.id} className="recipes__cards"/>
     ))}
-  </main>
+  </div>
 );
 
 Recipes.propTypes = {
