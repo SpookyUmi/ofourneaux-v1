@@ -1,7 +1,11 @@
 const initialState = {
   title: "O'Fourneaux",
   isClicked: false,
+  types: [],
+  seasons: [],
   tags: [],
+  difficulties: [],
+  categories: [],
   ingredients: [],
 };
 
@@ -20,14 +24,14 @@ const reducer = (oldState = initialState, action) => {
         isClicked: false,
       };
 
-    case 'TAGS_SUCCESS':
+    case 'REQUIRED_DATA_SUCCESS':
       return {
         ...oldState,
+        types: action.payload.types,
+        seasons: action.payload.seasons,
         tags: action.payload.tags,
-      };
-    case 'INGREDIENTS_SUCCESS':
-      return {
-        ...oldState,
+        difficulties: action.payload.difficulties,
+        categories: action.payload.categories,
         ingredients: action.payload.ingredients,
       };
 

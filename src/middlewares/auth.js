@@ -13,47 +13,27 @@ const auth = (store) => (next) => (action) => {
 
   const URL = 'https://ofourneaux.herokuapp.com';
 
-  async function getIngredients() {
+
+  async function getRequiredData(userToken) {
     try {
       const response = await axios({
         method: 'GET',
-        url: `${URL}/ingredients`,
+        url: `${URL}/new`,
       });
 
-      // console.log('Answer request ingredients :', response);
+      console.log('Answer request tags :', response);
 
       store.dispatch({
-        type: 'INGREDIENTS_SUCCESS',
+        type: 'REQUIRED_DATA_SUCCESS',
         payload: {
-          ingredients: response.data.data.ingredients,
+          types: response.data.data.type,
+          seasons: response.data.data.season,
+          tags: response.data.data.tag,
+          difficulties: response.data.data.difficulty,
+          categories: response.data.data.category,
+          ingredients: response.data.data.ingredient,
         },
       });
-    }
-    catch (error) {
-      // console.log('Error request ingredients :', error.response);
-    }
-  }
-
-  async function getTags(userToken) {
-    try {
-      const response = await axios({
-        method: 'GET',
-        url: `${URL}/tags`,
-        headers: {
-          authorization: userToken,
-        },
-      });
-
-      // console.log('Answer request tags :', response);
-
-      store.dispatch({
-        type: 'TAGS_SUCCESS',
-        payload: {
-          tags: response.data.data.tags,
-        },
-      });
-
-      getIngredients();
     }
     catch (error) {
       // console.log('Error request tags :', error.response);
@@ -103,7 +83,7 @@ const auth = (store) => (next) => (action) => {
       // after logging in, the action is redirect to the home page
       action.redirect('/');
 
-      getTags(userToken);
+      getRequiredData();
     }
     catch (error) {
       // console.log('Error request user :', error.response);
