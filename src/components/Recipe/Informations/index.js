@@ -1,16 +1,21 @@
+// YARN
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+// icons
 import timeIco from 'src/assets/icons/time.svg';
 import bakingIco from 'src/assets/icons/baking.svg';
 import ovenIco from 'src/assets/icons/oven.svg';
 import difficultyIco from 'src/assets/icons/difficulty.svg';
 import nutriScoreIco from 'src/assets/icons/nutriscore.svg';
 
+// SCSS
 import './styles.scss';
 
+// component
 const Informations = ({
+  id,
   title,
   description,
   tags,
@@ -18,7 +23,22 @@ const Informations = ({
   bakingTime,
   difficulty,
   nutriScore,
+  isLogged,
+  sendRecipeInShoppingList,
+  shoppingList,
 }) => {
+  let messageButton = 'Sélectionner';
+
+  const checkIfRecipeIsInShoppingList = () => {
+    shoppingList.forEach((itemList) => {
+      if (itemList === id) {
+        messageButton = 'Désélectionner';
+      }
+    });
+  };
+
+  checkIfRecipeIsInShoppingList();
+
   return (
     <div className="recipe__infos">
       <div className="recipe__infos__header">
@@ -32,7 +52,7 @@ const Informations = ({
           <div className="recipe__infos__header__intro__tags">
             {
               tags.map((tag) => (
-                <div className="recipe__infos__header__intro__tag">
+                <div key={tag} className="recipe__infos__header__intro__tag">
                   {tag}
                 </div>
               ))
@@ -41,7 +61,7 @@ const Informations = ({
         </div>
       </div>
 
-      <div className="recipe__line"></div>
+      <div className="recipe__line" />
       <div className="recipe__infos__data">
         <div className="recipe__infos__data__line">
           <div className="recipe__infos__data__block recipe__infos__data__block--total">
@@ -105,22 +125,29 @@ const Informations = ({
         </div>
       </div>
       <div className="recipe__select">
-        <div className="recipe__line"></div>
-        {/* TODO: function to add the recipe to the user's recipe list,
-        and update the shopping list accordingly */}
-        <button
-          className="recipe__select__button"
-          type="button"
-        >
-          Sélectionner
-        </button>
-        <div className="recipe__line"></div>
+        <div className="recipe__line" />
+        {
+          isLogged
+          && (
+            <button
+              id={id}
+              className="recipe__select__button"
+              type="button"
+              onClick={sendRecipeInShoppingList}
+            >
+              {messageButton}
+            </button>
+          )
+        }
+        <div className="recipe__line" />
       </div>
     </div>
   )
 };
 
+// PropTypes
 Informations.propTypes = {
+  id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   tags: PropTypes.array.isRequired,
@@ -128,6 +155,27 @@ Informations.propTypes = {
   bakingTime: PropTypes.number.isRequired,
   difficulty: PropTypes.string.isRequired,
   nutriScore: PropTypes.string.isRequired,
+  isLogged: PropTypes.bool.isRequired,
+  sendRecipeInShoppingList: PropTypes.func.isRequired,
+  shoppingList: PropTypes.array.isRequired,
 };
 
-export default connect(null, null)(Informations);
+const mapStateToProps = (state) => ({
+  isLogged: state.auth.isLogged,
+  shoppingList: state.user.shoppingList,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  // sends the request to the middleware "shoppingList.js"
+  // to update the list of the user's shopping list
+  sendRecipeInShoppingList: (event) => {
+    dispatch({
+      type: 'UPDATE_SHOPPING_LIST_REQUEST',
+      payload: {
+        id: event.target.id,
+      },
+    });
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Informations);

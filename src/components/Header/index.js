@@ -1,45 +1,56 @@
-// == Import npm
+// YARN
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { NavLink, withRouter } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+
+// icons
 import menu from 'src/assets/icons/nav.svg';
 
+// SCSS
 import './styles.scss';
 
+// component
 const Header = ({
   title,
   isLogged,
-  getProfile,
   handleDisconnect,
   trackSearch,
   handleSearch,
   setIsOpen,
-  isOpen
+  isOpen,
 }) => (
   <header className="header">
     <div className="header__container">
       {/* TODO: onSubmit, send a GET request (axios), and redirect to /recettes */}
-      {!isOpen &&
-          <img className="header__container__menu__icon" src={menu} alt="icône menu"
-            onClick={() => { setIsOpen(true) }}
+      {
+        !isOpen
+        && (
+          <img
+            className="header__container__menu__icon"
+            src={menu}
+            alt="icône menu"
+            onClick={() => {
+              setIsOpen(true);
+            }}
           />
-        }
-        {/* TODO: onSubmit, send a GET request (axios), and redirect to /recettes */}
-        <form type="submit" onSubmit={handleSearch} className="header__container__searchform">
-          <div className="header__container__searchform__icon">
-            <FontAwesomeIcon icon={faSearch} />
-          </div>
-          <input
-            type="text"
-            placeholder="Recherche..."
-            className="header__container__elem--input"
-            id="searchInput"
-            onChange={trackSearch}
-          />
-        </form>
+        )
+      }
+      {/* TODO: onSubmit, send a GET request (axios), and redirect to /recettes */}
+      <form type="submit" onSubmit={handleSearch} className="header__container__searchform">
+        <div className="header__container__searchform__icon">
+          <FontAwesomeIcon icon={faSearch} />
+        </div>
+        <input
+          type="text"
+          placeholder="Recherche..."
+          className="header__container__elem--input"
+          id="searchInput"
+          onChange={trackSearch}
+        />
+      </form>
       <NavLink exact to="/">
         <h1 className="header__container__title">{title}</h1>
       </NavLink>
@@ -56,7 +67,7 @@ const Header = ({
         isLogged
         && (
           <div className="header__container__buttons desktop">
-            <NavLink exact to="/profil" className="header__container__elem button__style" onClick={getProfile}>Mon profil</NavLink>
+            <NavLink exact to="/profil" className="header__container__elem button__style">Mon profil</NavLink>
             <NavLink to="/" className="header__container__elem header__container__elem--signout link__style" onClick={handleDisconnect}>Se déconnecter</NavLink>
 
           </div>
@@ -66,25 +77,23 @@ const Header = ({
   </header>
 );
 
+// PropTypes
 Header.propTypes = {
   title: PropTypes.string.isRequired,
   isLogged: PropTypes.bool.isRequired,
-  getProfile: PropTypes.func.isRequired,
   handleDisconnect: PropTypes.func.isRequired,
   trackSearch: PropTypes.func.isRequired,
   handleSearch: PropTypes.func.isRequired,
   setIsOpen: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
-}
-
-
-const mapStateToProps = (state, ownProps) => {
-  return {
-    title: state.app.title,
-    isLogged: state.auth.isLogged,
-    recipes: state.recipes.recipes,
-  }
 };
+
+// eslint-disable-next-line no-unused-vars
+const mapStateToProps = (state, ownProps) => ({
+  title: state.app.title,
+  isLogged: state.auth.isLogged,
+  recipes: state.recipes.recipes,
+});
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   trackSearch: (event) => {
@@ -101,16 +110,11 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     event.preventDefault();
     dispatch({
       type: 'SEND_SEARCH_REQUEST',
-      redirect: ownProps.history.push
+      redirect: ownProps.history.push,
     });
   },
 
-  getProfile: () => {
-    dispatch({
-      type: 'SEND_PROFILE_REQUEST',
-    });
-  },
-
+  // when the user logs out, we dispatch the action
   handleDisconnect: () => {
     dispatch({
       type: 'LOGOUT_SUCCESS',
@@ -118,6 +122,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
 });
 
+// eslint-disable-next-line import/no-mutable-exports
 let container = connect(mapStateToProps, mapDispatchToProps)(Header);
 
 container = withRouter(container);
