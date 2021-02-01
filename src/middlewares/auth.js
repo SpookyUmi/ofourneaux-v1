@@ -18,6 +18,9 @@ const auth = (store) => (next) => (action) => {
       const response = await axios({
         method: 'GET',
         url: `${URL}/new`,
+        headers: {
+          authorization: userToken,
+        },
       });
 
       console.log('Answer request tags :', response);
@@ -35,7 +38,7 @@ const auth = (store) => (next) => (action) => {
       });
     }
     catch (error) {
-      // console.log('Error request tags :', error.response);
+      console.log('Error request tags :', error.response);
     }
   }
 
@@ -73,7 +76,7 @@ const auth = (store) => (next) => (action) => {
           // TODO: uncomment next line
           // shoppingList: response.data.data.shopping_list,
           // ! test table, to be deleted
-          eatingPreferences: [],
+          eatingPreferences: [2],
           // TODO: uncomment next line
           // eatingPreferences: response.data.data.eatingPreferences,
         },
@@ -82,7 +85,7 @@ const auth = (store) => (next) => (action) => {
       // after logging in, the action is redirect to the home page
       action.redirect('/');
 
-      getRequiredData();
+      getRequiredData(userToken);
     }
     catch (error) {
       // console.log('Error request user :', error.response);

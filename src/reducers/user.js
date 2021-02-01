@@ -50,18 +50,32 @@ const reducer = (oldState = initialState, action) => {
       };
 
     case 'UPDATE_EATING_PREFERENCES':
+      // a copy of the food preference table was created in the state
       // eslint-disable-next-line no-case-declarations, max-len
       const updatedEatingPreferences = oldState.eatingPreferences.map((eatingPreference) => eatingPreference);
-      console.log('New copy of the eating preferences array :', updatedEatingPreferences);
+      // console.log('New copy of the eating preferences array :', updatedEatingPreferences);
 
+      // we target the index of the selected tag
       // eslint-disable-next-line no-case-declarations
       const index = updatedEatingPreferences.indexOf(action.payload.id);
-      console.log(index);
+      // console.log(index);
 
+      // if the food preference is already in the table, it is removed
       if (index > -1) {
         updatedEatingPreferences.splice(index, 1);
-        console.log('Eating preference removed !');
-        console.log(updatedEatingPreferences);
+        // console.log('Eating preference removed !');
+        // console.log(updatedEatingPreferences);
+        return {
+          ...oldState,
+          eatingPreferences: updatedEatingPreferences,
+        };
+      }
+
+      // if the food preference is not already in the table, it is added
+      if (index === -1) {
+        updatedEatingPreferences.push(action.payload.id);
+        // console.log('Eating preference add !');
+        // console.log(updatedEatingPreferences);
         return {
           ...oldState,
           eatingPreferences: updatedEatingPreferences,

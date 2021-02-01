@@ -30,6 +30,7 @@ const Navbar = ({
   trackSearch,
   handleSearch,
   handleDisconnect,
+  getFavoritesRecipes,
 }) => (
   <>
     {isOpen
@@ -78,10 +79,10 @@ const Navbar = ({
 
           {/* The following elements must only be displayed if the user is logged in */}
           {
-          isLogged
+          isLogged && status === 'user'
             && (
               <>
-                <NavLink to="/profil/:slug" className="navbar__link__profile link__style">
+                <NavLink to="/profil" className="navbar__link__profile link__style">
                   <img className="navbar__link__icon" src={profile} alt="icône profil" />
                   Mon profil
                 </NavLink>
@@ -89,7 +90,11 @@ const Navbar = ({
                   <img className="navbar__link__icon" src={list} alt="icône liste de courses" />
                   Liste de courses
                 </NavLink>
-                <NavLink to="/profil/recettes-favorites" className="navbar__link__favorites link__style">
+                <NavLink
+                  to="/profil/recettes-favorites"
+                  className="navbar__link__favorites link__style"
+                  onClick={getFavoritesRecipes}
+                >
                   <img className="navbar__link__icon" src={favorites} alt="icône favoris" />
                   Recettes favorites
                 </NavLink>
@@ -151,6 +156,7 @@ Navbar.propTypes = {
   trackSearch: PropTypes.func.isRequired,
   handleSearch: PropTypes.func.isRequired,
   handleDisconnect: PropTypes.func.isRequired,
+  getFavoritesRecipes: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -181,6 +187,13 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   handleDisconnect: () => {
     dispatch({
       type: 'LOGOUT_SUCCESS',
+    });
+  },
+
+  // sends the request to retrieve favorite recipes to the middleware "profile.js"
+  getFavoritesRecipes: () => {
+    dispatch({
+      type: 'SEND_FAVORITES_RECIPES_REQUEST',
     });
   },
 });
