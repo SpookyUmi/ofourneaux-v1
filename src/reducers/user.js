@@ -30,6 +30,7 @@ const reducer = (oldState = initialState, action) => {
         status: action.payload.status,
         recipesHistory: action.payload.recipesHistory,
         favoritesRecipes: action.payload.favoritesRecipes,
+        shoppingList: action.payload.shoppingList,
         eatingPreferences: action.payload.eatingPreferences,
       };
 
@@ -57,10 +58,17 @@ const reducer = (oldState = initialState, action) => {
         email: action.payload.email,
       };
 
+    // when the update of favourite recipes and shopping
+    // list is successful, the state is updated
     case 'UPDATE_FAVORITES_SUCCESS':
       return {
         ...oldState,
         favoritesRecipes: action.payload.favoritesRecipes,
+      };
+    case 'UPDATE_SHOPPING_LIST_SUCCESS':
+      return {
+        ...oldState,
+        shoppingList: action.payload.shoppingList,
       };
 
     // after deletion to the account, the state is emptied

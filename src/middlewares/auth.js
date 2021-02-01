@@ -41,7 +41,11 @@ const auth = (store) => (next) => (action) => {
           // test table, to be deleted
           favoritesRecipes: [1, 3, 5],
           // TODO: uncomment line 43
-          // favoritesRecipes: response.data.data.favoritesRecipes,
+          // favoritesRecipes: response.data.data.favorites_recipes,
+          // test table, to be deleted
+          shoppingList: [2, 4, 6],
+          // TODO: uncomment line 48
+          // shoppingList: response.data.data.shopping_list,
           eatingPreferences: response.data.data.eatingPreferences,
         },
       });
