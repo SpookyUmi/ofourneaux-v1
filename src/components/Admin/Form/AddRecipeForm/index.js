@@ -14,22 +14,22 @@ const AddRecipeForm = ({
 }) => {
   // I'm going to create a local state here to avoid having too many dispatches between my component
   // and the store.
-  const [title, setTitle] = useState('');
-  const [picture, setPicture] = useState('');
-  const [recipeType, setRecipeType] = useState(null);
-  const [description, setDescription] = useState('');
-  const [recipeSeasons, setRecipeSeasons] = useState([]);
-  const [localRecipeTags, setLocalRecipeTags] = useState([]);
-  const [recipeDifficulty, setRecipeDifficulty] = useState(null);
-  const [nutriScore, setNutriScore] = useState('');
-  const [preparationTime, setPreparationTime] = useState(0);
-  const [bakingTime, setBakingTime] = useState(0);
-  const [recipeIngredients, setRecipeIngredients] = useState([]);
-  const [newIngredient, setNewIngredient] = useState('');
-  const [newUnit, setNewUnit] = useState('');
-  const [newQuantity, setNewQuantity] = useState('');
-  const [steps, setSteps] = useState([]);
-  const [newStep, setNewStep] = useState('');
+  const [localTitle, setLocalTitle] = useState('');
+  const [localPicture, setLocalPicture] = useState('');
+  const [localType, setLocalType] = useState(null);
+  const [localDescription, setLocalDescription] = useState('');
+  const [localSeasons, setLocalSeasons] = useState([]);
+  const [localTags, setLocalTags] = useState([]);
+  const [localDifficulty, setLocalDifficulty] = useState(null);
+  const [localNutriScore, setLocalNutriScore] = useState('');
+  const [localPreparationTime, setLocalPreparationTime] = useState(0);
+  const [localBakingTime, setLocalBakingTime] = useState(0);
+  const [localIngredients, setLocalIngredients] = useState([]);
+  const [localNewIngredient, setLocalNewIngredient] = useState('');
+  const [localNewUnit, setLocalNewUnit] = useState('');
+  const [localNewQuantity, setLocalNewQuantity] = useState('');
+  const [localSteps, setLocalSteps] = useState([]);
+  const [localNewStep, setLocalNewStep] = useState('');
 
   return (
     <form className="recipe__form">
@@ -41,9 +41,9 @@ const AddRecipeForm = ({
             className="recipe__form__title__input margin"
             type="text"
             placeholder="Titre"
-            value={title}
+            value={localTitle}
             onChange={(event) => {
-              setTitle(event.target.value);
+              setLocalTitle(event.target.value);
             }}
           />
         </label>
@@ -54,9 +54,9 @@ const AddRecipeForm = ({
             className="recipe__form__image__input margin"
             type="file"
             placeholder="Choisir votre fichier"
-            value={picture}
+            value={localPicture}
             onChange={(event) => {
-              setPicture(event.target.value);
+              setLocalPicture(event.target.value);
             }}
           />
         </label>
@@ -72,7 +72,7 @@ const AddRecipeForm = ({
               onChange={
             (event) => {
               if (event.target.checked) {
-                setRecipeType(type.id);
+                setLocalType(type.id);
               }
             }
           }
@@ -86,9 +86,9 @@ const AddRecipeForm = ({
             className="recipe__form__description__input margin"
             type="text"
             placeholder="Veuillez décrire brièvement la recette."
-            value={description}
+            value={localDescription}
             onChange={(event) => {
-              setDescription(event.target.value);
+              setLocalDescription(event.target.value);
             }}
           />
         </label>
@@ -107,16 +107,16 @@ const AddRecipeForm = ({
               onChange={
             (event) => {
               if (event.target.checked) {
-                setRecipeSeasons([
-                  ...recipeSeasons,
+                setLocalSeasons([
+                  ...localSeasons,
                   season.id,
                 ]);
               }
-              else if (recipeSeasons.indexOf(season.id)) {
-                const index = recipeSeasons.indexOf(season.id);
-                recipeSeasons.splice(index, 1);
+              else if (localSeasons.indexOf(season.id)) {
+                const index = localSeasons.indexOf(season.id);
+                localSeasons.splice(index, 1);
               }
-              else setRecipeSeasons([...recipeSeasons]);
+              else setLocalSeasons([...localSeasons]);
             }
           }
             /> {season.name}
@@ -134,16 +134,16 @@ const AddRecipeForm = ({
               name={tag}
               onChange={(event) => {
                 if (event.target.checked) {
-                  setLocalRecipeTags([
-                    ...localRecipeTags,
+                  setLocalTags([
+                    ...localTags,
                     tag,
                   ]);
                 }
-                else if (localRecipeTags.indexOf(tag)) {
-                  const index = localRecipeTags.indexOf(tag);
-                  localRecipeTags.splice(index, 1);
+                else if (localTags.indexOf(tag)) {
+                  const index = localTags.indexOf(tag);
+                  localTags.splice(index, 1);
                 }
-                else setLocalRecipeTags([...localRecipeTags]);
+                else setLocalTags([...localTags]);
               }}
             />
             {tag}
@@ -160,12 +160,12 @@ const AddRecipeForm = ({
             className="margin"
             name="difficulties"
             onChange={(event) => {
-              setRecipeDifficulty(event.target.value);
+              setLocalDifficulty(event.target.value);
             }}
           >
-            {difficulties.map((difficulty) => {
-              <option value={difficulty.id}>{difficulty.level}</option>;
-            })}
+            {difficulties.map((difficulty) => (
+              <option value={difficulty.id}>{difficulty.level}</option>
+            ))}
           </select>
         </label>
 
@@ -177,7 +177,7 @@ const AddRecipeForm = ({
             className="margin"
             name="scores"
             onChange={(event) => {
-              setNutriScore(
+              setLocalNutriScore(
                 event.target.value,
               );
             }}
@@ -194,9 +194,9 @@ const AddRecipeForm = ({
         <label className="recipe__form__div__3__p label">Temps de préparation
           <input
             className="margin"
-            value={preparationTime}
+            value={localPreparationTime}
             onChange={(event) => {
-              setPreparationTime(event.target.value);
+              setLocalPreparationTime(event.target.value);
             }}
             type="number"
             name="time"
@@ -210,9 +210,9 @@ const AddRecipeForm = ({
         <label className="recipe__form__div__3__p label">Temps de cuisson
           <input
             className="margin"
-            value={bakingTime}
+            value={localBakingTime}
             onChange={(event) => {
-              setBakingTime(event.target.value);
+              setLocalBakingTime(event.target.value);
             }}
             type="number"
             name="time"
@@ -227,7 +227,7 @@ const AddRecipeForm = ({
       <div className="recipe__form__div__4">
         {/* ---- INGREDIENTS ---- */}
         <p className="recipe__form__div__4__p label">Ingrédients</p>
-        {recipeIngredients.length !== 0 && recipeIngredients.map((ingredient) => (
+        {localIngredients.length !== 0 && localIngredients.map((ingredient) => (
           <div key={ingredient.id}>
             <span className="recipe__form__div__4__quantity">{ingredient.quantity}</span>
             <span className="recipe__form__div__4__unit">{ingredient.unit}</span>
@@ -237,8 +237,8 @@ const AddRecipeForm = ({
               src={bin}
               alt="bin"
               onClick={() => {
-                const index = recipeIngredients.indexOf(ingredient);
-                recipeIngredients.splice(index, 1);
+                const index = localIngredients.indexOf(ingredient);
+                localIngredients.splice(index, 1);
               }}
             />
           </div>
@@ -247,7 +247,7 @@ const AddRecipeForm = ({
           className="margin"
           name="ingredients"
           onChange={(event) => {
-            setNewIngredient(
+            setLocalNewIngredient(
               event.target.value,
             );
           }}
@@ -263,7 +263,7 @@ const AddRecipeForm = ({
           type="text"
           placeholder="Unité"
           onChange={(event) => {
-            setNewUnit(
+            setLocalNewUnit(
               event.target.value,
             );
           }}
@@ -273,7 +273,7 @@ const AddRecipeForm = ({
           type="text"
           placeholder="Quantité"
           onChange={(event) => {
-            setNewQuantity(
+            setLocalNewQuantity(
               event.target.value,
             );
           }}
@@ -282,10 +282,10 @@ const AddRecipeForm = ({
           type="button"
           onClick={(event) => {
             event.preventDefault();
-            setRecipeIngredients([{
-              newIngredient,
-              newQuantity,
-              newUnit,
+            setLocalIngredients([{
+              localNewIngredient,
+              localNewQuantity,
+              localNewUnit,
             }]);
           }}
         >Ajouter un ingrédient
@@ -293,15 +293,15 @@ const AddRecipeForm = ({
         {/* ---- STEPS ---- */}
         <p className="recipe__form__div__4__p label">Étapes de préparation</p>
         <ol>
-          {steps?.map((step) => (
+          {localSteps?.map((step) => (
             <li key={step.string}>{step.string}
               <img
                 className="recipe__form__div__4__delete__icon"
                 src={bin}
                 alt="bin"
                 onClick={() => {
-                  const index = steps.indexOf(step);
-                  steps.splice(index, 1);
+                  const index = localSteps.indexOf(step);
+                  localSteps.splice(index, 1);
                 }}
               />
             </li>
@@ -312,17 +312,17 @@ const AddRecipeForm = ({
           type="text"
           placeholder="Veuillez saisir une étape"
           onChange={(event) => {
-            setNewStep(event.target.value);
+            setLocalNewStep(event.target.value);
           }}
         />
         <button
           type="button"
           onClick={(event) => {
             event.preventDefault();
-            setSteps([
-              ...steps,
+            setLocalSteps([
+              ...localSteps,
               {
-                string: newStep,
+                string: localNewStep,
               },
             ]);
           }}
@@ -342,18 +342,18 @@ const AddRecipeForm = ({
               method: 'post',
               url: 'https://ofourneaux.herokuapp.com/recipes',
               data: {
-                title: addRecipeForm.append('title', title),
-                picture: addRecipeForm.append('picture', picture),
-                type: addRecipeForm.append('type', type),
-                description: addRecipeForm.append('description', description),
-                seasons: addRecipeForm.append('seasons', recipeSeasons),
-                tags: addRecipeForm.append('tags', localRecipeTags),
-                difficulty: addRecipeForm.append('difficulty', difficulty),
-                nutri_score: addRecipeForm.append('nutri_score', nutriScore),
-                preparation_time: addRecipeForm.append('preparation_time', preparationTime),
-                baking_time: addRecipeForm.append('baking_time', bakingTime),
-                ingredients: addRecipeForm.append('ingredients', recipeIngredients),
-                steps: addRecipeForm.append('steps', steps),
+                title: addRecipeForm.append('title', localTitle),
+                picture: addRecipeForm.append('picture', localPicture),
+                type: addRecipeForm.append('type', localType),
+                description: addRecipeForm.append('description', localDescription),
+                seasons: addRecipeForm.append('seasons', localSeasons),
+                tags: addRecipeForm.append('tags', localTags),
+                difficulty: addRecipeForm.append('difficulty', localDifficulty),
+                nutri_score: addRecipeForm.append('nutri_score', localNutriScore),
+                preparation_time: addRecipeForm.append('preparation_time', localPreparationTime),
+                baking_time: addRecipeForm.append('baking_time', localBakingTime),
+                ingredients: addRecipeForm.append('ingredients', localIngredients),
+                steps: addRecipeForm.append('steps', localSteps),
               },
               headers: { authorization: userToken, 'Content-Type': 'multipart/form-data' },
             })

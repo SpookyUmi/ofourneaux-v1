@@ -7,11 +7,10 @@ import axios from 'axios';
 
 import 'src/components/Admin/admin.scss';
 import bin from 'src/assets/icons/delete.svg';
-import seasonsArray from 'src/data/seasons';
 import './updateRecipeForm.scss';
 
 const UpdateRecipeForm = ({
-  tags, ingredients, userToken,
+  types, seasons, tags, difficulties, ingredients, userToken,
   recipeId,
   recipeTitle,
   recipePictureUrl,
