@@ -1,6 +1,8 @@
 const initialState = {
   // by default, the modal is closed
   showModal: false,
+  message: '',
+  checked: false,
 };
 
 const reducer = (oldState = initialState, action) => {
@@ -26,6 +28,14 @@ const reducer = (oldState = initialState, action) => {
       return {
         ...oldState,
         showModal: false,
+      };
+
+    // after the profile has been modified, the user is informed
+    // that these changes have been taken into account
+    case 'EDIT_PROFILE_SUCCESS':
+      return {
+        ...oldState,
+        message: 'Les changements ont bien été pris en compte',
       };
 
     // when the user logs out, the modal disappears

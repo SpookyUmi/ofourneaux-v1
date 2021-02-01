@@ -14,6 +14,7 @@ import profileMiddleware from 'src/middlewares/profile';
 import signUpMiddleware from 'src/middlewares/signUp';
 import searchMiddleware from 'src/middlewares/search';
 import recipeMiddleware from 'src/middlewares/recipe';
+import shoppingListMiddleware from 'src/middlewares/shoppingList';
 
 const store = createStore(
   rootReducer,
@@ -28,6 +29,7 @@ const store = createStore(
       signUpMiddleware,
       searchMiddleware,
       recipeMiddleware,
+      shoppingListMiddleware,
     ),
   ),
 );
