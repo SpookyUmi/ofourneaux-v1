@@ -32,6 +32,7 @@ function uploadImage(image) {
           .child(image.name)
           .getDownloadURL()
           .then((url) => {
+            console.log(url);
             resolve(url);
           });
       },

@@ -6,14 +6,15 @@ import PropTypes from 'prop-types';
 import profilePicture from 'src/assets/images/profile-picture.jpg';
 import heartFull from 'src/assets/icons/heart-full.svg';
 import list from 'src/assets/icons/list.svg';
+import uploadImage from 'src/middlewares/firebase';
 
 import Modal from './Modal';
 
 import './styles.scss';
-import uploadImage from '../../middlewares/firebase';
 
-const imageUrl = (e) => {
-  uploadImage(e.target.files[0]);
+const imageUrl = async (e) => {
+  const url = await uploadImage(e.target.files[0]);
+  console.log('URl =>', url);
 };
 
 const Profile = ({
