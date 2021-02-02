@@ -45,7 +45,30 @@ const user = (store) => (next) => (action) => {
           store.dispatch({
             type: 'SHOPPING_LIST_SUCCESS',
             payload: {
-              shoppingList: response.data.data.shopping_list,
+              selectedRecipes: response.data.data,
+            },
+          });
+        })
+        .catch((error) => {
+          console.log('Erreur requête :', error.response);
+          // ! do we send anything in particular if the request fails ?
+        });
+      break;
+    case 'SEND_SHOPPING_LIST_REQUEST':
+      axios({
+        method: 'get',
+        url: `https://ofourneaux.herokuapp.com/shopping_list/${state.user.id}/generate`,
+        header: {
+          // ! the token is necessary ?
+          authorization: state.user.token,
+        },
+      })
+        .then((response) => {
+          console.log('Réponse requête :', response);
+          store.dispatch({
+            type: 'SHOPPING_LIST_SUCCESS',
+            payload: {
+              shoppingList: response.data.data,
             },
           });
         })

@@ -61,6 +61,7 @@
     "@fortawesome/react-fontawesome": "^0.1.14",
     "axios": "^0.21.1",
     "commitizen": "^4.2.3",
+    "connected-react-router": "^6.8.0",
     "dotenv-webpack": "^6.0.0",
     "firebase": "^8.2.5",
     "form-data": "^3.0.0",

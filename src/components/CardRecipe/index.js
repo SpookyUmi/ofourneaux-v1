@@ -29,7 +29,7 @@ const CardRecipe = ({
     <img className="card__recipe__img" src={picture_url} alt={title} />
     <div className="card__recipe__container">
       <h3 className="card__recipe__title">
-        <NavLink to={buildRecipeURL(title)} id={id} className="card__recipe__title__link" onClick={getRecipeById}>
+        <NavLink to={title && buildRecipeURL(title)} id={id} className="card__recipe__title__link" onClick={getRecipeById}>
           {title}
         </NavLink>
       </h3>

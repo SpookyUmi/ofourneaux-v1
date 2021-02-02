@@ -8,6 +8,7 @@ const initialState = {
   recipesHistory: [],
   favoritesRecipes: [],
   shoppingList: [],
+  ingredientsList: [],
   eatingPreferences: [],
   pictureUrl: '',
 };
@@ -134,6 +135,7 @@ const reducer = (oldState = initialState, action) => {
       return {
         ...oldState,
         shoppingList: action.payload.shoppingList,
+        selectedRecipes: action.payload.selectedRecipes,
       };
 
     case 'EDIT_FIELD_PROFILE_LAST_NAME':
