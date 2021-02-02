@@ -27,8 +27,7 @@ const Inscription = ({
       Inscription
     </h1>
     <div className="inscription__content">
-      <div className="inscription__content__text">Créez votre compte et accédez aux services de Ofourneaux (générateur de recettes, liste de courses, recettes, favorites, etc).</div>
-
+      <div className="inscription__content__text">Créez votre compte et accédez aux services de O'fourneaux (générateur de recettes, liste de courses, recettes, favorites, etc).</div>
       <form
         action=""
         method="POST"
