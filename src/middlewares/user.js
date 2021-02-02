@@ -1,4 +1,5 @@
 import axios from 'axios';
+import FormData from 'form-data';
 
 const user = (store) => (next) => (action) => {
   const state = store.getState();
