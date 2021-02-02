@@ -47,6 +47,9 @@ const App = ({ recipes }) => {
       <Route exact path="/profil/liste-de-courses">
         <ShoppingList />
       </Route>
+      <Route exact path="/profil/recettes-favorites">
+        <Recipes />
+      </Route>
       <Route exact path="/inscription">
         <Inscription />
       </Route>

@@ -162,6 +162,7 @@ Informations.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
+  id: state.recipe.id,
   isLogged: state.auth.isLogged,
   shoppingList: state.user.shoppingList,
 });

@@ -4,12 +4,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 50px 250px;
+  margin: 3.1rem auto;
 
   &__title {
     font-size: 2rem;
     font-family: vars.$font-title;
-    margin-bottom: 25px;
+    margin-bottom: 1.5rem;
   }
 
   &__wrapper {
@@ -24,7 +24,7 @@
     // plus d'infos : https://www.alsacreations.com/article/lire/539-Centrer#:~:text=Pour%20centrer%20horizontalement%20un%20%C3%A9l%C3%A9ment,%22auto%22%20aux%20marges%20lat%C3%A9rales.&text=De%20cette%20mani%C3%A8re%2C%20il%20%C3%A9quilibrera%20automatiquement%20les%20marges%20lat%C3%A9rales.
     left: 50%;
     transform: translate(-50%, 0);
-    border-radius: 150px;
+    border-radius: 9.375rem;
   }
 
   &__content {
@@ -35,15 +35,15 @@
     margin-top: 80px;
     color: vars.$color-primary;
     background-color: vars.$color-secondary;
-    border-radius: 25px;
-    padding: 90px 25px 25px 25px;
+    border-radius: 1.5rem;
+    padding: 5.6rem 1.5rem 1.5rem 1.5rem;
 
     &__header {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
       width: 40%;
-      margin-bottom: 25px;
+      margin-bottom: 1.5rem;
 
       &__link {
         display: flex;
@@ -55,7 +55,7 @@
         border-radius: 10rem;
         transition: background-color 0.3s ease;
       }
-      
+
       &__link:hover {
         background-color: #ffffff80;
       }
@@ -79,18 +79,18 @@
       &__input {
         display: flex;
         flex-direction: column;
-        margin: 10px 0px 5px 0px;
+        margin: 0.6rem 0 0.3rem 0;
       }
 
       &__input:first-child {
-        margin-top: 0px;
+        margin-top: 0;
       }
 
       &__label {
         font-size: 1rem;
         font-weight: 700;
         color: #000000;
-        margin: 0px 18px 5px 18px;
+        margin: 0 1.1rem 0.3rem 1.1rem;
       }
 
       &__field {
@@ -113,17 +113,17 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        margin: 5px 15px;
+        margin: 0.3rem 0.93rem;
       }
 
       &__title {
         color: #000000;
         font-family: vars.$font-title;
-        margin-bottom: 15px;
+        margin-bottom: 0.93rem;
       }
 
       &__checkbox {
-        margin-right: 10px;
+        margin-right: 0.6rem;
       }
 
       &__label {
@@ -143,15 +143,15 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      margin-bottom: 20px;
+      margin-bottom: 1.25rem;
     }
 
     &__button:first-child {
-      margin-top: 0rem;
+      margin-top: 0;
     }
 
     &__button:last-child {
-      margin-bottom: 0rem;
+      margin-bottom: 0;
     }
 
     &__button:hover {
@@ -191,7 +191,7 @@
         &__label {
           font-size: 0.9rem;
         }
-  
+
         &__field {
           font-size: 0.9rem;
         }

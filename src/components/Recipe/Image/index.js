@@ -96,6 +96,7 @@ Image.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
+  id: state.recipe.id,
   status: state.user.status,
   isLogged: state.auth.isLogged,
   favoritesRecipes: state.user.favoritesRecipes,

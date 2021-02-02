@@ -1,8 +1,8 @@
 @use 'src/styles/vars';
 
 .contact {
-
-  height: 100%;
+  height: 100vh;
+  margin-top: 3rem;
 
   &__title {
     margin: 1.5rem;

@@ -64,7 +64,7 @@ const AddRecipeForm = ({
         {/* ---- TYPES ---- */}
         <p className="recipe__form__div__1__p label">Catégories</p>
         {types.map((type) => (
-          <label className="label" key={type.name}>
+          <label className="label" key={type.id}>
             <input
               className="choice__text margin"
               type="radio"
@@ -127,26 +127,26 @@ const AddRecipeForm = ({
         the tag is in recipe.tags (if else?) */}
         <p className="recipe__form__div__2__p label">Labels</p>
         {tags?.map((tag) => (
-          <label className="label" htmlFor={tag} key={tag}>
+          <label className="label" htmlFor={tag.name} key={tag.id}>
             <input
               className="margin"
               type="checkbox"
-              name={tag}
+              name={tag.name}
               onChange={(event) => {
                 if (event.target.checked) {
                   setLocalTags([
                     ...localTags,
-                    tag,
+                    tag.id,
                   ]);
                 }
-                else if (localTags.indexOf(tag)) {
-                  const index = localTags.indexOf(tag);
+                else if (localTags.indexOf(tag.id)) {
+                  const index = localTags.indexOf(tag.id);
                   localTags.splice(index, 1);
                 }
                 else setLocalTags([...localTags]);
               }}
             />
-            {tag}
+            {tag.name}
           </label>
         ))}
       </div>
@@ -164,7 +164,7 @@ const AddRecipeForm = ({
             }}
           >
             {difficulties.map((difficulty) => (
-              <option value={difficulty.id}>{difficulty.level}</option>
+              <option value={difficulty.id} key={difficulty.id}>{difficulty.level}</option>
             ))}
           </select>
         </label>
@@ -228,16 +228,16 @@ const AddRecipeForm = ({
         {/* ---- INGREDIENTS ---- */}
         <p className="recipe__form__div__4__p label">Ingrédients</p>
         {localIngredients.length !== 0 && localIngredients.map((ingredient) => (
-          <div key={ingredient.id}>
-            <span className="recipe__form__div__4__quantity">{ingredient.quantity}</span>
-            <span className="recipe__form__div__4__unit">{ingredient.unit}</span>
-            <span className="recipe__form__div__4__name">{ingredient.name}</span>
+          <div key={ingredient.name}>
+            <span className="recipe__form__div__4__quantity ingredient__element">{ingredient.quantity}</span>
+            <span className="recipe__form__div__4__unit ingredient__element">{ingredient.unit}</span>
+            <span className="recipe__form__div__4__name ingredient__element">{ingredient.name}</span>
             <img
               className="recipe__form__div__4__delete__icon"
               src={bin}
               alt="bin"
               onClick={() => {
-                const index = localIngredients.indexOf(ingredient);
+                const index = localIngredients.indexOf(ingredient.id);
                 localIngredients.splice(index, 1);
               }}
             />
@@ -282,11 +282,16 @@ const AddRecipeForm = ({
           type="button"
           onClick={(event) => {
             event.preventDefault();
-            setLocalIngredients([{
-              localNewIngredient,
-              localNewQuantity,
-              localNewUnit,
-            }]);
+            setLocalIngredients(
+              [
+                ...localIngredients,
+                {
+                  name: localNewIngredient,
+                  quantity: localNewQuantity,
+                  unit: localNewUnit,
+                },
+              ],
+            );
           }}
         >Ajouter un ingrédient
         </button>
@@ -294,7 +299,7 @@ const AddRecipeForm = ({
         <p className="recipe__form__div__4__p label">Étapes de préparation</p>
         <ol>
           {localSteps?.map((step) => (
-            <li key={step.string}>{step.string}
+            <li key={step}>{step}
               <img
                 className="recipe__form__div__4__delete__icon"
                 src={bin}
@@ -319,12 +324,13 @@ const AddRecipeForm = ({
           type="button"
           onClick={(event) => {
             event.preventDefault();
-            setLocalSteps([
-              ...localSteps,
-              {
-                string: localNewStep,
-              },
-            ]);
+            setLocalSteps(
+              [
+                ...localSteps,
+                localNewStep,
+              ],
+            );
+            event.target.value = '';
           }}
         >Ajouter une étape
         </button>
@@ -377,7 +383,7 @@ AddRecipeForm.propTypes = {
     name: PropTypes.string,
   })).isRequired,
   ingredients: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.number,
     name: PropTypes.string,
     category: PropTypes.string,
   })).isRequired,

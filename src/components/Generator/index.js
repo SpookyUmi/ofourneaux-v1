@@ -72,7 +72,7 @@ const Generator = ({
                 <label htmlFor="difficulty">
                   Difficulté
                 </label>
-                <select name="difficulty" id="difficulty" onChange={trackGenDifficulty} defaultValue="" placeholder>
+                <select name="difficulty" id="difficulty" onChange={trackGenDifficulty} defaultValue="">
                     <option value="">Indifférent</option>
                     <option value="easy">Facile</option>
                     <option value="average">Intermédiaire</option>
@@ -83,7 +83,6 @@ const Generator = ({
                     <input type="checkbox" name="favorites" onChange={trackGenFavorites} />
                   </label>
                 } */}
-                {/* TODO: onSubmit, send GET/POST? request with form info AND season + last recipes used. Then redirect to /recettes */}
                 <button type="submit" onClick={
                   isLogged ? handleGeneratorLogged : handleGenerator
                 }>Try me !</button>

@@ -2,10 +2,11 @@
 
 .container {
   max-width: 1440px;
-  margin: 1rem auto;
+  margin: 2rem auto;
   text-align: center;
 
   &__section {
+    padding: 0 1.2rem 1.2rem 1.2rem;
 
     &__title {
       margin: 0.8rem;
