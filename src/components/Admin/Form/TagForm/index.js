@@ -13,33 +13,33 @@ const TagForm = ({
 
   <div className="tag__form">
     <form onSubmit={addNewTag}>
-      <p className="tag__form__p">Labels</p>
       <input
         className="tag__form__add__field"
         type="text"
         value={tagField}
         onChange={updateTagField}
-        placeholder="Label"
+        placeholder="Nouveau Label"
       />
       <input className="tag__form__add__submit" type="submit" value="Valider" />
     </form>
 
-    <div className="tag__form__tags__list">{tags.map((tag) => (
-      <div className="tag__form__tag" key={tag.id}>
-        <span>{tag.name}</span>
-        {/* <button className="tag__form__edit__button" type="button">
+    <div className="tag__form__tags__list">
+      {tags.map((tag) => (
+        <div className="tag__form__tag" key={tag.id}>
+          {tag.name}
+          {/* <button className="tag__form__edit__button" type="button">
             <img className="tag__form__edit__icon" href={pencil} alt="pencil" />
           </button> */}
-        <img className="tag__form__delete__icon" src={bin} alt="bin" onClick={deleteTag(tag.id)} />
-      </div>
-    ))}
+          <img className="tag__form__delete__icon" src={bin} id={tag.id} alt="bin" onClick={deleteTag} />
+        </div>
+      ))}
     </div>
 
   </div>
 );
 
 TagForm.propTypes = {
-  tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+  tags: PropTypes.arrayOf(PropTypes.object).isRequired,
   tagField: PropTypes.string.isRequired,
   updateTagField: PropTypes.func.isRequired,
   addNewTag: PropTypes.func.isRequired,
@@ -65,13 +65,22 @@ const mapDispatchToProps = (dispatch) => ({
     event.preventDefault();
     dispatch({
       type: 'ADD_TAG',
+      payload: {
+        name: event.target[0].value,
+      },
+    });
+    dispatch({
+      type: 'UPDATE_TAG_FIELD',
+      payload: {
+        tagField: '',
+      },
     });
   },
-  deleteTag: (id) => {
+  deleteTag: (event) => {
     dispatch({
       type: 'DELETE_TAG',
       payload: {
-        id,
+        id: event.target.id,
       },
     });
   },

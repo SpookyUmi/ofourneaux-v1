@@ -7,7 +7,7 @@ import axios from 'axios';
 
 import 'src/components/Admin/admin.scss';
 import bin from 'src/assets/icons/delete.svg';
-import './updateRecipeForm.scss';
+import '../AddRecipeForm/addRecipeForm.scss';
 
 const UpdateRecipeForm = ({
   types, seasons, tags, difficulties, ingredients, userToken,
@@ -367,31 +367,31 @@ const UpdateRecipeForm = ({
           value="Modifier la recette"
           onClick={(event) => {
             event.preventDefault();
-            const addUpdateRecipeForm = new FormData();
+            console.log('ingredients:', JSON.stringify(localIngredients));
+            const updateRecipeForm = new FormData();
+            updateRecipeForm.append('title', localTitle);
+            updateRecipeForm.append('picture_url', localPicture);
+            updateRecipeForm.append('type_id', localType);
+            updateRecipeForm.append('description', localDescription);
+            updateRecipeForm.append('seasons', `[${localSeasons.join(', ')}]`);
+            updateRecipeForm.append('tags', `[${localTags.join(', ')}]`);
+            updateRecipeForm.append('difficulty_id', localDifficulty);
+            updateRecipeForm.append('nutri_score', localNutriScore);
+            updateRecipeForm.append('preparation_time', localPreparationTime);
+            updateRecipeForm.append('baking_time', localBakingTime);
+            updateRecipeForm.append('ingredients', JSON.stringify(localIngredients));
+            updateRecipeForm.append('steps', JSON.stringify(localSteps));
             axios({
               method: 'patch',
-              url: 'https://ofourneaux.herokuapp.com/recipes/:recipeId',
-              data: {
-                title: addUpdateRecipeForm.append('title', localTitle),
-                picture: addUpdateRecipeForm.append('picture', localPicture),
-                type: addUpdateRecipeForm.append('type', localType),
-                description: addUpdateRecipeForm.append('description', localDescription),
-                seasons: addUpdateRecipeForm.append('seasons', localSeasons),
-                tags: addUpdateRecipeForm.append('tags', localTags),
-                difficulty: addUpdateRecipeForm.append('difficulty', localDifficulty),
-                nutri_score: addUpdateRecipeForm.append('nutri_score', localNutriScore),
-                preparation_time: addUpdateRecipeForm.append('preparation_time', localPreparationTime),
-                baking_time: addUpdateRecipeForm.append('baking_time', localBakingTime),
-                ingredients: addUpdateRecipeForm.append('ingredients', localIngredients),
-                steps: addUpdateRecipeForm.append('steps', localSteps),
-              },
+              url: `https://ofourneaux.herokuapp.com/recipes/${recipeId}`,
+              data: updateRecipeForm,
               headers: { authorization: userToken, 'Content-Type': 'multipart/form-data' },
             })
               .then((response) => {
-                console.log('Réponse création recette :', response.data);
+                console.log('Réponse update recette :', response.data);
               })
               .catch((error) => {
-                console.log('Erreur connexion :', error);
+                console.log('Erreur connexion :', error.response);
               });
           }}
         />
@@ -404,14 +404,14 @@ const UpdateRecipeForm = ({
             event.preventDefault();
             axios({
               method: 'delete',
-              url: 'https://ofourneaux.herokuapp.com/recipes/:recipeId',
+              url: `https://ofourneaux.herokuapp.com/recipes/${recipeId}`,
               headers: { authorization: userToken, 'Content-Type': 'multipart/form-data' },
             })
               .then((response) => {
-                console.log('Réponse création recette :', response.data);
+                console.log('Réponse suppression recette :', response.data);
               })
               .catch((error) => {
-                console.log('Erreur connexion :', error);
+                console.log('Erreur connexion :', error.response);
               });
           }}
         />

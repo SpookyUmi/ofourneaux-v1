@@ -1,14 +1,37 @@
 @use 'src/styles/vars';
 
+.tag__form{
+  padding: 5rem;
+  font-size: 1.4rem;
+}
+
+.tag__form__p{
+margin: 0.5rem;
+margin-left: 1rem;
+font-weight: bold;
+font-size: 1.6rem;
+}
+
+.tag__form__add__field, .tag__form__add__submit{
+  margin: 0.3rem;
+  margin-bottom: 1rem;
+}
+
 .tag__form__tags__list{
-  
+  display: flex;
+  flex-direction: column;
 }
 
 .tag__form__tag{
+  margin: 1rem;
+  padding: 0 1rem;
   border: 2px solid vars.$color-primary;
   border-radius: 1.3rem;
+  width: fit-content;
+  
 }
 
 .tag__form__delete__icon{
-    width: 2.5rem;
+  margin: 0 1rem;
+  width: 2rem;
   }

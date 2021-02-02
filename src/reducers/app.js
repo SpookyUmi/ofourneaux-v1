@@ -24,12 +24,7 @@ const reducer = (oldState = initialState, action) => {
         isClicked: false,
       };
 
-    case 'TAG_ADD':
-      return {
-        ...oldState,
-        tags: action.payload.tags,
-      };
-    case 'TAG_DELETE':
+    case 'UPDATE_TAGS':
       return {
         ...oldState,
         tags: action.payload.tags,
