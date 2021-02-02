@@ -1,5 +1,5 @@
 // YARN
-import React from 'react';
+import React, { useRef } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -31,8 +31,17 @@ const Navbar = ({
   handleSearch,
   handleDisconnect,
   getFavoritesRecipes,
-}) => (
-  <div className={`navbar ${isOpen ? "show__navbar" : ""}`}>
+}) => {
+
+  const node = useRef();
+  const handleClick = (event) => {
+    if (node.current.contains(event.target)) {
+      return;
+    } setIsOpen(false);
+  }
+  document.addEventListener('mousedown', handleClick);
+
+  return (<div className={`navbar ${isOpen ? "show__navbar" : ""}`} ref={node}>
         {isOpen &&
         <>
         <div className="navbar__links__top">
@@ -41,7 +50,6 @@ const Navbar = ({
               />
           <form onSubmit={handleSearch} className="navbar__searchform transition">
             <div className="navbar__searchform__icon transition">
-
               <FontAwesomeIcon icon={faSearch} />
             </div>
             <input
@@ -66,7 +74,7 @@ const Navbar = ({
                 <NavLink to="/connexion" className="navbar__link__signin link__style transition" onClick={() => { setIsOpen(false) }}>
                   Se connecter
                 </NavLink>
-                <NavLink to="/insciption" className="navbar__link__signup button__style transition" onClick={() => { setIsOpen(false) }}>
+                <NavLink to="/inscription" className="navbar__link__signup button__style transition" onClick={() => { setIsOpen(false) }}>
                   S'inscrire
                 </NavLink>
               </>
@@ -144,7 +152,7 @@ const Navbar = ({
         </>
         }
     </div>
-  );
+  )};
 
 
 Navbar.propTypes = {
