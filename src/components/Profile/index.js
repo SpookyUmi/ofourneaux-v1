@@ -18,6 +18,7 @@ import './styles.scss';
 
 const imageUrl = async (e) => {
   const url = await uploadImage(e.target.files[0]);
+  console.log('url :', url);
 };
 
 const Profile = ({

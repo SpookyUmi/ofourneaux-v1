@@ -9,7 +9,7 @@ const user = (store) => (next) => (action) => {
       axios({
         method: 'get',
         url: `https://ofourneaux.herokuapp.com/favorites/${state.user.id}`,
-        header: {
+        headers: {
           // ! the token is necessary ?
           authorization: state.user.token,
         },
@@ -34,7 +34,7 @@ const user = (store) => (next) => (action) => {
       axios({
         method: 'get',
         url: `https://ofourneaux.herokuapp.com/shopping_list/${state.user.id}`,
-        header: {
+        headers: {
           // ! the token is necessary ?
           authorization: state.user.token,
         },
