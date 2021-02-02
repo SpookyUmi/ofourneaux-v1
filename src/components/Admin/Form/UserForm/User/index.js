@@ -8,7 +8,7 @@ import 'src/components/Admin/admin.scss';
 const User = ({
   user, makeAdmin, makeNonAdmin, deleteUser,
 }) => (
-  {user.id && <div className="user">
+  <div className="user">
     <img className="user__image" href={user.image} alt="utilisateur" />
     <div className="user__description">
       <div className="user__description__name">{user.firstName}" "{user.lastName}</div>
@@ -35,15 +35,14 @@ const User = ({
       </button>
       )}
       <button
-        className="user__buttons__delete"
+        className="usser__buttons__delete"
         type="button"
         onClick={deleteUser}
       >Supprimer l'utilisateur
       </button>
     </div>
     <div className="user__status">{user.status}</div>
-  </div>}
-  
+  </div>
 );
 
 User.propTypes = {

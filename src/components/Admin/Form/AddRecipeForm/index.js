@@ -20,11 +20,12 @@ const AddRecipeForm = ({
   const [localDescription, setLocalDescription] = useState('');
   const [localSeasons, setLocalSeasons] = useState([]);
   const [localTags, setLocalTags] = useState([]);
-  const [localDifficulty, setLocalDifficulty] = useState(null);
-  const [localNutriScore, setLocalNutriScore] = useState('');
+  const [localDifficulty, setLocalDifficulty] = useState(1);
+  const [localNutriScore, setLocalNutriScore] = useState('A');
   const [localPreparationTime, setLocalPreparationTime] = useState(0);
   const [localBakingTime, setLocalBakingTime] = useState(0);
   const [localIngredients, setLocalIngredients] = useState([]);
+  const [localNewIngredientId, setLocalNewIngredientId] = useState(null);
   const [localNewIngredient, setLocalNewIngredient] = useState('');
   const [localNewUnit, setLocalNewUnit] = useState('');
   const [localNewQuantity, setLocalNewQuantity] = useState('');
@@ -228,7 +229,7 @@ const AddRecipeForm = ({
         {/* ---- INGREDIENTS ---- */}
         <p className="recipe__form__div__4__p label">Ingrédients</p>
         {localIngredients.length !== 0 && localIngredients.map((ingredient) => (
-          <div key={ingredient.name}>
+          <div key={ingredient.id}>
             <span className="recipe__form__div__4__quantity ingredient__element">{ingredient.quantity}</span>
             <span className="recipe__form__div__4__unit ingredient__element">{ingredient.unit}</span>
             <span className="recipe__form__div__4__name ingredient__element">{ingredient.name}</span>
@@ -247,13 +248,16 @@ const AddRecipeForm = ({
           className="margin"
           name="ingredients"
           onChange={(event) => {
+            setLocalNewIngredientId(
+              event.target.id,
+            );
             setLocalNewIngredient(
               event.target.value,
             );
           }}
         >
           {ingredients?.map((ingredient) => (
-            <option value={ingredient.name} key={ingredient.id}>
+            <option value={ingredient.name} id={ingredient.id} key={ingredient.id}>
               {ingredient.name}
             </option>
           ))}
@@ -261,6 +265,7 @@ const AddRecipeForm = ({
         <input
           className="margin"
           type="text"
+          value={localNewUnit}
           placeholder="Unité"
           onChange={(event) => {
             setLocalNewUnit(
@@ -271,6 +276,7 @@ const AddRecipeForm = ({
         <input
           className="margin"
           type="text"
+          value={localNewQuantity}
           placeholder="Quantité"
           onChange={(event) => {
             setLocalNewQuantity(
@@ -286,12 +292,15 @@ const AddRecipeForm = ({
               [
                 ...localIngredients,
                 {
+                  id: localNewIngredientId,
                   name: localNewIngredient,
                   quantity: localNewQuantity,
                   unit: localNewUnit,
                 },
               ],
             );
+            setLocalNewQuantity('');
+            setLocalNewUnit('');
           }}
         >Ajouter un ingrédient
         </button>
@@ -316,6 +325,7 @@ const AddRecipeForm = ({
           className="recipe__form__div__4__input margin"
           type="text"
           placeholder="Veuillez saisir une étape"
+          value={localNewStep}
           onChange={(event) => {
             setLocalNewStep(event.target.value);
           }}
@@ -330,7 +340,7 @@ const AddRecipeForm = ({
                 localNewStep,
               ],
             );
-            event.target.value = '';
+            setLocalNewStep('');
           }}
         >Ajouter une étape
         </button>
@@ -344,30 +354,42 @@ const AddRecipeForm = ({
           onClick={(event) => {
             event.preventDefault();
             const addRecipeForm = new FormData();
+            addRecipeForm.append('title', localTitle);
+            addRecipeForm.append('picture_url', localPicture);
+            addRecipeForm.append('type_id', localType);
+            addRecipeForm.append('description', localDescription);
+            addRecipeForm.append('seasons', `[${localSeasons.join(', ')}]`);
+            addRecipeForm.append('tags', `[${localTags.join(', ')}]`);
+            addRecipeForm.append('difficulty_id', localDifficulty);
+            addRecipeForm.append('nutri_score', localNutriScore);
+            addRecipeForm.append('preparation_time', localPreparationTime);
+            addRecipeForm.append('baking_time', localBakingTime);
+            addRecipeForm.append('ingredients', JSON.stringify(localIngredients));
+            addRecipeForm.append('steps', JSON.stringify(localSteps));
+            console.log('addRecipeForm', localTitle,
+              localPicture,
+              localType,
+              localDescription,
+              localSeasons,
+              localTags,
+              localDifficulty,
+              localNutriScore,
+              localPreparationTime,
+              localBakingTime,
+              localIngredients,
+              localSteps);
+
             axios({
               method: 'post',
               url: 'https://ofourneaux.herokuapp.com/recipes',
-              data: {
-                title: addRecipeForm.append('title', localTitle),
-                picture: addRecipeForm.append('picture', localPicture),
-                type: addRecipeForm.append('type', localType),
-                description: addRecipeForm.append('description', localDescription),
-                seasons: addRecipeForm.append('seasons', localSeasons),
-                tags: addRecipeForm.append('tags', localTags),
-                difficulty: addRecipeForm.append('difficulty', localDifficulty),
-                nutri_score: addRecipeForm.append('nutri_score', localNutriScore),
-                preparation_time: addRecipeForm.append('preparation_time', localPreparationTime),
-                baking_time: addRecipeForm.append('baking_time', localBakingTime),
-                ingredients: addRecipeForm.append('ingredients', localIngredients),
-                steps: addRecipeForm.append('steps', localSteps),
-              },
+              data: addRecipeForm,
               headers: { authorization: userToken, 'Content-Type': 'multipart/form-data' },
             })
               .then((response) => {
                 console.log('Réponse création recette :', response.data);
               })
               .catch((error) => {
-                console.log('Erreur connexion :', error);
+                console.log('Erreur connexion :', error.response);
               });
           }}
         />

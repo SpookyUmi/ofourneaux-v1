@@ -18,7 +18,7 @@ const Admin = ({ id }) => (
       <NavLink className="admin__desktop__tab button__style" exact to="/admin/ajout-recette">Ajouter une recette</NavLink>
       <NavLink className="admin__desktop__tab button__style" exact to="/admin/gestion-labels">Gérer les labels</NavLink>
       <NavLink className="admin__desktop__tab button__style" exact to="/admin/gestion-utilisateurs">Gérer les utilisateurs</NavLink>
-      <NavLink className="admin__desktop__tab button__style" exact to="/profil/:slug">Retour à mon profil</NavLink>
+      <NavLink className="admin__desktop__tab button__style" exact to="/profil/">Retour à mon profil</NavLink>
     </div>
     <h3 className="admin__subheader">{nameAccordingToCurrentRoute(window.location.pathname, id)}</h3>
     <Form />
