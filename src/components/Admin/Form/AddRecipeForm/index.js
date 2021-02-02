@@ -249,7 +249,7 @@ const AddRecipeForm = ({
           name="ingredients"
           onChange={(event) => {
             setLocalNewIngredientId(
-              event.target.id,
+              event.target[event.target.selectedIndex].id,
             );
             setLocalNewIngredient(
               event.target.value,
@@ -275,7 +275,7 @@ const AddRecipeForm = ({
         />
         <input
           className="margin"
-          type="text"
+          type="number"
           value={localNewQuantity}
           placeholder="Quantité"
           onChange={(event) => {
@@ -353,6 +353,7 @@ const AddRecipeForm = ({
           value="Ajouter une recette"
           onClick={(event) => {
             event.preventDefault();
+            console.log('localIngredients:', JSON.stringify(localIngredients));
             const addRecipeForm = new FormData();
             addRecipeForm.append('title', localTitle);
             addRecipeForm.append('picture_url', localPicture);
@@ -366,18 +367,6 @@ const AddRecipeForm = ({
             addRecipeForm.append('baking_time', localBakingTime);
             addRecipeForm.append('ingredients', JSON.stringify(localIngredients));
             addRecipeForm.append('steps', JSON.stringify(localSteps));
-            console.log('addRecipeForm', localTitle,
-              localPicture,
-              localType,
-              localDescription,
-              localSeasons,
-              localTags,
-              localDifficulty,
-              localNutriScore,
-              localPreparationTime,
-              localBakingTime,
-              localIngredients,
-              localSteps);
 
             axios({
               method: 'post',

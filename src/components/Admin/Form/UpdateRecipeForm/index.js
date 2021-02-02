@@ -39,6 +39,7 @@ const UpdateRecipeForm = ({
   const [localBakingTime, setLocalBakingTime] = useState(recipeBakingTime);
   const [localIngredients, setLocalIngredients] = useState(recipeIngredients);
   const [localNewIngredient, setLocalNewIngredient] = useState('');
+  const [localNewIngredientId, setLocalNewIngredientId] = useState(null);
   const [localNewUnit, setLocalNewUnit] = useState('');
   const [localNewQuantity, setLocalNewQuantity] = useState('');
   const [localSteps, setLocalSteps] = useState(recipeSteps);
@@ -241,7 +242,7 @@ const UpdateRecipeForm = ({
         {/* ---- INGREDIENTS ---- */}
         <p className="recipe__form__div__4__p label">Ingrédients</p>
         {localIngredients.length !== 0 && localIngredients.map((ingredient) => (
-          <div key={ingredient.name}>
+          <div key={ingredient.id}>
             <span className="recipe__form__div__4__quantity ingredient__element">{ingredient.quantity}</span>
             <span className="recipe__form__div__4__unit ingredient__element">{ingredient.unit}</span>
             <span className="recipe__form__div__4__name ingredient__element">{ingredient.name}</span>
@@ -260,13 +261,16 @@ const UpdateRecipeForm = ({
           className="margin"
           name="ingredients"
           onChange={(event) => {
+            setLocalNewIngredientId(
+              event.target[event.target.selectedIndex].id,
+            );
             setLocalNewIngredient(
               event.target.value,
             );
           }}
         >
           {ingredients?.map((ingredient) => (
-            <option value={ingredient.name} key={ingredient.id}>
+            <option value={ingredient.name} id={ingredient.id} key={ingredient.id}>
               {ingredient.name}
             </option>
           ))}
@@ -274,6 +278,7 @@ const UpdateRecipeForm = ({
         <input
           className="margin"
           type="text"
+          value={localNewUnit}
           placeholder="Unité"
           onChange={(event) => {
             setLocalNewUnit(
@@ -283,7 +288,8 @@ const UpdateRecipeForm = ({
         />
         <input
           className="margin"
-          type="text"
+          type="number"
+          value={localNewQuantity}
           placeholder="Quantité"
           onChange={(event) => {
             setLocalNewQuantity(
@@ -299,12 +305,15 @@ const UpdateRecipeForm = ({
               [
                 ...localIngredients,
                 {
+                  id: localNewIngredientId,
                   name: localNewIngredient,
                   quantity: localNewQuantity,
                   unit: localNewUnit,
                 },
               ],
             );
+            setLocalNewQuantity('');
+            setLocalNewUnit('');
           }}
         >Ajouter un ingrédient
         </button>
@@ -329,6 +338,7 @@ const UpdateRecipeForm = ({
           className="recipe__form__div__4__input margin"
           type="text"
           placeholder="Veuillez saisir une étape"
+          value={localNewStep}
           onChange={(event) => {
             setLocalNewStep(event.target.value);
           }}
@@ -343,7 +353,7 @@ const UpdateRecipeForm = ({
                 localNewStep,
               ],
             );
-            event.target.value = '';
+            setLocalNewStep('');
           }}
         >Ajouter une étape
         </button>
