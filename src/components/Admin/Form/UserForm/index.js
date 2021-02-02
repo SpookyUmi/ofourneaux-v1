@@ -6,9 +6,8 @@ import { connect } from 'react-redux';
 import User from './User';
 import 'src/components/Admin/admin.scss';
 
-// TODO add props (controlled field, handle onclick and props)
 const UserForm = ({
-  userSearchField, updateUserSearchField, searchByEmail, searchById,
+  userSearchField, updateUserSearchField, searchById,
 }) => (
   <div className="user__form">
 
@@ -34,14 +33,13 @@ const UserForm = ({
       </button>
     </form>
     <User />
-
   </div>
 );
 
 UserForm.propTypes = {
   userSearchField: PropTypes.string.isRequired,
   updateUserSearchField: PropTypes.func.isRequired,
-  searchByEmail: PropTypes.func.isRequired,
+  // searchByEmail: PropTypes.func.isRequired,
   searchById: PropTypes.func.isRequired,
 };
 

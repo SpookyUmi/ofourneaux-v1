@@ -1,0 +1,14 @@
+@use 'src/styles/vars';
+
+.tag__form__tags__list{
+  
+}
+
+.tag__form__tag{
+  border: 2px solid vars.$color-primary;
+  border-radius: 1.3rem;
+}
+
+.tag__form__delete__icon{
+    width: 2.5rem;
+  }

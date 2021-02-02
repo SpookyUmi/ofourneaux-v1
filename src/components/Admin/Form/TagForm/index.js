@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 // import pencil from 'src/assets/icons/modifier.svg';
 import bin from 'src/assets/icons/delete.svg';
-import 'src/components/Admin/admin.scss';
+import './tagform.scss';
 
 const TagForm = ({
   tags, tagField, updateTagField, addNewTag, deleteTag,
@@ -24,21 +24,16 @@ const TagForm = ({
       <input className="tag__form__add__submit" type="submit" value="Valider" />
     </form>
 
-    {tags.map((tag) => (
-      <div key={tag}>
-        <span>{tag}</span>
+    <div className="tag__form__tags__list">{tags.map((tag) => (
+      <div className="tag__form__tag" key={tag.id}>
+        <span>{tag.name}</span>
         {/* <button className="tag__form__edit__button" type="button">
             <img className="tag__form__edit__icon" href={pencil} alt="pencil" />
           </button> */}
-        <button
-          className="tag__form__delete__button"
-          type="button"
-          onClick={deleteTag(tag.id)}
-        >
-          <img className="tag__form__delete__icon" href={bin} alt="bin" />
-        </button>
+        <img className="tag__form__delete__icon" src={bin} alt="bin" onClick={deleteTag(tag.id)} />
       </div>
     ))}
+    </div>
 
   </div>
 );
@@ -52,7 +47,7 @@ TagForm.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  tags: state.admin.tags,
+  tags: state.app.tags,
   tagField: state.admin.tagField,
 });
 
