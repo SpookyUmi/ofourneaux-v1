@@ -49,7 +49,7 @@ const Profile = ({
           {/* TODO: check if the favorite recipes query works */}
           <NavLink
             exact
-            to="/recettes-favorites"
+            to="/profil/recettes-favorites"
             className="profile__content__header__link"
             onClick={getFavoritesRecipes}
           >
@@ -58,7 +58,7 @@ const Profile = ({
           {/* TODO: check if the shopping list query works */}
           <NavLink
             exact
-            to="/liste-de-courses"
+            to="/profil/liste-de-courses"
             className="profile__content__header__link"
             onClick={getShoppingList}
           >
