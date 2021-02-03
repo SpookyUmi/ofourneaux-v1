@@ -1,5 +1,5 @@
 // YARN
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
@@ -26,8 +26,12 @@ import SearchFail from 'src/components/Errors/SearchFail';
 import './styles.scss';
 import '../../styles/index.scss';
 
-const App = ({ recipes }) => {
+const App = ({ recipes, checkIfUserIsLogged }) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    checkIfUserIsLogged();
+  }, []);
 
   return (
     <div className="app">
@@ -89,4 +93,23 @@ const mapStateToProps = (state) => ({
   recipes: state.recipes.recipes,
 });
 
-export default connect(mapStateToProps, null)(App);
+const mapDispatchToProps = (dispatch) => ({
+  checkIfUserIsLogged: (event) => {
+    const userToken = localStorage.getItem('token');
+    const userId = localStorage.getItem('id');
+    if (userToken && userId) {
+      dispatch({
+        type: 'CHECK_LOGGED_USER',
+        payload: {
+          id: userId,
+          token: userToken
+        },
+        // type: 'SEND_LOGIN_REQUEST'
+      });
+    }
+  },
+});
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

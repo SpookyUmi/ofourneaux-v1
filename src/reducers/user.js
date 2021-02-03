@@ -18,6 +18,13 @@ const reducer = (oldState = initialState, action) => {
   console.log('Action user :', action);
 
   switch (action.type) {
+    case 'CHECK_LOGGED_USER':
+      return {
+        ...oldState,
+        id: action.payload.id,
+        token: action.payload.token,
+      };
+
     // after the user login, we place the token and the id in the reducer "user".
     // we will then use this reducer to send the request to the route back "/users/:userId"
     // which will allow to store the data related to this single user
@@ -39,6 +46,7 @@ const reducer = (oldState = initialState, action) => {
 
     // when the user logs out, the state is cleared
     case 'LOGOUT_SUCCESS':
+      localStorage.clear();
       return {
         ...oldState,
         id: '',

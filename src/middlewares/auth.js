@@ -70,18 +70,18 @@ const auth = (store) => (next) => (action) => {
     catch (error) {
       console.log('Error request favorites :', error.response);
 
-      // if (error.response.data.error === 'Resource not found') {
-      //   // when no data is returned from the back when asking
-      //   // for a user's favourite recipes, an empty table is dispatched
-      //   store.dispatch({
-      //     type: 'FAVORITES_RECIPES_SUCCESS',
-      //     payload: {
-      //       favoritesRecipes: [],
-      //     },
-      //   });
+      if (error.response.data.error === 'Resource not found') {
+        // when no data is returned from the back when asking
+        // for a user's favourite recipes, an empty table is dispatched
+        store.dispatch({
+          type: 'FAVORITES_RECIPES_SUCCESS',
+          payload: {
+            favoritesRecipes: [],
+          },
+        });
 
-      //   getTagsByUser(userId, userToken);
-      // }
+        getTagsByUser(userId, userToken);
+      }
     }
   }
 
@@ -144,6 +144,9 @@ const auth = (store) => (next) => (action) => {
       // console.log('Answer request login :', response);
 
       getUser(response.data.data.userId, response.data.data.token);
+
+      localStorage.setItem('id', response.data.data.userId);
+      localStorage.setItem('token', response.data.data.token);
     }
     catch (error) {
       // console.log('Error request login :', error.response);

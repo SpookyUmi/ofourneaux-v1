@@ -10,6 +10,12 @@ const reducer = (oldState = initialState, action) => {
   // console.log('Action "auth.js" :', action);
 
   switch (action.type) {
+    case 'CHECK_LOGGED_USER':
+      return {
+        ...oldState,
+        isLogged: true,
+      }
+
     // controlled fields
     case 'EDIT_FIELD_AUTH_EMAIL':
       return {
