@@ -16,11 +16,6 @@ import Modal from './Modal';
 // SCSS
 import './styles.scss';
 
-const imageUrl = async (e) => {
-  const url = await uploadImage(e.target.files[0]);
-  console.log('url :', url);
-};
-
 const Profile = ({
   lastName,
   firstName,
@@ -38,6 +33,7 @@ const Profile = ({
   toggleEatingPreference,
   tags,
   eatingPreferences,
+  changeProfileImage,
 }) => (
   <div className="profile">
     <h1 className="profile__title">Mon profil</h1>
@@ -108,7 +104,7 @@ const Profile = ({
               <input
                 className="profile__content__infos__field"
                 type="file"
-                onChange={imageUrl}
+                onChange={changeProfileImage}
               />
             </div>
           </div>
@@ -216,6 +212,7 @@ Profile.propTypes = {
   toggleEatingPreference: PropTypes.func.isRequired,
   eatingPreferences: PropTypes.array.isRequired,
   tags: PropTypes.array.isRequired,
+  changeProfileImage: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -267,6 +264,15 @@ const mapDispatchToProps = (dispatch) => ({
       type: 'EDIT_FIELD_PROFILE_EMAIL',
       payload: {
         email: event.target.value,
+      },
+    });
+  },
+  changeProfileImage: async (event) => {
+    const url = await uploadImage(event.target.files[0]);
+    dispatch({
+      type: 'CHANGE_PROFILE_PICTURE',
+      payload: {
+        pictureUrl: url,
       },
     });
   },

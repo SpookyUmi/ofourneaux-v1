@@ -23,22 +23,22 @@ const auth = (store) => (next) => (action) => {
         },
       });
 
-      console.log('Answer request data :', response);
+      // console.log('Answer request data :', response);
 
       store.dispatch({
         type: 'REQUIRED_DATA_SUCCESS',
         payload: {
-          types: response.data.data[0].type,
-          seasons: response.data.data[1].season,
-          tags: response.data.data[2].tag,
-          difficulties: response.data.data[3].difficulty,
-          categories: response.data.data[4].category,
-          ingredients: response.data.data[5].ingredient,
+          types: response.data.data.types,
+          seasons: response.data.data.seasons,
+          tags: response.data.data.tags,
+          difficulties: response.data.data.difficulties,
+          categories: response.data.data.categories,
+          ingredients: response.data.data.ingredients,
         },
       });
     }
     catch (error) {
-      console.log('Error request data :', error.response);
+      // console.log('Error request data :', error.response);
     }
   }
 
