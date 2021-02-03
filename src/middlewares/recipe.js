@@ -6,42 +6,75 @@ import FormData from 'form-data';
 const recipe = (store) => (next) => (action) => {
   const state = store.getState();
 
-  const form = new FormData();
   // console.log(form);
+
+  const URL = 'https://ofourneaux.herokuapp.com';
+
+  async function getRecipe(recipeId) {
+    try {
+      const response = await axios({
+        method: 'GET',
+        url: `${URL}/recipes/${recipeId}`,
+      });
+
+      console.log('Answer request recipe :', response);
+
+      store.dispatch({
+        type: 'RECIPE_REQUEST_SUCCESS',
+        payload: {
+          recipe: response.data.data,
+        },
+      });
+    }
+    catch (error) {
+      console.log('Error request recipe :', error.response);
+    }
+  }
 
   switch (action.type) {
     // when you try to retrieve a recipe, either by clicking
     // on the recipe card or when you try to modify/delete
     // API recipe request : OK
     case 'SEND_RECIPE_REQUEST':
-      axios({
-        method: 'get',
-        url: `https://ofourneaux.herokuapp.com/recipes/${action.payload.id}`,
-      })
-        .then((response) => {
-          // console.log('Answer request recipe :', response);
-          store.dispatch({
-            type: 'RECIPE_REQUEST_SUCCESS',
-            payload: {
-              recipe: response.data.data,
-            },
-          });
-        })
-        .catch((error) => {
-          // console.log('Error request recipe :', error.response);
-        });
+      getRecipe(action.payload.id);
+
+      // axios({
+      //   method: 'GET',
+      //   url: `https://ofourneaux.herokuapp.com/recipes/${action.payload.id}`,
+      // })
+      //   .then((response) => {
+      //     // console.log('Answer request recipe :', response);
+      //     store.dispatch({
+      //       type: 'RECIPE_REQUEST_SUCCESS',
+      //       payload: {
+      //         recipe: response.data.data,
+      //       },
+      //     });
+      //   })
+      //   // eslint-disable-next-line no-unused-vars
+      //   .catch((error) => {
+      //     // console.log('Error request recipe :', error.response);
+      //   });
       break;
 
-    // ! API update favorites recipes : TO BE CHECKED
+    // API update favorites recipes : OK
     case 'UPDATE_FAVORITES_REQUEST':
       // attention : the id that is retrieve is of type "string",
       // so it's necessary to "parseInt" it
       // eslint-disable-next-line no-case-declarations
       const recipeId = parseInt(action.payload.id, 10);
 
+      /* Bah alors, on bosse ? :p
+      Quelle productivité !! mdr
+      Heineken, tequila... xD */
+
+      // mdrrr ouais je m'arrête jamais
+      // pas le temps de niaiser Chloé, tmtc
+      // mdrrr c'est tout à fait ça !
+
       // we don't want to work directly on the state, so we make a copy of it with ".map"
       // eslint-disable-next-line no-case-declarations, max-len
-      const updatedRecipesFavorites = state.user.favoritesRecipes.map((favoriteRecipe) => favoriteRecipe);
+      const updatedRecipesFavorites = state.user.favoritesRecipes?.map((favoriteRecipe) => favoriteRecipe);
       // console.log('State "favoritesRecipes" copy :', updatedRecipesFavorites);
 
       // to remove an element from an array, the simplest method
@@ -55,7 +88,6 @@ const recipe = (store) => (next) => (action) => {
       // when an "indexOf" returns "-1", it means the element is not in the array
       if (index > -1) {
         updatedRecipesFavorites.splice(index, 1);
-        // console.log(updatedRecipesFavorites);
         // we dispatch the action to the reducer "user.js".
         store.dispatch({
           type: 'UPDATE_FAVORITES_SUCCESS',
@@ -64,7 +96,8 @@ const recipe = (store) => (next) => (action) => {
           },
         });
       }
-      else {
+
+      if (index === -1) {
         // if the recipe isn't in the favorite recipes, we add it with ".push"
         updatedRecipesFavorites.push(recipeId);
         store.dispatch({
@@ -75,27 +108,36 @@ const recipe = (store) => (next) => (action) => {
         });
       }
 
-      form.append('favorites_recipes', updatedRecipesFavorites);
+      // eslint-disable-next-line prefer-template, no-case-declarations
+      const updatedRecipesFavoritesStringify = '[' + updatedRecipesFavorites.join(', ') + ']';
 
-      // axios({
-      //   method: 'patch',
-      //   url: `https://ofourneaux.herokuapp.com/favorites/${state.user.id}`,
-      //   headers: {
-      //     authorization: state.user.token,
-      //   },
-      // })
-      //   .then((response) => {
-      //     console.log('Answer request add recipe in favorites :', response);
-      //     store.dispatch({
-      //       type: 'UPDATE_FAVORITES_REQUEST',
-      //       payload: {
-      //         favoritesRecipes: updatedRecipesFavorites,
-      //       },
-      //     });
-      //   })
-      //   .catch((error) => {
-      //     console.log('Error request add recipe in favorites :', error.response);
-      //   });
+      // eslint-disable-next-line no-case-declarations
+      const form = new FormData();
+      form.append('favorites', updatedRecipesFavoritesStringify);
+
+      axios({
+        method: 'PATCH',
+        url: `https://ofourneaux.herokuapp.com/favorites/${state.user.id}`,
+        data: form,
+        headers: {
+          authorization: state.user.token,
+        },
+      })
+        // eslint-disable-next-line no-unused-vars
+        .then((response) => {
+          // console.log('Answer request add recipe in favorites :', response);
+
+          store.dispatch({
+            type: 'UPDATE_FAVORITES_SUCCESS',
+            payload: {
+              favoritesRecipes: updatedRecipesFavorites,
+            },
+          });
+        })
+        // eslint-disable-next-line no-unused-vars
+        .catch((error) => {
+          // console.log('Error request add recipe in favorites :', error.response);
+        });
       break;
     default:
       next(action);

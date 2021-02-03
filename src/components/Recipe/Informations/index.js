@@ -142,18 +142,19 @@ const Informations = ({
         <div className="recipe__line" />
       </div>
     </div>
-  )
+  );
 };
 
 // PropTypes
 Informations.propTypes = {
-  id: PropTypes.number.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  id: PropTypes.number,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   tags: PropTypes.array.isRequired,
   preparationTime: PropTypes.number.isRequired,
   bakingTime: PropTypes.number.isRequired,
-  difficulty: PropTypes.string.isRequired,
+  difficulty: PropTypes.number.isRequired,
   nutriScore: PropTypes.string.isRequired,
   isLogged: PropTypes.bool.isRequired,
   sendRecipeInShoppingList: PropTypes.func.isRequired,

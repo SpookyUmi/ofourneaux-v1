@@ -47,6 +47,9 @@ const App = ({ recipes }) => {
       <Route exact path="/profil/liste-de-courses">
         <ShoppingList />
       </Route>
+      <Route exact path="/profil/recettes-favorites">
+        <Recipes />
+      </Route>
       <Route exact path="/inscription">
         <Inscription />
       </Route>
@@ -65,8 +68,7 @@ const App = ({ recipes }) => {
       </Route>
       <Route
         exact
-        path={['/admin/ajout-recette', '/admin/modification-recette/:id', '/admin/gestion-labels', '/admin/gestion-utilisateurs']}
-      >
+        path={['/admin/ajout-recette', '/admin/modification-recette/:id', '/admin/gestion-labels', '/admin/gestion-utilisateurs']}>
         <Admin />
       </Route>
       <Footer className="footer" />

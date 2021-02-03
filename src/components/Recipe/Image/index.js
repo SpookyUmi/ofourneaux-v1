@@ -35,7 +35,7 @@ const Image = ({
     });
   };
 
-  checkIfRecipeIsInFavorites();
+  if (favoritesRecipes && checkIfRecipeIsInFavorites());
 
   return (
     <div className="image">
@@ -84,13 +84,15 @@ const Image = ({
 };
 
 Image.propTypes = {
-  id: PropTypes.number.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  id: PropTypes.number,
   picture: PropTypes.string.isRequired,
   status: PropTypes.string.isRequired,
   isLogged: PropTypes.bool.isRequired,
   handleEditOrDeleteRecipe: PropTypes.func.isRequired,
   sendRecipeInFavorites: PropTypes.func.isRequired,
-  favoritesRecipes: PropTypes.array.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  favoritesRecipes: PropTypes.array,
 };
 
 const mapStateToProps = (state) => ({

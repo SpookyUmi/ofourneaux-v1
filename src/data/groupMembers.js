@@ -20,7 +20,7 @@ export default [
     firstname: 'Jenny-Lee',
     lastname: 'Boulanger',
     picture: 'src/assets/images/meme.png',
-    role: 'Lead Dev',
+    role: 'Lead Dev Front',
     description: 'Simple mais toujours délicieuse. Simple mais toujours',
   },
   {
@@ -28,7 +28,7 @@ export default [
     firstname: 'Julien',
     lastname: 'Le Coz',
     picture: 'src/assets/images/meme.png',
-    role: 'Lead Back',
+    role: 'Lead Dev Back',
     description: 'Simple mais toujours délicieuse. Simple mais toujours',
   },
   {
