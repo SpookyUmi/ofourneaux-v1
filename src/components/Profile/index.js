@@ -233,14 +233,14 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  // sends the request to retrieve favorite recipes to the middleware "profile.js"
+  // sends the request to retrieve favorite recipes to the middleware "user.js"
   getFavoritesRecipes: () => {
     dispatch({
       type: 'SEND_FAVORITES_RECIPES_REQUEST',
     });
   },
 
-  // sends the request to retrieve shopping list to the middleware "profile.js"
+  // sends the request to retrieve shopping list to the middleware "user.js"
   getShoppingList: () => {
     dispatch({
       type: 'SEND_SHOPPING_LIST_REQUEST',

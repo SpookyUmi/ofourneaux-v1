@@ -1,7 +1,5 @@
 import axios from 'axios';
 import FormData from 'form-data';
-import { string } from 'prop-types';
-
 
 const profile = (store) => (next) => (action) => {
   const state = store.getState();
@@ -100,37 +98,6 @@ const profile = (store) => (next) => (action) => {
     // ! request for edition of the profile by the user : TO BE CHECKED
     case 'SEND_EDIT_PROFILE_REQUEST':
       updateUserProfile();
-
-      // axios({
-      //   method: 'patch',
-      //   url: `https://ofourneaux.herokuapp.com/users/${state.user.id}`,
-      //   data: form,
-      //   headers: {
-      //     'Content-Type': 'multipart/form-data',
-      //     authorization: state.user.token,
-      //   },
-      // })
-      //   // eslint-disable-next-line no-unused-vars
-      //   .then((response) => {
-      //     console.log('Answer request update :', response);
-      //     store.dispatch({
-      //       type: 'EDIT_PROFILE_SUCCESS',
-      //       // ! does sending the data in this way update the reducer in the right way ?
-      //       payload: {
-      //         firstName: state.user.firstName,
-      //         lastName: state.user.lastName,
-      //         email: state.user.email,
-      //         pictureUrl: state.user.pictureUrl,
-      //         // eatingPreferences: state.user.eatingPreferences,
-      //       },
-      //     });
-      //   })
-      //   // eslint-disable-next-line no-unused-vars
-      //   .catch((error) => {
-      //     console.log('Error request update :', error.response);
-      //     // ! do we send anything in particular if the request fails ?
-      //     // ! in what cases can it fail ?
-      //   });
       break;
 
     // request for deletion of the profile by the user : OK

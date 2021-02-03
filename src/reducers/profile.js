@@ -49,6 +49,7 @@ const reducer = (oldState = initialState, action) => {
       return {
         ...oldState,
         showModal: false,
+        message: '',
       };
 
     // ! in which cases does modal close ?
