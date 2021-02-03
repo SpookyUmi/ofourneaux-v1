@@ -4,16 +4,18 @@ import FormData from 'form-data';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import uploadImage from 'src/middlewares/firebase';
 
 import 'src/components/Admin/admin.scss';
 import bin from 'src/assets/icons/delete.svg';
 import './addRecipeForm.scss';
 
+// This component uses data passed via props from the redux store, and a local state.
 const AddRecipeForm = ({
   types, seasons, tags, difficulties, ingredients, userToken,
 }) => {
   // I'm going to create a local state here to avoid having too many dispatches between my component
-  // and the store.
+  // and the store as the user fills in the form (no submit yet).
   const [localTitle, setLocalTitle] = useState('');
   const [localPicture, setLocalPicture] = useState('');
   const [localType, setLocalType] = useState(null);
@@ -32,14 +34,22 @@ const AddRecipeForm = ({
   const [localSteps, setLocalSteps] = useState([]);
   const [localNewStep, setLocalNewStep] = useState('');
 
+  const changeRecipeImage = async (event) => {
+    const url = await uploadImage(event.target.files[0]);
+    setLocalPicture(url);
+  };
+
   return (
     <form className="recipe__form">
+
       {/* I am creating divs 1-2-3-4 to help style the form for desktop mode */}
       <div className="recipe__form__div__1">
-        <label className="recipe__form__title__label label">
+
+        {/* ---- TITRE ---- */}
+        <label className="recipe__form__title label">
           Titre
           <input
-            className="recipe__form__title__input margin"
+            className="recipe__form__title input"
             type="text"
             placeholder="Titre"
             value={localTitle}
@@ -49,25 +59,41 @@ const AddRecipeForm = ({
           />
         </label>
 
-        <label className="recipe__form__image__label label">
+        {/* ---- IMAGE ---- */}
+        <label className="recipe__form__image label">
           Image
           <input
-            className="recipe__form__image__input margin"
+            className="recipe__form__image input"
             type="file"
             placeholder="Choisir votre fichier"
-            value={localPicture}
-            onChange={(event) => {
-              setLocalPicture(event.target.value);
-            }}
+            onChange={changeRecipeImage}
           />
         </label>
 
+        {/* ---- DESCRIPTION ---- */}
+        <label className="recipe__form__description label">
+          Description
+          <input
+            className="recipe__form__description input"
+            type="text"
+            placeholder="Veuillez décrire brièvement la recette."
+            value={localDescription}
+            onChange={(event) => {
+              setLocalDescription(event.target.value);
+            }}
+          />
+        </label>
+      </div>
+
+      {/* I am creating divs 1-2-3-4 to help style the form for desktop mode */}
+      <div className="recipe__form__div__2">
+
         {/* ---- TYPES ---- */}
-        <p className="recipe__form__div__1__p label">Catégories</p>
+        <p className="recipe__form__categories label">Catégories</p>
         {types.map((type) => (
           <label className="label" key={type.id}>
             <input
-              className="choice__text margin"
+              className="choice__text input"
               type="radio"
               name={type.name}
               onChange={
@@ -81,28 +107,14 @@ const AddRecipeForm = ({
           </label>
         ))}
 
-        <label className="recipe__form__description__label label">
-          Description
-          <input
-            className="recipe__form__description__input margin"
-            type="text"
-            placeholder="Veuillez décrire brièvement la recette."
-            value={localDescription}
-            onChange={(event) => {
-              setLocalDescription(event.target.value);
-            }}
-          />
-        </label>
-      </div>
-      <div className="recipe__form__div__2">
         {/* ---- SEASONS ---- */}
         {/* If we have time in the future we could add checked property to the checkbox if
         the season is in recipe.seasons (if else?) */}
-        <p className="recipe__form__div__2__p label">Saison</p>
+        <p className="recipe__form__seasons label">Saison</p>
         {seasons.map((season) => (
           <label className="label" key={season.name}>
             <input
-              className="choice__text margin"
+              className="choice__text input"
               type="checkbox"
               name={season.name}
               onChange={
@@ -123,14 +135,15 @@ const AddRecipeForm = ({
             /> {season.name}
           </label>
         ))}
+
         {/* ---- TAGS ---- */}
         {/* If we have time in the future we could add checked property to the checkbox if
         the tag is in recipe.tags (if else?) */}
-        <p className="recipe__form__div__2__p label">Labels</p>
+        <p className="recipe__form__tags label">Labels</p>
         {tags?.map((tag) => (
           <label className="label" htmlFor={tag.name} key={tag.id}>
             <input
-              className="margin"
+              className="input"
               type="checkbox"
               name={tag.name}
               onChange={(event) => {
@@ -152,13 +165,14 @@ const AddRecipeForm = ({
         ))}
       </div>
 
+      {/* I am creating divs 1-2-3-4 to help style the form for desktop mode */}
       <div className="recipe__form__div__3">
         {/* ---- DIFFICULTY --- */}
         {/* If we have time in the future we could add checked property to the checkbox if
         the difficulty is in recipe.difficulty (if else?) */}
-        <label className="recipe__form__div__3__p label">Difficulté
+        <label className="recipe__form__difficulty label">Difficulté
           <select
-            className="margin"
+            className="input"
             name="difficulties"
             onChange={(event) => {
               setLocalDifficulty(event.target.value);
@@ -173,9 +187,9 @@ const AddRecipeForm = ({
         {/* ---- NUTRISCORE ---- */}
         {/* If we have time in the future we could add checked property to the checkbox if
         the nutriscore is in recipe.nutriscore (if else?) */}
-        <label className="recipe__form__div__3__p label">Nutri Score
+        <label className="recipe__form__nutri__score label">Nutri Score
           <select
-            className="margin"
+            className="nutri__score input"
             name="scores"
             onChange={(event) => {
               setLocalNutriScore(
@@ -191,10 +205,10 @@ const AddRecipeForm = ({
           </select>
         </label>
 
-        {/* ---- BAKING TIME ---- */}
-        <label className="recipe__form__div__3__p label">Temps de préparation
+        {/* ---- PREPARATION TIME ---- */}
+        <label className="recipe__form__preparation__time label">Temps de préparation
           <input
-            className="margin"
+            className="input"
             value={localPreparationTime}
             onChange={(event) => {
               setLocalPreparationTime(event.target.value);
@@ -204,13 +218,13 @@ const AddRecipeForm = ({
             min="0"
             max="240"
           />
-          <span className="recipe__form__div__3__span choice__text">Minutes</span>
+          <span className="choice__text">Minutes</span>
         </label>
 
-        {/* ---- COOKING TIME ---- */}
-        <label className="recipe__form__div__3__p label">Temps de cuisson
+        {/* ---- BAKING TIME ---- */}
+        <label className="recipe__form__baking__time label">Temps de cuisson
           <input
-            className="margin"
+            className="input"
             value={localBakingTime}
             onChange={(event) => {
               setLocalBakingTime(event.target.value);
@@ -220,21 +234,23 @@ const AddRecipeForm = ({
             min="0"
             max="240"
           />
-          <span className="recipe__form__div__3__span choice_text">Minutes</span>
+          <span className="choice_text">Minutes</span>
         </label>
 
       </div>
 
+      {/* I am creating divs 1-2-3-4 to help style the form for desktop mode */}
       <div className="recipe__form__div__4">
+
         {/* ---- INGREDIENTS ---- */}
-        <p className="recipe__form__div__4__p label">Ingrédients</p>
+        <p className="recipe__form__ingredients label">Ingrédients</p>
         {localIngredients.length !== 0 && localIngredients.map((ingredient) => (
           <div key={ingredient.id}>
-            <span className="recipe__form__div__4__quantity ingredient__element">{ingredient.quantity}</span>
-            <span className="recipe__form__div__4__unit ingredient__element">{ingredient.unit}</span>
-            <span className="recipe__form__div__4__name ingredient__element">{ingredient.name}</span>
+            <span className="recipe__form__ingredient__quantity ingredient__element">{ingredient.quantity}</span>
+            <span className="recipe__form__ingredient__unit ingredient__element">{ingredient.unit}</span>
+            <span className="recipe__form__ingredient__name ingredient__element">{ingredient.name}</span>
             <img
-              className="recipe__form__div__4__delete__icon"
+              className="recipe__form__delete__icon"
               src={bin}
               alt="bin"
               onClick={() => {
@@ -245,7 +261,7 @@ const AddRecipeForm = ({
           </div>
         ))}
         <select
-          className="margin"
+          className="input"
           name="ingredients"
           onChange={(event) => {
             setLocalNewIngredientId(
@@ -263,7 +279,7 @@ const AddRecipeForm = ({
           ))}
         </select>
         <input
-          className="margin"
+          className="input"
           type="text"
           value={localNewUnit}
           placeholder="Unité"
@@ -274,7 +290,7 @@ const AddRecipeForm = ({
           }}
         />
         <input
-          className="margin"
+          className="input"
           type="number"
           value={localNewQuantity}
           placeholder="Quantité"
@@ -304,13 +320,14 @@ const AddRecipeForm = ({
           }}
         >Ajouter un ingrédient
         </button>
+
         {/* ---- STEPS ---- */}
-        <p className="recipe__form__div__4__p label">Étapes de préparation</p>
+        <p className="recipe__form__steps__p label">Étapes de préparation</p>
         <ol>
           {localSteps?.map((step) => (
             <li key={step}>{step}
               <img
-                className="recipe__form__div__4__delete__icon"
+                className="recipe__form__delete__icon"
                 src={bin}
                 alt="bin"
                 onClick={() => {
@@ -322,7 +339,7 @@ const AddRecipeForm = ({
           ))}
         </ol>
         <input
-          className="recipe__form__div__4__input margin"
+          className="recipe__form__steps__input input"
           type="text"
           placeholder="Veuillez saisir une étape"
           value={localNewStep}
@@ -346,6 +363,7 @@ const AddRecipeForm = ({
         </button>
       </div>
 
+      {/* ---- SUBMIT ---- */}
       <div className="submit__button">
         <input
           className="recipe__form__submit button__style"
