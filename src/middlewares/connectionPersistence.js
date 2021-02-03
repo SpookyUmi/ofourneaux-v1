@@ -1,15 +1,6 @@
-// YARN
 import axios from 'axios';
-import FormData from 'form-data';
 
-// middleware "auth"
-const auth = (store) => (next) => (action) => {
-  const state = store.getState();
-
-  // the data must be sent to the back in "form-data" format
-  const form = new FormData();
-  form.append('mail_address', state.auth.email);
-  form.append('password', state.auth.password);
+const connectionPersistence = (store) => (next) => (action) => {
 
   const URL = 'https://ofourneaux.herokuapp.com';
 
@@ -119,9 +110,6 @@ const auth = (store) => (next) => (action) => {
         },
       });
 
-      // after logging in, the action is redirect to the home page
-      action.redirect('/');
-
       getFavoritesRecipes(userId, userToken);
     }
     catch (error) {
@@ -129,47 +117,14 @@ const auth = (store) => (next) => (action) => {
     }
   }
 
-  // asynchronous function to retrieve the id and the token
-  async function logIn() {
-    try {
-      const response = await axios({
-        method: 'POST',
-        url: `${URL}/users/login`,
-        data: form,
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-
-      // console.log('Answer request login :', response);
-
-      getUser(response.data.data.userId, response.data.data.token);
-
-      localStorage.setItem('id', response.data.data.userId);
-      localStorage.setItem('token', response.data.data.token);
-    }
-    catch (error) {
-      // console.log('Error request login :', error.response);
-
-      store.dispatch({
-        type: 'LOGIN_FAILED',
-        payload: {
-          // if there is an error in the request (wrong identifies),
-          // an error message is sent to the reducer "auth.js"
-          errorMessage: 'Identifiants incorrects',
-        },
-      });
-    }
-  }
-
   switch (action.type) {
-    // API connection request : OK
-    case 'SEND_LOGIN_REQUEST':
-      logIn();
+    case 'CHECK_LOGGED_USER':
+      getUser(action.payload.id, action.payload.token)
       break;
     default:
       next(action);
   }
+
 };
 
-export default auth;
+export default connectionPersistence;

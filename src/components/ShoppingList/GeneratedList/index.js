@@ -5,10 +5,8 @@ import PropTypes from 'prop-types';
 // == Import
 import '../styles.scss';
 
-//import QuantitySetter from '../QuantitySetter';
-
 // == Composant
-const GeneratedList = ({ id, value, label, items }) => {
+const GeneratedList = ({ id, value, label, ingredients }) => {
   return (
       <div className="shopping__list" key={id}>
         <section className="shopping__list__header">
@@ -17,7 +15,7 @@ const GeneratedList = ({ id, value, label, items }) => {
           <img src="" alt="flèche"/>
         </section>
         <section className="shopping__list__body">
-        {items.map((ingredient) => (
+        {ingredients.map((ingredient) => (
           <form className="shopping__list__body__form" key={ingredient.id}>
             <label>
               <input type="checkbox" name="ingredient" />
@@ -30,10 +28,21 @@ const GeneratedList = ({ id, value, label, items }) => {
         ))}
         </section>
       </div>
-
   );
-
 };
+
+GeneratedList.propTypes = {
+  id: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+  label: PropTypes.string.isRequired,
+  ingredients: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    quantity: PropTypes.number,
+    unit: PropTypes.string,
+  })).isRequired,
+};
+
 
 // == Export
 export default GeneratedList;

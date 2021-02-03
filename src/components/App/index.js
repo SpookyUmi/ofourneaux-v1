@@ -1,5 +1,5 @@
 // YARN
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
@@ -16,16 +16,22 @@ import Connection from 'src/components/Connection';
 import Profile from 'src/components/Profile';
 import Recipe from 'src/components/Recipe';
 import Recipes from 'src/components/Recipes';
+import Favorites from 'src/components/Favorites';
 import NavBar from 'src/components/NavBar';
 import Footer from 'src/components/Footer';
 import Admin from 'src/components/Admin';
+import SearchFail from 'src/components/Errors/SearchFail';
 
 // SCSS
 import './styles.scss';
 import '../../styles/index.scss';
 
-const App = ({ recipes }) => {
+const App = ({ recipes, checkIfUserIsLogged }) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    checkIfUserIsLogged();
+  }, []);
 
   return (
     <div className="app">
@@ -48,7 +54,7 @@ const App = ({ recipes }) => {
         <ShoppingList />
       </Route>
       <Route exact path="/profil/recettes-favorites">
-        <Recipes />
+        <Favorites />
       </Route>
       <Route exact path="/inscription">
         <Inscription />
@@ -63,13 +69,16 @@ const App = ({ recipes }) => {
         <Recipes recipes={recipes} />
       </Route>
       <Route exact path="/recettes/:slug">
-        {/* use a "hasData" boolean to display the page only if you retrive a lot of data */}
         <Recipe recipes={recipes} />
       </Route>
       <Route
         exact
         path={['/admin/ajout-recette', '/admin/modification-recette/:id', '/admin/gestion-labels', '/admin/gestion-utilisateurs']}>
         <Admin />
+      </Route>
+      <Route
+        exact path={'/try-again'}>
+        <SearchFail />
       </Route>
       <Footer className="footer" />
     </div>
@@ -84,4 +93,22 @@ const mapStateToProps = (state) => ({
   recipes: state.recipes.recipes,
 });
 
-export default connect(mapStateToProps, null)(App);
+const mapDispatchToProps = (dispatch) => ({
+  checkIfUserIsLogged: (event) => {
+    const userToken = localStorage.getItem('token');
+    const userId = localStorage.getItem('id');
+    if (userToken && userId) {
+      dispatch({
+        type: 'CHECK_LOGGED_USER',
+        payload: {
+          id: userId,
+          token: userToken
+        },
+      });
+    }
+  },
+});
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

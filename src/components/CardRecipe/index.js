@@ -22,12 +22,14 @@ const CardRecipe = ({
   difficulty_id,
   getRecipeById,
   id,
+  addRecipeToFavorites,
+  addRecipeToShoppingList
 }) => (
   <div className="card__recipe">
     <img className="card__recipe__img" src={picture_url} alt={title} />
     <div className="card__recipe__container">
       <h3 className="card__recipe__title">
-        <NavLink to={buildRecipeURL(title)} id={id} className="card__recipe__title__link" onClick={getRecipeById}>
+        <NavLink to={title ? buildRecipeURL(title) : title} id={id} className="card__recipe__title__link" onClick={getRecipeById}>
           {title}
         </NavLink>
       </h3>
@@ -43,8 +45,12 @@ const CardRecipe = ({
       </div>
       {/* TODO onClick buttons */}
       <section className="card__recipe__buttons">
-        <button id="special__button" className="card__recipe__select__button" type="button">Sélectionner</button>
-        <button id="special__button" className="card__recipe__favorite__button" type="button">Favoris</button>
+        <button id={id} className="card__recipe__select__button" type="button"
+          onClick={addRecipeToShoppingList}
+        >Sélectionner</button>
+        <button id={id} className="card__recipe__favorite__button" type="button"
+          onClick={addRecipeToFavorites}
+        >Favoris</button>
       </section>
     </div>
   </div>
@@ -63,6 +69,26 @@ const mapDispatchToProps = (dispatch) => ({
   getRecipeById: (event) => {
     dispatch({
       type: 'SEND_RECIPE_REQUEST',
+      payload: {
+        id: event.target.id,
+      }
+    });
+  },
+
+  addRecipeToShoppingList: (event) => {
+    event.preventDefault();
+    dispatch({
+      type: 'UPDATE_SHOPPING_LIST_REQUEST',
+      payload: {
+        id: event.target.id,
+      }
+    });
+  },
+
+  addRecipeToFavorites: (event) => {
+    event.preventDefault();
+    dispatch({
+      type: 'UPDATE_FAVORITES_REQUEST',
       payload: {
         id: event.target.id,
       }

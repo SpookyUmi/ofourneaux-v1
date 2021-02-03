@@ -6,22 +6,22 @@ import PropTypes from 'prop-types';
 import CardRecipe from 'src/components/CardRecipe';
 import './styles.scss';
 
-const Recipes = ({ recipes }) => (
+const Favorites = ({ recipes }) => (
   <div className="recipes">
     {/* <h2>Résultats de la recherche</h2> */}
     {recipes?.map((recipe) => (
-      <CardRecipe {...recipe} key={recipe.id} className="recipes__cards"/>
+      <CardRecipe {...recipe} key={recipe.id} className="recipes__cards" />
     ))}
   </div>
 );
 
-Recipes.propTypes = {
+Favorites.propTypes = {
   recipes: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = (state) => {
   return {
-    recipes: state.recipes.recipes,
+    recipes: state.user.favoriteRecipes,
   }
 };
 
@@ -29,4 +29,4 @@ const mapDispatchToProps = (dispatch) => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Recipes);
+export default connect(mapStateToProps, mapDispatchToProps)(Favorites);

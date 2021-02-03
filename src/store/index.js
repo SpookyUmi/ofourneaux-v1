@@ -15,6 +15,7 @@ import searchMiddleware from 'src/middlewares/search';
 import recipeMiddleware from 'src/middlewares/recipe';
 import shoppingListMiddleware from 'src/middlewares/shoppingList';
 import appMiddleware from 'src/middlewares/app';
+import connectionPersistence from 'src/middlewares/connectionPersistence';
 
 const store = createStore(
   rootReducer,
@@ -30,6 +31,7 @@ const store = createStore(
       recipeMiddleware,
       shoppingListMiddleware,
       appMiddleware,
+      connectionPersistence,
     ),
   ),
 );

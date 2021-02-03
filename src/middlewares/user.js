@@ -1,4 +1,5 @@
 import axios from 'axios';
+import FormData from 'form-data';
 
 const user = (store) => (next) => (action) => {
   const state = store.getState();
@@ -36,6 +37,29 @@ const user = (store) => (next) => (action) => {
         method: 'GET',
         url: `${URL}/shopping_list/${state.user.id}`,
         headers: {
+          authorization: state.user.token,
+        },
+      })
+        .then((response) => {
+          console.log('Réponse requête :', response);
+          store.dispatch({
+            type: 'SHOPPING_LIST_SUCCESS',
+            payload: {
+              selectedRecipes: response.data.data,
+            },
+          });
+        })
+        .catch((error) => {
+          console.log('Erreur requête :', error.response);
+          // ! do we send anything in particular if the request fails ?
+        });
+      break;
+    case 'SEND_SHOPPING_LIST_REQUEST':
+      axios({
+        method: 'get',
+        url: `https://ofourneaux.herokuapp.com/shopping_list/${state.user.id}/generate`,
+        header: {
+          // ! the token is necessary ?
           authorization: state.user.token,
         },
       })
