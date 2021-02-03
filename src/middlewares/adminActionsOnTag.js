@@ -6,48 +6,68 @@ const adminActionsOnTag = (store) => (next) => (action) => {
 
   const addTagForm = new FormData();
 
-  switch (action.type) {
-    case 'ADD_TAG':
-      axios({
+  async function getTags() {
+    try {
+      const response = await axios({
+        method: 'GET',
+        url: 'https://ofourneaux.herokuapp.com/tags',
+        headers: {
+          authorization: state.user.token,
+        },
+      });
+      console.log('response', response);
+      store.dispatch({
+        type: 'UPDATE_TAGS',
+        payload: {
+          tags: response.data.data.tags,
+        },
+      });
+    }
+    catch (error) {
+      console.log('Error update tags :', error.response);
+    }
+  }
+
+  // asynchronous function to retrieve the id and the token
+  async function addTag(name) {
+    try {
+      addTagForm.append('name', name);
+      await axios({
         method: 'post',
         url: 'https://ofourneaux.herokuapp.com/tags',
-        data: {
-          name: addTagForm.append('name', state.admin.tagField),
-        },
+        data: addTagForm,
         headers: { authorization: state.user.token, 'Content-Type': 'multipart/form-data' },
-      })
-        .then((response) => {
-          console.log('Réponse connexion :', response);
-          store.dispatch({
-            type: 'TAG_ADD',
-            payload: {
-              tags: response.data,
-            },
-          });
-        })
-        .catch((error) => {
-          console.log('Erreur connexion :', error);
-        });
+      });
+
+      getTags();
+    }
+    catch (error) {
+      console.log('Error add tag :', error.response);
+    }
+  }
+
+  // asynchronous function to retrieve the id and the token
+  async function deleteTag(id) {
+    try {
+      await axios({
+        method: 'delete',
+        url: `https://ofourneaux.herokuapp.com/tags/${id}`,
+        headers: { authorization: state.user.token },
+      });
+      getTags();
+    }
+    catch (error) {
+      console.log('Error delete tag :', error.response);
+    }
+  }
+
+  switch (action.type) {
+    case 'ADD_TAG':
+      addTag(action.payload.name);
       break;
 
     case 'DELETE_TAG':
-      axios({
-        method: 'delete',
-        url: `https://ofourneaux.herokuapp.com/tags/${action.payload.id}`,
-        headers: { authorization: state.user.token },
-      })
-        .then((response) => {
-          console.log('Réponse connexion :', response);
-          store.dispatch({
-            type: 'TAG_DELETE',
-            payload: {
-              tags: response.data,
-            },
-          });
-        })
-        .catch((error) => {
-          console.log('Erreur connexion :', error);
-        });
+      deleteTag(action.payload.id);
       break;
     default:
       next(action);

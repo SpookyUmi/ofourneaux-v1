@@ -4,6 +4,7 @@ const initialState = {
   tags: [],
   tagField: '',
   ingredients: [],
+  userSearch: false,
 };
 
 const reducer = (oldState = initialState, action) => {
@@ -20,6 +21,7 @@ const reducer = (oldState = initialState, action) => {
       return {
         ...oldState,
         user: action.payload.user,
+        userSearch: true,
       };
     case 'USER_UPDATE':
       return {
@@ -30,6 +32,7 @@ const reducer = (oldState = initialState, action) => {
       return {
         ...oldState,
         user: {},
+        userSearch: false,
       };
     case 'UPDATE_TAG_FIELD':
       return {

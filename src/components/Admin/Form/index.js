@@ -6,6 +6,8 @@ import UpdateRecipeForm from './UpdateRecipeForm';
 import TagForm from './TagForm';
 import UserForm from './UserForm';
 
+// This component Form will show the form corresponding to the route
+// (AddRecipe, UpdateRecipe, TagForm or UserForm).
 const Form = () => (
   <div className="form">
     <Route exact path="/admin/ajout-recette">
