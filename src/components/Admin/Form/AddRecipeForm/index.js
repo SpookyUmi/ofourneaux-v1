@@ -7,6 +7,7 @@ import axios from 'axios';
 import uploadImage from 'src/middlewares/firebase';
 
 import 'src/components/Admin/admin.scss';
+
 import bin from 'src/assets/icons/delete.svg';
 import './addRecipeForm.scss';
 
@@ -34,6 +35,7 @@ const AddRecipeForm = ({
   const [localSteps, setLocalSteps] = useState([]);
   const [localNewStep, setLocalNewStep] = useState('');
 
+  // This function is used to handle the upload of image with the firebase middleware
   const changeRecipeImage = async (event) => {
     const url = await uploadImage(event.target.files[0]);
     setLocalPicture(url);
@@ -76,7 +78,7 @@ const AddRecipeForm = ({
           <input
             className="recipe__form__description input"
             type="text"
-            placeholder="Veuillez décrire brièvement la recette."
+            placeholder="Description"
             value={localDescription}
             onChange={(event) => {
               setLocalDescription(event.target.value);
@@ -90,6 +92,8 @@ const AddRecipeForm = ({
 
         {/* ---- TYPES ---- */}
         <p className="recipe__form__categories label">Catégories</p>
+        {/* I map on the types array of objects containing all types stocked in the store and
+        obtained through the GET request at init on route https://ofourneaux.herokuapp.com/datas */}
         {types.map((type) => (
           <label className="label" key={type.id}>
             <input
@@ -108,9 +112,9 @@ const AddRecipeForm = ({
         ))}
 
         {/* ---- SEASONS ---- */}
-        {/* If we have time in the future we could add checked property to the checkbox if
-        the season is in recipe.seasons (if else?) */}
         <p className="recipe__form__seasons label">Saison</p>
+        {/* I map on the seasons array of objects containing all seasons stocked in the store and
+        obtained through the GET request at init on route https://ofourneaux.herokuapp.com/datas */}
         {seasons.map((season) => (
           <label className="label" key={season.name}>
             <input
@@ -119,17 +123,18 @@ const AddRecipeForm = ({
               name={season.name}
               onChange={
             (event) => {
+              // if the user checks a new season its id is added to the localSeasons array
               if (event.target.checked) {
                 setLocalSeasons([
                   ...localSeasons,
                   season.id,
                 ]);
               }
+              // if the user unchecks a checked season its id is removed from the localSeasons array
               else if (localSeasons.indexOf(season.id)) {
                 const index = localSeasons.indexOf(season.id);
-                localSeasons.splice(index, 1);
+                setLocalSeasons(localSeasons.splice(index, 1));
               }
-              else setLocalSeasons([...localSeasons]);
             }
           }
             /> {season.name}
@@ -137,9 +142,9 @@ const AddRecipeForm = ({
         ))}
 
         {/* ---- TAGS ---- */}
-        {/* If we have time in the future we could add checked property to the checkbox if
-        the tag is in recipe.tags (if else?) */}
         <p className="recipe__form__tags label">Labels</p>
+        {/* I map on the seasons array of objects containing all seasons stocked in the store and
+        obtained through the GET request at init on route https://ofourneaux.herokuapp.com/datas */}
         {tags?.map((tag) => (
           <label className="label" htmlFor={tag.name} key={tag.id}>
             <input
@@ -147,17 +152,18 @@ const AddRecipeForm = ({
               type="checkbox"
               name={tag.name}
               onChange={(event) => {
+                // if the user checks a new tag its id is added to the localTags array
                 if (event.target.checked) {
                   setLocalTags([
                     ...localTags,
                     tag.id,
                   ]);
                 }
+                // if the user unchecks a checked tag its id is removed from the localTags array
                 else if (localTags.indexOf(tag.id)) {
                   const index = localTags.indexOf(tag.id);
-                  localTags.splice(index, 1);
+                  setLocalTags(localTags.splice(index, 1));
                 }
-                else setLocalTags([...localTags]);
               }}
             />
             {tag.name}
@@ -168,8 +174,6 @@ const AddRecipeForm = ({
       {/* I am creating divs 1-2-3-4 to help style the form for desktop mode */}
       <div className="recipe__form__div__3">
         {/* ---- DIFFICULTY --- */}
-        {/* If we have time in the future we could add checked property to the checkbox if
-        the difficulty is in recipe.difficulty (if else?) */}
         <label className="recipe__form__difficulty label">Difficulté
           <select
             className="input"
@@ -178,6 +182,9 @@ const AddRecipeForm = ({
               setLocalDifficulty(event.target.value);
             }}
           >
+            {/* I map on the difficulties array of objects containing all difficulties
+             stocked in the store and obtained through the GET request at init
+              on route https://ofourneaux.herokuapp.com/datas */}
             {difficulties.map((difficulty) => (
               <option value={difficulty.id} key={difficulty.id}>{difficulty.level}</option>
             ))}
@@ -185,8 +192,6 @@ const AddRecipeForm = ({
         </label>
 
         {/* ---- NUTRISCORE ---- */}
-        {/* If we have time in the future we could add checked property to the checkbox if
-        the nutriscore is in recipe.nutriscore (if else?) */}
         <label className="recipe__form__nutri__score label">Nutri Score
           <select
             className="nutri__score input"
@@ -244,7 +249,8 @@ const AddRecipeForm = ({
 
         {/* ---- INGREDIENTS ---- */}
         <p className="recipe__form__ingredients label">Ingrédients</p>
-        {localIngredients.length !== 0 && localIngredients.map((ingredient) => (
+        {/* I map on the localIngredients array if there are ingredients in it */}
+        {localIngredients?.map((ingredient) => (
           <div key={ingredient.id}>
             <span className="recipe__form__ingredient__quantity ingredient__element">{ingredient.quantity}</span>
             <span className="recipe__form__ingredient__unit ingredient__element">{ingredient.unit}</span>
@@ -254,8 +260,9 @@ const AddRecipeForm = ({
               src={bin}
               alt="bin"
               onClick={() => {
-                const index = localIngredients.indexOf(ingredient.id);
-                localIngredients.splice(index, 1);
+                // if the user clicks on the bin the associated ingredient is removed from the array
+                const index = localIngredients.indexOf(ingredient);
+                setLocalIngredients(localIngredients.splice(index, 1));
               }}
             />
           </div>
@@ -272,6 +279,9 @@ const AddRecipeForm = ({
             );
           }}
         >
+          {/* I map on the ingredients array of objects containing all ingredients
+          stocked in the store and obtained through the GET request at init
+          on route https://ofourneaux.herokuapp.com/datas */}
           {ingredients?.map((ingredient) => (
             <option value={ingredient.name} id={ingredient.id} key={ingredient.id}>
               {ingredient.name}
@@ -324,6 +334,7 @@ const AddRecipeForm = ({
         {/* ---- STEPS ---- */}
         <p className="recipe__form__steps__p label">Étapes de préparation</p>
         <ol>
+          {/* I map on the localSteps array if there are steps in it */}
           {localSteps?.map((step) => (
             <li key={step}>{step}
               <img
@@ -331,8 +342,9 @@ const AddRecipeForm = ({
                 src={bin}
                 alt="bin"
                 onClick={() => {
+                  // if the user clicks on the bin the associated step is removed from the array
                   const index = localSteps.indexOf(step);
-                  localSteps.splice(index, 1);
+                  setLocalSteps(localSteps.splice(index, 1));
                 }}
               />
             </li>
@@ -371,7 +383,6 @@ const AddRecipeForm = ({
           value="Ajouter une recette"
           onClick={(event) => {
             event.preventDefault();
-            console.log('localIngredients:', JSON.stringify(localIngredients));
             const addRecipeForm = new FormData();
             addRecipeForm.append('title', localTitle);
             addRecipeForm.append('picture_url', localPicture);
