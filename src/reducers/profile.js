@@ -38,6 +38,12 @@ const reducer = (oldState = initialState, action) => {
         message: 'Les changements ont bien été pris en compte',
       };
 
+    case 'EDIT_PROFILE_FAILED':
+      return {
+        ...oldState,
+        message: action.payload.message,
+      };
+
     // when the user logs out, the modal disappears
     case 'LOGOUT_SUCCESS':
       return {

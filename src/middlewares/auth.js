@@ -89,7 +89,7 @@ const auth = (store) => (next) => (action) => {
         },
       });
 
-      // console.log('Answer request favorites :', response.data.data);
+      console.log('Answer request favorites :', response.data.data);
 
       store.dispatch({
         type: 'FAVORITES_RECIPES_SUCCESS',
@@ -101,20 +101,20 @@ const auth = (store) => (next) => (action) => {
       getTagsByUser(userId, userToken);
     }
     catch (error) {
-      // console.log('Error request favorites :', error.response.data.error);
+      console.log('Error request favorites :', error.response);
 
-      if (error.response.data.error === 'Resource not found') {
-        // when no data is returned from the back when asking
-        // for a user's favourite recipes, an empty table is dispatched
-        store.dispatch({
-          type: 'FAVORITES_RECIPES_SUCCESS',
-          payload: {
-            favoritesRecipes: [],
-          },
-        });
+      // if (error.response.data.error === 'Resource not found') {
+      //   // when no data is returned from the back when asking
+      //   // for a user's favourite recipes, an empty table is dispatched
+      //   store.dispatch({
+      //     type: 'FAVORITES_RECIPES_SUCCESS',
+      //     payload: {
+      //       favoritesRecipes: [],
+      //     },
+      //   });
 
-        getTagsByUser(userId, userToken);
-      }
+      //   getTagsByUser(userId, userToken);
+      // }
     }
   }
 

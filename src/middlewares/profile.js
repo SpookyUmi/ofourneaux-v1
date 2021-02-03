@@ -1,11 +1,12 @@
 import axios from 'axios';
 import FormData from 'form-data';
+import { string } from 'prop-types';
 
 
 const profile = (store) => (next) => (action) => {
   const state = store.getState();
   console.log(state);
-  
+
   const URL = 'https://ofourneaux.herokuapp.com';
 
   // the data must be sent to the back in "form-data" format
@@ -16,10 +17,20 @@ const profile = (store) => (next) => (action) => {
   formProfile.append('picture_url', state.user.pictureUrl);
 
   const formEatingPreferences = new FormData();
-  formEatingPreferences.append('eating_preferences', state.user.eatingPreferences);
-  console.log('Eating preferences array :', state.user.eatingPreferences);
 
   async function updateEatingPreferencesUser(userId, userToken) {
+    // eslint-disable-next-line max-len
+    const updatedEatingPreferences = state.user.eatingPreferences.map((eatingPreference) => eatingPreference);
+
+    console.log('Préférence alimentaire dans le middleware :', updatedEatingPreferences);
+
+    // eslint-disable-next-line prefer-template
+    const updatedEatingPreferencesStringify = '[' + updatedEatingPreferences.join(', ') + ']';
+
+    console.log('Tableau stringifié :', updatedEatingPreferencesStringify);
+
+    formEatingPreferences.append('tags', updatedEatingPreferencesStringify);
+
     try {
       const response = await axios({
         method: 'PATCH',
@@ -34,7 +45,7 @@ const profile = (store) => (next) => (action) => {
       console.log('Answer request update eating preferences :', response);
 
       store.dispatch({
-        type: 'EDIT_PROFILE_SUCCESS',
+        type: 'EDIT_EATING_PREFERENCES_SUCCESS',
         payload: {
           eatingPreferences: state.user.eatingPreferences,
         },
@@ -59,6 +70,8 @@ const profile = (store) => (next) => (action) => {
 
       console.log('Answer request update profile :', response);
 
+      updateEatingPreferencesUser(state.user.id, state.user.token);
+
       store.dispatch({
         type: 'EDIT_PROFILE_SUCCESS',
         payload: {
@@ -68,11 +81,18 @@ const profile = (store) => (next) => (action) => {
           pictureUrl: state.user.pictureUrl,
         },
       });
-
-      updateEatingPreferencesUser(state.user.id, state.user.token);
     }
     catch (error) {
       console.log('Error request update profile :', error.response);
+
+      if (error.response.data.error === 'Mail address already in use') {
+        store.dispatch({
+          type: 'EDIT_PROFILE_FAILED',
+          payload: {
+            message: 'L\'adresse mail est déjà utilisée',
+          },
+        });
+      }
     }
   }
 
