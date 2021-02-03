@@ -1,7 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-
-// import './recipesHeader.scss';
 
 const RecipesHeader = () => (
   <div className="recipes__header">

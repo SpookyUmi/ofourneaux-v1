@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
@@ -7,13 +8,14 @@ import { buildRecipeURL } from 'src/utils/buildRecipeURL';
 
 import time from 'src/assets/icons/time.svg';
 import fire from 'src/assets/icons/difficulty.svg';
-import difficultyNameById from 'src/utils/difficultyNameById'
+import difficultyNameById from 'src/utils/difficultyNameById';
 
 import './styles.scss';
 
 // This component will display a card with a recipe's picture, title, total cooking time
-// and a button to add the recipe to the user's selection (if logged in)
-// or to redirect to sign in (if not logged in)
+// and a button to add the recipe to the user's selection.
+// The props picture_url, title, preparation_time, baking_time, difficulty_id, getRecipeById, id
+// are passed down by the Recipes component.
 const CardRecipe = ({
   picture_url,
   title,
@@ -23,7 +25,7 @@ const CardRecipe = ({
   getRecipeById,
   id,
   addRecipeToFavorites,
-  addRecipeToShoppingList
+  addRecipeToShoppingList,
 }) => (
   <div className="card__recipe">
     <img className="card__recipe__img" src={picture_url} alt={title} />
@@ -45,12 +47,21 @@ const CardRecipe = ({
       </div>
       {/* TODO onClick buttons */}
       <section className="card__recipe__buttons">
-        <button id={id} className="card__recipe__select__button" type="button"
+        <button
+          id={id}
+          className="card__recipe__select__button"
+          type="button"
           onClick={addRecipeToShoppingList}
-        >Sélectionner</button>
-        <button id={id} className="card__recipe__favorite__button" type="button"
+        >Sélectionner
+        </button>
+
+        <button
+          id={id}
+          className="card__recipe__favorite__button"
+          type="button"
           onClick={addRecipeToFavorites}
-        >Favoris</button>
+        >Favoris
+        </button>
       </section>
     </div>
   </div>
@@ -63,6 +74,9 @@ CardRecipe.propTypes = {
   preparation_time: PropTypes.number.isRequired,
   baking_time: PropTypes.number.isRequired,
   difficulty_id: PropTypes.number.isRequired,
+  getRecipeById: PropTypes.func.isRequired,
+  addRecipeToFavorites: PropTypes.func.isRequired,
+  addRecipeToShoppingList: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
@@ -71,7 +85,7 @@ const mapDispatchToProps = (dispatch) => ({
       type: 'SEND_RECIPE_REQUEST',
       payload: {
         id: event.target.id,
-      }
+      },
     });
   },
 
@@ -81,7 +95,7 @@ const mapDispatchToProps = (dispatch) => ({
       type: 'UPDATE_SHOPPING_LIST_REQUEST',
       payload: {
         id: event.target.id,
-      }
+      },
     });
   },
 
@@ -91,7 +105,7 @@ const mapDispatchToProps = (dispatch) => ({
       type: 'UPDATE_FAVORITES_REQUEST',
       payload: {
         id: event.target.id,
-      }
+      },
     });
   },
 });
