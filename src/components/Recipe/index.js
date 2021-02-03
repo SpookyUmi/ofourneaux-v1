@@ -13,28 +13,32 @@ import Image from 'src/components/Recipe/Image';
 import './styles.scss';
 
 // component
-const Recipe = ({ recipe }) => (
-  <div className="recipe">
-    <div className="recipe__block recipe__block--left">
-      <Informations
-        id={recipe.id}
-        title={recipe.title}
-        description={recipe.description}
-        tags={recipe.tags}
-        preparationTime={recipe.preparation_time}
-        bakingTime={recipe.baking_time}
-        difficulty={recipe.difficulty}
-        nutriScore={recipe.nutri_score}
-      />
-      <Instructions steps={recipe.steps} />
-    </div>
+const Recipe = ({ recipe }) => {
+  console.log(recipe);
 
-    <div className="recipe__block recipe__block--right">
-      <Image id={recipe.id} picture={recipe.picture_url} />
-      <Ingredients ingredients={recipe.ingredients} />
+  return (
+    <div className="recipe">
+      <div className="recipe__block recipe__block--left">
+        <Informations
+          id={recipe.id}
+          title={recipe.title}
+          description={recipe.description}
+          tags={recipe.tags}
+          preparationTime={recipe.preparation_time}
+          bakingTime={recipe.baking_time}
+          difficulty={recipe.difficulty_id}
+          nutriScore={recipe.nutri_score}
+        />
+        <Instructions steps={recipe.steps} />
+      </div>
+
+      <div className="recipe__block recipe__block--right">
+        <Image id={recipe.id} picture={recipe.picture_url} />
+        <Ingredients ingredients={recipe.ingredients} />
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 // PropTypes
 Recipe.propTypes = {
@@ -44,7 +48,7 @@ Recipe.propTypes = {
     picture_url: PropTypes.string,
     description: PropTypes.string,
     type: PropTypes.string,
-    difficulty: PropTypes.string,
+    difficulty_id: PropTypes.number,
     preparation_time: PropTypes.number,
     baking_time: PropTypes.number,
     nutri_score: PropTypes.string,

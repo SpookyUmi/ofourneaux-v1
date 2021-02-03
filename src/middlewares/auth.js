@@ -17,28 +17,104 @@ const auth = (store) => (next) => (action) => {
     try {
       const response = await axios({
         method: 'GET',
-        url: `${URL}/recipes/data`,
+        url: `${URL}/datas`,
         headers: {
           authorization: userToken,
         },
       });
 
-      console.log('Answer request data :', response.data.data);
+      // console.log('Answer request data :', response);
 
       store.dispatch({
         type: 'REQUIRED_DATA_SUCCESS',
         payload: {
-          types: response.data.data[0].type,
-          seasons: response.data.data[1].season,
-          tags: response.data.data[2].tag,
-          difficulties: response.data.data[3].difficulty,
-          categories: response.data.data[4].category,
-          ingredients: response.data.data[5].ingredient,
+          types: response.data.data.types,
+          seasons: response.data.data.seasons,
+          tags: response.data.data.tags,
+          difficulties: response.data.data.difficulties,
+          categories: response.data.data.categories,
+          ingredients: response.data.data.ingredients,
         },
       });
     }
     catch (error) {
-      console.log('Error request data :', error.response);
+      // console.log('Error request data :', error.response);
+    }
+  }
+
+  async function getTagsByUser(userId, userToken) {
+    try {
+      const response = await axios({
+        method: 'GET',
+        url: `${URL}/tags/user/${userId}`,
+        headers: {
+          authorization: userToken,
+        },
+      });
+
+      // console.log('Answer request tags by user :', response.data.data);
+
+      store.dispatch({
+        type: 'TAGS_USER_SUCCESS',
+        payload: {
+          tags: response.data.data,
+        },
+      });
+
+      getRequiredData(userToken);
+    }
+    catch (error) {
+      // console.log('Error request tags by user :', error.response.data.error);
+
+      if (error.response.data.error === 'Resource not found') {
+        store.dispatch({
+          type: 'TAGS_USER_SUCCESS',
+          payload: {
+            tags: [],
+          },
+        });
+
+        getRequiredData(userToken);
+      }
+    }
+  }
+
+  async function getFavoritesRecipes(userId, userToken) {
+    try {
+      const response = await axios({
+        method: 'GET',
+        url: `${URL}/favorites/${userId}`,
+        headers: {
+          authorization: userToken,
+        },
+      });
+
+      // console.log('Answer request favorites :', response.data.data);
+
+      store.dispatch({
+        type: 'FAVORITES_RECIPES_SUCCESS',
+        payload: {
+          favoritesRecipes: response.data.data,
+        },
+      });
+
+      getTagsByUser(userId, userToken);
+    }
+    catch (error) {
+      // console.log('Error request favorites :', error.response.data.error);
+
+      if (error.response.data.error === 'Resource not found') {
+        // when no data is returned from the back when asking
+        // for a user's favourite recipes, an empty table is dispatched
+        store.dispatch({
+          type: 'FAVORITES_RECIPES_SUCCESS',
+          payload: {
+            favoritesRecipes: [],
+          },
+        });
+
+        getTagsByUser(userId, userToken);
+      }
     }
   }
 
@@ -53,7 +129,8 @@ const auth = (store) => (next) => (action) => {
           authorization: userToken,
         },
       });
-      // console.log('Answer request user :', response);
+
+      console.log('Answer request user :', response);
 
       store.dispatch({
         type: 'LOGIN_SUCCESS',
@@ -68,17 +145,9 @@ const auth = (store) => (next) => (action) => {
           status: response.data.data.status,
           recipesHistory: response.data.data.recipes_history,
           // ! test table, to be deleted
-          favoritesRecipes: [1, 3, 5],
-          // TODO: uncomment next line
-          // favoritesRecipes: response.data.data.favorites_recipes,
-          // ! test table, to be deleted
           shoppingList: [2, 4, 6],
           // TODO: uncomment next line
           // shoppingList: response.data.data.shopping_list,
-          // ! test table, to be deleted
-          eatingPreferences: [2, 5],
-          // TODO: uncomment next line
-          // eatingPreferences: response.data.data.eatingPreferences,
           pictureUrl: response.data.data.picture_url,
         },
       });
@@ -86,7 +155,7 @@ const auth = (store) => (next) => (action) => {
       // after logging in, the action is redirect to the home page
       action.redirect('/');
 
-      getRequiredData(userToken);
+      getFavoritesRecipes(userId, userToken);
     }
     catch (error) {
       // console.log('Error request user :', error.response);
@@ -103,7 +172,6 @@ const auth = (store) => (next) => (action) => {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
-
       });
 
       // console.log('Answer request login :', response);

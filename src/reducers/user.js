@@ -14,8 +14,8 @@ const initialState = {
 };
 
 const reducer = (oldState = initialState, action) => {
-  // console.log('State user :', oldState);
-  // console.log('Action user :', action);
+  console.log('State user :', oldState);
+  console.log('Action user :', action);
 
   switch (action.type) {
     // after the user login, we place the token and the id in the reducer "user".
@@ -48,7 +48,7 @@ const reducer = (oldState = initialState, action) => {
         email: '',
         status: '',
         recipesHistory: [],
-        favoriteRecipes: [],
+        favoritesRecipes: [],
         shoppingList: [],
       };
 
@@ -93,6 +93,14 @@ const reducer = (oldState = initialState, action) => {
         firstName: action.payload.firstName,
         lastName: action.payload.lastName,
         email: action.payload.email,
+        pictureUrl: action.payload.pictureUrl,
+        eatingPreferences: action.payload.eatingPreferences,
+      };
+
+    case 'CHANGE_PROFILE_PICTURE':
+      return {
+        ...oldState,
+        pictureUrl: action.payload.pictureUrl,
       };
 
     // when the update of favourite recipes and shopping
@@ -119,11 +127,11 @@ const reducer = (oldState = initialState, action) => {
         email: '',
         status: '',
         recipesHistory: [],
-        favoriteRecipes: [],
+        favoritesRecipes: [],
         shoppingList: [],
       };
 
-    // ! we add the users's favourite recipes in the state : 404
+    // we add the users's favourite recipes in the state
     case 'FAVORITES_RECIPES_SUCCESS':
       return {
         ...oldState,
@@ -136,6 +144,12 @@ const reducer = (oldState = initialState, action) => {
         ...oldState,
         shoppingList: action.payload.shoppingList,
         selectedRecipes: action.payload.selectedRecipes,
+      };
+
+    case 'TAGS_USER_SUCCESS':
+      return {
+        ...oldState,
+        eatingPreferences: action.payload.tags,
       };
 
     case 'EDIT_FIELD_PROFILE_LAST_NAME':
