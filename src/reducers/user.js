@@ -7,7 +7,9 @@ const initialState = {
   status: '',
   recipesHistory: [],
   favoritesRecipes: [],
+  userFavoritesRecipes: [],
   shoppingList: [],
+  selectedRecipes: [],
   ingredientsList: [],
   eatingPreferences: [],
   pictureUrl: '',
@@ -151,11 +153,23 @@ const reducer = (oldState = initialState, action) => {
         favoritesRecipes: action.payload.favoritesRecipes,
       };
 
+    case 'COLLECT_FAVORITES_RECIPES':
+      return {
+        ...oldState,
+        userFavoritesRecipes: action.payload.userFavoritesRecipes,
+      };
+
     // ! we add the users's shopping list in the state : 404
     case 'SHOPPING_LIST_SUCCESS':
       return {
         ...oldState,
         shoppingList: action.payload.shoppingList,
+        shoppingListRecipes: action.payload.selectedRecipes,
+      };
+
+    case 'COLLECT_SHOPPING_LIST':
+      return {
+        ...oldState,
         selectedRecipes: action.payload.selectedRecipes,
       };
 

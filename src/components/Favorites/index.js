@@ -21,7 +21,7 @@ Favorites.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    recipes: state.user.favoriteRecipes,
+    recipes: state.user.userFavoritesRecipes,
   }
 };
 
