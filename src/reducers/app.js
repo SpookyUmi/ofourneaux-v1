@@ -10,7 +10,7 @@ const initialState = {
 };
 
 const reducer = (oldState = initialState, action) => {
-  // console.log('State in reducer "app.js" :', oldState);
+  console.log('State in reducer "app.js" :', oldState);
 
   switch (action.type) {
     case 'CLICK_IN':

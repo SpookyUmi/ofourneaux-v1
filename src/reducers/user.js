@@ -92,6 +92,14 @@ const reducer = (oldState = initialState, action) => {
         firstName: action.payload.firstName,
         lastName: action.payload.lastName,
         email: action.payload.email,
+        pictureUrl: action.payload.pictureUrl,
+        eatingPreferences: action.payload.eatingPreferences,
+      };
+
+    case 'CHANGE_PROFILE_PICTURE':
+      return {
+        ...oldState,
+        pictureUrl: action.payload.pictureUrl,
       };
 
     // when the update of favourite recipes and shopping
