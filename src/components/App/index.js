@@ -16,6 +16,7 @@ import Connection from 'src/components/Connection';
 import Profile from 'src/components/Profile';
 import Recipe from 'src/components/Recipe';
 import Recipes from 'src/components/Recipes';
+import Favorites from 'src/components/Favorites';
 import NavBar from 'src/components/NavBar';
 import Footer from 'src/components/Footer';
 import Admin from 'src/components/Admin';
@@ -48,7 +49,7 @@ const App = ({ recipes }) => {
         <ShoppingList />
       </Route>
       <Route exact path="/profil/recettes-favorites">
-        <Recipes />
+        <Favorites />
       </Route>
       <Route exact path="/inscription">
         <Inscription />
@@ -63,7 +64,6 @@ const App = ({ recipes }) => {
         <Recipes recipes={recipes} />
       </Route>
       <Route exact path="/recettes/:slug">
-        {/* use a "hasData" boolean to display the page only if you retrive a lot of data */}
         <Recipe recipes={recipes} />
       </Route>
       <Route
