@@ -94,6 +94,11 @@ const reducer = (oldState = initialState, action) => {
         lastName: action.payload.lastName,
         email: action.payload.email,
         pictureUrl: action.payload.pictureUrl,
+      };
+
+    case 'EDIT_EATING_PREFERENCES_SUCCESS':
+      return {
+        ...oldState,
         eatingPreferences: action.payload.eatingPreferences,
       };
 

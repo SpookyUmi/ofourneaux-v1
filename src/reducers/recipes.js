@@ -33,7 +33,7 @@ const reducer = (oldState = initialState, action) => {
       return {
         ...oldState,
         recipes: action.payload.recipes,
-      }
+      };
     default:
       return { ...oldState };
   };

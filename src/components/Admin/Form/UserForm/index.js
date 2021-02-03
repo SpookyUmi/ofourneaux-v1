@@ -6,9 +6,8 @@ import { connect } from 'react-redux';
 import User from './User';
 import 'src/components/Admin/admin.scss';
 
-// TODO add props (controlled field, handle onclick and props)
 const UserForm = ({
-  userSearchField, updateUserSearchField, searchByEmail, searchById,
+  userSearchField, updateUserSearchField, searchById, userSearch,
 }) => (
   <div className="user__form">
 
@@ -33,20 +32,21 @@ const UserForm = ({
       >Par ID
       </button>
     </form>
-    <User />
-
+    {userSearch && <User />}
   </div>
 );
 
 UserForm.propTypes = {
   userSearchField: PropTypes.string.isRequired,
   updateUserSearchField: PropTypes.func.isRequired,
-  searchByEmail: PropTypes.func.isRequired,
+  // searchByEmail: PropTypes.func.isRequired,
   searchById: PropTypes.func.isRequired,
+  userSearch: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   userSearchField: state.admin.userSearchField,
+  userSearch: state.admin.userSearch,
 });
 
 const mapDispatchToProps = (dispatch) => ({

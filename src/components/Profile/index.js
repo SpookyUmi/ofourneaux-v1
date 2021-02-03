@@ -4,11 +4,12 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+// import middlewares
+import uploadImage from 'src/middlewares/firebase';
+
 // icons
-import profilePicture from 'src/assets/images/profile-picture.jpg';
 import heartFull from 'src/assets/icons/heart-full.svg';
 import list from 'src/assets/icons/list.svg';
-import uploadImage from 'src/middlewares/firebase';
 
 // components import
 import Modal from './Modal';
@@ -16,7 +17,9 @@ import Modal from './Modal';
 // SCSS
 import './styles.scss';
 
+// component
 const Profile = ({
+  pictureUrl,
   lastName,
   firstName,
   email,
@@ -40,7 +43,7 @@ const Profile = ({
     <div className="profile__wrapper">
       {/* TODO: access to the user's files to change/modify his profile picture
     (open a modal to allow him to choose?) */}
-      <img className="profile__img" src={profilePicture} alt="Icône de profil de l'utilisateur" />
+      <img className="profile__img" src={pictureUrl} alt="Icône de profil de l'utilisateur" />
       <div className="profile__content">
         <div className="profile__content__header">
           {/* TODO: check if the favorite recipes query works */}
@@ -153,7 +156,7 @@ const Profile = ({
           </div>
         </div>
 
-        <div className="profile__content__message">
+        <div className={message === 'L\'adresse mail est déjà utilisée' ? 'profile__content__message error-message' : 'profile__content__message'}>
           {message}
         </div>
 
@@ -196,6 +199,7 @@ const Profile = ({
 
 // PropTypes
 Profile.propTypes = {
+  pictureUrl: PropTypes.string.isRequired,
   lastName: PropTypes.string.isRequired,
   firstName: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
@@ -216,6 +220,7 @@ Profile.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
+  pictureUrl: state.user.pictureUrl,
   lastName: state.user.lastName,
   firstName: state.user.firstName,
   email: state.user.email,
@@ -228,14 +233,14 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  // sends the request to retrieve favorite recipes to the middleware "profile.js"
+  // sends the request to retrieve favorite recipes to the middleware "user.js"
   getFavoritesRecipes: () => {
     dispatch({
       type: 'SEND_FAVORITES_RECIPES_REQUEST',
     });
   },
 
-  // sends the request to retrieve shopping list to the middleware "profile.js"
+  // sends the request to retrieve shopping list to the middleware "user.js"
   getShoppingList: () => {
     dispatch({
       type: 'SEND_SHOPPING_LIST_REQUEST',
@@ -300,6 +305,7 @@ const mapDispatchToProps = (dispatch) => ({
     // the id is therefore placed as an integer in a variable
     const idEatingPreference = parseInt(event.target.id, 10);
 
+    // dispatch to the reducer "user.js"
     dispatch({
       type: 'UPDATE_EATING_PREFERENCES',
       payload: {

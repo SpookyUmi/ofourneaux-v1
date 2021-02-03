@@ -13,35 +13,6 @@ const auth = (store) => (next) => (action) => {
 
   const URL = 'https://ofourneaux.herokuapp.com';
 
-  async function getRequiredData(userToken) {
-    try {
-      const response = await axios({
-        method: 'GET',
-        url: `${URL}/datas`,
-        headers: {
-          authorization: userToken,
-        },
-      });
-
-      // console.log('Answer request data :', response);
-
-      store.dispatch({
-        type: 'REQUIRED_DATA_SUCCESS',
-        payload: {
-          types: response.data.data.types,
-          seasons: response.data.data.seasons,
-          tags: response.data.data.tags,
-          difficulties: response.data.data.difficulties,
-          categories: response.data.data.categories,
-          ingredients: response.data.data.ingredients,
-        },
-      });
-    }
-    catch (error) {
-      // console.log('Error request data :', error.response);
-    }
-  }
-
   async function getTagsByUser(userId, userToken) {
     try {
       const response = await axios({
@@ -60,8 +31,6 @@ const auth = (store) => (next) => (action) => {
           tags: response.data.data,
         },
       });
-
-      getRequiredData(userToken);
     }
     catch (error) {
       // console.log('Error request tags by user :', error.response.data.error);
@@ -73,8 +42,6 @@ const auth = (store) => (next) => (action) => {
             tags: [],
           },
         });
-
-        getRequiredData(userToken);
       }
     }
   }
@@ -89,7 +56,7 @@ const auth = (store) => (next) => (action) => {
         },
       });
 
-      // console.log('Answer request favorites :', response.data.data);
+      console.log('Answer request favorites :', response.data.data);
 
       store.dispatch({
         type: 'FAVORITES_RECIPES_SUCCESS',
@@ -101,20 +68,20 @@ const auth = (store) => (next) => (action) => {
       getTagsByUser(userId, userToken);
     }
     catch (error) {
-      // console.log('Error request favorites :', error.response.data.error);
+      console.log('Error request favorites :', error.response);
 
-      if (error.response.data.error === 'Resource not found') {
-        // when no data is returned from the back when asking
-        // for a user's favourite recipes, an empty table is dispatched
-        store.dispatch({
-          type: 'FAVORITES_RECIPES_SUCCESS',
-          payload: {
-            favoritesRecipes: [],
-          },
-        });
+      // if (error.response.data.error === 'Resource not found') {
+      //   // when no data is returned from the back when asking
+      //   // for a user's favourite recipes, an empty table is dispatched
+      //   store.dispatch({
+      //     type: 'FAVORITES_RECIPES_SUCCESS',
+      //     payload: {
+      //       favoritesRecipes: [],
+      //     },
+      //   });
 
-        getTagsByUser(userId, userToken);
-      }
+      //   getTagsByUser(userId, userToken);
+      // }
     }
   }
 
