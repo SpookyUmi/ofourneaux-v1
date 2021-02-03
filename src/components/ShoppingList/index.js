@@ -10,7 +10,7 @@ import CardRecipe from 'src/components/CardRecipe';
 import GeneratedList from './GeneratedList';
 
 // == Composant
-const ShoppingList = ({ recipes }) => {
+const ShoppingList = ({ recipes, categories }) => {
 
   return (
     <div className="container">
@@ -44,7 +44,7 @@ ShoppingList.propTypes = {
 
 const mapStateToProps = (state) => ({
   recipes: state.user.shoppingList,
-  ingredients: state.user.ingredientsList
+  categories: state.user.ingredientsList
 });
 
 export default connect(mapStateToProps, null)(ShoppingList);

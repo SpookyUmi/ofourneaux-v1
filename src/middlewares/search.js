@@ -22,7 +22,7 @@ const search = (store) => (next) => (action) => {
         url: `https://ofourneaux.herokuapp.com/recipes/keyword?${search}`,
       })
         .then((response) => {
-          console.log('Réponse recettes :', response.data.data);
+          console.log('RECIPE RESPONSE :', response.data.data);
           store.dispatch({
             type: 'RECIPES_RESULTS',
             payload: {
@@ -33,6 +33,7 @@ const search = (store) => (next) => (action) => {
         })
         .catch((error) => {
           console.log('Erreur connexion :', error);
+          action.redirect('/try-again');
         });
         break;
     case 'SEND_GEN_REQUEST':

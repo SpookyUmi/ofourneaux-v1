@@ -20,6 +20,7 @@ import Favorites from 'src/components/Favorites';
 import NavBar from 'src/components/NavBar';
 import Footer from 'src/components/Footer';
 import Admin from 'src/components/Admin';
+import SearchFail from 'src/components/Errors/SearchFail';
 
 // SCSS
 import './styles.scss';
@@ -70,6 +71,10 @@ const App = ({ recipes }) => {
         exact
         path={['/admin/ajout-recette', '/admin/modification-recette/:id', '/admin/gestion-labels', '/admin/gestion-utilisateurs']}>
         <Admin />
+      </Route>
+      <Route
+        exact path={'/try-again'}>
+        <SearchFail />
       </Route>
       <Footer className="footer" />
     </div>
