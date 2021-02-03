@@ -39,7 +39,7 @@ const Profile = ({
   changeProfileImage,
 }) => (
   <div className="profile">
-    <h1 className="profile__title">Mon profil</h1>
+    <h1 className="profile__title">Mon profil - {firstName}</h1>
     <div className="profile__wrapper">
       {/* TODO: access to the user's files to change/modify his profile picture
     (open a modal to allow him to choose?) */}

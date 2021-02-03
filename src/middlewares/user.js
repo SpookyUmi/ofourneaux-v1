@@ -17,7 +17,7 @@ const user = (store) => (next) => (action) => {
         },
       })
         .then((response) => {
-          console.log('Réponse requête :', response);
+          console.log('FAVORITE RECIPES :', response);
           store.dispatch({
             type: 'FAVORITES_RECIPES_SUCCESS',
             payload: {

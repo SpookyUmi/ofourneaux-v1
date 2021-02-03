@@ -58,7 +58,7 @@ const auth = (store) => (next) => (action) => {
 
       console.log('Answer request favorites :', response.data.data);
 
-      store.dispatch({
+      await store.dispatch({
         type: 'FAVORITES_RECIPES_SUCCESS',
         payload: {
           favoritesRecipes: response.data.data,
