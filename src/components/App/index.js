@@ -104,7 +104,6 @@ const mapDispatchToProps = (dispatch) => ({
           id: userId,
           token: userToken
         },
-        // type: 'SEND_LOGIN_REQUEST'
       });
     }
   },

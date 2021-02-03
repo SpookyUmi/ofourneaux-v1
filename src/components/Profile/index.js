@@ -121,7 +121,7 @@ const Profile = ({
                 tags.map((tag) => {
                   let checked = false;
 
-                  eatingPreferences.forEach((eatingPreference) => {
+                  eatingPreferences?.forEach((eatingPreference) => {
                     if (eatingPreference === tag.id) {
                       checked = true;
                     }
