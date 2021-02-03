@@ -3,7 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-// import pencil from 'src/assets/icons/modifier.svg';
 import bin from 'src/assets/icons/delete.svg';
 import './tagform.scss';
 
@@ -27,9 +26,6 @@ const TagForm = ({
       {tags.map((tag) => (
         <div className="tag__form__tag" key={tag.id}>
           {tag.name}
-          {/* <button className="tag__form__edit__button" type="button">
-            <img className="tag__form__edit__icon" href={pencil} alt="pencil" />
-          </button> */}
           <img className="tag__form__delete__icon" src={bin} id={tag.id} alt="bin" onClick={deleteTag} />
         </div>
       ))}

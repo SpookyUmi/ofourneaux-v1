@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-
 import CardRecipe from 'src/components/CardRecipe';
 import './styles.scss';
 
@@ -10,7 +9,7 @@ const Recipes = ({ recipes }) => (
   <div className="recipes">
     {/* <h2>Résultats de la recherche</h2> */}
     {recipes?.map((recipe) => (
-      <CardRecipe {...recipe} key={recipe.id} className="recipes__cards"/>
+      <CardRecipe {...recipe} key={recipe.id} className="recipes__cards" />
     ))}
   </div>
 );
@@ -19,14 +18,8 @@ Recipes.propTypes = {
   recipes: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = (state) => {
-  return {
-    recipes: state.recipes.recipes,
-  }
-};
+const mapStateToProps = (state) => ({
+  recipes: state.recipes.recipes,
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {};
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Recipes);
+export default connect(mapStateToProps, null)(Recipes);
