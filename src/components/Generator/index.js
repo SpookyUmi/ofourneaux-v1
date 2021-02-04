@@ -20,88 +20,121 @@ const Generator = ({
   trackGenTime,
   trackGenDifficulty,
   handleGenerator,
-  handleGeneratorLogged
-  }) => {
-
-  return (
-    <div className="background__image">
-      <div className="generator">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#bfe285" fillOpacity="1" d="M0,96L80,122.7C160,149,320,203,480,192C640,181,800,107,960,90.7C1120,75,1280,117,1360,138.7L1440,160L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z"></path>
-        </svg>
-        <div className="generator__flexblock">
-          <section className="generator__description">
-            <h2 className="generator__title">Le Générateur</h2>
-            <p className="generator__text">Un outil intelligent, qui tient compte de la saison, de vos exigences alimentaires et des 7 dernières recettes que vous avez sélectionnées. Affinez vous-même les critères de sélection du générateur grâce à son formulaire intégré.</p>
-          </section>
-          <section className="generator__section">
-            {/* When property isClicked is false, the generator displays a logo */}
-            {!isClicked &&
+  handleGeneratorLogged,
+  trackGenFavorites,
+}) => (
+  <div className="background__image">
+    <div className="generator">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#bfe285" fillOpacity="1" d="M0,96L80,122.7C160,149,320,203,480,192C640,181,800,107,960,90.7C1120,75,1280,117,1360,138.7L1440,160L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z" />
+      </svg>
+      <div className="generator__flexblock">
+        <section className="generator__description">
+          <h2 className="generator__title">Le Générateur</h2>
+          <p className="generator__text">Un outil intelligent, qui tient compte de la saison, de vos exigences alimentaires et des 7 dernières recettes que vous avez sélectionnées. Affinez vous-même les critères de sélection du générateur grâce à son formulaire intégré.</p>
+        </section>
+        <section className="generator__section">
+          {/* When property isClicked is false, the generator displays a logo */}
+          {!isClicked
+              && (
               <div className="generator--animation">
-                <img src={pancakes}
+                <img
+                  src={pancakes}
                   className="generator__section__logo"
                   alt="logo de cadeau"
                   onClick={handleClickIn}
                 />
                 {/* <p className="generator__section__click">Click me</p> */}
               </div>
-            }
-            {/* When property isClicked is true (when somebody clicked on the logo),
-            it displays a form.*/}
-            {isClicked &&
+              )}
+          {/* When property isClicked is true (when somebody clicked on the logo),
+            it displays a form. */}
+          {isClicked
+              && (
               <form className="generator__form">
-              <img
-                src={arrow}
-                alt="logo de flèche"
-                className="generator__section__arrow link__style"
-                onClick={handleClickOut}
-              />
+                <img
+                  src={arrow}
+                  alt="logo de flèche"
+                  className="generator__section__arrow link__style"
+                  onClick={handleClickOut}
+                />
                 <div className="generator__form__section">
                   <label htmlFor="nbRecipes">
                     Recettes
-                  <input type="number" name="nbRecipes" id="nbRecipes" min="0" max="20" placeholder="5"
-                    onChange={trackGenNumber}
-                  />
+                    <input
+                      type="number"
+                      name="nbRecipes"
+                      id="nbRecipes"
+                      min="0"
+                      max="20"
+                      placeholder="2"
+                      onChange={trackGenNumber}
+                    />
                   </label>
                   <label htmlFor="time">
                     Temps (min)
-                  <input type="number" name="time" id="time" step="5" min="0" placeholder="35 min"
-                    onChange={trackGenTime}
-                  />
+                    <input
+                      type="number"
+                      name="time"
+                      id="time"
+                      step="5"
+                      min="0"
+                      placeholder="35 min"
+                      defaultValue="null"
+                      onChange={trackGenTime}
+                    />
                   </label>
                 </div>
+                {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                 <label htmlFor="difficulty">
                   Difficulté
                 </label>
                 <select name="difficulty" id="difficulty" onChange={trackGenDifficulty} defaultValue="">
-                    <option value="">Indifférent</option>
-                    <option value="easy">Facile</option>
-                    <option value="average">Intermédiaire</option>
-                    <option value="expert">Expérimenté</option>
-                  </select>
-                {/* {isLogged &&
-                  <label>Recettes favorites uniquement
+                  <option value="null">Indifférent</option>
+                  <option value="easy">Facile</option>
+                  <option value="average">Intermédiaire</option>
+                  <option value="expert">Expérimenté</option>
+                </select>
+                {isLogged
+                  && (
+                  // eslint-disable-next-line jsx-a11y/label-has-associated-control
+                  <label className="generator__form__section__favorites">
+                    Recettes favorites uniquement
                     <input type="checkbox" name="favorites" onChange={trackGenFavorites} />
                   </label>
-                } */}
-                <button type="submit" onClick={
+                  )}
+                <button
+                  type="submit"
+                  onClick={
                   isLogged ? handleGeneratorLogged : handleGenerator
-                }>Try me !</button>
+                }
+                >Try me !
+                </button>
               </form>
-            }
+              )}
 
-          </section>
-        </div>
+        </section>
       </div>
     </div>
-  );
+  </div>
+);
+
+Generator.propTypes = {
+  isClicked: PropTypes.bool.isRequired,
+  isLogged: PropTypes.bool.isRequired,
+  handleClickIn: PropTypes.func.isRequired,
+  handleClickOut: PropTypes.func.isRequired,
+  trackGenNumber: PropTypes.func.isRequired,
+  trackGenTime: PropTypes.func.isRequired,
+  trackGenDifficulty: PropTypes.func.isRequired,
+  handleGenerator: PropTypes.func.isRequired,
+  handleGeneratorLogged: PropTypes.func.isRequired,
+  trackGenFavorites: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    isLogged: state.auth.isLogged,
-    isClicked: state.app.isClicked
-  }
-};
+const mapStateToProps = (state, ownProps) => ({
+  isLogged: state.auth.isLogged,
+  isClicked: state.app.isClicked,
+});
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
 
@@ -121,47 +154,73 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 
   trackGenNumber: (event) => {
     event.preventDefault();
+    let number;
+    if (event.target.value) {
+      number = event.target.value;
+    }
+    else {
+      number = 1;
+    }
     dispatch({
       type: 'EDIT_GEN_NUMBER',
       payload: {
-        numberGen: event.target.value
-      }
-    })
+        numberGen: number,
+      },
+    });
   },
 
   trackGenTime: (event) => {
     event.preventDefault();
+    let time;
+    if (event.target.value) {
+      time = event.target.value;
+    }
+    else {
+      time = event.target.defaultValue;
+    }
     dispatch({
       type: 'EDIT_GEN_TIME',
       payload: {
-        timeGen: event.target.value
-      }
-    })
+        timeGen: time,
+      },
+    });
   },
 
   trackGenDifficulty: (event) => {
     event.preventDefault();
     let difficultyId;
     if (event.target.value === 'Facile') {
-      return difficultyId = 1;
-    } else if (event.target.value === 'Moyen') {
-      return difficultyId = 2;
-    } else if (event.target.value === 'Difficile') {
-      return difficultyId = 3;
+      difficultyId = 1;
+    } if (event.target.value === 'Moyen') {
+      difficultyId = 2;
+    } if (event.target.value === 'Difficile') {
+      difficultyId = 3;
+    }
+    else {
+      difficultyId = null;
     }
     dispatch({
       type: 'EDIT_GEN_DIFFICULTY',
       payload: {
-        diffGen: difficultyId
-      }
-    })
+        diffGen: difficultyId,
+      },
+    });
+  },
+
+  trackGenFavorites: (event) => {
+    dispatch({
+      type: 'EDIT_GEN_FAVORITES',
+      payload: {
+        favGen: event.target.checked,
+      },
+    });
   },
 
   handleGenerator: (event) => {
     event.preventDefault();
     dispatch({
       type: 'SEND_GEN_REQUEST',
-      redirect: ownProps.history.push
+      redirect: ownProps.history.push,
     });
   },
 
@@ -169,11 +228,12 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     event.preventDefault();
     dispatch({
       type: 'SEND_GEN_LOGGED_REQUEST',
-      redirect: ownProps.history.push
+      redirect: ownProps.history.push,
     });
   },
 });
 
+// eslint-disable-next-line import/no-mutable-exports
 let container = connect(mapStateToProps, mapDispatchToProps)(Generator);
 
 container = withRouter(container);
