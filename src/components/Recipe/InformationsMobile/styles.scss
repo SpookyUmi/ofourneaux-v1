@@ -1,0 +1,111 @@
+@use 'src/styles/vars';
+
+.mobile {
+  &__recipe {
+    &__infos {
+      margin-top: 4.5rem;
+      margin-bottom: 1.25rem;
+
+      &__header {
+        &__title {
+          margin-bottom: 1.25rem;
+          text-align: left;
+          line-height: 3.5rem;
+        }
+
+        &__intro {
+          margin: 1.25rem 0;
+          padding: 0 0.9rem;
+          ;
+
+          &__text {
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+          }
+
+          &__tags {
+            display: flex;
+            flex-direction: row;
+          }
+
+          &__tag {
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            color: vars.$color-primary;
+            margin: 0 0.3rem;
+            padding: 0.25rem 0.625rem;
+            border-radius: 0.3rem;
+            background-color: vars.$color-secondary;
+          }
+
+          // the first tag must not have a left margin to avoid a mismatch with the description text
+          &__tag:first-child {
+            margin-left: 0rem;
+          }
+
+          &__tag:last-child {
+            margin-right: 0rem;
+          }
+        }
+      }
+
+      &__data {
+        display: flex;
+        flex-direction: column;
+        font-size: 0.9rem;
+        padding: 0 0.9rem;
+
+        &__line {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          margin: 0.625rem 0rem;
+        }
+
+        &__block {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: calc(100% / 3);
+        }
+
+        &__details {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          padding: 0 0.3rem;
+        }
+
+        &__title {
+          font-weight: 700;
+          margin-bottom: 0.625rem;
+        }
+
+        &__icon {
+          width: 1.4rem;
+          height: 1.4rem;
+          margin-right: 0.625rem;
+        }
+      }
+    }
+
+    &__line {
+      width: 100%;
+      height: 1px;
+      background-color: vars.$color-primary;
+      margin: 0.3rem 0rem;
+    }
+
+    &__select {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin: 0.3rem 0rem;
+
+      &__button {
+        margin: 0rem 1.25rem;
+      }
+    }
+  }
+}
