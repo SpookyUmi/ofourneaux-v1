@@ -45,7 +45,7 @@ const auth = (store) => (next) => (action) => {
       }
     }
   }
-
+  //! TODO : getShoppingList & getIngredientsList
   async function getFavoritesRecipes(userId, userToken) {
     try {
       const response = await axios({
@@ -58,13 +58,12 @@ const auth = (store) => (next) => (action) => {
 
       console.log('Answer request favorites :', response.data.data);
 
-      store.dispatch({
+      await store.dispatch({
         type: 'FAVORITES_RECIPES_SUCCESS',
         payload: {
           favoritesRecipes: response.data.data,
         },
       });
-
       getTagsByUser(userId, userToken);
     }
     catch (error) {
