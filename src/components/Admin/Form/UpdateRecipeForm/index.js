@@ -11,6 +11,9 @@ import 'src/components/Admin/admin.scss';
 import bin from 'src/assets/icons/delete.svg';
 import '../AddRecipeForm/addRecipeForm.scss';
 
+import ModalConfirmDelete from './modal/ModalConfirmDelete';
+import ModalConfirmUpdate from './modal/ModalConfirmUpdate';
+
 // This component uses data passed via props from the redux store, and a local state.
 const UpdateRecipeForm = ({
   types, seasons, tags, difficulties, ingredients, userToken,
@@ -47,11 +50,53 @@ const UpdateRecipeForm = ({
   const [localNewQuantity, setLocalNewQuantity] = useState('');
   const [localSteps, setLocalSteps] = useState(recipeSteps);
   const [localNewStep, setLocalNewStep] = useState('');
+  const [updateModal, setUpdateModal] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
 
   // This function is used to handle the upload of image with the firebase middleware
   const changeRecipeImage = async (event) => {
     const url = await uploadImage(event.target.files[0]);
     setLocalPicture(url);
+  };
+
+  const showUpdateModal = () => {
+    setUpdateModal(true);
+  };
+
+  const showDeleteModal = () => {
+    setDeleteModal(true);
+  };
+
+  const hideModal = () => {
+    setUpdateModal(false);
+    setDeleteModal(false);
+  };
+
+  const deleteRecipe = () => {
+    axios({
+      method: 'delete',
+      url: `https://ofourneaux.herokuapp.com/recipes/${recipeId}`,
+      headers: { authorization: userToken, 'Content-Type': 'multipart/form-data' },
+    })
+      .then((response) => {
+        hideModal();
+        setLocalTitle('');
+        setLocalPicture('');
+        setLocalType(null);
+        setLocalDescription('');
+        setLocalSeasons([]);
+        setLocalTags([]);
+        setLocalDifficulty(1);
+        setLocalNutriScore('A');
+        setLocalPreparationTime(0);
+        setLocalBakingTime(0);
+        setLocalIngredients([]);
+        setLocalSteps([]);
+        console.log('Réponse suppression recette :', response.data);
+      })
+      .catch((error) => {
+        console.log('Erreur connexion :', error.response);
+      });
   };
 
   return (
@@ -502,6 +547,7 @@ const UpdateRecipeForm = ({
               headers: { authorization: userToken, 'Content-Type': 'multipart/form-data' },
             })
               .then((response) => {
+                showUpdateModal();
                 console.log('Réponse update recette :', response.data);
               })
               .catch((error) => {
@@ -516,20 +562,13 @@ const UpdateRecipeForm = ({
           value="Supprimer la recette"
           onClick={(event) => {
             event.preventDefault();
-            axios({
-              method: 'delete',
-              url: `https://ofourneaux.herokuapp.com/recipes/${recipeId}`,
-              headers: { authorization: userToken, 'Content-Type': 'multipart/form-data' },
-            })
-              .then((response) => {
-                console.log('Réponse suppression recette :', response.data);
-              })
-              .catch((error) => {
-                console.log('Erreur connexion :', error.response);
-              });
+            showDeleteModal();
           }}
         />
       </div>
+
+      {updateModal && <ModalConfirmUpdate hideModal={hideModal} />}
+      {deleteModal && <ModalConfirmDelete hideModal={hideModal} deleteRecipe={deleteRecipe} />}
 
     </form>
   );
