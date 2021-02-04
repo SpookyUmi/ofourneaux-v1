@@ -8,7 +8,7 @@ import uploadImage from 'src/middlewares/firebase';
 
 import 'src/components/Admin/admin.scss';
 import bin from 'src/assets/icons/delete.svg';
-import './addRecipeForm.scss';
+import './recipeForm.scss';
 
 import ModalConfirmCreation from './modal/ModalConfirmCreation';
 

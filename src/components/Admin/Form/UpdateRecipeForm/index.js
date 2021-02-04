@@ -7,11 +7,9 @@ import axios from 'axios';
 import uploadImage from 'src/middlewares/firebase';
 
 import 'src/components/Admin/admin.scss';
-
 import bin from 'src/assets/icons/delete.svg';
-import '../AddRecipeForm/addRecipeForm.scss';
+import '../AddRecipeForm/recipeForm.scss';
 
-import { useEffect } from 'react';
 import ModalConfirmDelete from './modal/ModalConfirmDelete';
 import ModalConfirmUpdate from './modal/ModalConfirmUpdate';
 
