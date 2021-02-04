@@ -316,7 +316,7 @@ const UpdateRecipeForm = ({
           <select
             className="difficulty__select input"
             name="difficulties"
-            defaultValue={localDifficulty}
+            value={localDifficulty}
             onChange={(event) => {
               setLocalDifficulty(event.target.value);
             }}
@@ -336,7 +336,7 @@ const UpdateRecipeForm = ({
           <select
             className="nutri__score input"
             name="scores"
-            defaultValue={localNutriScore}
+            value={localNutriScore}
             onChange={(event) => {
               setLocalNutriScore(
                 event.target.value,
