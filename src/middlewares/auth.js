@@ -84,6 +84,76 @@ const auth = (store) => (next) => (action) => {
     }
   }
 
+  async function getShoppingList(userId, userToken) {
+    try {
+      const response = await axios({
+        method: 'GET',
+        url: `${URL}/shopping_list/${userId}`,
+        headers: {
+          authorization: userToken,
+        },
+      });
+
+      console.log('Answer request shopping list :', response.data.data);
+
+      await store.dispatch({
+        type: 'SHOPPING_LIST_SUCCESS',
+        payload: {
+          shoppingList: response.data.data,
+        },
+      });
+    }
+    catch (error) {
+      console.log('Error request shopping list :', error.response);
+
+      if (error.response.data.error === 'Resource not found') {
+        // when no data is returned from the back when asking
+        // for a user's favourite recipes, an empty table is dispatched
+        store.dispatch({
+          type: 'SHOPPING_LIST_SUCCESS',
+          payload: {
+            shoppingList: [],
+          },
+        });
+      }
+    }
+  }
+
+  async function getIngredientsList(userId, userToken) {
+    try {
+      const response = await axios({
+        method: 'GET',
+        url: `${URL}/shopping_list/${userId}/generate`,
+        headers: {
+          authorization: userToken,
+        },
+      });
+
+      console.log('Answer request ingredients :', response.data.data);
+
+      await store.dispatch({
+        type: 'INGREDIENTS_LIST_SUCCESS',
+        payload: {
+          ingredientsList: response.data.data,
+        },
+      });
+    }
+    catch (error) {
+      console.log('Error request ingredients :', error.response);
+
+      if (error.response.data.error === 'Resource not found') {
+        // when no data is returned from the back when asking
+        // for a user's favourite recipes, an empty table is dispatched
+        store.dispatch({
+          type: 'INGREDIENTS_LIST_SUCCESS',
+          payload: {
+            ingredientsList: [],
+          },
+        });
+      }
+    }
+  }
+
   // asynchronous function to retrieve the user from the result
   // of the function to retrieve the id and the token
   async function getUser(userId, userToken) {
@@ -122,6 +192,8 @@ const auth = (store) => (next) => (action) => {
       action.redirect('/');
 
       getFavoritesRecipes(userId, userToken);
+      getShoppingList(userId, userToken);
+      getIngredientsList(userId, userToken);
     }
     catch (error) {
       // console.log('Error request user :', error.response);
