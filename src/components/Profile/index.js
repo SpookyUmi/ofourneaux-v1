@@ -47,23 +47,29 @@ const Profile = ({
       <div className="profile__content">
         <div className="profile__content__header">
           {/* TODO: check if the favorite recipes query works */}
-          <NavLink
-            exact
-            to="/profil/recettes-favorites"
-            className="profile__content__header__link"
-            onClick={getFavoritesRecipes}
-          >
-            <img className="profile__content__header__icon" src={heartFull} alt="Icône d'un coeur" />
-          </NavLink>
+          <section className="profile__content__header__section">
+            <NavLink
+              exact
+              to="/profil/recettes-favorites"
+              className="profile__content__header__link"
+              onClick={getFavoritesRecipes}
+            >
+              <img className="profile__content__header__icon" src={heartFull} alt="Icône d'un coeur" />
+            </NavLink>
+            <p>Recettes favorites</p>
+          </section>
           {/* TODO: check if the shopping list query works */}
-          <NavLink
-            exact
-            to="/profil/liste-de-courses"
-            className="profile__content__header__link"
-            onClick={getShoppingList}
-          >
-            <img className="profile__content__header__icon" src={list} alt="Icône d'une liste" />
-          </NavLink>
+          <section className="profile__content__header__section">
+            <NavLink
+              exact
+              to="/profil/liste-de-courses"
+              className="profile__content__header__link"
+              onClick={getShoppingList}
+            >
+              <img className="profile__content__header__icon" src={list} alt="Icône d'une liste" />
+            </NavLink>
+            <p>Liste de courses</p>
+          </section>
         </div>
 
         <div className="profile__content__infos">
@@ -236,14 +242,14 @@ const mapDispatchToProps = (dispatch) => ({
   // sends the request to retrieve favorite recipes to the middleware "user.js"
   getFavoritesRecipes: () => {
     dispatch({
-      type: 'SEND_FAVORITES_RECIPES_REQUEST',
+      type: 'COLLECT_FAVORITES_RECIPES',
     });
   },
 
   // sends the request to retrieve shopping list to the middleware "user.js"
   getShoppingList: () => {
     dispatch({
-      type: 'SEND_SHOPPING_LIST_REQUEST',
+      type: 'COLLECT_SELECTED_RECIPES',
     });
   },
 

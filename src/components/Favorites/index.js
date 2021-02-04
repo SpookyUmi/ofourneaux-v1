@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-
 import CardRecipe from 'src/components/CardRecipe';
 import './styles.scss';
 
@@ -23,14 +22,8 @@ Favorites.propTypes = {
   recipes: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = (state) => {
-  return {
-    recipes: state.user.userFavoritesRecipes,
-  }
-};
+const mapStateToProps = (state) => ({
+  recipes: state.user.collectedFavoritesRecipes,
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {};
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Favorites);
+export default connect(mapStateToProps, null)(Favorites);

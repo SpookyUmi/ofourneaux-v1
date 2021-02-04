@@ -32,65 +32,103 @@ const Navbar = ({
   handleDisconnect,
   getFavoritesRecipes,
 }) => {
-
   const node = useRef();
   const handleClick = (event) => {
     if (node.current.contains(event.target)) {
       return;
     } setIsOpen(false);
-  }
+  };
   document.addEventListener('mousedown', handleClick);
 
-  return (<div className={`navbar ${isOpen ? "show__navbar" : ""}`} ref={node}>
-        {isOpen &&
+  return (
+    <div className={`navbar ${isOpen ? 'show__navbar' : ''}`} ref={node}>
+      {isOpen
+        && (
         <>
-        <div className="navbar__links__top">
-          <img className="navbar__toggle__home__icon link__style transition" src={arrow} alt="icône flèche gauche"
-            onClick={() => { setIsOpen(false) }}
-              />
-          <form onSubmit={handleSearch} className="navbar__searchform transition">
-            <div className="navbar__searchform__icon transition">
-              <FontAwesomeIcon icon={faSearch} />
-            </div>
-            <input
-              type="text"
-              placeholder="Recherche..."
-              className="navbar__searchform__input transition"
-              id="searchInputNavbar"
-              onChange={trackSearch}
-              onSubmit={() => { setIsOpen(false) }}
+          <div className="navbar__links__top">
+            <img
+              className="navbar__toggle__home__icon link__style transition"
+              src={arrow}
+              alt="icône flèche gauche"
+              onClick={() => {
+                setIsOpen(false);
+              }}
             />
-          </form>
-          <NavLink to="/" className="navbar__link__home link__style transition" onClick={() => { setIsOpen(false) }}>
-            <img className="navbar__link__icon transition" src={home} alt="icône accueil" />
-            Accueil
-          </NavLink>
+            <form onSubmit={handleSearch} className="navbar__searchform transition">
+              <div className="navbar__searchform__icon transition">
+                <FontAwesomeIcon icon={faSearch} />
+              </div>
+              <input
+                type="text"
+                placeholder="Recherche..."
+                className="navbar__searchform__input transition"
+                id="searchInputNavbar"
+                onChange={trackSearch}
+                onSubmit={() => {
+                  setIsOpen(false);
+                }}
+              />
+            </form>
+            <NavLink
+              to="/"
+              className="navbar__link__home link__style transition"
+              onClick={() => {
+                setIsOpen(false);
+              }}
+            >
+              <img className="navbar__link__icon transition" src={home} alt="icône accueil" />
+              Accueil
+            </NavLink>
 
-          {/* The following elements must only be displayed if the user is NOT logged in */}
-          {
+            {/* The following elements must only be displayed if the user is NOT logged in */}
+            {
             !isLogged
             && (
               <>
-                <NavLink to="/connexion" className="navbar__link__signin link__style transition" onClick={() => { setIsOpen(false) }}>
+                <NavLink
+                  to="/connexion"
+                  className="navbar__link__signin link__style transition"
+                  onClick={() => {
+                    setIsOpen(false);
+                  }}
+                >
                   Se connecter
                 </NavLink>
-                <NavLink to="/inscription" className="navbar__link__signup button__style transition" onClick={() => { setIsOpen(false) }}>
+                <NavLink
+                  to="/inscription"
+                  className="navbar__link__signup button__style transition"
+                  onClick={() => {
+                    setIsOpen(false);
+                  }}
+                >
                   S'inscrire
                 </NavLink>
               </>
             )
           }
 
-          {/* The following elements must only be displayed if the user is logged in */}
-          {
+            {/* The following elements must only be displayed if the user is logged in */}
+            {
           isLogged && status === 'user'
             && (
               <>
-                <NavLink to="/profil" className="navbar__link__profile link__style transition" onClick={() => { setIsOpen(false) }}>
+                <NavLink
+                  to="/profil"
+                  className="navbar__link__profile link__style transition"
+                  onClick={() => {
+                    setIsOpen(false);
+                  }}
+                >
                   <img className="navbar__link__icon transition" src={profile} alt="icône profil" />
                   Mon profil
                 </NavLink>
-                <NavLink to="/profil/liste-de-courses" className="navbar__link__list link__style transition" onClick={() => { setIsOpen(false) }}>
+                <NavLink
+                  to="/profil/liste-de-courses"
+                  className="navbar__link__list link__style transition"
+                  onClick={() => {
+                    setIsOpen(false);
+                  }}
+                >
                   <img className="navbar__link__icon transition" src={list} alt="icône liste de courses" />
                   Liste de courses
                 </NavLink>
@@ -98,62 +136,113 @@ const Navbar = ({
                   to="/profil/recettes-favorites"
                   className="navbar__link__favorites link__style transition"
                   onClick={getFavoritesRecipes}
-                  onClick={() => { setIsOpen(false) }}
+                  onClick={() => {
+                    setIsOpen(false);
+                  }}
                 >
                   <img className="navbar__link__icon transition" src={favorites} alt="icône favoris" />
                   Recettes favorites
                 </NavLink>
-                <NavLink to="/" className="navbar__link__logout link__style transition" onClick={handleDisconnect} onClick={() => { setIsOpen(false) }}>
+                <NavLink
+                  to="/"
+                  className="navbar__link__logout link__style transition"
+                  onClick={handleDisconnect}
+                  onClick={() => {
+                    setIsOpen(false);
+                  }}
+                >
                   Se déconnecter
                 </NavLink>
               </>
             )
           }
-          {/* The following elements must only be displayed if the user is logged in AND ADMIN */}
-          {isLogged && status === 'admin'
+            {/* The following elements must only be displayed if the user is logged in AND ADMIN */}
+            {isLogged && status === 'admin'
           && (
           <>
-            <NavLink to="/profil" className="navbar__link__profile link__style transition" onClick={() => { setIsOpen(false) }}>
+            <NavLink
+              to="/profil"
+              className="navbar__link__profile link__style transition"
+              onClick={() => {
+                setIsOpen(false);
+              }}
+            >
               <img className="navbar__link__icon transition" src={profile} alt="icône profil" />
               Mon profil
             </NavLink>
-            <NavLink to="/admin/ajout-recette" className="navbar__link__adminrecipes link__style transition" onClick={() => { setIsOpen(false) }}>
+            <NavLink
+              to="/admin/ajout-recette"
+              className="navbar__link__adminrecipes link__style transition"
+              onClick={() => {
+                setIsOpen(false);
+              }}
+            >
               <img className="navbar__link__icon transition" src={recipe} alt="icône recettes" />
               Ajouter une recette
             </NavLink>
-            <NavLink to="/admin/modification-recette" className="navbar__link__adminrecipes link__style transition" onClick={() => { setIsOpen(false) }}>
+            <NavLink
+              to="/admin/modification-recette"
+              className="navbar__link__adminrecipes link__style transition"
+              onClick={() => {
+                setIsOpen(false);
+              }}
+            >
               <img className="navbar__link__icon transition" src={recipe} alt="icône recettes" />
               Modifier/Supprimer une recette
             </NavLink>
-            <NavLink to="/admin/gestion-labels" className="navbar__link__adminlabels link__style transition" onClick={() => { setIsOpen(false) }}>
+            <NavLink
+              to="/admin/gestion-labels"
+              className="navbar__link__adminlabels link__style transition"
+              onClick={() => {
+                setIsOpen(false);
+              }}
+            >
               <img className="navbar__link__icon transition" src={tag} alt="icône labels" />
               Gérer les labels
             </NavLink>
-            <NavLink to="/admin/gestion-utilisateurs" className="navbar__link__adminusers link__style transition" onClick={() => { setIsOpen(false) }}>
+            <NavLink
+              to="/admin/gestion-utilisateurs"
+              className="navbar__link__adminusers link__style transition"
+              onClick={() => {
+                setIsOpen(false);
+              }}
+            >
               <img className="navbar__link__icon transition" src={users} alt="icône utilisateurs" />
               Gérer les utilisateurs
             </NavLink>
           </>
           )}
-        </div>
+          </div>
 
-        {/* The following elements are displayed for all users */}
+          {/* The following elements are displayed for all users */}
 
-        <div className="navbar__links__bottom">
-          <NavLink to="/contact" className="navbar__link__contact link__style transition" onClick={() => { setIsOpen(false) }}>
-            <img className="navbar__link__icon transition" src={contact} alt="icône contact" />
-            Contact
-          </NavLink>
-          <NavLink to="/a-propos" className="navbar__link__about link__style transition" onClick={() => { setIsOpen(false) }}>
-            <img className="navbar__link__icon transition" src={about} alt="icône à propos" />
-            A propos
-          </NavLink>
-        </div>
+          <div className="navbar__links__bottom">
+            <NavLink
+              to="/contact"
+              className="navbar__link__contact link__style transition"
+              onClick={() => {
+                setIsOpen(false);
+              }}
+            >
+              <img className="navbar__link__icon transition" src={contact} alt="icône contact" />
+              Contact
+            </NavLink>
+            <NavLink
+              to="/a-propos"
+              className="navbar__link__about link__style transition"
+              onClick={() => {
+                setIsOpen(false);
+              }}
+            >
+              <img className="navbar__link__icon transition" src={about} alt="icône à propos" />
+              A propos
+            </NavLink>
+          </div>
         </>
-        }
+        )}
     </div>
-  )};
-
+  );
+};
 
 Navbar.propTypes = {
   isLogged: PropTypes.bool.isRequired,
@@ -200,7 +289,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   // sends the request to retrieve favorite recipes to the middleware "profile.js"
   getFavoritesRecipes: () => {
     dispatch({
-      type: 'SEND_FAVORITES_RECIPES_REQUEST',
+      type: 'COLLECT_FAVORITES_RECIPES',
     });
   },
 });

@@ -45,7 +45,7 @@ const auth = (store) => (next) => (action) => {
       }
     }
   }
-
+  //! TODO : getShoppingList & getIngredientsList
   async function getFavoritesRecipes(userId, userToken) {
     try {
       const response = await axios({
@@ -64,7 +64,6 @@ const auth = (store) => (next) => (action) => {
           favoritesRecipes: response.data.data,
         },
       });
-
       getTagsByUser(userId, userToken);
     }
     catch (error) {

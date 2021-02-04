@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const favorites = (store) => (next) => (action) => {
-  // const state = store.getState();
+  const state = store.getState();
 
   const URL = 'https://ofourneaux.herokuapp.com';
 
@@ -14,7 +14,7 @@ const favorites = (store) => (next) => (action) => {
     return response.data.data;
   }
 
-  async function getFavoriteRecipes(favoritesRecipesId) {
+  async function getArrayFavoriteRecipes(favoritesRecipesId) {
     let array;
     try {
       array = await Promise.all(favoritesRecipesId.map((id) => fetchRecipe(id)));
@@ -38,11 +38,26 @@ const favorites = (store) => (next) => (action) => {
 
   async function sendFavoritesRecipes() {
     try {
-      const userFavorites = await getFavoriteRecipes(action.payload.favoritesRecipes);
+      const userFavorites = await getArrayFavoriteRecipes(state.user.favoritesRecipes);
       store.dispatch({
-        type: 'COLLECT_FAVORITES_RECIPES',
+        type: 'FAVORITES_RECIPES_COLLECTED',
         payload: {
-          userFavoritesRecipes: userFavorites,
+          collectedFavoritesRecipes: userFavorites,
+        },
+      });
+    }
+    catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function sendSelectedRecipes() {
+    try {
+      const selectedRecipes = await getSelectedRecipes(state.user.shoppingList);
+      store.dispatch({
+        type: 'SELECTED_RECIPES_COLLECTED',
+        payload: {
+          selectedRecipes,
         },
       });
     }
@@ -53,19 +68,11 @@ const favorites = (store) => (next) => (action) => {
   console.log('ACTION', action.type, action.payload);
 
   switch (action.type) {
-    case 'FAVORITES_RECIPES_SUCCESS':
+    case 'COLLECT_FAVORITES_RECIPES':
       sendFavoritesRecipes();
       break;
-    case 'SHOPPING_LIST_SUCCESS':
-      (async () => {
-        const selectedRecipes = await getSelectedRecipes(action.payload.shoppingList);
-        store.dispatch({
-          type: 'COLLECT_SHOPPING_LIST',
-          payload: {
-            selectedRecipes,
-          },
-        });
-      })();
+    case 'COLLECT_SELECTED_RECIPES':
+      sendSelectedRecipes();
       break;
     default:
       next(action);
