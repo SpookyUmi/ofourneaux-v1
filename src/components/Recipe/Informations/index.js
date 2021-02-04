@@ -10,6 +10,9 @@ import ovenIco from 'src/assets/icons/oven.svg';
 import difficultyIco from 'src/assets/icons/difficulty.svg';
 import nutriScoreIco from 'src/assets/icons/nutriscore.svg';
 
+// import utils
+import difficultyNameById from 'src/utils/difficultyNameById';
+
 // SCSS
 import './styles.scss';
 
@@ -107,7 +110,7 @@ const Informations = ({
             <div className="recipe__infos__data__details">
               <img className="recipe__infos__data__icon" src={difficultyIco} alt="Icône d'une flamme" />
               <p className="recipe__infos__data__text">
-                {difficulty}
+                {difficultyNameById(difficulty)}
               </p>
             </div>
           </div>

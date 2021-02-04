@@ -37,24 +37,6 @@ const recipe = (store) => (next) => (action) => {
     // API recipe request : OK
     case 'SEND_RECIPE_REQUEST':
       getRecipe(action.payload.id);
-
-      // axios({
-      //   method: 'GET',
-      //   url: `https://ofourneaux.herokuapp.com/recipes/${action.payload.id}`,
-      // })
-      //   .then((response) => {
-      //     // console.log('Answer request recipe :', response);
-      //     store.dispatch({
-      //       type: 'RECIPE_REQUEST_SUCCESS',
-      //       payload: {
-      //         recipe: response.data.data,
-      //       },
-      //     });
-      //   })
-      //   // eslint-disable-next-line no-unused-vars
-      //   .catch((error) => {
-      //     // console.log('Error request recipe :', error.response);
-      //   });
       break;
 
     // API update favorites recipes : OK
