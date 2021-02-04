@@ -1,54 +1,78 @@
 import axios from 'axios';
-import FormData from 'form-data';
 import URL from 'src/middlewares/urlEnv';
 
 const favorites = (store) => (next) => (action) => {
   const state = store.getState();
 
-  const fetchRecipe = async (recipeId) => {
-    const response = await axios.get(`${URL}/recipes/${recipeId}`);
+  async function fetchRecipe(recipeId) {
+    const response = await axios({
+      method: 'GET',
+      url: `${URL}/recipes/${recipeId}`,
+    });
     console.log('RECIPES RESPONSE :', response.data);
     return response.data.data;
   }
 
-  const getFavoriteRecipes = async (favoritesRecipesId) => {
+  async function getArrayFavoriteRecipes(favoritesRecipesId) {
+    let array;
     try {
-      return Promise.all(favoritesRecipesId.map(id => fetchRecipe(id)));
-    } catch (error) {
+      array = await Promise.all(favoritesRecipesId.map((id) => fetchRecipe(id)));
+    }
+    catch (error) {
       console.log('Erreur : ', error);
+    }
+    return array;
+  }
+
+  async function getArraySelectedRecipes(selectedRecipesId) {
+    let array;
+    try {
+      array = await Promise.all(selectedRecipesId.map((id) => fetchRecipe(id)));
+    }
+    catch (error) {
+      console.log('Erreur : ', error);
+    }
+    return array;
+  }
+
+  async function sendFavoritesRecipes() {
+    try {
+      const userFavorites = await getArrayFavoriteRecipes(state.user.favoritesRecipes);
+      store.dispatch({
+        type: 'FAVORITES_RECIPES_COLLECTED',
+        payload: {
+          collectedFavoritesRecipes: userFavorites,
+        },
+      });
+    }
+    catch (error) {
+      console.log(error);
     }
   }
 
-  const getSelectedRecipes = async (selectedRecipesId) => {
+  async function sendSelectedRecipes() {
     try {
-      return Promise.all(selectedRecipesId.map(id => fetchRecipe(id)));
-    } catch (error) {
-      console.log('Erreur : ', error);
+      const userSelected = await getArraySelectedRecipes(state.user.shoppingList);
+      store.dispatch({
+        type: 'SELECTED_RECIPES_COLLECTED',
+        payload: {
+          selectedRecipes: userSelected,
+        },
+      });
+    }
+    catch (error) {
+      console.log(error);
     }
   }
+  console.log('ACTION', action.type, action.payload);
 
   switch (action.type) {
-    case 'FAVORITES_RECIPES_SUCCESS':
-      ;(async () => {
-        const favoritesRecipes = await getFavoriteRecipes(action.payload.favoritesRecipes);
-        store.dispatch({
-          type: 'COLLECT_FAVORITES_RECIPES',
-          payload: {
-            userFavoritesRecipes: favoritesRecipes,
-          },
-        });
-      })()
+    case 'COLLECT_FAVORITES_RECIPES':
+      sendFavoritesRecipes();
       break;
-    case 'SHOPPING_LIST_SUCCESS':
-      ;(async () => {
-        const selectedRecipes = await getSelectedRecipes(action.payload.shoppingList);
-        store.dispatch({
-          type: 'COLLECT_SHOPPING_LIST',
-          payload: {
-            selectedRecipes: selectedRecipes,
-          },
-        });
-      })()
+    case 'COLLECT_SELECTED_RECIPES':
+      sendSelectedRecipes();
+      break;
     default:
       next(action);
   }

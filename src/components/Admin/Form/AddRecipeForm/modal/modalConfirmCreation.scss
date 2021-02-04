@@ -1,0 +1,23 @@
+@use 'src/styles/vars';
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 5px 10px black;
+  background-color: vars.$color-secondary;
+  padding: 20px;
+  border-radius: 10px;
+
+  &__buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 0.5rem 0rem;
+  }
+
+  &__button {
+    margin: 0rem 0.5rem;
+  }
+}

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import FormData from 'form-data';
+// import FormData from 'form-data';
 import URL from 'src/middlewares/urlEnv';
 
 const user = (store) => (next) => (action) => {
@@ -16,7 +16,7 @@ const user = (store) => (next) => (action) => {
         },
       })
         .then((response) => {
-          console.log('Réponse requête :', response);
+          console.log('FAVORITE RECIPES :', response);
           store.dispatch({
             type: 'FAVORITES_RECIPES_SUCCESS',
             payload: {
@@ -53,7 +53,7 @@ const user = (store) => (next) => (action) => {
           // ! do we send anything in particular if the request fails ?
         });
       break;
-    case 'SEND_SHOPPING_LIST_REQUEST':
+    case 'SEND_INGREDIENTS_LIST_REQUEST':
       axios({
         method: 'get',
         url: `${URL}/shopping_list/${state.user.id}/generate`,
@@ -65,9 +65,9 @@ const user = (store) => (next) => (action) => {
         .then((response) => {
           console.log('Réponse requête :', response);
           store.dispatch({
-            type: 'SHOPPING_LIST_SUCCESS',
+            type: 'INGREDIENTS_LIST_SUCCESS',
             payload: {
-              shoppingList: response.data.data,
+              ingredientsList: response.data.data,
             },
           });
         })

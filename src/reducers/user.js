@@ -7,7 +7,7 @@ const initialState = {
   status: '',
   recipesHistory: [],
   favoritesRecipes: [],
-  userFavoritesRecipes: [],
+  collectedFavoritesRecipes: [],
   shoppingList: [],
   selectedRecipes: [],
   ingredientsList: [],
@@ -15,6 +15,7 @@ const initialState = {
   pictureUrl: '',
 };
 
+// eslint-disable-next-line consistent-return
 const reducer = (oldState = initialState, action) => {
   console.log('State user :', oldState);
   console.log('Action user :', action);
@@ -59,7 +60,12 @@ const reducer = (oldState = initialState, action) => {
         status: '',
         recipesHistory: [],
         favoritesRecipes: [],
+        collectedFavoritesRecipes: [],
         shoppingList: [],
+        selectedRecipes: [],
+        ingredientsList: [],
+        eatingPreferences: [],
+        pictureUrl: '',
       };
 
     case 'UPDATE_EATING_PREFERENCES':
@@ -146,17 +152,17 @@ const reducer = (oldState = initialState, action) => {
         shoppingList: [],
       };
 
-    // we add the users's favourite recipes in the state
+      // we add the users's favourite recipes in the state
     case 'FAVORITES_RECIPES_SUCCESS':
       return {
         ...oldState,
         favoritesRecipes: action.payload.favoritesRecipes,
       };
 
-    case 'COLLECT_FAVORITES_RECIPES':
+    case 'FAVORITES_RECIPES_COLLECTED':
       return {
         ...oldState,
-        userFavoritesRecipes: action.payload.userFavoritesRecipes,
+        collectedFavoritesRecipes: action.payload.collectedFavoritesRecipes,
       };
 
     // ! we add the users's shopping list in the state : 404
@@ -164,10 +170,15 @@ const reducer = (oldState = initialState, action) => {
       return {
         ...oldState,
         shoppingList: action.payload.shoppingList,
-        shoppingListRecipes: action.payload.selectedRecipes,
       };
 
-    case 'COLLECT_SHOPPING_LIST':
+    case 'INGREDIENTS_LIST_SUCCESS':
+      return {
+        ...oldState,
+        ingredientsList: action.payload.ingredientsList,
+      };
+
+    case 'SELECTED_RECIPES_COLLECTED':
       return {
         ...oldState,
         selectedRecipes: action.payload.selectedRecipes,
