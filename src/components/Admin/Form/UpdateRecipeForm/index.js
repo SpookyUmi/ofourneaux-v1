@@ -7,9 +7,11 @@ import axios from 'axios';
 import uploadImage from 'src/middlewares/firebase';
 
 import 'src/components/Admin/admin.scss';
+
 import bin from 'src/assets/icons/delete.svg';
 import '../AddRecipeForm/addRecipeForm.scss';
 
+// This component uses data passed via props from the redux store, and a local state.
 const UpdateRecipeForm = ({
   types, seasons, tags, difficulties, ingredients, userToken,
   recipeId,
@@ -27,15 +29,15 @@ const UpdateRecipeForm = ({
   recipeSeasons,
 }) => {
   // I'm going to create a local state here to avoid having too many dispatches between my component
-  // and the store.
+  // and the store as the user fills in the form (no submit yet).
   const [localTitle, setLocalTitle] = useState(recipeTitle);
-  const [localPicture, setLocalPicture] = useState('');
+  const [localPicture, setLocalPicture] = useState(recipePictureUrl);
   const [localType, setLocalType] = useState(recipeType);
   const [localDescription, setLocalDescription] = useState(recipeDescription);
-  const [localSeasons, setLocalSeasons] = useState([]);
-  const [localTags, setLocalTags] = useState([]);
-  const [localDifficulty, setLocalDifficulty] = useState('');
-  const [localNutriScore, setLocalNutriScore] = useState('');
+  const [localSeasons, setLocalSeasons] = useState(recipeSeasons);
+  const [localTags, setLocalTags] = useState(recipeTags);
+  const [localDifficulty, setLocalDifficulty] = useState(recipeDifficulty);
+  const [localNutriScore, setLocalNutriScore] = useState(recipeNutriScore);
   const [localPreparationTime, setLocalPreparationTime] = useState(recipePreparationTime);
   const [localBakingTime, setLocalBakingTime] = useState(recipeBakingTime);
   const [localIngredients, setLocalIngredients] = useState(recipeIngredients);
@@ -46,6 +48,7 @@ const UpdateRecipeForm = ({
   const [localSteps, setLocalSteps] = useState(recipeSteps);
   const [localNewStep, setLocalNewStep] = useState('');
 
+  // This function is used to handle the upload of image with the firebase middleware
   const changeRecipeImage = async (event) => {
     const url = await uploadImage(event.target.files[0]);
     setLocalPicture(url);
@@ -88,7 +91,7 @@ const UpdateRecipeForm = ({
           <input
             className="recipe__form__description input"
             type="text"
-            placeholder="Veuillez décrire brièvement la recette."
+            placeholder="Description"
             value={localDescription}
             onChange={(event) => {
               setLocalDescription(event.target.value);
@@ -102,8 +105,13 @@ const UpdateRecipeForm = ({
 
         {/* ---- TYPES ---- */}
         <p className="recipe__form__categories label">Catégories</p>
+        {/* I map on the types array of objects containing all types stocked in the store and
+        obtained through the GET request at init on route https://ofourneaux.herokuapp.com/datas */}
         {types.map((type) => (
           <label className="label" key={type.id}>
+            {/* if the type does not correspond to the recipeType the input appears unchecked */}
+            {localType !== type.id
+            && (
             <input
               className="choice__text input"
               type="radio"
@@ -115,63 +123,142 @@ const UpdateRecipeForm = ({
               }
             }
           }
-            /> {type.name}
+            />
+            )}
+            {/* if the type corresponds to the recipeType the input appears checked */}
+            {localType === type.id
+            && (
+            <input
+              className="choice__text input"
+              type="radio"
+              checked
+              name={type.name}
+              onChange={
+            (event) => {
+              if (event.target.checked) {
+                setLocalType(type.id);
+              }
+            }
+          }
+            />
+            )}
+            {type.name}
           </label>
         ))}
 
         {/* ---- SEASONS ---- */}
-        {/* If we have time in the future we could add checked property to the checkbox if
-        the season is in recipe.seasons (if else?) */}
         <p className="recipe__form__seasons label">Saison</p>
+        {/* I map on the seasons array of objects containing all seasons stocked in the store and
+        obtained through the GET request at init on route https://ofourneaux.herokuapp.com/datas */}
         {seasons.map((season) => (
           <label className="label" key={season.name}>
+            {/* if the season is not in the localSeasons the input is rendered unchecked */}
+            {localSeasons.indexOf(season.id) === -1
+            && (
             <input
               className="choice__text input"
               type="checkbox"
               name={season.name}
               onChange={
             (event) => {
+              // if the user checks a new season its id is added to the localSeasons array
               if (event.target.checked) {
                 setLocalSeasons([
                   ...localSeasons,
                   season.id,
                 ]);
               }
+              // if the user unchecks a checked season its id is removed from the localSeasons array
               else if (localSeasons.indexOf(season.id)) {
                 const index = localSeasons.indexOf(season.id);
-                localSeasons.splice(index, 1);
+                setLocalSeasons(localSeasons.splice(index, 1));
               }
-              else setLocalSeasons([...localSeasons]);
             }
           }
-            /> {season.name}
+            />
+            )}
+            {/* if the season is in the localSeasons the input is rendered checked */}
+            {localSeasons.indexOf(season.id) > -1 && (
+            <input
+              className="choice__text input"
+              type="checkbox"
+              checked
+              name={season.name}
+              onChange={
+            (event) => {
+              // if the user checks a new season its id is added to the localSeasons array
+              if (event.target.checked) {
+                setLocalSeasons([
+                  ...localSeasons,
+                  season.id,
+                ]);
+              }
+              // if the user unchecks a checked season its id is removed from the localSeasons array
+              else if (localSeasons.indexOf(season.id)) {
+                const index = localSeasons.indexOf(season.id);
+                setLocalSeasons(localSeasons.splice(index, 1));
+              }
+            }
+          }
+            />
+            )}
+            {season.name}
           </label>
         ))}
 
         {/* ---- TAGS ---- */}
-        {/* If we have time in the future we could add checked property to the checkbox if
-        the tag is in recipe.tags (if else?) */}
         <p className="recipe__form__tags label">Labels</p>
+        {/* I map on the seasons array of objects containing all seasons stocked in the store and
+        obtained through the GET request at init on route https://ofourneaux.herokuapp.com/datas */}
         {tags?.map((tag) => (
           <label className="label" htmlFor={tag.name} key={tag.id}>
+            {/* if the tag is not in the localTags the input is rendered unchecked */}
+            {localTags.indexOf(tag.id) === -1
+            && (
             <input
               className="input"
               type="checkbox"
               name={tag.name}
               onChange={(event) => {
+                // if the user checks a new tag its id is added to the localTags array
                 if (event.target.checked) {
                   setLocalTags([
                     ...localTags,
                     tag.id,
                   ]);
                 }
+                // if the user unchecks a checked tag its id is removed from the localTags array
                 else if (localTags.indexOf(tag.id)) {
                   const index = localTags.indexOf(tag.id);
-                  localTags.splice(index, 1);
+                  setLocalTags(localTags.splice(index, 1));
                 }
-                else setLocalTags([...localTags]);
               }}
             />
+            )}
+            {/* if the tags is in the localTags the input is rendered checked */}
+            {localTags.indexOf(tag.id) > -1
+            && (
+            <input
+              className="input"
+              type="checkbox"
+              checked
+              name={tag.name}
+              onChange={(event) => {
+                // if the user checks a new tag its id is added to the localTags array
+                if (event.target.checked) {
+                  setLocalTags([
+                    ...localTags,
+                    tag.id,
+                  ]);
+                }
+                // if the user unchecks a checked tag its id is removed from the localTags array
+                else if (localTags.indexOf(tag.id)) {
+                  const index = localTags.indexOf(tag.id);
+                  setLocalTags(localTags.splice(index, 1));
+                }
+              }}
+            />
+            )}
             {tag.name}
           </label>
         ))}
@@ -180,29 +267,31 @@ const UpdateRecipeForm = ({
       {/* I am creating divs 1-2-3-4 to help style the form for desktop mode */}
       <div className="recipe__form__div__3">
         {/* ---- DIFFICULTY --- */}
-        {/* If we have time in the future we could add checked property to the checkbox if
-        the difficulty is in recipe.difficulty (if else?) */}
         <label className="recipe__form__difficulty label">Difficulté
           <select
-            className="input"
+            className="difficulty__select input"
             name="difficulties"
+            defaultValue={localDifficulty}
             onChange={(event) => {
               setLocalDifficulty(event.target.value);
             }}
           >
+            {/* I map on the difficulties array of objects containing all difficulties
+             stocked in the store and obtained through the GET request at init
+              on route https://ofourneaux.herokuapp.com/datas */}
             {difficulties.map((difficulty) => (
               <option value={difficulty.id} key={difficulty.id}>{difficulty.level}</option>
+
             ))}
           </select>
         </label>
 
         {/* ---- NUTRISCORE ---- */}
-        {/* If we have time in the future we could add checked property to the checkbox if
-        the nutriscore is in recipe.nutriscore (if else?) */}
         <label className="recipe__form__nutri__score label">Nutri Score
           <select
             className="nutri__score input"
             name="scores"
+            defaultValue={localNutriScore}
             onChange={(event) => {
               setLocalNutriScore(
                 event.target.value,
@@ -256,7 +345,8 @@ const UpdateRecipeForm = ({
 
         {/* ---- INGREDIENTS ---- */}
         <p className="recipe__form__ingredients label">Ingrédients</p>
-        {localIngredients.length !== 0 && localIngredients.map((ingredient) => (
+        {/* I map on the localIngredients array if there are ingredients in it */}
+        {localIngredients?.map((ingredient) => (
           <div key={ingredient.id}>
             <span className="recipe__form__ingredient__quantity ingredient__element">{ingredient.quantity}</span>
             <span className="recipe__form__ingredient__unit ingredient__element">{ingredient.unit}</span>
@@ -266,8 +356,10 @@ const UpdateRecipeForm = ({
               src={bin}
               alt="bin"
               onClick={() => {
-                const index = localIngredients.indexOf(ingredient.id);
+                // if the user clicks on the bin the associated ingredient is removed from the array
+                const index = localIngredients.indexOf(ingredient);
                 localIngredients.splice(index, 1);
+                setLocalIngredients(localIngredients);
               }}
             />
           </div>
@@ -284,6 +376,9 @@ const UpdateRecipeForm = ({
             );
           }}
         >
+          {/* I map on the ingredients array of objects containing all ingredients
+          stocked in the store and obtained through the GET request at init
+          on route https://ofourneaux.herokuapp.com/datas */}
           {ingredients?.map((ingredient) => (
             <option value={ingredient.name} id={ingredient.id} key={ingredient.id}>
               {ingredient.name}
@@ -336,6 +431,7 @@ const UpdateRecipeForm = ({
         {/* ---- STEPS ---- */}
         <p className="recipe__form__steps__p label">Étapes de préparation</p>
         <ol>
+          {/* I map on the localSteps array if there are steps in it */}
           {localSteps?.map((step) => (
             <li key={step}>{step}
               <img
@@ -343,8 +439,10 @@ const UpdateRecipeForm = ({
                 src={bin}
                 alt="bin"
                 onClick={() => {
+                  // if the user clicks on the bin the associated step is removed from the array
                   const index = localSteps.indexOf(step);
                   localSteps.splice(index, 1);
+                  setLocalSteps(localSteps);
                 }}
               />
             </li>
@@ -464,13 +562,13 @@ UpdateRecipeForm.propTypes = {
   recipeTitle: PropTypes.string.isRequired,
   recipePictureUrl: PropTypes.string.isRequired,
   recipeDescription: PropTypes.string.isRequired,
-  recipeType: PropTypes.string.isRequired,
-  recipeDifficulty: PropTypes.string.isRequired,
+  recipeType: PropTypes.number.isRequired,
+  recipeDifficulty: PropTypes.number.isRequired,
   recipePreparationTime: PropTypes.number.isRequired,
   recipeBakingTime: PropTypes.number.isRequired,
   recipeNutriScore: PropTypes.string.isRequired,
-  recipeSeasons: PropTypes.arrayOf(PropTypes.string).isRequired,
-  recipeTags: PropTypes.arrayOf(PropTypes.string).isRequired,
+  recipeSeasons: PropTypes.arrayOf(PropTypes.number).isRequired,
+  recipeTags: PropTypes.arrayOf(PropTypes.number).isRequired,
   recipeIngredients: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
     quantity: PropTypes.number,
@@ -493,8 +591,8 @@ const mapStateToProps = (state) => ({
   recipeTitle: state.recipe.title,
   recipePictureUrl: state.recipe.picture_url,
   recipeDescription: state.recipe.description,
-  recipeType: state.recipe.type,
-  recipeDifficulty: state.recipe.difficulty,
+  recipeType: state.recipe.type_id,
+  recipeDifficulty: state.recipe.difficulty_id,
   recipePreparationTime: state.recipe.preparation_time,
   recipeBakingTime: state.recipe.baking_time,
   recipeNutriScore: state.recipe.nutri_score,

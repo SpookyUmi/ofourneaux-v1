@@ -1,11 +1,10 @@
 import axios from 'axios';
 import FormData from 'form-data';
 
-
 const profile = (store) => (next) => (action) => {
   const state = store.getState();
   console.log(state);
-  
+
   const URL = 'https://ofourneaux.herokuapp.com';
 
   // the data must be sent to the back in "form-data" format
@@ -16,10 +15,20 @@ const profile = (store) => (next) => (action) => {
   formProfile.append('picture_url', state.user.pictureUrl);
 
   const formEatingPreferences = new FormData();
-  formEatingPreferences.append('eating_preferences', state.user.eatingPreferences);
-  console.log('Eating preferences array :', state.user.eatingPreferences);
 
   async function updateEatingPreferencesUser(userId, userToken) {
+    // eslint-disable-next-line max-len
+    const updatedEatingPreferences = state.user.eatingPreferences.map((eatingPreference) => eatingPreference);
+
+    console.log('Préférence alimentaire dans le middleware :', updatedEatingPreferences);
+
+    // eslint-disable-next-line prefer-template
+    const updatedEatingPreferencesStringify = '[' + updatedEatingPreferences.join(', ') + ']';
+
+    console.log('Tableau stringifié :', updatedEatingPreferencesStringify);
+
+    formEatingPreferences.append('tags', updatedEatingPreferencesStringify);
+
     try {
       const response = await axios({
         method: 'PATCH',
@@ -34,7 +43,7 @@ const profile = (store) => (next) => (action) => {
       console.log('Answer request update eating preferences :', response);
 
       store.dispatch({
-        type: 'EDIT_PROFILE_SUCCESS',
+        type: 'EDIT_EATING_PREFERENCES_SUCCESS',
         payload: {
           eatingPreferences: state.user.eatingPreferences,
         },
@@ -59,6 +68,8 @@ const profile = (store) => (next) => (action) => {
 
       console.log('Answer request update profile :', response);
 
+      updateEatingPreferencesUser(state.user.id, state.user.token);
+
       store.dispatch({
         type: 'EDIT_PROFILE_SUCCESS',
         payload: {
@@ -68,11 +79,18 @@ const profile = (store) => (next) => (action) => {
           pictureUrl: state.user.pictureUrl,
         },
       });
-
-      updateEatingPreferencesUser(state.user.id, state.user.token);
     }
     catch (error) {
       console.log('Error request update profile :', error.response);
+
+      if (error.response.data.error === 'Mail address already in use') {
+        store.dispatch({
+          type: 'EDIT_PROFILE_FAILED',
+          payload: {
+            message: 'L\'adresse mail est déjà utilisée',
+          },
+        });
+      }
     }
   }
 
@@ -80,37 +98,6 @@ const profile = (store) => (next) => (action) => {
     // ! request for edition of the profile by the user : TO BE CHECKED
     case 'SEND_EDIT_PROFILE_REQUEST':
       updateUserProfile();
-
-      // axios({
-      //   method: 'patch',
-      //   url: `https://ofourneaux.herokuapp.com/users/${state.user.id}`,
-      //   data: form,
-      //   headers: {
-      //     'Content-Type': 'multipart/form-data',
-      //     authorization: state.user.token,
-      //   },
-      // })
-      //   // eslint-disable-next-line no-unused-vars
-      //   .then((response) => {
-      //     console.log('Answer request update :', response);
-      //     store.dispatch({
-      //       type: 'EDIT_PROFILE_SUCCESS',
-      //       // ! does sending the data in this way update the reducer in the right way ?
-      //       payload: {
-      //         firstName: state.user.firstName,
-      //         lastName: state.user.lastName,
-      //         email: state.user.email,
-      //         pictureUrl: state.user.pictureUrl,
-      //         // eatingPreferences: state.user.eatingPreferences,
-      //       },
-      //     });
-      //   })
-      //   // eslint-disable-next-line no-unused-vars
-      //   .catch((error) => {
-      //     console.log('Error request update :', error.response);
-      //     // ! do we send anything in particular if the request fails ?
-      //     // ! in what cases can it fail ?
-      //   });
       break;
 
     // request for deletion of the profile by the user : OK

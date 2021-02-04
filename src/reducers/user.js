@@ -7,7 +7,10 @@ const initialState = {
   status: '',
   recipesHistory: [],
   favoritesRecipes: [],
+  userFavoritesRecipes: [],
   shoppingList: [],
+  selectedRecipes: [],
+  ingredientsList: [],
   eatingPreferences: [],
   pictureUrl: '',
 };
@@ -17,6 +20,13 @@ const reducer = (oldState = initialState, action) => {
   console.log('Action user :', action);
 
   switch (action.type) {
+    case 'CHECK_LOGGED_USER':
+      return {
+        ...oldState,
+        id: action.payload.id,
+        token: action.payload.token,
+      };
+
     // after the user login, we place the token and the id in the reducer "user".
     // we will then use this reducer to send the request to the route back "/users/:userId"
     // which will allow to store the data related to this single user
@@ -38,6 +48,7 @@ const reducer = (oldState = initialState, action) => {
 
     // when the user logs out, the state is cleared
     case 'LOGOUT_SUCCESS':
+      localStorage.clear();
       return {
         ...oldState,
         id: '',
@@ -93,6 +104,11 @@ const reducer = (oldState = initialState, action) => {
         lastName: action.payload.lastName,
         email: action.payload.email,
         pictureUrl: action.payload.pictureUrl,
+      };
+
+    case 'EDIT_EATING_PREFERENCES_SUCCESS':
+      return {
+        ...oldState,
         eatingPreferences: action.payload.eatingPreferences,
       };
 
@@ -137,11 +153,24 @@ const reducer = (oldState = initialState, action) => {
         favoritesRecipes: action.payload.favoritesRecipes,
       };
 
+    case 'COLLECT_FAVORITES_RECIPES':
+      return {
+        ...oldState,
+        userFavoritesRecipes: action.payload.userFavoritesRecipes,
+      };
+
     // ! we add the users's shopping list in the state : 404
     case 'SHOPPING_LIST_SUCCESS':
       return {
         ...oldState,
         shoppingList: action.payload.shoppingList,
+        shoppingListRecipes: action.payload.selectedRecipes,
+      };
+
+    case 'COLLECT_SHOPPING_LIST':
+      return {
+        ...oldState,
+        selectedRecipes: action.payload.selectedRecipes,
       };
 
     case 'TAGS_USER_SUCCESS':
