@@ -20,4 +20,15 @@
   &__button {
     margin: 0rem 0.5rem;
   }
+
+  .modal_update_input{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    
+    > * {
+        margin: 10px;
+    }
+  }
+
 }

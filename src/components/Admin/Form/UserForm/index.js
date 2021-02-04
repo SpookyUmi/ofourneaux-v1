@@ -110,7 +110,7 @@ const UserForm = ({ userToken }) => {
         && <ModalConfirmDelete user={userSelected} hideModal={hideModal} deleteUser={deleteUser} />
       }
       {modalUpdateUser
-        && <ModalUpdateUser user={userSelected} hideModal={hideModal} userToken={userToken} />
+        && <ModalUpdateUser user={userSelected} hideModal={hideModal} userToken={userToken} getUsers={getUsers} />
       }
     </div>
   );

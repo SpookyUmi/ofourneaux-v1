@@ -8,29 +8,34 @@
   min-width: 400px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 
-  & thead tr {
+  table {
+    width: 100%;
+  }
+
+  thead tr {
     background-color: #009879;
     color: #ffffff;
-    text-align: left;
+    text-align: center;
   }
 
-  & th, td {
-      padding: 12px 15px;
+  th, td {
+    padding: 12px 15px;
+    text-align: center;
   }
 
-  & tbody tr {
+  tbody tr {
     border-bottom: 1px solid #dddddd;
   }
 
-  & tbody tr:nth-of-type(even) {
+  tbody tr:nth-of-type(even) {
     background-color: #f3f3f3;
   }
 
-  & tbody tr:last-of-type {
+  tbody tr:last-of-type {
     border-bottom: 2px solid #009879;
   }
 
-  & tbody tr.active-row {
+  tbody tr.active-row {
     font-weight: bold;
     color: #009879;
   }

@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import URL from 'src/middlewares/urlEnv';
 import axios from 'axios';
+import FormData from 'form-data';
 import './modalUpdateUser.scss';
 
 const statusUser = [
@@ -16,11 +17,8 @@ const ModalUpdateUser = (props) => {
   const [mailAddress, setMailAddress] = useState(props.user.mail_address);
   const [statusId, setStatusId] = useState(statusUser.find((value) => value.name == props.user.status).id);
 
-  console.log('USER =>', props);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(value);
 
     switch (name) {
       case 'first_name':
@@ -40,26 +38,26 @@ const ModalUpdateUser = (props) => {
     }
   };
 
-  const user = {
-    id: props.user.id,
-    first_name: firstName,
-    last_name: lastName,
-    mail_address: mailAddress,
-    status_id: statusId,
-  };
+  const formProfile = new FormData();
+  formProfile.append('last_name', lastName);
+  formProfile.append('first_name', firstName);
+  formProfile.append('mail_address', mailAddress);
+  formProfile.append('status_id', statusId);
 
   const updateUser = async () => {
     await axios({
       method: 'PATCH',
       url: `${URL}/users/${props.user.id}`,
-      data: user,
+      data: formProfile,
       headers: {
         'Content-Type': 'multipart/form-data',
         authorization: props.userToken,
       },
     })
       .then((response) => {
-        console.log(response);
+        // console.log(response);
+        props.getUsers();
+        props.hideModal();
       })
       .catch((error) => {
         console.log('Erreur connexion :', error);
@@ -69,7 +67,7 @@ const ModalUpdateUser = (props) => {
   return (
     <div className="modal">
       <h1>Gérer l'utilisateur</h1>
-      <div>
+      <div className="modal_update_input">
         <input type="text" value={firstName} name="first_name" onChange={(event) => handleChange(event)} />
         <input type="text" value={lastName} name="last_name" onChange={(event) => handleChange(event)} />
         <input type="text" value={mailAddress} name="mail_address" onChange={(event) => handleChange(event)} />

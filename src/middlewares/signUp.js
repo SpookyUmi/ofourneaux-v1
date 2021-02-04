@@ -1,6 +1,7 @@
 // YARN
 import axios from 'axios';
 import FormData from 'form-data';
+import URL from 'src/middlewares/urlEnv';
 
 // middleware "signUp"
 const signUp = (store) => (next) => (action) => {
@@ -18,7 +19,7 @@ const signUp = (store) => (next) => (action) => {
     case 'SEND_SUBSCRIPTION_REQUEST':
       axios({
         method: 'post',
-        url: 'https://ofourneaux.herokuapp.com/users',
+        url: `${URL}users`,
         data: form,
         headers: {
           'Content-Type': 'multipart/form-data',

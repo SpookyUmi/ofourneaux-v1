@@ -1,14 +1,11 @@
 // YARN
 import axios from 'axios';
 import FormData from 'form-data';
+import URL from 'src/middlewares/urlEnv';
 
 // middleware
 const recipe = (store) => (next) => (action) => {
   const state = store.getState();
-
-  // console.log(form);
-
-  const URL = 'https://ofourneaux.herokuapp.com';
 
   async function getRecipe(recipeId) {
     try {
@@ -40,7 +37,7 @@ const recipe = (store) => (next) => (action) => {
 
       // axios({
       //   method: 'GET',
-      //   url: `https://ofourneaux.herokuapp.com/recipes/${action.payload.id}`,
+      //   url: `${URL}/recipes/${action.payload.id}`,
       // })
       //   .then((response) => {
       //     // console.log('Answer request recipe :', response);
@@ -117,7 +114,7 @@ const recipe = (store) => (next) => (action) => {
 
       axios({
         method: 'PATCH',
-        url: `https://ofourneaux.herokuapp.com/favorites/${state.user.id}`,
+        url: `${URL}/favorites/${state.user.id}`,
         data: form,
         headers: {
           authorization: state.user.token,

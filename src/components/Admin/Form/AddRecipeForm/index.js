@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import uploadImage from 'src/middlewares/firebase';
+import URL from 'src/middlewares/urlEnv';
 
 import 'src/components/Admin/admin.scss';
 
@@ -399,7 +400,7 @@ const AddRecipeForm = ({
 
             axios({
               method: 'post',
-              url: 'https://ofourneaux.herokuapp.com/recipes',
+              url: `${URL}/recipes`,
               data: addRecipeForm,
               headers: { authorization: userToken, 'Content-Type': 'multipart/form-data' },
             })

@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import uploadImage from 'src/middlewares/firebase';
+import URL from 'src/middlewares/urlEnv';
 
 import 'src/components/Admin/admin.scss';
 
@@ -497,7 +498,7 @@ const UpdateRecipeForm = ({
             updateRecipeForm.append('steps', JSON.stringify(localSteps));
             axios({
               method: 'patch',
-              url: `https://ofourneaux.herokuapp.com/recipes/${recipeId}`,
+              url: `${URL}/recipes/${recipeId}`,
               data: updateRecipeForm,
               headers: { authorization: userToken, 'Content-Type': 'multipart/form-data' },
             })
@@ -518,7 +519,7 @@ const UpdateRecipeForm = ({
             event.preventDefault();
             axios({
               method: 'delete',
-              url: `https://ofourneaux.herokuapp.com/recipes/${recipeId}`,
+              url: `${URL}/recipes/${recipeId}`,
               headers: { authorization: userToken, 'Content-Type': 'multipart/form-data' },
             })
               .then((response) => {

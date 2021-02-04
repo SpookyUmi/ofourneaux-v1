@@ -1,10 +1,9 @@
 import axios from 'axios';
 import FormData from 'form-data';
+import URL from 'src/middlewares/urlEnv';
 
 const favorites = (store) => (next) => (action) => {
   const state = store.getState();
-
-  const URL = 'https://ofourneaux.herokuapp.com';
 
   const fetchRecipe = async (recipeId) => {
     const response = await axios.get(`${URL}/recipes/${recipeId}`);

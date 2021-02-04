@@ -1,11 +1,10 @@
 import axios from 'axios';
 import FormData from 'form-data';
+import URL from 'src/middlewares/urlEnv';
 
 const profile = (store) => (next) => (action) => {
   const state = store.getState();
   console.log(state);
-
-  const URL = 'https://ofourneaux.herokuapp.com';
 
   // the data must be sent to the back in "form-data" format
   const formProfile = new FormData();
@@ -104,7 +103,7 @@ const profile = (store) => (next) => (action) => {
     case 'SEND_DELETE_PROFILE_REQUEST':
       axios({
         method: 'delete',
-        url: `https://ofourneaux.herokuapp.com/users/${state.user.id}`,
+        url: `${URL}/users/${state.user.id}`,
         headers: {
           authorization: state.user.token,
         },

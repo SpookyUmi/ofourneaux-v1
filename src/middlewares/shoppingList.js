@@ -1,6 +1,7 @@
 // YARN
 import axios from 'axios';
 import FormData from 'form-data';
+import URL from 'src/middlewares/urlEnv';
 
 // middleware
 const shoppingList = (store) => (next) => (action) => {
@@ -43,7 +44,7 @@ const shoppingList = (store) => (next) => (action) => {
 
       // axios({
       //   method: 'patch',
-      //   url: `https://ofourneaux.herokuapp.com/shopping_list/${state.user.id}`,
+      //   url: `${URL}/shopping_list/${state.user.id}`,
       //   headers: {
       //     authorization: state.user.token,
       //   },
