@@ -66,8 +66,8 @@ const ModalUpdateUser = (props) => {
 
   return (
     <div className="modal">
-      <h1>Gérer l'utilisateur</h1>
-      <div className="modal_update_input">
+      <h1 className="modal__title">Modifier l'utilisateur</h1>
+      <div className="modal__update__input">
         <input type="text" value={firstName} name="first_name" onChange={(event) => handleChange(event)} />
         <input type="text" value={lastName} name="last_name" onChange={(event) => handleChange(event)} />
         <input type="text" value={mailAddress} name="mail_address" onChange={(event) => handleChange(event)} />

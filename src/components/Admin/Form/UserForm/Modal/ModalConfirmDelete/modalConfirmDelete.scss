@@ -10,6 +10,14 @@
   border-radius: 10px;
   background-color: vars.$color-secondary;
 
+  &__title{
+    margin-bottom: 1.5rem;
+  }
+
+  &__text{
+    text-align: center;
+  }
+
   &__buttons {
     display: flex;
     flex-direction: row;
@@ -21,7 +29,7 @@
     margin: 0rem 0.5rem;
   }
 
-  .modal_update_input{
+  .modal__update__input{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
