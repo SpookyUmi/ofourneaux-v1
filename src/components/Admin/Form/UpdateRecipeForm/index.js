@@ -11,6 +11,7 @@ import 'src/components/Admin/admin.scss';
 import bin from 'src/assets/icons/delete.svg';
 import '../AddRecipeForm/addRecipeForm.scss';
 
+import { useEffect } from 'react';
 import ModalConfirmDelete from './modal/ModalConfirmDelete';
 import ModalConfirmUpdate from './modal/ModalConfirmUpdate';
 
@@ -211,21 +212,15 @@ const UpdateRecipeForm = ({
             type="checkbox"
             name={season.name}
             onChange={
-          (event) => {
-            // if the user checks a new season its id is added to the localSeasons array
-            if (event.target.checked) {
-              setLocalSeasons([
-                ...localSeasons,
-                season.id,
-              ]);
+              () => {
+                // if the user checks a new season its id is added to the localSeasons array
+
+                setLocalSeasons([
+                  ...localSeasons,
+                  season.id,
+                ]);
+              }
             }
-            // if the user unchecks a checked season its id is removed from the localSeasons array
-            else if (localSeasons.indexOf(season.id)) {
-              const index = localSeasons.indexOf(season.id);
-              setLocalSeasons(localSeasons.splice(index, 1));
-            }
-          }
-        }
           />
           )}
               {/* if the season is in the localSeasons the input is rendered checked */}
@@ -236,21 +231,15 @@ const UpdateRecipeForm = ({
                 checked
                 name={season.name}
                 onChange={
-          (event) => {
-            // if the user checks a new season its id is added to the localSeasons array
-            if (event.target.checked) {
-              setLocalSeasons([
-                ...localSeasons,
-                season.id,
-              ]);
-            }
-            // if the user unchecks a checked season its id is removed from the localSeasons array
-            else if (localSeasons.indexOf(season.id)) {
-              const index = localSeasons.indexOf(season.id);
-              setLocalSeasons(localSeasons.splice(index, 1));
-            }
-          }
-        }
+                () => {
+                // if the user unchecks a checked season its id is removed
+                // from the localSeasons array
+
+                  const index = localSeasons.indexOf(season.id);
+                  localSeasons.splice(index, 1);
+                  setLocalSeasons([...localSeasons]);
+                }
+                }
               />
               )}
             </>
@@ -275,19 +264,13 @@ const UpdateRecipeForm = ({
                   className="input"
                   type="checkbox"
                   name={tag.name}
-                  onChange={(event) => {
+                  onChange={() => {
                   // if the user checks a new tag its id is added to the localTags array
-                    if (event.target.checked) {
-                      setLocalTags([
-                        ...localTags,
-                        tag.id,
-                      ]);
-                    }
-                    // if the user unchecks a checked tag its id is removed from the localTags array
-                    else if (localTags.indexOf(tag.id)) {
-                      const index = localTags.indexOf(tag.id);
-                      setLocalTags(localTags.splice(index, 1));
-                    }
+
+                    setLocalTags([
+                      ...localTags,
+                      tag.id,
+                    ]);
                   }}
                 />
                 )}
@@ -299,19 +282,12 @@ const UpdateRecipeForm = ({
                   type="checkbox"
                   checked
                   name={tag.name}
-                  onChange={(event) => {
-                  // if the user checks a new tag its id is added to the localTags array
-                    if (event.target.checked) {
-                      setLocalTags([
-                        ...localTags,
-                        tag.id,
-                      ]);
-                    }
+                  onChange={() => {
                     // if the user unchecks a checked tag its id is removed from the localTags array
-                    else if (localTags.indexOf(tag.id)) {
-                      const index = localTags.indexOf(tag.id);
-                      setLocalTags(localTags.splice(index, 1));
-                    }
+
+                    const index = localTags.indexOf(tag.id);
+                    localTags.splice(index, 1);
+                    setLocalTags([...localTags]);
                   }}
                 />
                 )}
@@ -492,7 +468,7 @@ const UpdateRecipeForm = ({
           {/* I map on the localSteps array if there are steps in it */}
           {localSteps?.map((step) => (
             <>
-              <li key={step} className="step__element">{step}</li>
+              <li key={localSteps.indexOf(step)} className="step__element">{step}</li>
 
               <img
                 className="recipe__form__delete__icon"
