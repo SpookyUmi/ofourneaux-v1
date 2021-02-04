@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
+import { MobileView, BrowserView } from 'react-device-detect';
 
 // Components
 import Header from 'src/components/Header';

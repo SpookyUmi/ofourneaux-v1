@@ -1,31 +1,33 @@
 @use 'src/styles/vars';
 
-.image {
-  position: relative; 
-
-  &__recipe {
-    width: 100%;
-    height: 100%;
-    border-radius: 1.5rem;
-    margin-bottom: 1.25rem;
-  }
-
-  &__icons {
-    position: absolute;
-    z-index: 10;
-    width: 100%;
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-  &__icon {
-    cursor: pointer;
-    width: 1.5rem;
-  }
-
-  &__icon:first-child {
-    margin-right: 0.9rem;
+@media only screen and (min-width: 1024px) {
+  .image {
+    position: relative; 
+  
+    &__recipe {
+      width: 100%;
+      height: 500px;
+      border-radius: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+  
+    &__icons {
+      position: absolute;
+      z-index: 10;
+      width: 100%;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  
+    &__icon {
+      cursor: pointer;
+      width: 1.5rem;
+    }
+  
+    &__icon:first-child {
+      margin-right: 0.9rem;
+    }
   }
 }
