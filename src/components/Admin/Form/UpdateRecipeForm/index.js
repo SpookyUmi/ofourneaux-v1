@@ -271,6 +271,7 @@ const UpdateRecipeForm = ({
           <select
             className="difficulty__select input"
             name="difficulties"
+            defaultValue={localDifficulty}
             onChange={(event) => {
               setLocalDifficulty(event.target.value);
             }}
@@ -279,19 +280,8 @@ const UpdateRecipeForm = ({
              stocked in the store and obtained through the GET request at init
               on route https://ofourneaux.herokuapp.com/datas */}
             {difficulties.map((difficulty) => (
-              <>
-                {/* if the difficulty does not correspond to the recipeDifficulty
-                 the input appears unselected */}
-                {localDifficulty !== difficulty.id
-                && (<option value={difficulty.id} key={difficulty.id}>{difficulty.level}</option>)}
-                {/* if the difficulty does not correspond to the recipeDifficulty
-                 the input appears unselected */}
-                {localDifficulty === difficulty.id
-                && (
-                  <option value={difficulty.id} selected key={difficulty.id}>{difficulty.level}
-                  </option>
-                )}
-              </>
+              <option value={difficulty.id} key={difficulty.id}>{difficulty.level}</option>
+
             ))}
           </select>
         </label>
@@ -301,23 +291,18 @@ const UpdateRecipeForm = ({
           <select
             className="nutri__score input"
             name="scores"
+            defaultValue={localNutriScore}
             onChange={(event) => {
               setLocalNutriScore(
                 event.target.value,
               );
             }}
           >
-            {/* if the value corresponds to the localNutriScore the option will be selected */}
-            {localNutriScore !== 'A' && <option value="A">A</option>}
-            {localNutriScore === 'A' && <option value="A" selected>A</option>}
-            {localNutriScore !== 'B' && <option value="B">B</option>}
-            {localNutriScore === 'B' && <option value="B" selected>B</option>}
-            {localNutriScore !== 'C' && <option value="C">C</option>}
-            {localNutriScore === 'C' && <option value="C" selected>C</option>}
-            {localNutriScore !== 'D' && <option value="D">D</option>}
-            {localNutriScore === 'D' && <option value="D" selected>D</option>}
-            {localNutriScore !== 'E' && <option value="E">E</option>}
-            {localNutriScore === 'E' && <option value="E" selected>E</option>}
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+            <option value="E">E</option>
           </select>
         </label>
 
@@ -373,7 +358,8 @@ const UpdateRecipeForm = ({
               onClick={() => {
                 // if the user clicks on the bin the associated ingredient is removed from the array
                 const index = localIngredients.indexOf(ingredient);
-                setLocalIngredients(localIngredients.splice(index, 1));
+                localIngredients.splice(index, 1);
+                setLocalIngredients(localIngredients);
               }}
             />
           </div>
@@ -455,7 +441,8 @@ const UpdateRecipeForm = ({
                 onClick={() => {
                   // if the user clicks on the bin the associated step is removed from the array
                   const index = localSteps.indexOf(step);
-                  setLocalSteps(localSteps.splice(index, 1));
+                  localSteps.splice(index, 1);
+                  setLocalSteps(localSteps);
                 }}
               />
             </li>
