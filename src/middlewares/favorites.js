@@ -25,7 +25,7 @@ const favorites = (store) => (next) => (action) => {
     return array;
   }
 
-  async function getSelectedRecipes(selectedRecipesId) {
+  async function getArraySelectedRecipes(selectedRecipesId) {
     let array;
     try {
       array = await Promise.all(selectedRecipesId.map((id) => fetchRecipe(id)));
@@ -53,11 +53,11 @@ const favorites = (store) => (next) => (action) => {
 
   async function sendSelectedRecipes() {
     try {
-      const selectedRecipes = await getSelectedRecipes(state.user.shoppingList);
+      const userSelected = await getArraySelectedRecipes(state.user.shoppingList);
       store.dispatch({
         type: 'SELECTED_RECIPES_COLLECTED',
         payload: {
-          selectedRecipes,
+          selectedRecipes: userSelected,
         },
       });
     }

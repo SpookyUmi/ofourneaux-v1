@@ -180,10 +180,7 @@ const auth = (store) => (next) => (action) => {
           email: response.data.data.mail_address,
           status: response.data.data.status,
           recipesHistory: response.data.data.recipes_history,
-          // ! test table, to be deleted
-          shoppingList: [2, 4, 6],
-          // TODO: uncomment next line
-          // shoppingList: response.data.data.shopping_list,
+          shoppingList: response.data.data.shopping_list,
           pictureUrl: response.data.data.picture_url,
         },
       });

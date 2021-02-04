@@ -178,7 +178,7 @@ const reducer = (oldState = initialState, action) => {
         ingredientsList: action.payload.ingredientsList,
       };
 
-    case 'COLLECT_SHOPPING_LIST':
+    case 'SELECTED_RECIPES_COLLECTED':
       return {
         ...oldState,
         selectedRecipes: action.payload.selectedRecipes,
