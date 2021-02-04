@@ -1,25 +1,88 @@
 @use 'src/styles/vars';
 
+// MOBILE
+@media only screen and (max-width: 768px) {
+  .tag__form{
+    padding: 1rem;
+    font-size: 1rem;
+    background-color: vars.$color-secondary;
+    border-radius: 2rem;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .tag__form__p{
+  margin: 0.5rem;
+  margin-left: 1rem;
+  font-weight: bold;
+  }
+  
+  .tag__form__add__field{
+    margin: 0.3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .tag__form__add__submit{
+    margin: 0.3rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem 1rem;
+    width: fit-content;
+  }
+  
+  .tag__form__tags__list{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .tag__form__tag{
+    margin: 1rem;
+    padding: 0 1rem;
+    border: 2px solid vars.$color-primary;
+    border-radius: 1.3rem;
+    width: fit-content;
+    background-color: vars.$color-sand;
+    display: flex;
+  }
+  
+  .tag__form__delete__icon{
+    width: 1.6rem;
+    margin-left: 1rem;
+  }
+  
+}
+
+//DESKTOP
+@media only screen and (min-width: 768px) {
 .tag__form{
   padding: 5rem;
-  font-size: 1.4rem;
+  font-size: 1rem;
+  background-color: vars.$color-secondary;
+  border-radius: 2rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .tag__form__p{
 margin: 0.5rem;
 margin-left: 1rem;
 font-weight: bold;
-font-size: 1.6rem;
 }
 
-.tag__form__add__field, .tag__form__add__submit{
+.tag__form__add__field{
   margin: 0.3rem;
   margin-bottom: 1rem;
 }
 
+.tag__form__add__submit{
+  margin: 0.3rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  width: fit-content;
+}
+
 .tag__form__tags__list{
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
 }
 
 .tag__form__tag{
@@ -28,10 +91,12 @@ font-size: 1.6rem;
   border: 2px solid vars.$color-primary;
   border-radius: 1.3rem;
   width: fit-content;
-  
+  background-color: vars.$color-sand;
+  display: flex;
 }
 
 .tag__form__delete__icon{
-  margin: 0 1rem;
-  width: 2rem;
-  }
+  width: 1.6rem;
+  margin-left: 1rem;
+}
+}

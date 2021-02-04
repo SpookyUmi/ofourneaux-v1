@@ -2,38 +2,65 @@
 
 // MOBILE
 @media only screen and (max-width: 768px) {
+
   .recipe__form{
-    padding: 2rem;
     display:flex;
     flex-direction: column;
     justify-content: space-between;
     font-size: 1.4rem;
+    background-color: vars.$color-secondary;
+    border-radius: 2rem;
   }
   .label{
     font-weight: bold;
     margin: 1rem;
     padding: 0.5rem;
+    font-size: 1.4rem;
   }
 
   .input{
-    margin: 1rem 0;
+    margin: 0.8rem;
+    font-size: 1rem;
+  }
+
+  .choice__text{
+    margin-left: 1.5rem;
+    text-transform: capitalize;
+    font-weight: bold;
+  }
+
+  .difficulty__select{
+    width: 8rem;
   }
 
   .nutri__score{
     width: 4rem;
   }
 
-  .recipe__form__image{
-    border: 0px;
-  }
-
   .recipe__form__div__1{
     display: flex;
+    flex-direction: column;
   }
   .recipe__form__div__1 input{
     display: block;
+    margin: 1rem 0;
   }
 
+  .recipe__form__div__2{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .recipe__form__div__3{
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+  }
+
+  .recipe__form__div__4{
+    display: flex;
+    flex-direction: column;
+  }
   
   .recipe__form__div__4 input{
     margin: 1rem;
@@ -43,7 +70,8 @@
   }
 
   .recipe__form__delete__icon{
-    width: 2.5rem;
+    width: 1.6rem;
+    margin-left: 1rem;
   }
 
   .submit__button{
@@ -54,6 +82,32 @@
 
   .ingredient__element{
     padding: 0 1rem;
+  }
+
+  .ingredient__element{
+    padding: 0 1rem;
+    font-size: 1.2rem;
+  }
+
+  .step__element{
+    padding: 0 1rem;
+    font-size: 1.2rem;
+    display: inline;
+  }
+
+  .recipe__form__image .input{
+    font-size: 1rem;
+    width: 100%;
+  }
+
+  .ingredient__button, .step__button{
+    width: fit-content;
+    margin: auto;
+  }
+
+  .tags__cloud{
+    display: flex;
+    flex-wrap: wrap;
   }
 }
 
@@ -65,15 +119,25 @@
     flex-direction: column;
     justify-content: space-between;
     font-size: 1.4rem;
+    background-color: vars.$color-secondary;
+    border-radius: 2rem;
   }
   .label{
     font-weight: bold;
     margin: 1rem;
     padding: 0.5rem;
+    font-size: 1.4rem;
   }
 
   .input{
-    margin: 1rem 0;
+    margin: 0.8rem;
+    font-size: 1rem;
+  }
+
+  .choice__text{
+    margin-left: 1.5rem;
+    text-transform: capitalize;
+    font-weight: bold;
   }
 
   .difficulty__select{
@@ -84,17 +148,17 @@
     width: 4rem;
   }
 
-  .recipe__form__image{
-    border: 0px;
-  }
-
   .recipe__form__div__1{
     display: flex;
   }
   .recipe__form__div__1 input{
     display: block;
+    margin: 1rem 0;
   }
 
+  .recipe__form__div__3{
+    margin-top: 1rem;
+  }
   
   .recipe__form__div__4 input{
     margin: 1rem;
@@ -104,7 +168,8 @@
   }
 
   .recipe__form__delete__icon{
-    width: 2.5rem;
+    width: 1.6rem;
+    margin-left: 1rem;
   }
 
   .submit__button{
@@ -115,5 +180,12 @@
 
   .ingredient__element{
     padding: 0 1rem;
+    font-size: 1.2rem;
+  }
+
+  .step__element{
+    padding: 0 1rem;
+    font-size: 1.2rem;
+    display: inline;
   }
 }
