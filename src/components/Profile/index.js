@@ -120,7 +120,7 @@ const Profile = ({
 
           <div className="profile__content__block profile__content__constraints">
             <h3 className="profile__content__constraints__title">
-              Mes contraintes alimentaires
+              Mes exigences alimentaires
             </h3>
             <div className="profile__content__constraints__inputs">
               {

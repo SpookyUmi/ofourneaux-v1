@@ -13,7 +13,7 @@ export default [
     lastname: 'Grangy Kagita',
     picture: 'src/assets/images/meme.png',
     role: 'Scrum Master',
-    description: 'Simple mais toujours délicieuse. Simple mais toujours',
+    description: 'Collectionne les fouets',
   },
   {
     id: 1465,
@@ -29,7 +29,7 @@ export default [
     lastname: 'Le Coz',
     picture: 'src/assets/images/meme.png',
     role: 'Lead Dev Back',
-    description: 'Simple mais toujours délicieuse. Simple mais toujours',
+    description: 'Fan d\'API et d\'IPA. Coïncidence ? Je ne pense pas.',
   },
   {
     id: 5869,
