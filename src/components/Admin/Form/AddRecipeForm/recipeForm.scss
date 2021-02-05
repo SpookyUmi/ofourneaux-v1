@@ -165,6 +165,7 @@
 
   .recipe__form__div__1{
     display: flex;
+    flex-wrap: wrap;
   }
   .recipe__form__div__1 input{
     display: block;
@@ -202,5 +203,15 @@
     padding: 0 1rem;
     font-size: 1.2rem;
     display: inline;
+  }
+
+  .categories__cloud{
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .seasons__cloud{
+    display: flex;
+    flex-wrap: wrap;
   }
 }
