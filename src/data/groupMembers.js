@@ -2,6 +2,7 @@ import charlene from 'src/assets/images/charlene.png';
 import julien from 'src/assets/images/julien.png';
 import jenny from 'src/assets/images/jenny.png';
 import chloe from 'src/assets/images/chloe.png';
+import stephane from 'src/assets/images/stephane.png';
 
 export default [
   {
@@ -40,7 +41,7 @@ export default [
     id: 5869,
     firstname: 'Stéphane',
     lastname: 'Soucheyre',
-    img: 'src/assets/images/meme.png',
+    img: stephane,
     role: 'Git Master',
     description: 'Simple mais toujours délicieuse. Simple mais toujours',
   },

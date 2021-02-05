@@ -17,8 +17,9 @@
   border-radius: 5rem;
 }
 
-.recipes {
+.recipes__card {
     display: flex;
     flex-wrap: wrap;
-    min-height: 100vh;
+    //min-height: 100vh;
+    margin-bottom: 5rem;
   }

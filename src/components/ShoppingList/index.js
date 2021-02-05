@@ -25,7 +25,7 @@ const ShoppingList = ({
       <div className="recipes__container__title">
         <h2>Recettes sélectionnées</h2>
       </div>
-      <section className="recipes">
+      <section className="shoppinglist__recipes">
         {recipes?.map((recipe) => (
           <CardRecipe
             key={recipe.id}

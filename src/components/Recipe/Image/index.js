@@ -39,7 +39,7 @@ const Image = ({
 
   return (
     <div className="image">
-    {/* TODO: put the icons in white */}
+      {/* TODO: put the icons in white */}
       <div className="image__icons">
         {
           status === 'admin'
@@ -80,7 +80,7 @@ const Image = ({
       {/* eslint-disable-next-line jsx-a11y/img-redundant-alt */}
       <img className="image__recipe" src={picture} alt="Photo de la recette" />
     </div>
-  )
+  );
 };
 
 Image.propTypes = {

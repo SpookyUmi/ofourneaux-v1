@@ -2,6 +2,12 @@
 
 .shoppinglist__container {
   margin-top: 0;
+  margin-bottom: 5rem;
+}
+
+.shoppinglist__recipes {
+  display: flex;
+  flex-wrap: wrap;
   margin-bottom: 1rem;
 }
 
