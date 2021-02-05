@@ -6,43 +6,43 @@ import PropTypes from 'prop-types';
 import '../styles.scss';
 
 // == Composant
-const GeneratedList = ({ id, value, label, ingredients }) => {
-  return (
-      <div className="shopping__list" key={id}>
-        <section className="shopping__list__header">
-          <img src="" alt={value}/>
-          <h3>{label}</h3>
-          <img src="" alt="flèche"/>
-        </section>
-        <section className="shopping__list__body">
-        {ingredients.map((ingredient) => (
-          <form className="shopping__list__body__form" key={ingredient.id}>
-            <label>
-              <input type="checkbox" name="ingredient" />
-              {ingredient.name}
-            </label>
-            <div className="shopping__list__body__form__quantity">
-              <p>{ingredient.quantity} {ingredient.unit}</p>
-            </div>
-          </form>
-        ))}
-        </section>
-      </div>
-  );
-};
+const GeneratedList = ({
+  name, items, icon,
+}) => (
+  <div className="shopping__list" key={name}>
+    <section className="shopping__list__header">
+      <img src={icon} alt={name} />
+      <h3>{name}</h3>
+      <img src="" alt="flèche" />
+    </section>
+    <section className="shopping__list__body">
+      {items.map((ingredient) => (
+        <form className="shopping__list__body__form" key={ingredient.id}>
+          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+          <label>
+            <input type="checkbox" name="ingredient" />
+            {ingredient.name}
+          </label>
+          <div className="shopping__list__body__form__quantity">
+            <p>{ingredient.quantity} {ingredient.unit}</p>
+          </div>
+        </form>
+      ))}
+    </section>
+  </div>
+);
 
 GeneratedList.propTypes = {
-  id: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
-  label: PropTypes.string.isRequired,
-  ingredients: PropTypes.arrayOf(PropTypes.shape({
+  name: PropTypes.string.isRequired,
+  icon: PropTypes.string.isRequired,
+  items: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
     quantity: PropTypes.number,
     unit: PropTypes.string,
+    category_id: PropTypes.number,
   })).isRequired,
 };
-
 
 // == Export
 export default GeneratedList;
