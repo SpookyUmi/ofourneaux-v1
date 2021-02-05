@@ -1,5 +1,10 @@
 @use 'src/styles/vars';
 
+.shoppinglist__container {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
 .shopping__list {
   background-color: vars.$color-secondary;
   padding: 0.5rem;

@@ -20,6 +20,14 @@ const connectionPersistence = (store) => (next) => (action) => {
           tags: response.data.data,
         },
       });
+
+      store.dispatch({
+        type: 'COLLECT_SELECTED_RECIPES',
+      });
+
+      store.dispatch({
+        type: 'COLLECT_FAVORITES_RECIPES',
+      });
     }
     catch (error) {
       // console.log('Error request tags by user :', error.response.data.error);
