@@ -17,8 +17,9 @@ const ShoppingList = ({
     name: category.name,
     icon: category.icon,
     items: ingredients.filter((ingredient) => ingredient.category_id === category.id),
+    icon: category.icon,
   }));
-  console.log('CATEGORIES INGRID', categoriesWithIngredients);
+  // console.log('CATEGORIES INGRID', categoriesWithIngredients);
   return (
     <div className="shoppinglist__container">
       <div className="recipes__container__title">

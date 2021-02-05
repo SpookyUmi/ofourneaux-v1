@@ -18,8 +18,8 @@ const initialState = {
 
 // eslint-disable-next-line consistent-return
 const reducer = (oldState = initialState, action) => {
-  console.log('State user :', oldState);
-  console.log('Action user :', action);
+  // console.log('State user :', oldState);
+  // console.log('Action user :', action);
 
   switch (action.type) {
     case 'CHECK_LOGGED_USER':

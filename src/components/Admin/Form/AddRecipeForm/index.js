@@ -106,12 +106,13 @@ const AddRecipeForm = ({
           <p className="label">Catégories</p>
           {/* I map on the types array of objects containing all types stocked in the store and
       obtained through the GET request at init on route https://ofourneaux.herokuapp.com/datas */}
-          {types.map((type) => (
-            <>
-              <label className="choice__text" key={type.id}>{type.name}
-              </label>
-              {/* if the type does not correspond to the recipeType the input appears unchecked */}
-              {localType !== type.id
+          <div className="categories__cloud">
+            {types.map((type) => (
+              <div>
+                <label className="choice__text" key={type.id}>{type.name}
+                </label>
+                {/* if the type does not correspond to the recipeType the input appears unchecked */}
+                {localType !== type.id
           && (
           <input
             className="input"
@@ -126,8 +127,8 @@ const AddRecipeForm = ({
         }
           />
           )}
-              {/* if the type corresponds to the recipeType the input appears checked */}
-              {localType === type.id
+                {/* if the type corresponds to the recipeType the input appears checked */}
+                {localType === type.id
           && (
           <input
             className="input"
@@ -143,8 +144,9 @@ const AddRecipeForm = ({
         }
           />
           )}
-            </>
-          ))}
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* ---- SEASONS ---- */}
@@ -152,12 +154,13 @@ const AddRecipeForm = ({
           <p className="label">Saison</p>
           {/* I map on the seasons array of objects containing all seasons stocked in the store and
       obtained through the GET request at init on route https://ofourneaux.herokuapp.com/datas */}
-          {seasons.map((season) => (
-            <>
-              <label className="choice__text" key={season.name}>{season.name}
-              </label>
-              {/* if the season is not in the localSeasons the input is rendered unchecked */}
-              {localSeasons.indexOf(season.id) === -1
+          <div className="seasons__cloud">
+            {seasons.map((season) => (
+              <div>
+                <label className="choice__text" key={season.name}>{season.name}
+                </label>
+                {/* if the season is not in the localSeasons the input is rendered unchecked */}
+                {localSeasons.indexOf(season.id) === -1
           && (
           <input
             className="input"
@@ -174,14 +177,14 @@ const AddRecipeForm = ({
             }
           />
           )}
-              {/* if the season is in the localSeasons the input is rendered checked */}
-              {localSeasons.indexOf(season.id) > -1 && (
-              <input
-                className="input"
-                type="checkbox"
-                checked
-                name={season.name}
-                onChange={
+                {/* if the season is in the localSeasons the input is rendered checked */}
+                {localSeasons.indexOf(season.id) > -1 && (
+                <input
+                  className="input"
+                  type="checkbox"
+                  checked
+                  name={season.name}
+                  onChange={
                 () => {
                 // if the user unchecks a checked season its id is removed
                 // from the localSeasons array
@@ -191,10 +194,11 @@ const AddRecipeForm = ({
                   setLocalSeasons([...localSeasons]);
                 }
                 }
-              />
-              )}
-            </>
-          ))}
+                />
+                )}
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* ---- TAGS ---- */}
@@ -343,7 +347,7 @@ const AddRecipeForm = ({
               // if the user clicks on the bin the associated ingredient is removed from the array
                 const index = localIngredients.indexOf(ingredient);
                 localIngredients.splice(index, 1);
-                setLocalIngredients(localIngredients);
+                setLocalIngredients([...localIngredients]);
               }}
             />
           </div>
@@ -418,7 +422,7 @@ const AddRecipeForm = ({
         <ol>
           {/* I map on the localSteps array if there are steps in it */}
           {localSteps?.map((step) => (
-            <>
+            <div>
               <li key={localSteps.indexOf(step)} className="step__element">{step}</li>
 
               <img
@@ -429,10 +433,10 @@ const AddRecipeForm = ({
                 // if the user clicks on the bin the associated step is removed from the array
                   const index = localSteps.indexOf(step);
                   localSteps.splice(index, 1);
-                  setLocalSteps(localSteps);
+                  setLocalSteps([...localSteps]);
                 }}
               />
-            </>
+            </div>
           ))}
         </ol>
         <input

@@ -220,7 +220,8 @@ Profile.propTypes = {
   showModal: PropTypes.bool.isRequired,
   openModalConfirmDelete: PropTypes.func.isRequired,
   toggleEatingPreference: PropTypes.func.isRequired,
-  eatingPreferences: PropTypes.array.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  eatingPreferences: PropTypes.array,
   tags: PropTypes.array.isRequired,
   changeProfileImage: PropTypes.func.isRequired,
 };

@@ -53,7 +53,7 @@ const connectionPersistence = (store) => (next) => (action) => {
         },
       });
 
-      console.log('Answer request favorites :', response.data.data);
+      // console.log('Answer request favorites :', response.data.data);
 
       store.dispatch({
         type: 'FAVORITES_RECIPES_SUCCESS',
@@ -65,7 +65,7 @@ const connectionPersistence = (store) => (next) => (action) => {
       getTagsByUser(userId, userToken);
     }
     catch (error) {
-      console.log('Error request favorites :', error.response);
+      // console.log('Error request favorites :', error.response);
 
       if (error.response.data.error === 'Resource not found') {
         // when no data is returned from the back when asking
@@ -92,7 +92,7 @@ const connectionPersistence = (store) => (next) => (action) => {
         },
       });
 
-      console.log('Answer request shopping list :', response.data.data);
+      // console.log('Answer request shopping list :', response.data.data);
 
       await store.dispatch({
         type: 'SHOPPING_LIST_SUCCESS',
@@ -102,7 +102,7 @@ const connectionPersistence = (store) => (next) => (action) => {
       });
     }
     catch (error) {
-      console.log('Error request shopping list :', error.response);
+      // console.log('Error request shopping list :', error.response);
 
       if (error.response.data.error === 'Resource not found') {
         // when no data is returned from the back when asking
@@ -127,7 +127,7 @@ const connectionPersistence = (store) => (next) => (action) => {
         },
       });
 
-      console.log('Answer request ingredients :', response.data.data);
+      // console.log('Answer request ingredients :', response.data.data);
 
       await store.dispatch({
         type: 'INGREDIENTS_LIST_SUCCESS',
@@ -137,7 +137,7 @@ const connectionPersistence = (store) => (next) => (action) => {
       });
     }
     catch (error) {
-      console.log('Error request ingredients :', error.response);
+      // console.log('Error request ingredients :', error.response);
 
       if (error.response.data.error === 'Resource not found') {
         // when no data is returned from the back when asking
@@ -163,7 +163,7 @@ const connectionPersistence = (store) => (next) => (action) => {
         },
       });
 
-      console.log('Answer request user :', response);
+      // console.log('Answer request user :', response);
 
       store.dispatch({
         type: 'LOGIN_SUCCESS',

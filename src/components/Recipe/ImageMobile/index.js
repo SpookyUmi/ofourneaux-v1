@@ -20,6 +20,7 @@ const Image = ({
   handleEditOrDeleteRecipe,
   sendRecipeInFavorites,
   favoritesRecipes,
+  tagsData,
 }) => {
   // by default the heart icon is empty
   let heart = heartLine;
@@ -89,7 +90,7 @@ const Image = ({
           {
             tags.map((tag) => (
               <div key={tag} className="mobile__recipe__header__infos__tag">
-                {tag}
+                {tagsData.find((value) => value.id === tag).name}
               </div>
             ))
           }
@@ -111,6 +112,7 @@ Image.propTypes = {
   sendRecipeInFavorites: PropTypes.func.isRequired,
   // eslint-disable-next-line react/require-default-props
   favoritesRecipes: PropTypes.array,
+  tagsData: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -118,6 +120,7 @@ const mapStateToProps = (state) => ({
   status: state.user.status,
   isLogged: state.auth.isLogged,
   favoritesRecipes: state.user.favoritesRecipes,
+  tagsData: state.app.tags,
 });
 
 const mapDispatchToProps = (dispatch) => ({

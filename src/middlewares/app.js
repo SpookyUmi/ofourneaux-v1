@@ -11,7 +11,7 @@ const app = (store) => (next) => (action) => {
         url: `${URL}/datas`,
       });
 
-      console.log('Answer request data :', response);
+      // console.log('Answer request data :', response);
 
       store.dispatch({
         type: 'REQUIRED_DATA_SUCCESS',

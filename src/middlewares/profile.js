@@ -4,7 +4,7 @@ import URL from 'src/middlewares/urlEnv';
 
 const profile = (store) => (next) => (action) => {
   const state = store.getState();
-  console.log(state);
+  // console.log(state);
 
   // the data must be sent to the back in "form-data" format
   const formProfile = new FormData();
@@ -19,12 +19,12 @@ const profile = (store) => (next) => (action) => {
     // eslint-disable-next-line max-len
     const updatedEatingPreferences = state.user.eatingPreferences.map((eatingPreference) => eatingPreference);
 
-    console.log('Préférence alimentaire dans le middleware :', updatedEatingPreferences);
+    // console.log('Préférence alimentaire dans le middleware :', updatedEatingPreferences);
 
     // eslint-disable-next-line prefer-template
     const updatedEatingPreferencesStringify = '[' + updatedEatingPreferences.join(', ') + ']';
 
-    console.log('Tableau stringifié :', updatedEatingPreferencesStringify);
+    // console.log('Tableau stringifié :', updatedEatingPreferencesStringify);
 
     formEatingPreferences.append('tags', updatedEatingPreferencesStringify);
 
@@ -39,7 +39,7 @@ const profile = (store) => (next) => (action) => {
         },
       });
 
-      console.log('Answer request update eating preferences :', response);
+      // console.log('Answer request update eating preferences :', response);
 
       store.dispatch({
         type: 'EDIT_EATING_PREFERENCES_SUCCESS',
@@ -49,7 +49,7 @@ const profile = (store) => (next) => (action) => {
       });
     }
     catch (error) {
-      console.log('Error request update eating preferences :', error.response);
+      // console.log('Error request update eating preferences :', error.response);
     }
   }
 
@@ -65,7 +65,7 @@ const profile = (store) => (next) => (action) => {
         },
       });
 
-      console.log('Answer request update profile :', response);
+      // console.log('Answer request update profile :', response);
 
       updateEatingPreferencesUser(state.user.id, state.user.token);
 
@@ -80,7 +80,7 @@ const profile = (store) => (next) => (action) => {
       });
     }
     catch (error) {
-      console.log('Error request update profile :', error.response);
+      // console.log('Error request update profile :', error.response);
 
       if (error.response.data.error === 'Mail address already in use') {
         store.dispatch({
