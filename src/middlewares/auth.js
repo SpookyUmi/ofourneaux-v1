@@ -1,6 +1,7 @@
 // YARN
 import axios from 'axios';
 import FormData from 'form-data';
+import URL from 'src/middlewares/urlEnv';
 
 // middleware "auth"
 const auth = (store) => (next) => (action) => {
@@ -10,8 +11,6 @@ const auth = (store) => (next) => (action) => {
   const form = new FormData();
   form.append('mail_address', state.auth.email);
   form.append('password', state.auth.password);
-
-  const URL = 'https://ofourneaux.herokuapp.com';
 
   async function getTagsByUser(userId, userToken) {
     try {

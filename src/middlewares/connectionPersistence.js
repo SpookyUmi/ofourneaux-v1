@@ -1,8 +1,7 @@
 import axios from 'axios';
+import URL from 'src/middlewares/urlEnv';
 
 const connectionPersistence = (store) => (next) => (action) => {
-  const URL = 'https://ofourneaux.herokuapp.com';
-
   async function getTagsByUser(userId, userToken) {
     try {
       const response = await axios({

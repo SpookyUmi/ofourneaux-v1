@@ -1,9 +1,8 @@
 import axios from 'axios';
+import URL from 'src/middlewares/urlEnv';
 
 const favorites = (store) => (next) => (action) => {
   const state = store.getState();
-
-  const URL = 'https://ofourneaux.herokuapp.com';
 
   async function fetchRecipe(recipeId) {
     const response = await axios({

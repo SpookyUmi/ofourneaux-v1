@@ -1,10 +1,9 @@
 import axios from 'axios';
 // import FormData from 'form-data';
+import URL from 'src/middlewares/urlEnv';
 
 const user = (store) => (next) => (action) => {
   const state = store.getState();
-
-  const URL = 'https://ofourneaux.herokuapp.com';
 
   switch (action.type) {
     // ! request for when the user whishes to access the page of his favourite recipes : 404
@@ -57,7 +56,7 @@ const user = (store) => (next) => (action) => {
     case 'SEND_INGREDIENTS_LIST_REQUEST':
       axios({
         method: 'get',
-        url: `https://ofourneaux.herokuapp.com/shopping_list/${state.user.id}/generate`,
+        url: `${URL}/shopping_list/${state.user.id}/generate`,
         header: {
           // ! the token is necessary ?
           authorization: state.user.token,

@@ -1,0 +1,42 @@
+@use 'src/styles/vars';
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 5px 10px vars.$color-primary;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: vars.$color-secondary;
+
+  &__title{
+    margin-bottom: 1.5rem;
+  }
+
+  &__text{
+    text-align: center;
+  }
+
+  &__buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 0.5rem 0rem;
+  }
+
+  &__button {
+    margin: 0rem 0.5rem;
+  }
+
+  .modal__update__input{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    
+    > * {
+        margin: 10px;
+    }
+  }
+
+}

@@ -5,10 +5,10 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  box-shadow: 0 5px 10px black;
-  background-color: vars.$color-secondary;
+  box-shadow: 0 5px 10px vars.$color-primary;
   padding: 20px;
   border-radius: 10px;
+  background-color: vars.$color-secondary;
 
   &__buttons {
     display: flex;

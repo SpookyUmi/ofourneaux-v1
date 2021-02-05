@@ -19,19 +19,13 @@ const Ingredients = ({ ingredients, categories }) => {
             {/* eslint-disable-next-line jsx-a11y/img-redundant-alt */}
             <img
               className="recipe__ingredient__img"
-              src={
-                categories.forEach((category) => {
-                  if (category.id === ingredient.category_id) {
-                    return (category.icon);
-                  }
-                })
-              }
+              src={categories.find((category) => category.id === ingredient.category_id).icon}
               alt="Photo de la catégorie de l'ingrédient" />
             <div className="recipe__ingredient__title">
               {ingredient.name}
             </div>
             <div className="recipe__ingredient__quantity">
-              {ingredient.quantity + ingredient.unit}
+              {ingredient.quantity + ' ' + ingredient.unit}
             </div>
           </div>
         ))}

@@ -29,6 +29,7 @@ const Informations = ({
   isLogged,
   sendRecipeInShoppingList,
   shoppingList,
+  tagsData,
 }) => {
   let messageButton = 'Sélectionner';
 
@@ -56,7 +57,7 @@ const Informations = ({
             {
               tags.map((tag) => (
                 <div key={tag} className="recipe__infos__header__intro__tag">
-                  {tag}
+                  {tagsData.find((value) => value.id === tag).name}
                 </div>
               ))
             }
@@ -162,12 +163,14 @@ Informations.propTypes = {
   isLogged: PropTypes.bool.isRequired,
   sendRecipeInShoppingList: PropTypes.func.isRequired,
   shoppingList: PropTypes.array.isRequired,
+  tagsData: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   id: state.recipe.id,
   isLogged: state.auth.isLogged,
   shoppingList: state.user.shoppingList,
+  tagsData: state.app.tags,
 });
 
 const mapDispatchToProps = (dispatch) => ({

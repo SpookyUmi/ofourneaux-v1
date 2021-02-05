@@ -1,5 +1,6 @@
 import axios from 'axios';
 import FormData from 'form-data';
+import URL from 'src/middlewares/urlEnv';
 
 const adminActionsOnTag = (store) => (next) => (action) => {
   const state = store.getState();
@@ -10,7 +11,7 @@ const adminActionsOnTag = (store) => (next) => (action) => {
     try {
       const response = await axios({
         method: 'GET',
-        url: 'https://ofourneaux.herokuapp.com/tags',
+        url: `${URL}/tags`,
         headers: {
           authorization: state.user.token,
         },
@@ -34,7 +35,7 @@ const adminActionsOnTag = (store) => (next) => (action) => {
       addTagForm.append('name', name);
       await axios({
         method: 'post',
-        url: 'https://ofourneaux.herokuapp.com/tags',
+        url: `${URL}/tags`,
         data: addTagForm,
         headers: { authorization: state.user.token, 'Content-Type': 'multipart/form-data' },
       });
@@ -51,7 +52,7 @@ const adminActionsOnTag = (store) => (next) => (action) => {
     try {
       await axios({
         method: 'delete',
-        url: `https://ofourneaux.herokuapp.com/tags/${id}`,
+        url: `${URL}/tags/${id}`,
         headers: { authorization: state.user.token },
       });
       getTags();

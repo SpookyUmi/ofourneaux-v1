@@ -1,5 +1,6 @@
 import axios from 'axios';
 import FormData from 'form-data';
+import URL from 'src/middlewares/urlEnv';
 
 const adminActionsOnUser = (store) => (next) => (action) => {
   const state = store.getState();
@@ -14,7 +15,7 @@ const adminActionsOnUser = (store) => (next) => (action) => {
     case 'GET_USER_BY_ID':
       axios({
         method: 'get',
-        url: `https://ofourneaux.herokuapp.com/users/${state.admin.user.userSearchField}`,
+        url: `${URL}/users/${state.admin.user.userSearchField}`,
         headers: { authorization: state.user.token },
       })
         .then((response) => {
@@ -33,7 +34,7 @@ const adminActionsOnUser = (store) => (next) => (action) => {
     case 'MAKE_ADMIN':
       axios({
         method: 'patch',
-        url: `https://ofourneaux.herokuapp.com/users/${state.admin.user.id}`,
+        url: `${URL}/users/${state.admin.user.id}`,
         data: makeAdminForm,
         headers: { authorization: state.user.token, 'Content-Type': 'multipart/form-data' },
       })
@@ -53,7 +54,7 @@ const adminActionsOnUser = (store) => (next) => (action) => {
     case 'MAKE_NON_ADMIN':
       axios({
         method: 'patch',
-        url: `https://ofourneaux.herokuapp.com/users/${state.admin.user.id}`,
+        url: `${URL}/users/${state.admin.user.id}`,
         data: makeNonAdminForm,
         headers: { authorization: state.user.token, 'Content-Type': 'multipart/form-data' },
       })
@@ -73,7 +74,7 @@ const adminActionsOnUser = (store) => (next) => (action) => {
     case 'DELETE_USER':
       axios({
         method: 'delete',
-        url: `https://ofourneaux.herokuapp.com/users/${state.admin.user.id}`,
+        url: `${URL}/users/${state.admin.user.id}`,
         headers: { authorization: state.user.token },
       })
         .then((response) => {

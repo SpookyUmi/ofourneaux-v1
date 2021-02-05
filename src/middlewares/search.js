@@ -1,4 +1,5 @@
 import axios from 'axios';
+import URL from 'src/middlewares/urlEnv';
 
 const search = (store) => (next) => (action) => {
   const state = store.getState();
@@ -14,7 +15,7 @@ const search = (store) => (next) => (action) => {
     case 'SEND_SEARCH_REQUEST':
       axios({
         method: 'get',
-        url: `https://ofourneaux.herokuapp.com/recipes/keyword?${searchValue}`,
+        url: `${URL}/recipes/keyword?${searchValue}`,
       })
         .then((response) => {
           console.log('RECIPE RESPONSE :', response.data.data);
@@ -34,7 +35,7 @@ const search = (store) => (next) => (action) => {
     case 'SEND_GEN_REQUEST':
       axios({
         method: 'get',
-        url: `https://ofourneaux.herokuapp.com/recipes/quantity/${number}?time=${time}&difficulty=${difficulty}`,
+        url: `${URL}/recipes/quantity/${number}`,
       })
         .then((response) => {
           console.log('Réponse recettes :', response.data.data);
@@ -53,7 +54,7 @@ const search = (store) => (next) => (action) => {
     case 'SEND_GEN_LOGGED_REQUEST':
       axios({
         method: 'get',
-        url: `https://ofourneaux.herokuapp.com/recipes/quantity/${number}/user/${userId}?time=${time}&difficulty=${difficulty}&favorites=${favorites}`,
+        url: `${URL}/recipes/quantity/${number}/user/${userId}?time=${time}&difficulty=${difficulty}&favorites=${favorites}`,
         headers: { authorization: state.user.token },
       })
         .then((response) => {

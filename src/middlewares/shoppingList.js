@@ -1,12 +1,11 @@
 // YARN
 import axios from 'axios';
 import FormData from 'form-data';
+import URL from 'src/middlewares/urlEnv';
 
 // middleware
 const shoppingList = (store) => (next) => (action) => {
   const state = store.getState();
-
-  const URL = 'https://ofourneaux.herokuapp.com';
 
   const form = new FormData();
 

@@ -1,14 +1,11 @@
 // YARN
 import axios from 'axios';
 import FormData from 'form-data';
+import URL from 'src/middlewares/urlEnv';
 
 // middleware
 const recipe = (store) => (next) => (action) => {
   const state = store.getState();
-
-  // console.log(form);
-
-  const URL = 'https://ofourneaux.herokuapp.com';
 
   async function getRecipe(recipeId) {
     try {

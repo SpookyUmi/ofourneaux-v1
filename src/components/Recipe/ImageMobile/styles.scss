@@ -1,0 +1,77 @@
+@use 'src/styles/vars';
+
+.mobile {
+  &__image {
+    position: relative;
+  
+    &__recipe {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      overflow: hidden;
+    }
+  
+    &__icons {
+      position: absolute;
+      z-index: 10;
+      width: 100%;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  
+    &__icon {
+      cursor: pointer;
+      width: 1.5rem;
+    }
+  
+    &__icon:first-child {
+      margin-right: 0.9rem;
+    }
+  }
+  
+  &__recipe__header__infos {
+    position: absolute; 
+    z-index: 10;
+    left: 50%;
+    bottom: -45px;
+    background-color: vars.$color-secondary;
+    border-radius: 20rem;
+    padding: 1rem 1.5rem;
+    transform: translate(-50%, 0);
+    
+    &__title {
+      font-size: 1.5rem;
+      line-height: 1.8rem;
+    }
+
+    &__tags {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      margin-top: 0.65rem;
+    }
+
+    &__tag {
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      color: vars.$color-sand;
+      margin: 0 0.3rem;
+      padding: 0.12rem 0.55rem;
+      border-radius: 0.3rem;
+      background-color: vars.$color-primary;
+    }
+
+    // the first tag must not have a left margin to avoid a mismatch with the description text
+    &__tag:first-child {
+      margin-left: 0rem;
+    }
+
+    &__tag:last-child {
+      margin-right: 0rem;
+    }
+  }
+}
+
