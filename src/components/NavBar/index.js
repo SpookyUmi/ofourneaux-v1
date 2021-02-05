@@ -195,18 +195,6 @@ const Navbar = ({
               Ajouter une recette
             </NavLink>
             <NavLink
-              to="/admin/modification-recette"
-              className="navbar__link__adminrecipes link__style transition"
-              onClick={() => {
-                setIsOpen(false);
-              }}
-            >
-              <div className="icon__style">
-                <img className="navbar__link__icon" src={recipe} alt="icône recettes" />
-              </div>
-              Modifier/Supprimer une recette
-            </NavLink>
-            <NavLink
               to="/admin/gestion-labels"
               className="navbar__link__adminlabels link__style transition"
               onClick={() => {
