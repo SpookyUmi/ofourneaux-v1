@@ -6,18 +6,20 @@ import PropTypes from 'prop-types';
 // == Import
 import './styles.scss';
 import plane from 'src/assets/images/paper-plane.svg';
+import { NavLink } from 'react-router-dom';
 
 // == Composant
 const Contact = () => {
-
-  const [state, handleSubmit] = useForm("contactForm");
-
+  const [state, handleSubmit] = useForm('contactForm');
   if (state.succeeded) {
-    return <div className="contact message__sent">
-      <h3>Merci pour votre message !</h3>
-      <h3>Nous vous répondrons dans les plus brefs délais.</h3>
-      <img src={plane} alt="avion en papier" className="message__sent__icon"/>
-    </div>
+    return (
+      <div className="contact message__sent">
+        <h3>Merci pour votre message !</h3>
+        <h3>Nous vous répondrons dans les plus brefs délais.</h3>
+        <img src={plane} alt="avion en papier" className="message__sent__icon" />
+        <NavLink to="/" className="button__style">Retour à l'accueil</NavLink>
+      </div>
+    );
   }
   return (
     <div className="contact">

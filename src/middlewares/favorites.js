@@ -11,9 +11,6 @@ const favorites = (store) => (next) => (action) => {
         method: 'GET',
         url: `${URL}/recipes/${recipeId}`,
       });
-      if (response.status === 404) {
-        next(action);
-      }
     }
     catch (error) {
       throw new Error(error);

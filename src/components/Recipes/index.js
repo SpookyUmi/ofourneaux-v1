@@ -12,7 +12,7 @@ const Recipes = ({ recipes, setIsOpen }) => {
       <div className="recipes__container__title">
         <h2>Résultats de la recherche</h2>
       </div>
-      <section className="recipes">
+      <section className="recipes__card">
         {recipes?.map((recipe) => (
           <CardRecipe {...recipe} key={recipe.id} className="recipes__cards" />
         ))}

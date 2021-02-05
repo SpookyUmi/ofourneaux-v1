@@ -61,7 +61,7 @@
     display: flex;
     flex-direction: column;
   }
-  
+
   .recipe__form__div__4 input{
     margin: 1rem;
   }
@@ -136,6 +136,7 @@
     font-size: 1.4rem;
     background-color: vars.$color-secondary;
     border-radius: 2rem;
+    margin-bottom: 3rem;
   }
   .label{
     font-weight: bold;
@@ -175,7 +176,7 @@
   .recipe__form__div__3{
     margin-top: 1rem;
   }
-  
+
   .recipe__form__div__4 input{
     margin: 1rem;
   }
