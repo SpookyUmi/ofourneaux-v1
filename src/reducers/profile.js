@@ -38,6 +38,12 @@ const reducer = (oldState = initialState, action) => {
         message: 'Les changements ont bien été pris en compte',
       };
 
+    case 'CLEAR_MESSAGE_PROFILE':
+      return {
+        ...oldState,
+        message: '',
+      };
+
     case 'EDIT_PROFILE_FAILED':
       return {
         ...oldState,
