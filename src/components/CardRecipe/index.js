@@ -26,46 +26,76 @@ const CardRecipe = ({
   id,
   addRecipeToFavorites,
   addRecipeToShoppingList,
-}) => (
-  <div className="card__recipe">
-    <img className="card__recipe__img" src={picture_url} alt={title} />
-    <div className="card__recipe__container">
-      <h3 className="card__recipe__title">
-        <NavLink to={title ? buildRecipeURL(title) : title} id={id} className="card__recipe__title__link" onClick={getRecipeById}>
-          {title}
-        </NavLink>
-      </h3>
-      <div className="card__recipe__infos">
-        <section className="card__recipe__info">
-          <img className="card__recipe__time__icon" src={time} alt="icône de durée" />
-          <p className="card__recipe__time">{preparation_time + baking_time} min</p>
-        </section>
-        <section className="card__recipe__info">
-          <img className="card__recipe__time__icon" src={fire} alt="icône de difficulté" />
-          <p className="card__recipe__time">{difficultyNameById(difficulty_id)}</p>
-        </section>
-      </div>
-      {/* TODO onClick buttons */}
-      <section className="card__recipe__buttons">
-        <button
-          id={id}
-          className="card__recipe__select__button"
-          type="button"
-          onClick={addRecipeToShoppingList}
-        >Sélectionner
-        </button>
+  isLogged,
+  shoppingList,
+  favoritesRecipes,
+}) => {
+  let messageButton = 'Sélectionner';
+  let messageFavorite = 'Favoris';
 
-        <button
-          id={id}
-          className="card__recipe__favorite__button"
-          type="button"
-          onClick={addRecipeToFavorites}
-        >Favoris
-        </button>
-      </section>
+  const checkIfRecipeIsInShoppingList = () => {
+    shoppingList.forEach((itemList) => {
+      if (itemList === id) {
+        messageButton = 'Désélectionner';
+      }
+    });
+  };
+
+  const checkIfRecipeIsInFavorites = () => {
+    favoritesRecipes.forEach((favoriteRecipe) => {
+      if (favoriteRecipe === id) {
+        messageFavorite = 'Retirer';
+      }
+    });
+  };
+
+  checkIfRecipeIsInShoppingList();
+  checkIfRecipeIsInFavorites();
+
+  return (
+    <div className="card__recipe">
+      <img className="card__recipe__img" src={picture_url} alt={title} />
+      <div className="card__recipe__container">
+        <h3 className="card__recipe__title">
+          <NavLink to={title ? buildRecipeURL(title) : title} id={id} className="card__recipe__title__link" onClick={getRecipeById}>
+            {title}
+          </NavLink>
+        </h3>
+        <div className="card__recipe__infos">
+          <section className="card__recipe__info">
+            <img className="card__recipe__time__icon" src={time} alt="icône de durée" />
+            <p className="card__recipe__time">{preparation_time + baking_time} min</p>
+          </section>
+          <section className="card__recipe__info">
+            <img className="card__recipe__time__icon" src={fire} alt="icône de difficulté" />
+            <p className="card__recipe__time">{difficultyNameById(difficulty_id)}</p>
+          </section>
+        </div>
+        {
+          isLogged
+          && (
+            <section className="card__recipe__buttons">
+              <button
+                id={id}
+                className="card__recipe__select__button"
+                type="button"
+                onClick={addRecipeToShoppingList}
+              >{messageButton}
+              </button>
+              <button
+                id={id}
+                className="card__recipe__favorite__button"
+                type="button"
+                onClick={addRecipeToFavorites}
+              >{messageFavorite}
+              </button>
+            </section>
+          )
+        }
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 CardRecipe.propTypes = {
   id: PropTypes.number.isRequired,
@@ -77,7 +107,16 @@ CardRecipe.propTypes = {
   getRecipeById: PropTypes.func.isRequired,
   addRecipeToFavorites: PropTypes.func.isRequired,
   addRecipeToShoppingList: PropTypes.func.isRequired,
+  isLogged: PropTypes.bool.isRequired,
+  shoppingList: PropTypes.array.isRequired,
+  favoritesRecipes: PropTypes.array.isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  isLogged: state.auth.isLogged,
+  shoppingList: state.user.shoppingList,
+  favoritesRecipes: state.user.favoritesRecipes,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   getRecipeById: (event) => {
@@ -110,4 +149,4 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default connect(null, mapDispatchToProps)(CardRecipe);
+export default connect(mapStateToProps, mapDispatchToProps)(CardRecipe);

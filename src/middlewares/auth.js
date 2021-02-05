@@ -179,7 +179,6 @@ const auth = (store) => (next) => (action) => {
           email: response.data.data.mail_address,
           status: response.data.data.status,
           recipesHistory: response.data.data.recipes_history,
-          shoppingList: response.data.data.shopping_list,
           pictureUrl: response.data.data.picture_url,
         },
       });
