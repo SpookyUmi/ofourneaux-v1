@@ -8,9 +8,8 @@ import uploadImage from 'src/middlewares/firebase';
 import URL from 'src/middlewares/urlEnv';
 
 import 'src/components/Admin/admin.scss';
-
 import bin from 'src/assets/icons/delete.svg';
-import '../AddRecipeForm/addRecipeForm.scss';
+import '../AddRecipeForm/recipeForm.scss';
 
 import ModalConfirmDelete from './modal/ModalConfirmDelete';
 import ModalConfirmUpdate from './modal/ModalConfirmUpdate';
@@ -150,164 +149,151 @@ const UpdateRecipeForm = ({
       <div className="recipe__form__div__2">
 
         {/* ---- TYPES ---- */}
-        <p className="recipe__form__categories label">Catégories</p>
-        {/* I map on the types array of objects containing all types stocked in the store and
-        obtained through the GET request at init on route https://ofourneaux.herokuapp.com/datas */}
-        {types.map((type) => (
-          <label className="label" key={type.id}>
-            {/* if the type does not correspond to the recipeType the input appears unchecked */}
-            {localType !== type.id
-            && (
-            <input
-              className="choice__text input"
-              type="radio"
-              name={type.name}
-              onChange={
-            (event) => {
-              if (event.target.checked) {
-                setLocalType(type.id);
-              }
+        <div className="recipe__form__categories">
+          <p className="label">Catégories</p>
+          {/* I map on the types array of objects containing all types stocked in the store and
+      obtained through the GET request at init on route https://ofourneaux.herokuapp.com/datas */}
+          {types.map((type) => (
+            <>
+              <label className="choice__text" key={type.id}>{type.name}
+              </label>
+              {/* if the type does not correspond to the recipeType the input appears unchecked */}
+              {localType !== type.id
+          && (
+          <input
+            className="input"
+            type="radio"
+            name={type.name}
+            onChange={
+          (event) => {
+            if (event.target.checked) {
+              setLocalType(type.id);
             }
           }
-            />
-            )}
-            {/* if the type corresponds to the recipeType the input appears checked */}
-            {localType === type.id
-            && (
-            <input
-              className="choice__text input"
-              type="radio"
-              checked
-              name={type.name}
-              onChange={
-            (event) => {
-              if (event.target.checked) {
-                setLocalType(type.id);
-              }
+        }
+          />
+          )}
+              {/* if the type corresponds to the recipeType the input appears checked */}
+              {localType === type.id
+          && (
+          <input
+            className="input"
+            type="radio"
+            checked
+            name={type.name}
+            onChange={
+          (event) => {
+            if (event.target.checked) {
+              setLocalType(type.id);
             }
           }
-            />
-            )}
-            {type.name}
-          </label>
-        ))}
+        }
+          />
+          )}
+            </>
+          ))}
+        </div>
 
         {/* ---- SEASONS ---- */}
-        <p className="recipe__form__seasons label">Saison</p>
-        {/* I map on the seasons array of objects containing all seasons stocked in the store and
-        obtained through the GET request at init on route https://ofourneaux.herokuapp.com/datas */}
-        {seasons.map((season) => (
-          <label className="label" key={season.name}>
-            {/* if the season is not in the localSeasons the input is rendered unchecked */}
-            {localSeasons.indexOf(season.id) === -1
-            && (
-            <input
-              className="choice__text input"
-              type="checkbox"
-              name={season.name}
-              onChange={
-            (event) => {
-              // if the user checks a new season its id is added to the localSeasons array
-              if (event.target.checked) {
+        <div className="recipe__form__seasons">
+          <p className="label">Saison</p>
+          {/* I map on the seasons array of objects containing all seasons stocked in the store and
+      obtained through the GET request at init on route https://ofourneaux.herokuapp.com/datas */}
+          {seasons.map((season) => (
+            <>
+              <label className="choice__text" key={season.name}>{season.name}
+              </label>
+              {/* if the season is not in the localSeasons the input is rendered unchecked */}
+              {localSeasons.indexOf(season.id) === -1
+          && (
+          <input
+            className="input"
+            type="checkbox"
+            name={season.name}
+            onChange={
+              () => {
+                // if the user checks a new season its id is added to the localSeasons array
+
                 setLocalSeasons([
                   ...localSeasons,
                   season.id,
                 ]);
               }
-              // if the user unchecks a checked season its id is removed from the localSeasons array
-              else if (localSeasons.indexOf(season.id)) {
-                const index = localSeasons.indexOf(season.id);
-                setLocalSeasons(localSeasons.splice(index, 1));
-              }
             }
-          }
-            />
-            )}
-            {/* if the season is in the localSeasons the input is rendered checked */}
-            {localSeasons.indexOf(season.id) > -1 && (
-            <input
-              className="choice__text input"
-              type="checkbox"
-              checked
-              name={season.name}
-              onChange={
-            (event) => {
-              // if the user checks a new season its id is added to the localSeasons array
-              if (event.target.checked) {
-                setLocalSeasons([
-                  ...localSeasons,
-                  season.id,
-                ]);
-              }
-              // if the user unchecks a checked season its id is removed from the localSeasons array
-              else if (localSeasons.indexOf(season.id)) {
-                const index = localSeasons.indexOf(season.id);
-                setLocalSeasons(localSeasons.splice(index, 1));
-              }
-            }
-          }
-            />
-            )}
-            {season.name}
-          </label>
-        ))}
+          />
+          )}
+              {/* if the season is in the localSeasons the input is rendered checked */}
+              {localSeasons.indexOf(season.id) > -1 && (
+              <input
+                className="input"
+                type="checkbox"
+                checked
+                name={season.name}
+                onChange={
+                () => {
+                // if the user unchecks a checked season its id is removed
+                // from the localSeasons array
+
+                  const index = localSeasons.indexOf(season.id);
+                  localSeasons.splice(index, 1);
+                  setLocalSeasons([...localSeasons]);
+                }
+                }
+              />
+              )}
+            </>
+          ))}
+        </div>
 
         {/* ---- TAGS ---- */}
-        <p className="recipe__form__tags label">Labels</p>
-        {/* I map on the seasons array of objects containing all seasons stocked in the store and
-        obtained through the GET request at init on route https://ofourneaux.herokuapp.com/datas */}
-        {tags?.map((tag) => (
-          <label className="label" htmlFor={tag.name} key={tag.id}>
-            {/* if the tag is not in the localTags the input is rendered unchecked */}
-            {localTags.indexOf(tag.id) === -1
-            && (
-            <input
-              className="input"
-              type="checkbox"
-              name={tag.name}
-              onChange={(event) => {
-                // if the user checks a new tag its id is added to the localTags array
-                if (event.target.checked) {
-                  setLocalTags([
-                    ...localTags,
-                    tag.id,
-                  ]);
-                }
-                // if the user unchecks a checked tag its id is removed from the localTags array
-                else if (localTags.indexOf(tag.id)) {
-                  const index = localTags.indexOf(tag.id);
-                  setLocalTags(localTags.splice(index, 1));
-                }
-              }}
-            />
-            )}
-            {/* if the tags is in the localTags the input is rendered checked */}
-            {localTags.indexOf(tag.id) > -1
-            && (
-            <input
-              className="input"
-              type="checkbox"
-              checked
-              name={tag.name}
-              onChange={(event) => {
-                // if the user checks a new tag its id is added to the localTags array
-                if (event.target.checked) {
-                  setLocalTags([
-                    ...localTags,
-                    tag.id,
-                  ]);
-                }
-                // if the user unchecks a checked tag its id is removed from the localTags array
-                else if (localTags.indexOf(tag.id)) {
-                  const index = localTags.indexOf(tag.id);
-                  setLocalTags(localTags.splice(index, 1));
-                }
-              }}
-            />
-            )}
-            {tag.name}
-          </label>
-        ))}
+        <div className="recipe__form__tags">
+          <p className="label">Labels</p>
+          {/* I map on the seasons array of objects containing all seasons stocked in the store and
+      obtained through the GET request at init on route https://ofourneaux.herokuapp.com/datas */}
+          <div className="tags__cloud">
+            {tags?.map((tag) => (
+              <>
+                <label className="choice__text" htmlFor={tag.name} key={tag.id}>{tag.name}
+                </label>
+
+                {/* if the tag is not in the localTags the input is rendered unchecked */}
+                {localTags.indexOf(tag.id) === -1
+                && (
+                <input
+                  className="input"
+                  type="checkbox"
+                  name={tag.name}
+                  onChange={() => {
+                  // if the user checks a new tag its id is added to the localTags array
+
+                    setLocalTags([
+                      ...localTags,
+                      tag.id,
+                    ]);
+                  }}
+                />
+                )}
+                {/* if the tags is in the localTags the input is rendered checked */}
+                {localTags.indexOf(tag.id) > -1
+                && (
+                <input
+                  className="input"
+                  type="checkbox"
+                  checked
+                  name={tag.name}
+                  onChange={() => {
+                    // if the user unchecks a checked tag its id is removed from the localTags array
+
+                    const index = localTags.indexOf(tag.id);
+                    localTags.splice(index, 1);
+                    setLocalTags([...localTags]);
+                  }}
+                />
+                )}
+              </>
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* I am creating divs 1-2-3-4 to help style the form for desktop mode */}
@@ -323,8 +309,8 @@ const UpdateRecipeForm = ({
             }}
           >
             {/* I map on the difficulties array of objects containing all difficulties
-             stocked in the store and obtained through the GET request at init
-              on route https://ofourneaux.herokuapp.com/datas */}
+           stocked in the store and obtained through the GET request at init
+            on route https://ofourneaux.herokuapp.com/datas */}
             {difficulties.map((difficulty) => (
               <option value={difficulty.id} key={difficulty.id}>{difficulty.level}</option>
 
@@ -402,7 +388,7 @@ const UpdateRecipeForm = ({
               src={bin}
               alt="bin"
               onClick={() => {
-                // if the user clicks on the bin the associated ingredient is removed from the array
+              // if the user clicks on the bin the associated ingredient is removed from the array
                 const index = localIngredients.indexOf(ingredient);
                 localIngredients.splice(index, 1);
                 setLocalIngredients(localIngredients);
@@ -423,8 +409,8 @@ const UpdateRecipeForm = ({
           }}
         >
           {/* I map on the ingredients array of objects containing all ingredients
-          stocked in the store and obtained through the GET request at init
-          on route https://ofourneaux.herokuapp.com/datas */}
+        stocked in the store and obtained through the GET request at init
+        on route https://ofourneaux.herokuapp.com/datas */}
           {ingredients?.map((ingredient) => (
             <option value={ingredient.name} id={ingredient.id} key={ingredient.id}>
               {ingredient.name}
@@ -455,6 +441,7 @@ const UpdateRecipeForm = ({
         />
         <button
           type="button"
+          className="ingredient__button"
           onClick={(event) => {
             event.preventDefault();
             setLocalIngredients(
@@ -475,23 +462,25 @@ const UpdateRecipeForm = ({
         </button>
 
         {/* ---- STEPS ---- */}
-        <p className="recipe__form__steps__p label">Étapes de préparation</p>
+        <p className="recipe__form__steps label">Étapes de préparation</p>
         <ol>
           {/* I map on the localSteps array if there are steps in it */}
           {localSteps?.map((step) => (
-            <li key={step}>{step}
+            <>
+              <li key={localSteps.indexOf(step)} className="step__element">{step}</li>
+
               <img
                 className="recipe__form__delete__icon"
                 src={bin}
                 alt="bin"
                 onClick={() => {
-                  // if the user clicks on the bin the associated step is removed from the array
+                // if the user clicks on the bin the associated step is removed from the array
                   const index = localSteps.indexOf(step);
                   localSteps.splice(index, 1);
                   setLocalSteps(localSteps);
                 }}
               />
-            </li>
+            </>
           ))}
         </ol>
         <input
@@ -505,6 +494,7 @@ const UpdateRecipeForm = ({
         />
         <button
           type="button"
+          className="step__button"
           onClick={(event) => {
             event.preventDefault();
             setLocalSteps(

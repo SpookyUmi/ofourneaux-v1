@@ -89,6 +89,18 @@ button:hover, .button__style:hover, input[type=button]:hover {
   color: vars.$color-primary;
 }
 
+.icon__style {
+  width: 3.5rem;
+  height: 3.5rem;
+  padding: 0.7rem;
+  border-radius: 10rem;
+  transition: background-color 0.3s ease;
+}
+
+.icon__style:hover {
+  background-color: #ffffff80;
+}
+
 label {
   color: #000;
 }
@@ -100,9 +112,9 @@ label {
   text-align: center;
 }
 
+
 @media only screen and (min-width: 768px) {
   h1 {
-  font-size: 3rem;
-}
-
+    font-size: 3rem;
+  }
 }

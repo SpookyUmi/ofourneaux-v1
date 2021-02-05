@@ -46,14 +46,16 @@ const Navbar = ({
         && (
         <>
           <div className="navbar__links__top">
-            <img
-              className="navbar__toggle__home__icon link__style transition"
-              src={arrow}
-              alt="icône flèche gauche"
-              onClick={() => {
-                setIsOpen(false);
-              }}
-            />
+            <div className="icon__style toggle__icon__container">
+              <img
+                className="navbar__toggle__home__icon link__style transition"
+                src={arrow}
+                alt="icône flèche gauche"
+                onClick={() => {
+                  setIsOpen(false);
+                }}
+              />
+            </div>
             <form onSubmit={handleSearch} className="navbar__searchform transition">
               <div className="navbar__searchform__icon transition">
                 <FontAwesomeIcon icon={faSearch} />
@@ -76,7 +78,9 @@ const Navbar = ({
                 setIsOpen(false);
               }}
             >
-              <img className="navbar__link__icon transition" src={home} alt="icône accueil" />
+              <div className="icon__style">
+                <img className="navbar__link__icon" src={home} alt="icône accueil" />
+              </div>
               Accueil
             </NavLink>
 
@@ -114,12 +118,14 @@ const Navbar = ({
               <>
                 <NavLink
                   to="/profil"
-                  className="navbar__link__profile link__style transition"
+                  className="navbar__link__profile transition"
                   onClick={() => {
                     setIsOpen(false);
                   }}
                 >
-                  <img className="navbar__link__icon transition" src={profile} alt="icône profil" />
+                  <div className="icon__style">
+                    <img className="navbar__link__icon" src={profile} alt="icône profil" />
+                  </div>
                   Mon profil
                 </NavLink>
                 <NavLink
@@ -129,7 +135,9 @@ const Navbar = ({
                     setIsOpen(false);
                   }}
                 >
-                  <img className="navbar__link__icon transition" src={list} alt="icône liste de courses" />
+                  <div className="icon__style">
+                    <img className="navbar__link__icon" src={list} alt="icône liste de courses" />
+                  </div>
                   Liste de courses
                 </NavLink>
                 <NavLink
@@ -140,7 +148,9 @@ const Navbar = ({
                     setIsOpen(false);
                   }}
                 >
-                  <img className="navbar__link__icon transition" src={favorites} alt="icône favoris" />
+                  <div className="icon__style favorites__icon">
+                    <img className="navbar__link__icon" src={favorites} alt="icône favoris" />
+                  </div>
                   Recettes favorites
                 </NavLink>
                 <NavLink
@@ -167,7 +177,9 @@ const Navbar = ({
                 setIsOpen(false);
               }}
             >
-              <img className="navbar__link__icon transition" src={profile} alt="icône profil" />
+              <div className="icon__style">
+                <img className="navbar__link__icon" src={profile} alt="icône profil" />
+              </div>
               Mon profil
             </NavLink>
             <NavLink
@@ -177,7 +189,9 @@ const Navbar = ({
                 setIsOpen(false);
               }}
             >
-              <img className="navbar__link__icon transition" src={recipe} alt="icône recettes" />
+              <div className="icon__style">
+                <img className="navbar__link__icon" src={recipe} alt="icône recettes" />
+              </div>
               Ajouter une recette
             </NavLink>
             <NavLink
@@ -187,7 +201,9 @@ const Navbar = ({
                 setIsOpen(false);
               }}
             >
-              <img className="navbar__link__icon transition" src={recipe} alt="icône recettes" />
+              <div className="icon__style">
+                <img className="navbar__link__icon" src={recipe} alt="icône recettes" />
+              </div>
               Modifier/Supprimer une recette
             </NavLink>
             <NavLink
@@ -197,7 +213,9 @@ const Navbar = ({
                 setIsOpen(false);
               }}
             >
-              <img className="navbar__link__icon transition" src={tag} alt="icône labels" />
+              <div className="icon__style">
+                <img className="navbar__link__icon" src={tag} alt="icône labels" />
+              </div>
               Gérer les labels
             </NavLink>
             <NavLink
@@ -207,8 +225,20 @@ const Navbar = ({
                 setIsOpen(false);
               }}
             >
-              <img className="navbar__link__icon transition" src={users} alt="icône utilisateurs" />
+              <div className="icon__style">
+                <img className="navbar__link__icon" src={users} alt="icône utilisateurs" />
+              </div>
               Gérer les utilisateurs
+            </NavLink>
+            <NavLink
+              to="/"
+              className="navbar__link__logout link__style transition"
+              onClick={handleDisconnect}
+              onClick={() => {
+                setIsOpen(false);
+              }}
+            >
+              Se déconnecter
             </NavLink>
           </>
           )}
@@ -224,7 +254,9 @@ const Navbar = ({
                 setIsOpen(false);
               }}
             >
-              <img className="navbar__link__icon transition" src={contact} alt="icône contact" />
+              <div className="icon__style">
+                <img className="navbar__link__icon" src={contact} alt="icône contact" />
+              </div>
               Contact
             </NavLink>
             <NavLink
@@ -234,7 +266,9 @@ const Navbar = ({
                 setIsOpen(false);
               }}
             >
-              <img className="navbar__link__icon transition" src={about} alt="icône à propos" />
+              <div className="icon__style">
+                <img className="navbar__link__icon" src={about} alt="icône à propos" />
+              </div>
               A propos
             </NavLink>
           </div>

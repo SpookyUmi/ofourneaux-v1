@@ -5,7 +5,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  box-shadow: 0 5px 10px black;
+  box-shadow: 0 5px 10px vars.$color-primary;
   background-color: vars.$color-secondary;
   padding: 20px;
   border-radius: 10px;
