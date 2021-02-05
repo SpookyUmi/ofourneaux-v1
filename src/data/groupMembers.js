@@ -42,7 +42,7 @@ export default [
     lastname: 'Soucheyre',
     img: 'src/assets/images/meme.png',
     role: 'Git Master',
-    description: 'Simple mais toujours délicieuse. Simple mais toujours',
+    description: 'Qui as fait ça !? Personne ? GIT BLAME',
   },
 
 ];
