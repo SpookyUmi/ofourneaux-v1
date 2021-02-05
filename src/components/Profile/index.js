@@ -294,6 +294,12 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch({
       type: 'SEND_EDIT_PROFILE_REQUEST',
     });
+
+    setTimeout(() => {
+      dispatch({
+        type: 'CLEAR_MESSAGE_PROFILE',
+      });
+    }, 3000);
   },
 
   // we dispatch the action of opening the modal
