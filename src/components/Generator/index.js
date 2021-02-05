@@ -79,7 +79,7 @@ const Generator = ({
                       step="5"
                       min="0"
                       placeholder="35 min"
-                      defaultValue="null"
+                      defaultValue=""
                       onChange={trackGenTime}
                     />
                   </label>
@@ -209,6 +209,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
 
   trackGenFavorites: (event) => {
+    console.log(event.target.checked);
     dispatch({
       type: 'EDIT_GEN_FAVORITES',
       payload: {
