@@ -20,7 +20,7 @@
   background-color: vars.$color-secondary;
   padding: 1rem;
   border-radius: 4rem;
-  max-width: 260px;
+  max-width: 265px;
   height: 360px;
 
   &__image {
@@ -34,6 +34,10 @@
 
   &__name, &__role, &__description {
     margin: 0.3rem;
+  }
+
+  &__role {
+    margin-top: 0.5rem;
   }
 }
 

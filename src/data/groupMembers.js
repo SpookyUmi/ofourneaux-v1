@@ -1,9 +1,14 @@
+import charlene from 'src/assets/images/charlene.png';
+import julien from 'src/assets/images/julien.png';
+import jenny from 'src/assets/images/jenny.png';
+import chloe from 'src/assets/images/chloe.png';
+
 export default [
   {
     id: 2780,
     firstname: 'Chloé',
     lastname: 'Danisevicius',
-    picture: 'src/assets/images/meme.png',
+    img: chloe,
     role: 'Product Owner',
     description: 'Simple mais toujours délicieuse. Simple mais toujours',
   },
@@ -11,23 +16,23 @@ export default [
     id: 3235,
     firstname: 'Charlène',
     lastname: 'Grangy Kagita',
-    picture: 'src/assets/images/meme.png',
+    img: charlene,
     role: 'Scrum Master',
-    description: 'Collectionne les fouets',
+    description: 'Collectionne les fouets et aime les tests unitaires.',
   },
   {
     id: 1465,
     firstname: 'Jenny-Lee',
     lastname: 'Boulanger',
-    picture: 'src/assets/images/meme.png',
+    img: jenny,
     role: 'Lead Dev Front',
-    description: 'Simple mais toujours délicieuse. Simple mais toujours',
+    description: 'Bichonne React aussi bien que son chat',
   },
   {
     id: 4899,
     firstname: 'Julien',
     lastname: 'Le Coz',
-    picture: 'src/assets/images/meme.png',
+    img: julien,
     role: 'Lead Dev Back',
     description: 'Fan d\'API et d\'IPA. Coïncidence ? Je ne pense pas.',
   },
@@ -35,7 +40,7 @@ export default [
     id: 5869,
     firstname: 'Stéphane',
     lastname: 'Soucheyre',
-    picture: 'src/assets/images/meme.png',
+    img: 'src/assets/images/meme.png',
     role: 'Git Master',
     description: 'Simple mais toujours délicieuse. Simple mais toujours',
   },

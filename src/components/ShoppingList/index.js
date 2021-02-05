@@ -11,13 +11,13 @@ import GeneratedList from './GeneratedList';
 
 // == Composant
 const ShoppingList = ({
-  recipes, ingredients, categories,
+  recipes, ingredients, categories, setIsOpen,
 }) => {
+  setIsOpen(false);
   const categoriesWithIngredients = categories.map((category) => ({
     name: category.name,
     icon: category.icon,
     items: ingredients.filter((ingredient) => ingredient.category_id === category.id),
-    icon: category.icon,
   }));
   // console.log('CATEGORIES INGRID', categoriesWithIngredients);
   return (
@@ -56,6 +56,7 @@ ShoppingList.propTypes = {
   recipes: PropTypes.array.isRequired,
   ingredients: PropTypes.array.isRequired,
   categories: PropTypes.array.isRequired,
+  setIsOpen: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
