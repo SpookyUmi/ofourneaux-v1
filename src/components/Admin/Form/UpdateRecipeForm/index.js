@@ -395,7 +395,7 @@ const UpdateRecipeForm = ({
               // if the user clicks on the bin the associated ingredient is removed from the array
                 const index = localIngredients.indexOf(ingredient);
                 localIngredients.splice(index, 1);
-                setLocalIngredients(localIngredients);
+                setLocalIngredients([...localIngredients]);
               }}
             />
           </div>
@@ -470,7 +470,7 @@ const UpdateRecipeForm = ({
         <ol>
           {/* I map on the localSteps array if there are steps in it */}
           {localSteps?.map((step) => (
-            <>
+            <div>
               <li key={localSteps.indexOf(step)} className="step__element">{step}</li>
 
               <img
@@ -481,10 +481,10 @@ const UpdateRecipeForm = ({
                 // if the user clicks on the bin the associated step is removed from the array
                   const index = localSteps.indexOf(step);
                   localSteps.splice(index, 1);
-                  setLocalSteps(localSteps);
+                  setLocalSteps([...localSteps]);
                 }}
               />
-            </>
+            </div>
           ))}
         </ol>
         <input

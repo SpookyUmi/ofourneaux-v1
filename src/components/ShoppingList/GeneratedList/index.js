@@ -13,18 +13,21 @@ const GeneratedList = ({
     <section className="shopping__list__header">
       <img src={icon} alt={name} />
       <h3>{name.replace(/-/g, ' ')}</h3>
-      <img src="" alt="flèche" />
     </section>
     <section className="shopping__list__body">
       {items.map((ingredient) => (
         <form className="shopping__list__body__form" key={ingredient.id}>
           {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <label>
-            <input type="checkbox" name="ingredient" />
+            <input
+              type="checkbox"
+              name={ingredient.name}
+              className="shopping__list__body__form__input"
+            />
             {ingredient.name}
           </label>
           <div className="shopping__list__body__form__quantity">
-            <p>{ingredient.quantity} {ingredient.unit}</p>
+            <p><strong>{ingredient.quantity}</strong> {ingredient.unit}</p>
           </div>
         </form>
       ))}
@@ -44,5 +47,4 @@ GeneratedList.propTypes = {
   })).isRequired,
 };
 
-// == Export
 export default GeneratedList;

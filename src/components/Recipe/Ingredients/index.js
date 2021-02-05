@@ -16,12 +16,13 @@ const Ingredients = ({ ingredients, categories }) => (
           <img
             className="recipe__ingredient__img"
             src={categories.find((category) => category.id === ingredient.category_id).icon}
-            alt="Photo de la catégorie de l'ingrédient" />
+            alt="Photo de la catégorie de l'ingrédient"
+          />
           <div className="recipe__ingredient__title">
             {ingredient.name}
           </div>
           <div className="recipe__ingredient__quantity">
-            {ingredient.quantity + ' ' + ingredient.unit}
+            {`${ingredient.quantity} ${ingredient.unit}`}
           </div>
         </div>
       ))}

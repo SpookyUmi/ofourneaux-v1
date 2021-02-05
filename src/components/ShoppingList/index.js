@@ -15,6 +15,7 @@ const ShoppingList = ({
 }) => {
   const categoriesWithIngredients = categories.map((category) => ({
     name: category.name,
+    icon: category.icon,
     items: ingredients.filter((ingredient) => ingredient.category_id === category.id),
     icon: category.icon,
   }));

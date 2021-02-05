@@ -284,7 +284,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   trackSearch: (event) => {
-    // console.log('Input email :', event.target.value);
     dispatch({
       type: 'EDIT_SEARCH_FIELD',
       payload: {

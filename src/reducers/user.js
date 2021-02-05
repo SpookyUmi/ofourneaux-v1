@@ -12,6 +12,7 @@ const initialState = {
   selectedRecipes: [],
   ingredientsList: [],
   eatingPreferences: [],
+  checkedIngredients: [],
   pictureUrl: '',
 };
 
