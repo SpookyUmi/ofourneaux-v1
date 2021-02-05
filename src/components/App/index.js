@@ -74,11 +74,14 @@ const App = ({ recipes, checkIfUserIsLogged }) => {
       </Route>
       <Route
         exact
-        path={['/admin/ajout-recette', '/admin/modification-recette/:id', '/admin/gestion-labels', '/admin/gestion-utilisateurs']}>
+        path={['/admin/ajout-recette', '/admin/modification-recette/:id', '/admin/gestion-labels', '/admin/gestion-utilisateurs']}
+      >
         <Admin />
       </Route>
       <Route
-        exact path={'/try-again'}>
+        exact
+        path="/try-again"
+      >
         <SearchFail />
       </Route>
       <Footer className="footer" />
@@ -103,13 +106,11 @@ const mapDispatchToProps = (dispatch) => ({
         type: 'CHECK_LOGGED_USER',
         payload: {
           id: userId,
-          token: userToken
+          token: userToken,
         },
       });
     }
   },
 });
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
