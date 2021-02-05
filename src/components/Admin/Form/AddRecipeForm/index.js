@@ -166,7 +166,6 @@ const AddRecipeForm = ({
             onChange={
               () => {
                 // if the user checks a new season its id is added to the localSeasons array
-
                 setLocalSeasons([
                   ...localSeasons,
                   season.id,
