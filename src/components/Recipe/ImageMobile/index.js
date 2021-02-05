@@ -90,16 +90,16 @@ const Image = ({
         </h1>
         <div className="mobile__recipe__header__infos__tags">
           {
-            tags.map((tag) => (
+            tags?.map((tag) => (
               <div key={tag} className="mobile__recipe__header__infos__tag">
-                {tagsData.find((value) => value.id === tag).name}
+                {tagsData?.find((value) => value.id === tag).name}
               </div>
             ))
           }
           {
-            seasons.map((season) => (
-              <div key={season} className="recipe__infos__header__intro__tag">
-                {seasonsData.find((value) => value.id === season).name}
+            seasons?.map((season) => (
+              <div key={season} className="mobile__recipe__header__infos__tag">
+                {seasonsData?.find((value) => value.id === season).name}
               </div>
             ))
           }

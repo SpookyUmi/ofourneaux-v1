@@ -45,6 +45,8 @@ const Informations = ({
 
   checkIfRecipeIsInShoppingList();
 
+  console.log('liste de course user :', shoppingList);
+
   return (
     <div className="recipe__infos">
       <div className="recipe__infos__header">
@@ -57,16 +59,16 @@ const Informations = ({
           </p>
           <div className="recipe__infos__header__intro__tags">
             {
-              tags.map((tag) => (
+              tags?.map((tag) => (
                 <div key={tag} className="recipe__infos__header__intro__tag">
-                  {tagsData.find((value) => value.id === tag).name}
+                  {tagsData?.find((value) => value.id === tag).name}
                 </div>
               ))
             }
             {
-              seasons.map((season) => (
+              seasons?.map((season) => (
                 <div key={season} className="recipe__infos__header__intro__tag">
-                  {seasonsData.find((value) => value.id === season).name}
+                  {seasonsData?.find((value) => value.id === season).name}
                 </div>
               ))
             }
