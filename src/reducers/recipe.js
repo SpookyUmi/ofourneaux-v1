@@ -4,7 +4,7 @@ const initialState = {
   picture_url: '',
   description: '',
   type: '',
-  difficulty_id: '',
+  difficulty_id: 0,
   preparation_time: 0,
   baking_time: 0,
   nutri_score: '',
