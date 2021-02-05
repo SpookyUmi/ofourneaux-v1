@@ -15,12 +15,14 @@ const Image = ({
   title,
   picture,
   tags,
+  seasons,
   status,
   isLogged,
   handleEditOrDeleteRecipe,
   sendRecipeInFavorites,
   favoritesRecipes,
   tagsData,
+  seasonsData,
 }) => {
   // by default the heart icon is empty
   let heart = heartLine;
@@ -88,9 +90,16 @@ const Image = ({
         </h1>
         <div className="mobile__recipe__header__infos__tags">
           {
-            tags.map((tag) => (
+            tags?.map((tag) => (
               <div key={tag} className="mobile__recipe__header__infos__tag">
-                {tagsData.find((value) => value.id === tag).name}
+                {tagsData?.find((value) => value.id === tag).name}
+              </div>
+            ))
+          }
+          {
+            seasons?.map((season) => (
+              <div key={season} className="mobile__recipe__header__infos__tag">
+                {seasonsData?.find((value) => value.id === season).name}
               </div>
             ))
           }
@@ -107,12 +116,14 @@ Image.propTypes = {
   picture: PropTypes.string.isRequired,
   status: PropTypes.string.isRequired,
   tags: PropTypes.array.isRequired,
+  seasons: PropTypes.array.isRequired,
   isLogged: PropTypes.bool.isRequired,
   handleEditOrDeleteRecipe: PropTypes.func.isRequired,
   sendRecipeInFavorites: PropTypes.func.isRequired,
   // eslint-disable-next-line react/require-default-props
   favoritesRecipes: PropTypes.array,
   tagsData: PropTypes.array.isRequired,
+  seasonsData: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -121,6 +132,7 @@ const mapStateToProps = (state) => ({
   isLogged: state.auth.isLogged,
   favoritesRecipes: state.user.favoritesRecipes,
   tagsData: state.app.tags,
+  seasonsData: state.app.seasons,
 });
 
 const mapDispatchToProps = (dispatch) => ({

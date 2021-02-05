@@ -117,7 +117,7 @@ const UserForm = ({ userToken }) => {
 };
 
 UserForm.propTypes = {
-  userToken: PropTypes.func.isRequired,
+  userToken: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({

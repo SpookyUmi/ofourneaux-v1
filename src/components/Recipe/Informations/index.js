@@ -22,6 +22,7 @@ const Informations = ({
   title,
   description,
   tags,
+  seasons,
   preparationTime,
   bakingTime,
   difficulty,
@@ -30,6 +31,7 @@ const Informations = ({
   sendRecipeInShoppingList,
   shoppingList,
   tagsData,
+  seasonsData,
 }) => {
   let messageButton = 'Sélectionner';
 
@@ -43,6 +45,8 @@ const Informations = ({
 
   checkIfRecipeIsInShoppingList();
 
+  console.log('liste de course user :', shoppingList);
+
   return (
     <div className="recipe__infos">
       <div className="recipe__infos__header">
@@ -55,9 +59,16 @@ const Informations = ({
           </p>
           <div className="recipe__infos__header__intro__tags">
             {
-              tags.map((tag) => (
+              tags?.map((tag) => (
                 <div key={tag} className="recipe__infos__header__intro__tag">
-                  {tagsData.find((value) => value.id === tag).name}
+                  {tagsData?.find((value) => value.id === tag).name}
+                </div>
+              ))
+            }
+            {
+              seasons?.map((season) => (
+                <div key={season} className="recipe__infos__header__intro__tag">
+                  {seasonsData?.find((value) => value.id === season).name}
                 </div>
               ))
             }
@@ -156,6 +167,7 @@ Informations.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   tags: PropTypes.array.isRequired,
+  seasons: PropTypes.array.isRequired,
   preparationTime: PropTypes.number.isRequired,
   bakingTime: PropTypes.number.isRequired,
   difficulty: PropTypes.number.isRequired,
@@ -164,6 +176,7 @@ Informations.propTypes = {
   sendRecipeInShoppingList: PropTypes.func.isRequired,
   shoppingList: PropTypes.array.isRequired,
   tagsData: PropTypes.array.isRequired,
+  seasonsData: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -171,6 +184,7 @@ const mapStateToProps = (state) => ({
   isLogged: state.auth.isLogged,
   shoppingList: state.user.shoppingList,
   tagsData: state.app.tags,
+  seasonsData: state.app.seasons,
 });
 
 const mapDispatchToProps = (dispatch) => ({

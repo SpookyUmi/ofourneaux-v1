@@ -108,8 +108,8 @@ const AddRecipeForm = ({
       obtained through the GET request at init on route https://ofourneaux.herokuapp.com/datas */}
           <div className="categories__cloud">
             {types.map((type) => (
-              <div>
-                <label className="choice__text" key={type.id}>{type.name}
+              <div key={type.id}>
+                <label className="choice__text" >{type.name}
                 </label>
                 {/* if the type does not correspond to the recipeType the input appears unchecked */}
                 {localType !== type.id
@@ -156,8 +156,8 @@ const AddRecipeForm = ({
       obtained through the GET request at init on route https://ofourneaux.herokuapp.com/datas */}
           <div className="seasons__cloud">
             {seasons.map((season) => (
-              <div>
-                <label className="choice__text" key={season.name}>{season.name}
+              <div key={season.name}>
+                <label className="choice__text">{season.name}
                 </label>
                 {/* if the season is not in the localSeasons the input is rendered unchecked */}
                 {localSeasons.indexOf(season.id) === -1
@@ -208,8 +208,8 @@ const AddRecipeForm = ({
       obtained through the GET request at init on route https://ofourneaux.herokuapp.com/datas */}
           <div className="tags__cloud">
             {tags?.map((tag) => (
-              <>
-                <label className="choice__text" htmlFor={tag.name} key={tag.id}>{tag.name}
+              <span key={tag.id}>
+                <label className="choice__text" htmlFor={tag.name}>{tag.name}
                 </label>
 
                 {/* if the tag is not in the localTags the input is rendered unchecked */}
@@ -246,7 +246,7 @@ const AddRecipeForm = ({
                   }}
                 />
                 )}
-              </>
+              </span>
             ))}
           </div>
         </div>
@@ -422,8 +422,8 @@ const AddRecipeForm = ({
         <ol>
           {/* I map on the localSteps array if there are steps in it */}
           {localSteps?.map((step) => (
-            <div>
-              <li key={localSteps.indexOf(step)} className="step__element">{step}</li>
+            <div key={localSteps.indexOf(step)}>
+              <li className="step__element">{step}</li>
 
               <img
                 className="recipe__form__delete__icon"
