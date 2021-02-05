@@ -24,12 +24,10 @@ const TagForm = ({
 
     <div className="tag__form__tags__list">
       {tags.map((tag) => (
-        <>
-          <div className="tag__form__tag" key={tag.id}>
-            {tag.name}
-            <img className="tag__form__delete__icon" src={bin} id={tag.id} alt="bin" onClick={deleteTag} />
-          </div>
-        </>
+        <div className="tag__form__tag" key={tag.id}>
+          {tag.name}
+          <img className="tag__form__delete__icon" src={bin} id={tag.id} alt="bin" onClick={deleteTag} />
+        </div>
       ))}
     </div>
 
