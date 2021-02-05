@@ -64,7 +64,7 @@ const Generator = ({
                       type="number"
                       name="nbRecipes"
                       id="nbRecipes"
-                      min="0"
+                      min="1"
                       max="20"
                       placeholder="2"
                       onChange={trackGenNumber}
@@ -88,11 +88,11 @@ const Generator = ({
                 <label htmlFor="difficulty">
                   Difficulté
                 </label>
-                <select name="difficulty" id="difficulty" onChange={trackGenDifficulty} defaultValue="">
-                  <option value="null">Indifférent</option>
+                <select name="difficulty" id="difficulty" onChange={trackGenDifficulty}>
+                  <option value="">Indifférent</option>
                   <option value="easy">Facile</option>
-                  <option value="average">Intermédiaire</option>
-                  <option value="expert">Expérimenté</option>
+                  <option value="average">Moyen</option>
+                  <option value="expert">Difficile</option>
                 </select>
                 {isLogged
                   && (
@@ -111,7 +111,6 @@ const Generator = ({
                 </button>
               </form>
               )}
-
         </section>
       </div>
     </div>
@@ -131,7 +130,7 @@ Generator.propTypes = {
   trackGenFavorites: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state) => ({
   isLogged: state.auth.isLogged,
   isClicked: state.app.isClicked,
 });
@@ -189,15 +188,17 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   trackGenDifficulty: (event) => {
     event.preventDefault();
     let difficultyId;
-    if (event.target.value === 'Facile') {
+    if (event.target.value === 'easy') {
       difficultyId = 1;
-    } if (event.target.value === 'Moyen') {
+    }
+    else if (event.target.value === 'average') {
       difficultyId = 2;
-    } if (event.target.value === 'Difficile') {
+    }
+    else if (event.target.value === 'expert') {
       difficultyId = 3;
     }
     else {
-      difficultyId = null;
+      difficultyId = '';
     }
     dispatch({
       type: 'EDIT_GEN_DIFFICULTY',
