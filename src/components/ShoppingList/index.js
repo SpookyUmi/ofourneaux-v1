@@ -17,9 +17,12 @@ const ShoppingList = ({
     name: category.name,
     items: ingredients.filter((ingredient) => ingredient.category_id === category.id),
   }));
+  console.log('CATEGORIES INGRID', categoriesWithIngredients);
   return (
-    <div className="container">
-      <h2>Recettes sélectionnées</h2>
+    <div className="shoppinglist__container">
+      <div className="recipes__container__title">
+        <h2>Recettes sélectionnées</h2>
+      </div>
       <section className="recipes">
         {recipes?.map((recipe) => (
           <CardRecipe
@@ -33,10 +36,13 @@ const ShoppingList = ({
       <h2>Liste de courses</h2>
       <section className="lists">
         {categoriesWithIngredients?.map((category) => (
+          category.items.length >= 1
+          && (
           <GeneratedList
             key={category.name}
             {...category}
           />
+          )
         ))}
       </section>
     </div>

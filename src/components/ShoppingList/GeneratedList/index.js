@@ -12,7 +12,7 @@ const GeneratedList = ({
   <div className="shopping__list" key={name}>
     <section className="shopping__list__header">
       <img src={icon} alt={name} />
-      <h3>{name}</h3>
+      <h3>{name.replace(/-/g, ' ')}</h3>
       <img src="" alt="flèche" />
     </section>
     <section className="shopping__list__body">

@@ -24,16 +24,10 @@ const connectionPersistence = (store) => (next) => (action) => {
 
       store.dispatch({
         type: 'COLLECT_SELECTED_RECIPES',
-        payload: {
-          tags: response.data.data,
-        },
       });
 
       store.dispatch({
         type: 'COLLECT_FAVORITES_RECIPES',
-        payload: {
-          tags: response.data.data,
-        },
       });
     }
     catch (error) {
