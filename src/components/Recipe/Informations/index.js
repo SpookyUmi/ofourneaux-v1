@@ -34,7 +34,7 @@ const Informations = ({
   let messageButton = 'Sélectionner';
 
   const checkIfRecipeIsInShoppingList = () => {
-    shoppingList.forEach((itemList) => {
+    shoppingList?.forEach((itemList) => {
       if (itemList === id) {
         messageButton = 'Désélectionner';
       }

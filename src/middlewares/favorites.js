@@ -9,7 +9,7 @@ const favorites = (store) => (next) => (action) => {
       method: 'GET',
       url: `${URL}/recipes/${recipeId}`,
     });
-    console.log('RECIPES RESPONSE :', response.data);
+    // console.log('RECIPES RESPONSE :', response.data);
     return response.data.data;
   }
 
@@ -19,7 +19,7 @@ const favorites = (store) => (next) => (action) => {
       array = await Promise.all(favoritesRecipesId.map((id) => fetchRecipe(id)));
     }
     catch (error) {
-      console.log('Erreur : ', error);
+      // console.log('Erreur : ', error);
     }
     return array;
   }
@@ -30,7 +30,7 @@ const favorites = (store) => (next) => (action) => {
       array = await Promise.all(selectedRecipesId.map((id) => fetchRecipe(id)));
     }
     catch (error) {
-      console.log('Erreur : ', error);
+      // console.log('Erreur : ', error);
     }
     return array;
   }
@@ -46,7 +46,7 @@ const favorites = (store) => (next) => (action) => {
       });
     }
     catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   }
 
@@ -61,10 +61,10 @@ const favorites = (store) => (next) => (action) => {
       });
     }
     catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   }
-  console.log('ACTION', action.type, action.payload);
+  // console.log('ACTION', action.type, action.payload);
 
   switch (action.type) {
     case 'COLLECT_FAVORITES_RECIPES':

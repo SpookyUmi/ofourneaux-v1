@@ -15,54 +15,50 @@ import InformationsMobile from 'src/components/Recipe/InformationsMobile';
 import './styles.scss';
 
 // component
-const Recipe = ({ recipe }) => {
-  console.log(recipe);
-
-  return (
-    <div className="recipe">
-      <div className="recipe__desktop">
-        <div className="recipe__block recipe__block--left">
-          <Informations
-            id={recipe.id}
-            title={recipe.title}
-            description={recipe.description}
-            tags={recipe.tags}
-            preparationTime={recipe.preparation_time}
-            bakingTime={recipe.baking_time}
-            difficulty={recipe.difficulty_id}
-            nutriScore={recipe.nutri_score}
-          />
-          <Instructions steps={recipe.steps} />
-        </div>
-
-        <div className="recipe__block recipe__block--right">
-          <Image id={recipe.id} picture={recipe.picture_url} />
-          <Ingredients ingredients={recipe.ingredients} />
-        </div>
+const Recipe = ({ recipe }) => (
+  <div className="recipe">
+    <div className="recipe__desktop">
+      <div className="recipe__block recipe__block--left">
+        <Informations
+          id={recipe.id}
+          title={recipe.title}
+          description={recipe.description}
+          tags={recipe.tags}
+          preparationTime={recipe.preparation_time}
+          bakingTime={recipe.baking_time}
+          difficulty={recipe.difficulty_id}
+          nutriScore={recipe.nutri_score}
+        />
+        <Instructions steps={recipe.steps} />
       </div>
 
-      <div className="recipe__mobile">
-        <ImageMobile
-          id={recipe.id}
-          picture={recipe.picture_url}
-          title={recipe.title}
-          tags={recipe.tags}
-        />
-        <div className="recipe__mobile__content">
-          <InformationsMobile
-            id={recipe.id}
-            preparationTime={recipe.preparation_time}
-            bakingTime={recipe.baking_time}
-            difficulty={recipe.difficulty_id}
-            nutriScore={recipe.nutri_score}
-          />
-          <Ingredients ingredients={recipe.ingredients} />
-          <Instructions steps={recipe.steps} />
-        </div>
+      <div className="recipe__block recipe__block--right">
+        <Image id={recipe.id} picture={recipe.picture_url} />
+        <Ingredients ingredients={recipe.ingredients} />
       </div>
     </div>
-  );
-};
+
+    <div className="recipe__mobile">
+      <ImageMobile
+        id={recipe.id}
+        picture={recipe.picture_url}
+        title={recipe.title}
+        tags={recipe.tags}
+      />
+      <div className="recipe__mobile__content">
+        <InformationsMobile
+          id={recipe.id}
+          preparationTime={recipe.preparation_time}
+          bakingTime={recipe.baking_time}
+          difficulty={recipe.difficulty_id}
+          nutriScore={recipe.nutri_score}
+        />
+        <Ingredients ingredients={recipe.ingredients} />
+        <Instructions steps={recipe.steps} />
+      </div>
+    </div>
+  </div>
+);
 
 // PropTypes
 Recipe.propTypes = {
