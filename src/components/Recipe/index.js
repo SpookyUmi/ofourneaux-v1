@@ -48,6 +48,7 @@ const Recipe = ({ recipe }) => {
           picture={recipe.picture_url}
           title={recipe.title}
           tags={recipe.tags}
+          seasons={recipe.seasons}
         />
         <div className="recipe__mobile__content">
           <InformationsMobile
@@ -79,8 +80,8 @@ Recipe.propTypes = {
     nutri_score: PropTypes.string,
     date_creation: PropTypes.string,
     date_update: PropTypes.string,
-    seasons: PropTypes.string,
-    tags: PropTypes.arrayOf(PropTypes.string),
+    seasons: PropTypes.array,
+    tags: PropTypes.arrayOf(PropTypes.number),
     ingredients: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.number,
       quantity: PropTypes.number,
