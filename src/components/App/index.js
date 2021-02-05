@@ -36,15 +36,12 @@ const App = ({ recipes, checkIfUserIsLogged }) => {
 
   return (
     <div className="app">
-      {/* TODO: switch between Header and NavBar according to responsive : set a property in our state ? */}
       <Header setIsOpen={setIsOpen} isOpen={isOpen} />
       <NavBar setIsOpen={setIsOpen} isOpen={isOpen} />
       <Route exact path="/">
-        {/* TODO: Change the components thanks to Links */}
         <HomePresentation />
         <Generator />
       </Route>
-      {/* TODO: Link to /a-propos, to /contact */}
       <Route exact path="/a-propos">
         <About />
       </Route>
@@ -52,10 +49,10 @@ const App = ({ recipes, checkIfUserIsLogged }) => {
         <Contact />
       </Route>
       <Route exact path="/profil/liste-de-courses">
-        <ShoppingList />
+        <ShoppingList setIsOpen={setIsOpen} />
       </Route>
       <Route exact path="/profil/recettes-favorites">
-        <Favorites />
+        <Favorites setIsOpen={setIsOpen} />
       </Route>
       <Route exact path="/inscription">
         <Inscription />
@@ -67,7 +64,7 @@ const App = ({ recipes, checkIfUserIsLogged }) => {
         <Profile />
       </Route>
       <Route exact path="/recettes">
-        <Recipes recipes={recipes} />
+        <Recipes recipes={recipes} setIsOpen={setIsOpen} />
       </Route>
       <Route exact path="/recettes/:slug">
         <Recipe recipes={recipes} />

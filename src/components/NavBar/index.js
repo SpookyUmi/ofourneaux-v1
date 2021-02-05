@@ -31,6 +31,7 @@ const Navbar = ({
   handleSearch,
   handleDisconnect,
   getFavoritesRecipes,
+  getSelectedRecipes,
 }) => {
   const node = useRef();
   const handleClick = (event) => {
@@ -66,9 +67,6 @@ const Navbar = ({
                 className="navbar__searchform__input transition"
                 id="searchInputNavbar"
                 onChange={trackSearch}
-                onSubmit={() => {
-                  setIsOpen(false);
-                }}
               />
             </form>
             <NavLink
@@ -110,7 +108,6 @@ const Navbar = ({
               </>
             )
           }
-
             {/* The following elements must only be displayed if the user is logged in */}
             {
           isLogged && status === 'user'
@@ -131,9 +128,7 @@ const Navbar = ({
                 <NavLink
                   to="/profil/liste-de-courses"
                   className="navbar__link__list link__style transition"
-                  onClick={() => {
-                    setIsOpen(false);
-                  }}
+                  onClick={getSelectedRecipes}
                 >
                   <div className="icon__style">
                     <img className="navbar__link__icon" src={list} alt="icône liste de courses" />
@@ -144,9 +139,6 @@ const Navbar = ({
                   to="/profil/recettes-favorites"
                   className="navbar__link__favorites link__style transition"
                   onClick={getFavoritesRecipes}
-                  onClick={() => {
-                    setIsOpen(false);
-                  }}
                 >
                   <div className="icon__style favorites__icon">
                     <img className="navbar__link__icon" src={favorites} alt="icône favoris" />
@@ -157,9 +149,6 @@ const Navbar = ({
                   to="/"
                   className="navbar__link__logout link__style transition"
                   onClick={handleDisconnect}
-                  onClick={() => {
-                    setIsOpen(false);
-                  }}
                 >
                   Se déconnecter
                 </NavLink>
@@ -222,9 +211,6 @@ const Navbar = ({
               to="/"
               className="navbar__link__logout link__style transition"
               onClick={handleDisconnect}
-              onClick={() => {
-                setIsOpen(false);
-              }}
             >
               Se déconnecter
             </NavLink>
@@ -275,6 +261,7 @@ Navbar.propTypes = {
   handleSearch: PropTypes.func.isRequired,
   handleDisconnect: PropTypes.func.isRequired,
   getFavoritesRecipes: PropTypes.func.isRequired,
+  getSelectedRecipes: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -313,9 +300,15 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
       type: 'COLLECT_FAVORITES_RECIPES',
     });
   },
+
+  getSelectedRecipes: () => {
+    dispatch({
+      type: 'COLLECT_SELECTED_RECIPES',
+    });
+  },
 });
 
-// eslint-disable-next-line import/no-mutable-exports
+{ /* eslint-disable-next-line import/no-mutable-exports */ }
 let container = connect(mapStateToProps, mapDispatchToProps)(Navbar);
 
 container = withRouter(container);

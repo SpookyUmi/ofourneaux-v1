@@ -42,7 +42,7 @@
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      width: 40%;
+      width: 45%;
       margin-bottom: 1.5rem;
 
       &__link {
@@ -71,6 +71,7 @@
         align-items: center;
         justify-content: center;
         text-align: center;
+        margin-right: 1px;
       }
 
       &__section p {
