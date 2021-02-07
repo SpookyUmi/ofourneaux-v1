@@ -20,7 +20,7 @@ export default [
         unit: 'gr',
         name: 'farine',
         category: 'Epicerie',
-        icon:'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
+        icon: 'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
       },
       {
         id: 2,
@@ -28,7 +28,7 @@ export default [
         unit: 'gr',
         name: 'sel',
         category: 'Epicerie',
-        icon:'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
+        icon: 'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
       },
       {
         id: 15,
@@ -99,7 +99,7 @@ export default [
         unit: 'gr',
         name: 'farine',
         category: 'Epicerie',
-        icon:'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
+        icon: 'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
       },
       {
         id: 3,
@@ -107,7 +107,7 @@ export default [
         unit: 'cl',
         name: 'eau',
         category: 'Boisson',
-        icon:'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
+        icon: 'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
       },
       {
         id: 131,
@@ -115,7 +115,7 @@ export default [
         unit: 'gr',
         name: 'levure de boulanger',
         category: 'Epicerie',
-        icon:'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
+        icon: 'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
       },
       {
         id: 12,
@@ -123,7 +123,7 @@ export default [
         unit: 'CS',
         name: 'huile d\'olive',
         category: 'Epicerie',
-        icon:'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
+        icon: 'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
       },
       {
         id: 143,
@@ -131,7 +131,7 @@ export default [
         unit: 'CC',
         name: 'sucre',
         category: 'Epicerie',
-        icon:'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
+        icon: 'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
       },
       {
         id: 4,
@@ -139,7 +139,7 @@ export default [
         unit: 'CC',
         name: 'sel',
         category: 'Epicerie',
-        icon:'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
+        icon: 'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
       },
       {
         id: 78,
@@ -147,7 +147,7 @@ export default [
         unit: 'gr',
         name: 'pulpe de tomates',
         category: 'Epicerie',
-        icon:'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
+        icon: 'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
       },
       {
         id: 97,
@@ -155,7 +155,7 @@ export default [
         unit: 'gr',
         name: 'de mozzarella',
         category: 'Produit laitier',
-        icon:'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
+        icon: 'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
       },
     ],
     instructions: [
@@ -201,7 +201,7 @@ export default [
         unit: 'gr',
         name: 'farine',
         category: 'Epicerie',
-        icon:'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
+        icon: 'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
       },
       {
         id: 3,
@@ -209,7 +209,7 @@ export default [
         unit: 'cl',
         name: 'eau',
         category: 'Boisson',
-        icon:'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
+        icon: 'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
       },
       {
         id: 12,
@@ -217,7 +217,7 @@ export default [
         unit: 'cl',
         name: 'huile d\'olive',
         category: 'Epicerie',
-        icon:'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
+        icon: 'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
       },
       {
         id: 4,
@@ -225,7 +225,7 @@ export default [
         unit: 'CC',
         name: 'sel',
         category: 'Epicerie',
-        icon:'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
+        icon: 'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
       },
       {
         id: 4,
@@ -233,7 +233,7 @@ export default [
         unit: 'CC',
         name: 'paprika fumé',
         category: 'Epicerie',
-        icon:'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
+        icon: 'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
       },
       {
         id: 4,
@@ -241,7 +241,7 @@ export default [
         unit: 'CC',
         name: 'ail semoule',
         category: 'Epicerie',
-        icon:'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
+        icon: 'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
       },
       {
         id: 678,
@@ -249,7 +249,7 @@ export default [
         unit: '',
         name: 'poireaux',
         category: 'Légumes',
-        icon:'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
+        icon: 'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
       },
       {
         id: 985,
@@ -257,7 +257,7 @@ export default [
         unit: '',
         name: 'oeufs',
         category: 'Produits frais',
-        icon:'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
+        icon: 'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
       },
       {
         id: 897,
@@ -265,7 +265,7 @@ export default [
         unit: '',
         name: 'bûche de chèvre',
         category: 'Produits frais',
-        icon:'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
+        icon: 'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
       },
       {
         id: 123,
@@ -273,7 +273,7 @@ export default [
         unit: 'CS',
         name: 'crème fraîche',
         category: 'Produits frais',
-        icon:'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
+        icon: 'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
       },
       {
         id: 123,
@@ -281,7 +281,7 @@ export default [
         unit: 'CS',
         name: 'parmesan râpé',
         category: 'Produits frais',
-        icon:'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
+        icon: 'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
       },
       {
         id: 598,
@@ -289,13 +289,13 @@ export default [
         unit: 'CS',
         name: 'sauce yakitori',
         category: 'Epicerie',
-        icon:'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
+        icon: 'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
       },
     ],
     instructions: [
       'La pâte :',
       'Verser la farine dans un saladier, ajouter le sel, le parmesan et mélanger',
-      'Ajouter l\'eau, l\'huile et pétrir à la main ou à l\'aide d\'un robo prétrisseur',
+      'Ajouter l\'eau, l\'huile et pétrir à la main ou à l\'aide d\'un robot pétrisseur',
       'Une fois que la pâte est uniforme et ferme, l\'étaler au fond d\'un moule à tarte recouvert de papier cuisson',
       'Réserver la pâte au réfrigérateur.',
       'La garniture :',
@@ -333,7 +333,7 @@ export default [
         unit: 'gr',
         name: 'farine',
         category: 'Epicerie',
-        icon:'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
+        icon: 'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
       },
       {
         id: 3,
@@ -341,7 +341,7 @@ export default [
         unit: 'cl',
         name: 'eau',
         category: 'Boisson',
-        icon:'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
+        icon: 'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
       },
       {
         id: 131,
@@ -349,7 +349,7 @@ export default [
         unit: 'gr',
         name: 'levure de boulanger',
         category: 'Epicerie',
-        icon:'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
+        icon: 'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
       },
       {
         id: 12,
@@ -357,7 +357,7 @@ export default [
         unit: 'CS',
         name: 'huile d\'olive',
         category: 'Epicerie',
-        icon:'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
+        icon: 'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
       },
       {
         id: 143,
@@ -365,7 +365,7 @@ export default [
         unit: 'CC',
         name: 'sucre',
         category: 'Epicerie',
-        icon:'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
+        icon: 'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
       },
       {
         id: 4,
@@ -373,7 +373,7 @@ export default [
         unit: 'CC',
         name: 'sel',
         category: 'Epicerie',
-        icon:'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
+        icon: 'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
       },
       {
         id: 78,
@@ -381,7 +381,7 @@ export default [
         unit: 'gr',
         name: 'pulpe de tomates',
         category: 'Epicerie',
-        icon:'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
+        icon: 'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
       },
       {
         id: 97,
@@ -389,7 +389,7 @@ export default [
         unit: 'gr',
         name: 'de mozzarella',
         category: 'Produit laitier',
-        icon:'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
+        icon: 'https://www.freepik.com/free-vector/sliced-vegetables-realistic-concept-with-tomato-pepper-onion-vector-illustration_4029364.html',
       },
     ],
     instructions: [
