@@ -19,7 +19,7 @@ export default [
     lastname: 'Grangy Kagita',
     img: charlene,
     role: 'Scrum Master',
-    description: 'Collectionne les fouets et aime les tests unitaires.',
+    description: 'Écrit des tests qui passent avant d’avoir écrit le code.',
   },
   {
     id: 1465,
