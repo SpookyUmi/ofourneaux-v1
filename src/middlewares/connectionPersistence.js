@@ -12,8 +12,6 @@ const connectionPersistence = (store) => (next) => (action) => {
         },
       });
 
-      // console.log('Answer request tags by user :', response.data.data);
-
       store.dispatch({
         type: 'TAGS_USER_SUCCESS',
         payload: {
@@ -151,6 +149,7 @@ const connectionPersistence = (store) => (next) => (action) => {
       }
     }
   }
+
   // asynchronous function to retrieve the user from the result
   // of the function to retrieve the id and the token
   async function getUser(userId, userToken) {

@@ -72,11 +72,11 @@ const App = ({ recipes, checkIfUserIsLogged }) => {
       <Route
         exact
         path={[
-          '/admin/ajout-recette', 
-          '/admin/modification-recette/:id', 
-          '/admin/gestion-labels', 
+          '/admin/ajout-recette',
+          '/admin/modification-recette/:id',
+          '/admin/gestion-labels',
           '/admin/gestion-utilisateurs',
-          '/admin/ajout-ingredient'
+          '/admin/ajout-ingredient',
         ]}
       >
         <Admin />
