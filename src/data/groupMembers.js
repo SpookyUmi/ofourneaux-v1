@@ -43,7 +43,7 @@ export default [
     lastname: 'Soucheyre',
     img: stephane,
     role: 'Git Master',
-    description: 'Simple mais toujours délicieuse. Simple mais toujours',
+    description: 'Qui as fait ça !? Personne ? GIT BLAME',
   },
 
 ];
