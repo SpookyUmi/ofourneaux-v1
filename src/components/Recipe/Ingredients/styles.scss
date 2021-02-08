@@ -20,6 +20,7 @@
   &__ingredient {
     margin-right: 0.625rem;
     margin-bottom: 0.625rem;
+    max-width: 80px;
 
     &__img {
       height: 3rem;
@@ -33,6 +34,7 @@
       font-size: 0.9rem;
       font-weight: 700;
       margin-bottom: 0.3rem;
+      line-height: 1rem;
     }
 
     &__quantity {

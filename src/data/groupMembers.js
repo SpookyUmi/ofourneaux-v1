@@ -19,7 +19,7 @@ export default [
     lastname: 'Grangy Kagita',
     img: charlene,
     role: 'Scrum Master',
-    description: 'Écrit des tests qui passent avant d’avoir écrit le code',
+    description: 'Écrit des tests qui passent avant d’avoir écrit le code.',
   },
   {
     id: 1465,
@@ -43,7 +43,7 @@ export default [
     lastname: 'Soucheyre',
     img: stephane,
     role: 'Git Master',
-    description: 'Qui a fait ça !? Personne ? GIT BLAME',
+    description: 'Qui as fait ça !? Personne ? GIT BLAME',
   },
 
 ];

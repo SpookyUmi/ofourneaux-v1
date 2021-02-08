@@ -9,6 +9,8 @@ function nameAccordingToCurrentRoute(currentRoute, id) {
     return ('Gérer les labels');
   } if (currentRoute === '/admin/gestion-utilisateurs') {
     return ('Gérer les utilisateurs');
+  } if (currentRoute === '/admin/ajout-ingredient') {
+    return ('Ajouter un ingrédient');
   }
   return ('erreur dans NameAccordingToRoute');
 }
