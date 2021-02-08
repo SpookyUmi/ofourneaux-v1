@@ -44,7 +44,7 @@ const auth = (store) => (next) => (action) => {
       }
     }
   }
-  //! TODO : getShoppingList & getIngredientsList
+
   async function getFavoritesRecipes(userId, userToken) {
     try {
       const response = await axios({
@@ -55,7 +55,7 @@ const auth = (store) => (next) => (action) => {
         },
       });
 
-      console.log('Answer request favorites :', response.data.data);
+      // console.log('Answer request favorites :', response.data.data);
 
       await store.dispatch({
         type: 'FAVORITES_RECIPES_SUCCESS',
@@ -66,7 +66,7 @@ const auth = (store) => (next) => (action) => {
       getTagsByUser(userId, userToken);
     }
     catch (error) {
-      console.log('Error request favorites :', error.response);
+      // console.log('Error request favorites :', error.response);
 
       if (error.response.data.error === 'Resource not found') {
         // when no data is returned from the back when asking

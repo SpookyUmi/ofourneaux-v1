@@ -19,7 +19,7 @@ const signUp = (store) => (next) => (action) => {
     case 'SEND_SUBSCRIPTION_REQUEST':
       axios({
         method: 'post',
-        url: `${URL}users`,
+        url: `${URL}/users`,
         data: form,
         headers: {
           'Content-Type': 'multipart/form-data',
