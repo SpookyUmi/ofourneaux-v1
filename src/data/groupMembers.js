@@ -19,7 +19,7 @@ export default [
     lastname: 'Grangy Kagita',
     img: charlene,
     role: 'Scrum Master',
-    description: 'Écrit des tests qui passent avant d’avoir écrit le code',
+    description: 'Écrit des tests qui passent avant d’avoir écrit le code.',
   },
   {
     id: 1465,
