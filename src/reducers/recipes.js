@@ -2,8 +2,8 @@ const initialState = {
   recipes: [],
   search: '',
   number: 1,
-  time: null,
-  difficulty: null,
+  time: '',
+  difficulty: '',
   favorites: false,
 };
 
@@ -32,7 +32,7 @@ const reducer = (oldState = initialState, action) => {
     case 'EDIT_GEN_FAVORITES':
       return {
         ...oldState,
-        favorites: action.payload.diffGen,
+        favorites: action.payload.favGen,
       };
     case 'RECIPES_RESULTS':
       console.log('RECIPES !!!');

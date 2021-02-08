@@ -1,7 +1,7 @@
 @use 'src/styles/vars';
 
 .contact {
-  height: 100vh;
+  height: 90vh;
   margin-top: 3rem;
 
   &__title {
@@ -45,10 +45,11 @@
 
   &__icon {
     width: 10rem;
-    margin-top: 2rem;
+    margin: 2rem 0;
   }
 }
 
 .message__sent h3 {
   margin: 0.5rem;
+  text-align: center;
 }

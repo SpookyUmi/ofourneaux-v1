@@ -5,11 +5,17 @@ const favorites = (store) => (next) => (action) => {
   const state = store.getState();
 
   async function fetchRecipe(recipeId) {
-    const response = await axios({
-      method: 'GET',
-      url: `${URL}/recipes/${recipeId}`,
-    });
-    // console.log('RECIPES RESPONSE :', response.data);
+    let response;
+    try {
+      response = await axios({
+        method: 'GET',
+        url: `${URL}/recipes/${recipeId}`,
+      });
+    }
+    catch (error) {
+      throw new Error(error);
+    }
+
     return response.data.data;
   }
 
@@ -19,7 +25,7 @@ const favorites = (store) => (next) => (action) => {
       array = await Promise.all(favoritesRecipesId.map((id) => fetchRecipe(id)));
     }
     catch (error) {
-      // console.log('Erreur : ', error);
+      throw new Error(error);
     }
     return array;
   }
@@ -30,7 +36,7 @@ const favorites = (store) => (next) => (action) => {
       array = await Promise.all(selectedRecipesId.map((id) => fetchRecipe(id)));
     }
     catch (error) {
-      // console.log('Erreur : ', error);
+      throw new Error(error);
     }
     return array;
   }

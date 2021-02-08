@@ -5,6 +5,7 @@
   margin: 2rem auto;
   text-align: center;
   min-height: 100vh;
+  margin-bottom: 5rem;
 
   &__section {
     padding: 0 1.2rem 1.2rem 1.2rem;
@@ -45,9 +46,9 @@
 
   .container__section {
 
-    &__text {
+    /* &__text {
       text-align: left;
-    }
+    } */
 
     &--flex {
       display: flex;

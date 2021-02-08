@@ -12,7 +12,7 @@ const Favorites = ({ recipes, setIsOpen }) => {
       <div className="recipes__container__title">
         <h2>Mes recettes favorites</h2>
       </div>
-      <section className="recipes">
+      <section className="recipes__card">
         {recipes?.map((recipe) => (
           <CardRecipe {...recipe} key={recipe.id} className="recipes__cards" />
         ))}

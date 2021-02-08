@@ -4,7 +4,7 @@
   background-image: url('../../assets/images/background.jpg');
   background-size: cover;
   background-position: center;
-  margin-bottom: -1.2rem;
+  //margin-bottom: -1.2rem;
 }
 
 @supports not (backdrop-filter: none) {
@@ -48,8 +48,8 @@
 
   &__section {
     padding: 2rem;
-    width: 330px;
-    height: 330px;
+    //max-width: 350px;
+    height: 350px;
     margin: 0.5rem;
     display: flex;
     flex-direction: column;
@@ -119,6 +119,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
       }
     }
 
@@ -172,6 +173,7 @@
 @media only screen and (min-width: 1024px) {
 
   .generator {
+    //margin-bottom: 3rem;
 
   &__flexblock {
     flex-direction: row-reverse;
