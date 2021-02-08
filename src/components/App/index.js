@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
-import { MobileView, BrowserView } from 'react-device-detect';
 
 // Components
 import Header from 'src/components/Header';
@@ -22,6 +21,7 @@ import NavBar from 'src/components/NavBar';
 import Footer from 'src/components/Footer';
 import Admin from 'src/components/Admin';
 import SearchFail from 'src/components/Errors/SearchFail';
+import CheckError from 'src/components/Errors/CheckError';
 
 // SCSS
 import './styles.scss';
@@ -86,6 +86,12 @@ const App = ({ recipes, checkIfUserIsLogged }) => {
         path="/try-again"
       >
         <SearchFail />
+      </Route>
+      <Route
+        exact
+        path="/404"
+      >
+        <CheckError />
       </Route>
       <Footer className="footer" />
     </div>

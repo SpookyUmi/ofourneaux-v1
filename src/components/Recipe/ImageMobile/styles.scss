@@ -52,6 +52,7 @@
       flex-direction: row;
       justify-content: center;
       margin-top: 0.65rem;
+      flex-wrap: wrap;
     }
 
     &__tag {
@@ -59,7 +60,7 @@
       text-transform: uppercase;
       font-size: 0.75rem;
       color: vars.$color-sand;
-      margin: 0 0.3rem;
+      margin: 0.2rem 0.3rem;
       padding: 0.12rem 0.55rem;
       border-radius: 0.3rem;
       background-color: vars.$color-primary;
