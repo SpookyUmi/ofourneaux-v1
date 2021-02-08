@@ -11,7 +11,7 @@ export default [
     lastname: 'Danisevicius',
     img: chloe,
     role: 'Product Owner',
-    description: 'Simple mais toujours délicieuse. Simple mais toujours',
+    description: 'Aime les tartes, mais ne veut pas rentrer dans le moule.',
   },
   {
     id: 3235,
@@ -43,7 +43,7 @@ export default [
     lastname: 'Soucheyre',
     img: stephane,
     role: 'Git Master',
-    description: 'Qui as fait ça !? Personne ? GIT BLAME',
+    description: 'Qui a fait ça !? Personne ? GIT BLAME',
   },
 
 ];

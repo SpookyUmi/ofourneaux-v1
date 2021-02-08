@@ -44,9 +44,7 @@ const Informations = ({
   };
 
   checkIfRecipeIsInShoppingList();
-
-  console.log('liste de course user :', shoppingList);
-
+  
   return (
     <div className="recipe__infos">
       <div className="recipe__infos__header">

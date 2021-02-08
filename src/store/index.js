@@ -33,7 +33,7 @@ const store = createStore(
       shoppingListMiddleware,
       appMiddleware,
       connectionPersistence,
-      favoritesMiddleware
+      favoritesMiddleware,
     ),
   ),
 );
