@@ -14,7 +14,7 @@ const reducer = (oldState = initialState, action) => {
       return {
         ...oldState,
         isLogged: true,
-      }
+      };
 
     // controlled fields
     case 'EDIT_FIELD_AUTH_EMAIL':

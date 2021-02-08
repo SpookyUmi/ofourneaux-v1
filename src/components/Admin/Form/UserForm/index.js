@@ -12,7 +12,6 @@ import ModalUpdateUser from './Modal/ModalUpdateUser';
 
 import './userForm.scss';
 
-// TODO add props (controlled field, handle onclick and props)
 const UserForm = ({ userToken }) => {
   const [users, setUsers] = useState([]);
   const [userSelected, setUserSelected] = useState(null);
@@ -121,7 +120,6 @@ UserForm.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  userSearchField: state.admin.userSearchField,
   userToken: state.user.token,
 });
 
