@@ -83,8 +83,10 @@ const UpdateRecipeForm = ({
 
   const resetValue = () => {
     setLocalNewQuantity('');
+    setLocalNewUnit('');
     document.getElementById('unité').selectedIndex = 0;
     document.getElementById('ingredient').selectedIndex = 0;
+    console.log('quantity =>', localNewQuantity);
   };
 
   const deleteRecipe = () => {
@@ -422,49 +424,49 @@ const UpdateRecipeForm = ({
         }
         <label htmlFor="ingredients" className="recipe__form__title label">Ingredients
         <select
-            className="input"
-            name="ingredients"
-            defaultValue={"defaultIngredient"}
-            id="ingredient"
-            onChange={(event) => {
-              setLocalNewIngredientId(
-                Number(event.target[event.target.selectedIndex].id),
-              );
-              setLocalNewIngredient(
-                event.target.value,
-              );
-            }}
-          >
-            <option value="defaultIngredient" selected>---</option>
-            {/* I map on the ingredients array of objects containing all ingredients
-        stocked in the store and obtained through the GET request at init
-        on route https://ofourneaux.herokuapp.com/datas */}
-            {ingredients?.map((ingredient) => (
-              <option value={ingredient.name} id={ingredient.id} key={ingredient.id}>
-                {ingredient.name}
-              </option>
-            ))}
-          </select>
+          className="input"
+          name="ingredients"
+          defaultValue="defaultIngredient"
+          id="ingredient"
+          onChange={(event) => {
+            setLocalNewIngredientId(
+              Number(event.target[event.target.selectedIndex].id),
+            );
+            setLocalNewIngredient(
+              event.target.value,
+            );
+          }}
+        >
+          <option value="defaultIngredient" selected>---</option>
+          {/* I map on the ingredients array of objects containing all ingredients
+      stocked in the store and obtained through the GET request at init
+      on route https://ofourneaux.herokuapp.com/datas */}
+          {ingredients?.map((ingredient) => (
+            <option value={ingredient.name} id={ingredient.id} key={ingredient.id}>
+              {ingredient.name}
+            </option>
+          ))}
+        </select>
         </label>
         <label htmlFor="unité" className="recipe__form__title label">Unité
         <select
-            defaultValue={"defaultUnit"}
-            id="unité"
-            onChange={(event) => {
-              setLocalNewUnit(
-                event.target.value,
-              );
-            }}
-          >
-            <option value="defaultUnit" disabled>---</option>
-            <option value="cl">cl</option>
-            <option value="gr">gr</option>
-            <option value="ml">ml</option>
-            <option value="càc">càc</option>
-            <option value="càs">càs</option>
-            <option value="pincée">pincée</option>
-            <option value="sachet">sachet</option>
-          </select>
+          defaultValue={"defaultUnit"}
+          id="unité"
+          onChange={(event) => {
+            setLocalNewUnit(
+              event.target.value,
+            );
+          }}
+        >
+          <option value="defaultUnit" disabled>---</option>
+          <option value="cl">cl</option>
+          <option value="gr">gr</option>
+          <option value="ml">ml</option>
+          <option value="càc">càc</option>
+          <option value="càs">càs</option>
+          <option value="pincée">pincée</option>
+          <option value="sachet">sachet</option>
+        </select>
         </label>
         <input
           className="input"
