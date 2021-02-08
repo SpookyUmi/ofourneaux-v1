@@ -71,7 +71,7 @@ const Generator = ({
                     />
                   </label>
                   <label htmlFor="time">
-                    Temps (min)
+                    Temps max
                     <input
                       type="number"
                       name="time"
