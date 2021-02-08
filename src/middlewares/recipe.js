@@ -96,7 +96,7 @@ const recipe = (store) => (next) => (action) => {
 
       axios({
         method: 'PATCH',
-        url: `https://ofourneaux.herokuapp.com/favorites/${state.user.id}`,
+        url: `${URL}/favorites/${state.user.id}`,
         data: form,
         headers: {
           authorization: state.user.token,
