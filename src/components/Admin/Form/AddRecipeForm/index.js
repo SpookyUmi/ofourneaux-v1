@@ -109,9 +109,10 @@ const AddRecipeForm = ({
           <div className="categories__cloud">
             {types.map((type) => (
               <div key={type.id}>
-                <label className="choice__text" >{type.name}
+                <label className="choice__text">{type.name}
                 </label>
-                {/* if the type does not correspond to the recipeType the input appears unchecked */}
+                {/* if the type does not correspond to the recipeType
+                the input appears unchecked */}
                 {localType !== type.id
           && (
           <input
