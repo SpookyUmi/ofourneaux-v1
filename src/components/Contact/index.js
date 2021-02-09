@@ -1,7 +1,6 @@
 // == Import npm
 import React from 'react';
 import { useForm, ValidationError } from '@formspree/react';
-import PropTypes from 'prop-types';
 
 // == Import
 import './styles.scss';
@@ -31,7 +30,7 @@ const Contact = () => {
         method="POST"
       >
         <label htmlFor="email">
-          Votre addresse e-mail
+          Votre adresse e-mail
         </label>
         <input
           id="email"
@@ -60,7 +59,7 @@ const Contact = () => {
           errors={state.errors}
         />
         <button type="submit" disabled={state.submitting} className="contact__form__input">
-          Submit
+          Envoyer
         </button>
       </form>
     </div>
