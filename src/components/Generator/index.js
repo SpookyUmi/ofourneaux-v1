@@ -224,6 +224,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
       type: 'SEND_GEN_REQUEST',
       redirect: ownProps.history.push,
     });
+    dispatch({
+      type: 'CLICK_OUT',
+    });
   },
 
   handleGeneratorLogged: (event) => {
@@ -231,6 +234,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     dispatch({
       type: 'SEND_GEN_LOGGED_REQUEST',
       redirect: ownProps.history.push,
+    });
+    dispatch({
+      type: 'CLICK_OUT',
     });
   },
 });

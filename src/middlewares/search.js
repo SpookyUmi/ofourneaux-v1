@@ -35,7 +35,7 @@ const search = (store) => (next) => (action) => {
     case 'SEND_GEN_REQUEST':
       axios({
         method: 'get',
-        url: `${URL}/recipes/quantity/${number}`,
+        url: `${URL}/recipes/quantity/${number}?time=${time}&difficulty=${difficulty}`,
       })
         .then((response) => {
           console.log('Réponse recettes :', response.data.data);
