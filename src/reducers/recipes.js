@@ -35,10 +35,10 @@ const reducer = (oldState = initialState, action) => {
         favorites: action.payload.favGen,
       };
     case 'RECIPES_RESULTS':
-      console.log('RECIPES !!!');
       return {
         ...oldState,
         recipes: action.payload.recipes,
+        search: action.payload.search,
       };
     default:
       return { ...oldState };

@@ -23,6 +23,7 @@ const search = (store) => (next) => (action) => {
             type: 'RECIPES_RESULTS',
             payload: {
               recipes: response.data.data,
+              search: '',
             },
           });
           action.redirect('/recettes');

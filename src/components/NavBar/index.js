@@ -32,6 +32,7 @@ const Navbar = ({
   handleDisconnect,
   getFavoritesRecipes,
   getSelectedRecipes,
+  search,
 }) => {
   const node = useRef();
   const handleClick = (event) => {
@@ -66,6 +67,7 @@ const Navbar = ({
                 placeholder="Recherche..."
                 className="navbar__searchform__input transition"
                 id="searchInputNavbar"
+                value={search}
                 onChange={trackSearch}
               />
             </form>
@@ -255,6 +257,7 @@ const Navbar = ({
 Navbar.propTypes = {
   isLogged: PropTypes.bool.isRequired,
   status: PropTypes.string.isRequired,
+  search: PropTypes.string.isRequired,
   isOpen: PropTypes.bool.isRequired,
   setIsOpen: PropTypes.func.isRequired,
   trackSearch: PropTypes.func.isRequired,
@@ -267,6 +270,7 @@ Navbar.propTypes = {
 const mapStateToProps = (state) => ({
   isLogged: state.auth.isLogged,
   status: state.user.status,
+  search: state.recipes.search,
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

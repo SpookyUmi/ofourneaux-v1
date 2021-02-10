@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -6,7 +6,9 @@ import CardRecipe from 'src/components/CardRecipe';
 import './styles.scss';
 
 const Recipes = ({ recipes, setIsOpen }) => {
-  setIsOpen(false);
+  useEffect(() => {
+    setIsOpen(false);
+  }, []);
   return (
     <div className="recipes__container">
       <div className="recipes__container__title">

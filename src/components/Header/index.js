@@ -21,6 +21,7 @@ const Header = ({
   handleSearch,
   setIsOpen,
   isOpen,
+  search,
 }) => (
   <header className="header">
     <div className="header__container">
@@ -49,6 +50,7 @@ const Header = ({
           className="header__container__elem--input"
           id="searchInput"
           autoComplete="off"
+          value={search}
           onChange={trackSearch}
         />
       </form>
@@ -87,6 +89,7 @@ Header.propTypes = {
   handleSearch: PropTypes.func.isRequired,
   setIsOpen: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
+  search: PropTypes.string.isRequired,
 };
 
 // eslint-disable-next-line no-unused-vars
@@ -94,6 +97,7 @@ const mapStateToProps = (state, ownProps) => ({
   title: state.app.title,
   isLogged: state.auth.isLogged,
   recipes: state.recipes.recipes,
+  search: state.recipes.search,
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
