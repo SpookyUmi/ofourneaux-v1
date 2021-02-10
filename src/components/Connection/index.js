@@ -43,10 +43,11 @@ const Connection = ({
             placeholder="Email"
             value={email}
             onChange={trackEmail}
+            autoComplete="off"
           />
         </div>
         <div className="connection__content__form__input">
-          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */} 
+          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <label className="connection__content__form__label" htmlFor="password">
             Mot de passe
           </label>
@@ -58,6 +59,7 @@ const Connection = ({
             placeholder="Mot de passe"
             value={password}
             onChange={trackPassword}
+            autoComplete="off"
           />
           {/* TODO: link to the forgotten password page */}
           <a href="">

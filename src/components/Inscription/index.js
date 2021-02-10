@@ -57,6 +57,7 @@ const Inscription = ({
               value={lastName}
               onChange={trackLastName}
               required
+              autoComplete="off"
             />
           </div>
           <div className="inscription__content__input">
@@ -76,6 +77,7 @@ const Inscription = ({
               value={firstName}
               onChange={trackFirstName}
               required
+              autoComplete="off"
             />
           </div>
           <div className="inscription__content__input">
@@ -95,6 +97,7 @@ const Inscription = ({
               value={email}
               onChange={trackEmail}
               required
+              autoComplete="off"
             />
           </div>
           <div className="inscription__content__input">

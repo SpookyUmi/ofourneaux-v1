@@ -48,6 +48,7 @@ const Header = ({
           placeholder="Recherche..."
           className="header__container__elem--input"
           id="searchInput"
+          autoComplete="off"
           onChange={trackSearch}
         />
       </form>
