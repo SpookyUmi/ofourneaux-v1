@@ -154,7 +154,7 @@ const Inscription = ({
             </ul>
           </div>
 
-          <input className="inscription__content__footer__button" type="submit" value="Je m'inscris" />
+          <input className="inscription__content__footer__button button__style" type="submit" value="Je m'inscris" />
         </div>
       </form>
     </div>
