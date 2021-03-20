@@ -38,6 +38,7 @@ const reducer = (oldState = initialState, action) => {
       return {
         ...oldState,
         recipes: action.payload.recipes,
+        search: '',
       };
     default:
       return { ...oldState };
